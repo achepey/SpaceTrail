@@ -37,5 +37,7 @@
     <string name="Resources_EngPrts">Engine Parts</string>
     <string name="Resources_AlumPrts">Aluminum Parts</string>
     <string name="Resources_SprWings">Spare Wings</string>
+    <string name="title_activity_space">SpaceActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
