@@ -163,4 +163,65 @@
         android:layout_marginLeft="48dp"
         android:layout_toRightOf="@+id/textView2" />
 
+    <Space
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/textView7"
+        android:layout_above="@+id/button"
+        android:layout_alignLeft="@+id/wingTextField"
+        android:layout_alignRight="@+id/wingTextField"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Fuel Num"
+        android:id="@+id/fuelQuantity"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Food Num"
+        android:id="@+id/foodQuantity"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Engine"
+        android:id="@+id/engineQuantity"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Alum Num"
+        android:id="@+id/alumQuantity"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="wing Num"
+        android:id="@+id/wingQuantity"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
 </RelativeLayout>
