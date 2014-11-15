@@ -32,5 +32,10 @@
     <string name="ShipParts_Engine">Engine</string>
     <string name="ShipParts_Environment">Environment</string>
     <string name="ShipParts_Navigation">Navigation</string>
-    
+    <string name="Resources_fuel">Fuel</string>
+    <string name="Resources_food">Food</string>
+    <string name="Resources_EngPrts">Engine Parts</string>
+    <string name="Resources_AlumPrts">Aluminum Parts</string>
+    <string name="Resources_SprWings">Spare Wings</string>
+
 </resources>
