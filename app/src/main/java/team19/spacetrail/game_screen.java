@@ -4,42 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 
-public class MainActivity extends Activity {
+public class game_screen extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game_screen);
     }
 
-    public void newGameMenu(View view) {
-        setContentView(R.layout.new_game_menu);
-    }
-
-    public void buyResourceMenu(View view) {
-        setContentView(R.layout.resource_menu);
-    }
-
-    public void loadGame(View view) {
-        setContentView(R.layout.activity_load_game);
-    }
-
-    public void gameScreen(View view) { setContentView(R.layout.activity_game_screen); }
-
-    public void gameInfoScreen(View view) { setContentView(R.layout.activity_game_info); }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_game_screen, menu);
         return true;
     }
 
