@@ -9,13 +9,17 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="team19.spacetrail.MainActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="team19.spacetrail.load_game"
+            android:label="@string/title_activity_load_game" >
         </activity>
     </application>
 

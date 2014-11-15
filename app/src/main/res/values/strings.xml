@@ -22,5 +22,16 @@
     <string name="wings">Spare Wings @ $15.00</string>
     <string name="buy">Buy!</string>
     <string name="quantityYouHave">Quantity You Have</string>
+    <string name="title_activity_load_game">load_game</string>
+    <string name="loadGameMenu">GAME INFORMATION</string>
+    <string name="loadGame_PeopleMenu">People</string>
+    <string name="loadGame_ShipMenu">Ship</string>
+    <string name="loadGame_ResourceMenu">Resources</string>
+    <string name="loadGame_People_Name1">Name1</string>
+    <string name="loadGame_People_Info1">Info1</string>
+    <string name="ShipParts_Engine">Engine</string>
+    <string name="ShipParts_Environment">Environment</string>
+    <string name="ShipParts_Navigation">Navigation</string>
+    <string name="ShipParts_Navigation">Navigation</string>
 
 </resources>
