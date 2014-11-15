@@ -19,13 +19,15 @@
         android:text="@string/new_game"
         android:id="@+id/newGameButton"
         android:layout_below="@+id/welcome"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:onClick="newGameMenu" />
 
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/load_game"
-        android:id="@+id/button"
+        android:id="@+id/loadGameButton"
         android:layout_below="@+id/newGameButton"
         android:layout_alignLeft="@+id/newGameButton"
         android:layout_alignStart="@+id/newGameButton" />
@@ -34,9 +36,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/instructions"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:id="@+id/instructionButton"
+        android:layout_below="@+id/loadGameButton"
+        android:layout_alignLeft="@+id/loadGameButton"
+        android:layout_alignStart="@+id/loadGameButton" />
 
 </RelativeLayout>

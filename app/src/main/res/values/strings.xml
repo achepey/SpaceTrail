@@ -7,5 +7,10 @@
     <string name="new_game">New Game</string>
     <string name="load_game">Load Game</string>
     <string name="instructions">Instructions</string>
+    <string name="newGameMenu">WELCOME TO THE NEW GAME MENU</string>
+    <string name="capName">Spaceship Captain\'s Name:</string>
+    <string name="name">Name</string>
+    <string name="headToSpace">Head to Space!</string>
+    <string name="otherMembers">Name of other space adventurer\'s</string>
 
 </resources>
