@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/d"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/newGameMenu"
+        android:id="@+id/newGameTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editCapField"
+        android:layout_marginTop="41dp"
+        android:layout_toEndOf="@+id/capName"
+        android:layout_below="@+id/newGameTitle"
+        android:layout_alignRight="@+id/sumbitGame"
+        android:layout_alignEnd="@+id/sumbitGame" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/capName"
+        android:id="@+id/capName"
+        android:layout_toStartOf="@+id/newGameTitle"
+        android:layout_alignBottom="@+id/editCapField"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buyResources"
+        android:id="@+id/sumbitGame"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/capName"
+        android:layout_alignStart="@+id/capName"
+        android:layout_marginLeft="51dp"
+        android:onClick="buyResourceMenu" />
+
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/otherMembers"
+        android:id="@+id/OtherMembersString"
+        android:layout_marginRight="77dp"
+        android:layout_alignTop="@+id/capName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1."
+        android:id="@+id/firstOtherName"
+        android:layout_below="@+id/editCapField"
+        android:layout_alignLeft="@+id/OtherMembersString"
+        android:layout_alignStart="@+id/OtherMembersString" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstOtherNameField"
+        android:layout_marginLeft="35dp"
+        android:layout_alignBottom="@+id/firstOtherName"
+        android:layout_alignLeft="@+id/firstOtherName"
+        android:layout_alignStart="@+id/firstOtherName"
+        android:layout_alignRight="@+id/OtherMembersString"
+        android:layout_alignEnd="@+id/OtherMembersString" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="2."
+        android:id="@+id/secOtherName"
+        android:layout_below="@+id/firstOtherName"
+        android:layout_alignLeft="@+id/OtherMembersString"
+        android:layout_alignStart="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/secOtherNameField"
+        android:layout_marginLeft="35dp"
+        android:layout_alignBottom="@+id/secOtherName"
+        android:layout_alignLeft="@+id/firstOtherName"
+        android:layout_alignStart="@+id/firstOtherName"
+        android:layout_alignRight="@+id/OtherMembersString"
+        android:layout_alignEnd="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="3."
+        android:id="@+id/thirdOtherName"
+        android:layout_below="@+id/secOtherName"
+        android:layout_alignLeft="@+id/OtherMembersString"
+        android:layout_alignStart="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thirdOtherNameField"
+        android:layout_marginLeft="35dp"
+        android:layout_alignBottom="@+id/thirdOtherName"
+        android:layout_alignLeft="@+id/firstOtherName"
+        android:layout_alignStart="@+id/firstOtherName"
+        android:layout_alignRight="@+id/OtherMembersString"
+        android:layout_alignEnd="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="4."
+        android:id="@+id/fourOtherName"
+        android:layout_below="@+id/thirdOtherName"
+        android:layout_alignLeft="@+id/OtherMembersString"
+        android:layout_alignStart="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fourOtherNameField"
+        android:layout_marginLeft="35dp"
+        android:layout_alignBottom="@+id/fourOtherName"
+        android:layout_alignLeft="@+id/firstOtherName"
+        android:layout_alignStart="@+id/firstOtherName"
+        android:layout_alignRight="@+id/OtherMembersString"
+        android:layout_alignEnd="@+id/OtherMembersString"
+        android:paddingTop="5dp" />
+
+</RelativeLayout>

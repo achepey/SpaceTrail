@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 public class MainActivity extends Activity {
@@ -13,11 +15,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
     }
 
     public void newGameMenu(View view) {
-        setContentView(R.layout.new_game);
+        setContentView(R.layout.new_game_menu);
+    }
+
+    public void buyResourceMenu(View view) {
+        setContentView(R.layout.resource_menu);
     }
 
 

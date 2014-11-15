@@ -10,7 +10,17 @@
     <string name="newGameMenu">WELCOME TO THE NEW GAME MENU</string>
     <string name="capName">Spaceship Captain\'s Name:</string>
     <string name="name">Name</string>
+    <string name="buyResources">Buy Resources!</string>
     <string name="headToSpace">Head to Space!</string>
     <string name="otherMembers">Name of other space adventurer\'s</string>
+    <string name="money">You have:</string>
+    <string name="toSpend">to spend</string>
+    <string name="fuel">Fuel @ $0.20</string>
+    <string name="food">Food @ $0.25</string>
+    <string name="enginePart">Engine Parts @ $25.00</string>
+    <string name="aluminumPart">Aluminum Parts @ $10.00</string>
+    <string name="wings">Spare Wings @ $15.00</string>
+    <string name="buy">Buy!</string>
+    <string name="quantityYouHave">Quantity You Have</string>
 
 </resources>
