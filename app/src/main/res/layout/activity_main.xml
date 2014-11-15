@@ -30,7 +30,8 @@
         android:id="@+id/loadGameButton"
         android:layout_below="@+id/newGameButton"
         android:layout_alignLeft="@+id/newGameButton"
-        android:layout_alignStart="@+id/newGameButton" />
+        android:layout_alignStart="@+id/newGameButton"
+        android:onClick="loadGameMenu" />
 
     <Button
         android:layout_width="150dp"

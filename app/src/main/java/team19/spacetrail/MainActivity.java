@@ -28,6 +28,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.resource_menu);
     }
 
+    public void loadGameMenu(View view) {
+        setContentView(R.layout.activity_load_game);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
