@@ -35,5 +35,7 @@
     <string name="random">random</string>
     <string name="notrandom">notrandom</string>
     <string name="testrandom">hello</string>
+    <string name="pie">pie</string>
+    
     <string name="hellllooo">helllooo</string>
 </resources>
