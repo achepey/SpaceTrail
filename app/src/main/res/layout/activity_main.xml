@@ -21,7 +21,8 @@
         android:layout_below="@+id/welcome"
         android:layout_centerHorizontal="true"
         android:layout_alignParentEnd="false"
-        android:onClick="newGameMenu" />
+        android:onClick="newGameMenu"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="150dp"
@@ -31,7 +32,8 @@
         android:layout_below="@+id/newGameButton"
         android:layout_alignLeft="@+id/newGameButton"
         android:layout_alignStart="@+id/newGameButton"
-        android:onClick="loadGame" />
+        android:onClick="loadGame"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="150dp"

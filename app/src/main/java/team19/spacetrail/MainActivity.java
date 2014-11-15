@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
         int wingsint = Integer.parseInt(fuel.getText().toString());
 
         startActivity(intent);
+        finish();
     }
 
     public void gameScreen(View view) { setContentView(R.layout.activity_game_screen); }

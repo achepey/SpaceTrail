@@ -46,4 +46,8 @@
     <string name="title_activity_game_info">game_info</string>
     <string name="gameInfo_back">Back</string>
 
+    <string name="promptExit">Are you sure you want to quit? Your game will be saved.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
