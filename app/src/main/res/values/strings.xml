@@ -29,6 +29,7 @@
     <string name="loadGame_ResourceMenu">Resources</string>
     <string name="loadGame_People_Name1">Name1</string>
     <string name="loadGame_People_Info1">Info1</string>
+    <string name="loadGame_CurrentPlanet">Planet</string>
     <string name="ShipParts_Engine">Engine</string>
     <string name="ShipParts_Environment">Environment</string>
     <string name="ShipParts_Navigation">Navigation</string>
@@ -39,5 +40,10 @@
     <string name="Resources_SprWings">Spare Wings</string>
     <string name="title_activity_space">SpaceActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_game_screen">game_screen</string>
+    <string name="gameScreen_travel">Travel</string>
+    <string name="gameScreen_info">Information</string>
+    <string name="title_activity_game_info">game_info</string>
+    <string name="gameInfo_back">Back</string>
 
 </resources>

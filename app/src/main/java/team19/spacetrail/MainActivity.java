@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.resource_menu);
     }
 
-    public void loadGameMenu(View view) {
+    public void loadGame(View view) {
         setContentView(R.layout.activity_load_game);
     }
 
@@ -65,6 +65,10 @@ public class MainActivity extends Activity {
 
         startActivity(intent);
     }
+
+    public void gameScreen(View view) { setContentView(R.layout.activity_game_screen); }
+
+    public void gameInfoScreen(View view) { setContentView(R.layout.activity_game_info); }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

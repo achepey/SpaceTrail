@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context="team19.spacetrail.load_game">
 
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewFlipper" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -140,6 +145,22 @@
                 android:layout_row="2"
                 android:layout_column="1" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loadGame_CurrentPlanet"
+                android:id="@+id/currentPlanet"
+                android:layout_row="3"
+                android:layout_column="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Earth"
+                android:id="@+id/tempPlanet"
+                android:layout_row="3"
+                android:layout_column="1" />
+
         </GridLayout>
 
         <GridLayout
@@ -241,6 +262,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/headToSpace"
-        android:id="@+id/headToSpace" />
+        android:id="@+id/headToSpace"
+        android:onClick="gameScreen"/>
 
 </LinearLayout>
