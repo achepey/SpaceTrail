@@ -45,12 +45,11 @@
     <string name="gameScreen_info">Information</string>
     <string name="title_activity_game_info">game_info</string>
     <string name="gameInfo_back">Back</string>
-
     <string name="promptExit">Are you sure you want to quit? Your game will be saved.</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-
     <string name="planet_select">Which planet do you want to travel to?</string>
+
     <string-array name="planets_array">
         <item>Mercury</item>
         <item>Venus</item>
@@ -61,5 +60,7 @@
         <item>Uranus</item>
         <item>Neptune</item>
     </string-array>
+
+    <string name="title_activity_planet">PlanetActivity</string>
 
 </resources>

@@ -2,6 +2,7 @@ package team19.spacetrail;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -17,7 +18,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 
-public class GameSceenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+public class GameScreenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
     private ImageView spaceship;
     private ArrayList<ImageView> planets;
@@ -52,7 +53,7 @@ public class GameSceenActivity extends Activity implements GestureDetector.OnGes
         planet_selector.setTitle(R.string.planet_select);
 
     }
-
+    /* Helper Methods */
     public void moveShip(View v) {
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
         if(spaceship.getX() >= 30) {
@@ -60,6 +61,24 @@ public class GameSceenActivity extends Activity implements GestureDetector.OnGes
             spaceship.setX(spaceship.getX()-30.0f);
         }
 
+    }
+
+    /* Override Methods */
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.promptExit);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.create().show();
     }
 
     @Override
@@ -84,6 +103,8 @@ public class GameSceenActivity extends Activity implements GestureDetector.OnGes
         return super.onOptionsItemSelected(item);
     }
 
+
+    /* Methods used with Implementation */
     @Override
     public boolean onTouchEvent(MotionEvent event){
         this.detector.onTouchEvent(event);

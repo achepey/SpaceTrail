@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/spaceship_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -18,14 +18,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GameSceenActivity"
+            android:name=".GameScreenActivity"
             android:label="@string/title_activity_game_screen"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".GameInfoActivity"
+            android:name="team19.spacetrail.GameInfoActivity"
             android:label="@string/title_activity_game_info"
             android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="team19.spacetrail.PlanetActivity"
+            android:label="@string/title_activity_planet"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
