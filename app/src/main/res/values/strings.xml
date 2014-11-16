@@ -49,18 +49,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="planet_select">Which planet do you want to travel to?</string>
-
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
-
     <string name="title_activity_planet">PlanetActivity</string>
 
 </resources>
