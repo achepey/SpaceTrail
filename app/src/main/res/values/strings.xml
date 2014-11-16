@@ -48,7 +48,9 @@
     <string name="promptExit">Are you sure you want to quit? Your game will be saved.</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+
     <string name="planet_select">Which planet do you want to travel to?</string>
+    <string name="issue_title">Alert! Alert! Alert!</string>
     <string name="title_activity_planet">PlanetActivity</string>
 
 </resources>
