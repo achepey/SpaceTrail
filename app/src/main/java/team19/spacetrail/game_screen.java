@@ -28,8 +28,11 @@ public class game_screen extends Activity {
     public void moveShip(View v) {
         ImageView img = (ImageView) findViewById( R.id.spaceship );
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
-        img.startAnimation(anim);
-        img.setX(img.getX()-30.0f);
+        if(img.getX() >= 30) {
+            img.startAnimation(anim);
+            img.setX(img.getX()-30.0f);
+        }
+
     }
 
     @Override
