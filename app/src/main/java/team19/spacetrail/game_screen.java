@@ -11,8 +11,13 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 
 public class game_screen extends Activity {
+
+    private ImageView spaceship;
+    private ArrayList<ImageView> planets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +26,26 @@ public class game_screen extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_game_screen);
-        ImageView image = (ImageView) findViewById(R.id.spaceship);
+        spaceship = (ImageView) findViewById(R.id.spaceship);
+        
+        //adding planets to arraylist
+        planets.add((ImageView) findViewById(R.id.mercury));
+        planets.add((ImageView) findViewById(R.id.venus));
+        planets.add((ImageView) findViewById(R.id.earth));
+        planets.add((ImageView) findViewById(R.id.mars));
+        planets.add((ImageView) findViewById(R.id.jupiter));
+        planets.add((ImageView) findViewById(R.id.saturn));
+        planets.add((ImageView) findViewById(R.id.uranus));
+        planets.add((ImageView) findViewById(R.id.neptune));
+
 
     }
 
     public void moveShip(View v) {
-        ImageView img = (ImageView) findViewById( R.id.spaceship );
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
-        if(img.getX() >= 30) {
-            img.startAnimation(anim);
-            img.setX(img.getX()-30.0f);
+        if(spaceship.getX() >= 30) {
+            spaceship.startAnimation(anim);
+            spaceship.setX(spaceship.getX()-30.0f);
         }
 
     }
