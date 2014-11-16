@@ -1,6 +1,8 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ public class game_screen extends Activity {
 
     private ImageView spaceship;
     private ArrayList<ImageView> planets;
+    private int dest_planet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,9 @@ public class game_screen extends Activity {
 
         setContentView(R.layout.activity_game_screen);
         spaceship = (ImageView) findViewById(R.id.spaceship);
-        
+
+        planets = new ArrayList<ImageView>();
+
         //adding planets to arraylist
         planets.add((ImageView) findViewById(R.id.mercury));
         planets.add((ImageView) findViewById(R.id.venus));
@@ -38,6 +43,8 @@ public class game_screen extends Activity {
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
 
+        AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
+        planet_selector.setTitle(R.string.planet_select);
 
     }
 

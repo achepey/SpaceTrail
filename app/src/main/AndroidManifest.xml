@@ -19,15 +19,18 @@
         </activity>
         <activity
             android:name="team19.spacetrail.load_game"
-            android:label="@string/title_activity_load_game" >
+            android:label="@string/title_activity_load_game"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="team19.spacetrail.game_screen"
-            android:label="@string/title_activity_game_screen" >
+            android:label="@string/title_activity_game_screen"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="team19.spacetrail.game_info"
-            android:label="@string/title_activity_game_info" >
+            android:label="@string/title_activity_game_info"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:screenOrientation="landscape"

@@ -71,10 +71,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, game_screen.class);
         startActivity(intent);
         finish();
-    //    setContentView(R.layout.activity_game_screen);
     }
 
-    public void gameInfoScreen(View view) { setContentView(R.layout.activity_game_info); }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

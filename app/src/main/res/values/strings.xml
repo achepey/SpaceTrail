@@ -50,4 +50,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
+    <string name="planet_select">Which planet do you want to travel to?</string>
+
 </resources>
