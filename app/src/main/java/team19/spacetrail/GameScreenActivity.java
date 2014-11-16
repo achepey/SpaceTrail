@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -49,18 +52,39 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
 
-        AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
-        planet_selector.setTitle(R.string.planet_select);
-
+        selectPlanet();
     }
     /* Helper Methods */
     public void moveShip(View v) {
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
-        if(spaceship.getX() >= 30) {
+        if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
-            spaceship.setX(spaceship.getX()-30.0f);
+            spaceship.setX(spaceship.getX()- 30.0f);
         }
+    }
 
+    public void selectPlanet(){
+        AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
+        planet_selector.setTitle(R.string.planet_select);
+        String[] planets_array = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"};
+
+        planet_selector.setItems(planets_array, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dest_planet = which;
+                dialog.dismiss();
+                for(int i = 0; i < planets.size(); ++i){
+                    if(i != which){
+                        planets.get(i).setVisibility(View.INVISIBLE);
+                    }
+                    else {
+                        planets.get(i).setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+        AlertDialog dialog = planet_selector.create();
+        dialog.show();
     }
 
     /* Override Methods */
