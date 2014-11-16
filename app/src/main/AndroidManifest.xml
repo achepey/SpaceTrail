@@ -32,11 +32,6 @@
             android:label="@string/title_activity_game_info"
             android:screenOrientation="landscape" >
         </activity>
-        <activity
-            android:screenOrientation="landscape"
-            android:name="team19.spacetrail.SpaceActivity"
-            android:label="@string/title_activity_space" >
-        </activity>
     </application>
 
 </manifest>
