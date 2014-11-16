@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="team19.spacetrail.game_screen">
+    tools:context="team19.spacetrail.GameSceenActivity">
 
     <ImageView
         android:id="@+id/spaceship"
@@ -91,7 +91,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:layout_above="@+id/gameInfo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -104,15 +103,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="moveShip"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gameScreen_info"
-        android:id="@+id/gameInfo"
-        android:layout_alignTop="@+id/makeMove"
-        android:layout_toLeftOf="@+id/makeMove"
-        android:layout_toStartOf="@+id/makeMove"
-        android:onClick="gameInfoScreen"/>
 
 </RelativeLayout>

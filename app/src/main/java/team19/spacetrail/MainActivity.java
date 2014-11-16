@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
     }
     /* Called when the user hits the send to space button */
     public void headToSpace(View view) {
-        Intent intent = new Intent(this, game_screen.class);
+        Intent intent = new Intent(this, GameSceenActivity.class);
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
         int fuelint = Integer.parseInt(fuel.getText().toString());
 
@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
     }
 
     public void gameScreen(View view) {
-        Intent intent = new Intent(this, game_screen.class);
+        Intent intent = new Intent(this, GameSceenActivity.class);
         startActivity(intent);
         finish();
     }

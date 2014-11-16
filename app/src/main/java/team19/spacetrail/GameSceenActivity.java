@@ -3,7 +3,6 @@ package team19.spacetrail;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -13,14 +12,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
-public class game_screen extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+public class GameSceenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
     private ImageView spaceship;
     private ArrayList<ImageView> planets;
@@ -108,7 +105,7 @@ public class game_screen extends Activity implements GestureDetector.OnGestureLi
 
     @Override
     public void onLongPress(MotionEvent event) {
-        Intent intent = new Intent(this, game_info.class);
+        Intent intent = new Intent(this, GameInfoActivity.class);
         startActivity(intent);
     }
 

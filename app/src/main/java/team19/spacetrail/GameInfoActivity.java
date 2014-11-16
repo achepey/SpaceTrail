@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class game_info extends Activity {
+public class GameInfoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
