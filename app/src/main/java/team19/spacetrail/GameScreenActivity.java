@@ -1,11 +1,15 @@
 package team19.spacetrail;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +23,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TableRow;
 
 import java.util.ArrayList;
 
@@ -32,6 +37,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private ArrayList<ImageView> planets;
     private int dest_planet = 0;
     private GestureDetector detector;
+    private float screen_distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,9 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
 
+     /*   screen_distance = spaceship.getX()-planets.get(dest_planet).getX()+planets.get(dest_planet).getWidth();            //distance between spaceship and planet images
+        Log.d("Game",Float.toString(planets.get(dest_planet).getX()));  */
+
         selectPlanet();
     }
     /* Helper Methods */
@@ -76,15 +85,17 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             d.setCanceledOnTouchOutside(false);
             d.show();
         }
-
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX()- 30.0f);
-        /*    ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)spaceship.getLayoutParams();
-            params.width = (int)(params.width * .50);
-            params.height = (int)(params.height * .50);
-            spaceship.setLayoutParams(params);  */
+        /*    if(spaceship.getX()-planets.get(dest_planet).getX()+planets.get(dest_planet).getWidth() < screen_distance) {
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship_crop);
+                int width = (int) (spaceship.getWidth() * .95);
+                int height = (int) (spaceship.getHeight() * .95);
+                Bitmap rbmp = Bitmap.createScaledBitmap(bmp, width, height, true);
+                spaceship.setImageBitmap(rbmp);
+            }*/
         }
         else{
             AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
