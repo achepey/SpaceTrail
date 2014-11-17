@@ -75,6 +75,11 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX()- 30.0f);
         }
+        else {
+            Intent intent = new Intent(this, PlanetActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void selectPlanet(){

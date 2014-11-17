@@ -48,9 +48,17 @@
     <string name="promptExit">Are you sure you want to quit? Your game will be saved.</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-
     <string name="planet_select">Which planet do you want to travel to?</string>
     <string name="issue_title">Alert! Alert! Alert!</string>
     <string name="title_activity_planet">PlanetActivity</string>
+    <string name="PlanetMenuWelcome">Welcome to</string>
+
+    <string-array name="resources_array">
+        <item>Fuel</item>
+        <item>Food</item>
+        <item>Engine Parts</item>
+        <item>Aluminum Parts</item>
+        <item>Spare Wings</item>
+    </string-array>
 
 </resources>
