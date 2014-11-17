@@ -27,20 +27,28 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
+    /* Helper Methods */
+    //Sets Layout to the new game menu
     public void newGameMenu(View view) {
         setContentView(R.layout.new_game_menu);
     }
 
+    //Sets Layout to the buying starting resources menu
     public void buyResourceMenu(View view) {
         setContentView(R.layout.resource_menu);
     }
 
+    //Sets Layout to the load game menu
     public void loadGame(View view) {
         setContentView(R.layout.activity_load_game);
     }
 
-    public void loadInstructions(View view) { setContentView(R.layout.instruction_screen); }
+    //Sets Layout to the Instructions menu
+    public void loadInstructions(View view) {
+        setContentView(R.layout.instruction_screen);
+    }
 
+    //Does the function of buying the original resources.
     public void buyStartingResources(View view) {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButton);
@@ -50,19 +58,21 @@ public class MainActivity extends Activity {
         EditText aluminum = (EditText) findViewById(R.id.aluminumPartsTextField);
         EditText wings = (EditText) findViewById(R.id.wingTextField);
 
+        //Creates pop-up letting user know the resources were purchased correctly
         Context context = getApplicationContext();
         CharSequence popup = "Resources Acquired!";
         Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM, 0, 200);
         toast.show();
+
+        //Resets the fields to be blank values
         fuel.setText("");
         food.setText("");
         engine.setText("");
         aluminum.setText("");
         wings.setText("");
-
     }
-    /* Called when the user hits the send to space button */
+    // Called when the user hits the send to space button, stores the starting resources in data file
     public void headToSpace(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
@@ -80,17 +90,17 @@ public class MainActivity extends Activity {
         TextView wings = (TextView) findViewById(R.id.wingQuantity);
         int wingsint = Integer.parseInt(fuel.getText().toString());
 
+        //Ends MainActivity and starts the GameScreenActivity
         startActivity(intent);
         finish();
     }
 
+    //Used for a button to start the GameScreenActivity
     public void gameScreen(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         startActivity(intent);
         finish();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class ExitActivity extends Activity {
 
+    //Allows for clean exit of the game or has user decide to play again or not.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,24 +25,28 @@ public class ExitActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_exit);
+        //Determines which activity called this activity, in order to respond appropriately
         String caller = this.getIntent().getExtras().getString("activity");
         TextView exitMessage = (TextView) findViewById(R.id.exitMessage);
-        if(caller.equals("GameScreen") || caller.equals("Planet")){
+        if(caller.equals("GameScreen")){
             exitMessage.setText("Sorry, You Lose!");
         }
     }
 
+    /* Helper Methods */
+    //Cleanly exists game
     public void exitGame(View view) {
         finish();
     }
 
+    //If user chooses to restart, takes them back to main activity
     public void startOver(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         finish();
         startActivity(intent);
     }
 
-
+    /* Override Methods */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

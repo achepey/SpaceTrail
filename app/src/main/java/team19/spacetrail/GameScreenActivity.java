@@ -32,12 +32,14 @@ import java.util.ArrayList;
 
 public class GameScreenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
+    /* Constants used for access outside of this activity */
     public final static String PLANET_NAME = "team19.spacetrail.PLANET_NAME";
     public final static String[] PLANETS_ARRAY = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"};
 
+    /* Instance Fields */
     private ImageView spaceship;
-    private ArrayList<ImageView> planets;
-    private int dest_planet = 0;
+    private ArrayList<ImageView> planets; // Holds image views for all planets
+    private int dest_planet = 0; // Integer representing the user's desired planet destination
     private GestureDetector detector;
     private int screen_width;
 
@@ -47,6 +49,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //Sets listener to the screen for tap and long tap
         detector = new GestureDetector(this, this);
         detector.setOnDoubleTapListener(this);
 
@@ -72,7 +75,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
         selectPlanet();
     }
+
     /* Helper Methods */
+
+    //Process of moving ship across screen
     public void moveShip(View v) {
         //Random chance to encounter issue
         double rand = Math.random();
@@ -91,8 +97,9 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             Dialog d = issue_alert.create();
             d.setCanceledOnTouchOutside(false);
             d.show();
-
         }
+
+        //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
@@ -105,6 +112,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 spaceship.setImageBitmap(rbmp);
             }
         }
+        //Tells user they arrived at planet, and gives choice of moving to next planet, or stopping on planet to purchase resources
         else{
             AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
             planet_decider.setMessage("You've reached " + PLANETS_ARRAY[dest_planet] + "!\nWould you like to stop by the convenience store?");
@@ -123,6 +131,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
     }
 
+    //Ends this activity and sends planet info to planet activity
     public void goToPlanetMenu() {
         Intent intent = new Intent(this, PlanetActivity.class);
         String p_name = Integer.toString(dest_planet);
@@ -131,6 +140,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         finish();
     }
 
+    //Displays picture of planet to planet menu for better aesthetic view
     public void selectPlanet(){
         AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
         planet_selector.setTitle(R.string.planet_select);
@@ -149,6 +159,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     }
 
     /* Override Methods */
+
+    //Allows for user to save and exit the game
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -190,6 +202,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
 
     /* Methods used with Implementation */
+
+    //Tells activity touch event occurred
     @Override
     public boolean onTouchEvent(MotionEvent event){
         this.detector.onTouchEvent(event);
@@ -209,6 +223,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         return true;
     }
 
+    //Opens up the Game info layout, and allows user to hit back button to return to game.
     @Override
     public void onLongPress(MotionEvent event) {
         Intent intent = new Intent(this, GameInfoActivity.class);
@@ -227,6 +242,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         //Log.d(DEBUG_TAG, "onShowPress: " + event.toString());
     }
 
+    //Uses a single tap to propel the ship forward
     @Override
     public boolean onSingleTapUp(MotionEvent event) {
         View v = new View(this);
@@ -234,6 +250,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         return true;
     }
 
+    //Uses a double tap to propel the ship forward
     @Override
     public boolean onDoubleTap(MotionEvent event) {
         View v = new View(this);

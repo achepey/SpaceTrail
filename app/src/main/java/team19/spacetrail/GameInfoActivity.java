@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 public class GameInfoActivity extends Activity {
 
+    //Displays user resources, ship health, and explorer's health in orderly fashion
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

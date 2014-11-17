@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 
 public class PlanetActivity extends Activity {
-
+    /* Instance Fields */
     private String planet_name;
     private ArrayList<ImageView> planets = new ArrayList<ImageView>();
 
@@ -59,6 +59,9 @@ public class PlanetActivity extends Activity {
 
     }
 
+    /* Helper Methods */
+
+    //Gets info from previous activity, and sets the planet info screen appropriately
     public void setPlanetInfo() {
         Intent intent = getIntent();
         planet_name = intent.getStringExtra(GameScreenActivity.PLANET_NAME);
@@ -69,6 +72,7 @@ public class PlanetActivity extends Activity {
         planets.get(planet_name_as_int).setVisibility(View.VISIBLE);
     }
 
+    //Does the process of buying resources and updating data file to reflect them
     public void buyResources(View view) {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButtonPlanet);
@@ -104,6 +108,7 @@ public class PlanetActivity extends Activity {
 
     }
 
+    //called when user wants to travel to next planet, ends this activity and starts another Game Screen Activity
     public void nextPlanet(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         finish();
@@ -111,6 +116,8 @@ public class PlanetActivity extends Activity {
     }
 
     /* Override Methods */
+
+    //Allows for user to save and exit the game
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
