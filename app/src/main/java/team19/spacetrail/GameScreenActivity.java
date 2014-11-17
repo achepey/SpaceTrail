@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,7 +39,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private ArrayList<ImageView> planets;
     private int dest_planet = 0;
     private GestureDetector detector;
-    private float screen_distance;
+    private int screen_width;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
 
-     /*   screen_distance = spaceship.getX()-planets.get(dest_planet).getX()+planets.get(dest_planet).getWidth();            //distance between spaceship and planet images
-        Log.d("Game",Float.toString(planets.get(dest_planet).getX()));  */
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screen_width = size.x;
 
         selectPlanet();
     }
@@ -89,13 +93,13 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX()- 30.0f);
-        /*    if(spaceship.getX()-planets.get(dest_planet).getX()+planets.get(dest_planet).getWidth() < screen_distance) {
+            if(spaceship.getX() < screen_width/2) {
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship_crop);
                 int width = (int) (spaceship.getWidth() * .95);
                 int height = (int) (spaceship.getHeight() * .95);
                 Bitmap rbmp = Bitmap.createScaledBitmap(bmp, width, height, true);
                 spaceship.setImageBitmap(rbmp);
-            }*/
+            }
         }
         else{
             AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
