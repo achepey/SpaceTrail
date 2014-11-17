@@ -1,8 +1,10 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -38,7 +41,7 @@ public class MainActivity extends Activity {
 
     public void loadInstructions(View view) { setContentView(R.layout.instruction_screen); }
 
-    public void buyResources() {
+    public void buyStartingResources(View view) {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButton);
         EditText fuel = (EditText) findViewById(R.id.fuelTextField);
@@ -46,6 +49,18 @@ public class MainActivity extends Activity {
         EditText engine = (EditText) findViewById(R.id.enginePartTextField);
         EditText aluminum = (EditText) findViewById(R.id.aluminumPartsTextField);
         EditText wings = (EditText) findViewById(R.id.wingTextField);
+
+        Context context = getApplicationContext();
+        CharSequence popup = "Resources Acquired!";
+        Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 200);
+        toast.show();
+        fuel.setText("");
+        food.setText("");
+        engine.setText("");
+        aluminum.setText("");
+        wings.setText("");
+
     }
     /* Called when the user hits the send to space button */
     public void headToSpace(View view) {

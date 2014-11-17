@@ -263,7 +263,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/spinnerTextField"
+        android:id="@+id/buyAmountField"
         android:layout_marginTop="36dp"
         android:layout_alignTop="@+id/gridLayout"
         android:layout_alignLeft="@+id/ResourceSpinner"
@@ -288,8 +288,8 @@
         android:layout_height="wrap_content"
         android:text="@string/buy"
         android:id="@+id/buyButtonPlanet"
-        android:layout_alignTop="@+id/spinnerTextField"
-        android:layout_toRightOf="@+id/spinnerTextField"
+        android:layout_alignTop="@+id/buyAmountField"
+        android:layout_toRightOf="@+id/buyAmountField"
         android:layout_marginLeft="10dp"
         android:onClick="buyResources" />
 

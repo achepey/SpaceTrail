@@ -135,6 +135,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 planets.get(dest_planet).setVisibility(View.VISIBLE);
             }
         });
+        planet_selector.setCancelable(false);
         AlertDialog dialog = planet_selector.create();
         dialog.show();
     }
@@ -220,13 +221,15 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
     @Override
     public boolean onSingleTapUp(MotionEvent event) {
-        //Log.d(DEBUG_TAG, "onSingleTapUp: " + event.toString());
+        View v = new View(this);
+        moveShip(v);
         return true;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent event) {
-        // Log.d(DEBUG_TAG, "onDoubleTap: " + event.toString());
+        View v = new View(this);
+        moveShip(v);
         return true;
     }
 

@@ -1,20 +1,24 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,7 +71,14 @@ public class PlanetActivity extends Activity {
     public void buyResources(View view) {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButtonPlanet);
-        EditText rscText = (EditText) findViewById(R.id.spinnerTextField);
+        EditText rscText = (EditText) findViewById(R.id.buyAmountField);
+
+        Context context = getApplicationContext();
+        CharSequence popup = "Resources Acquired!";
+        Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 350);
+        toast.show();
+        rscText.setText("");
     }
 
     public void nextPlanet(View view) {
@@ -76,6 +87,23 @@ public class PlanetActivity extends Activity {
         startActivity(intent);
     }
 
+    /* Override Methods */
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.promptExit);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.create().show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
