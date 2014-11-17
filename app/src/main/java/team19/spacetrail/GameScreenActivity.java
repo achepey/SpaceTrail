@@ -77,17 +77,21 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         //Random chance to encounter issue
         double rand = Math.random();
         if(rand < .001) {
+            final Intent intent = new Intent(this, ExitActivity.class);
             AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
             issue_alert.setTitle(R.string.issue_title);
             issue_alert.setMessage("Your spaceship has been destroyed!");
             issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     finish();
+                    intent.putExtra("activity", "GameScreen");
+                    startActivity(intent);
                 }
             });
             Dialog d = issue_alert.create();
             d.setCanceledOnTouchOutside(false);
             d.show();
+
         }
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,13 +73,35 @@ public class PlanetActivity extends Activity {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButtonPlanet);
         EditText rscText = (EditText) findViewById(R.id.buyAmountField);
+        Spinner spin = (Spinner) findViewById(R.id.ResourceSpinner);
 
-        Context context = getApplicationContext();
-        CharSequence popup = "Resources Acquired!";
-        Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 350);
-        toast.show();
-        rscText.setText("");
+        //Might want to check to see if it is a digit as well
+        String stringRscText = rscText.getText().toString();
+        if (stringRscText.matches("")) {
+            CharSequence popup = "You did not enter a valid number!";
+            Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 350);
+            toast.show();
+            return;
+        }
+
+        String prompt = spin.getSelectedItem().toString();
+        int num = Integer.parseInt(stringRscText);
+        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
+            Intent intent = new Intent(this, ExitActivity.class);
+            finish();
+            intent.putExtra("activity", "Planet");
+            startActivity(intent);
+        }
+        else {
+            Context context = getApplicationContext();
+            CharSequence popup = "Resources Acquired!";
+            Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 350);
+            toast.show();
+            rscText.setText("");
+        }
+
     }
 
     public void nextPlanet(View view) {
