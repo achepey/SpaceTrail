@@ -25,9 +25,12 @@ import java.util.ArrayList;
 
 public class GameScreenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
+    public final static String PLANET_NAME = "team19.spacetrail.PLANET_NAME";
+    public final static String[] PLANETS_ARRAY = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"};
+
     private ImageView spaceship;
     private ArrayList<ImageView> planets;
-    private int dest_planet;
+    private int dest_planet = 0;
     private GestureDetector detector;
 
     @Override
@@ -83,19 +86,37 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             params.height = (int)(params.height * .50);
             spaceship.setLayoutParams(params);  */
         }
-        else {
-            Intent intent = new Intent(this, PlanetActivity.class);
-            startActivity(intent);
-            finish();
+        else{
+            AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
+            planet_decider.setMessage("You've reached " + PLANETS_ARRAY[dest_planet] + "!\nWould you like to stop by the convenience store?");
+            planet_decider.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    goToPlanetMenu();
+                }
+            });
+            planet_decider.setNegativeButton(R.string.nextPlanet, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    recreate();
+                }
+            });
+            planet_decider.create().show();
         }
+
+    }
+
+    public void goToPlanetMenu() {
+        Intent intent = new Intent(this, PlanetActivity.class);
+        String p_name = Integer.toString(dest_planet);
+        intent.putExtra(PLANET_NAME, p_name);
+        startActivity(intent);
+        finish();
     }
 
     public void selectPlanet(){
         AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
         planet_selector.setTitle(R.string.planet_select);
-        String[] planets_array = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"};
 
-        planet_selector.setItems(planets_array, new DialogInterface.OnClickListener() {
+        planet_selector.setItems(PLANETS_ARRAY, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dest_planet = which;

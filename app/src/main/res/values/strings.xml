@@ -53,6 +53,7 @@
     <string name="issue_title">Alert! Alert! Alert!</string>
     <string name="title_activity_planet">PlanetActivity</string>
     <string name="PlanetMenuWelcome">Welcome to</string>
+    <string name="nextPlanet">Head to Next Planet!</string>
 
     <string-array name="resources_array">
         <item>Fuel</item>

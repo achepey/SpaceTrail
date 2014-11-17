@@ -17,9 +17,9 @@
         android:columnCount="3"
         android:minWidth="@dimen/loadGame_ColSize"
         android:rowCount="5"
-        android:layout_below="@+id/textView13"
-        android:layout_toLeftOf="@+id/textView12"
-        android:layout_toStartOf="@+id/textView12">
+        android:layout_below="@+id/resourceTitle"
+        android:layout_toLeftOf="@+id/welcomeTo"
+        android:layout_toStartOf="@+id/welcomeTo">
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,28 +118,114 @@
         android:visibility="invisible"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView12" />
+        android:layout_alignTop="@+id/welcomeTo"
+        android:maxHeight="160dp"
+        android:maxWidth="160dp" />
+
+    <ImageView
+        android:id="@+id/mercury"
+        android:src="@drawable/mercury"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/welcomeTo"
+        android:contentDescription="Mercury" />
+
+    <ImageView
+        android:id="@+id/venus"
+        android:src="@drawable/venus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/welcomeTo" />
+
+    <ImageView
+        android:id="@+id/earth"
+        android:src="@drawable/earth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/welcomeTo" />
+
+    <ImageView
+        android:id="@+id/jupiter"
+        android:src="@drawable/jupiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignBottom="@+id/saturn"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/welcomeTo" />
+
+    <ImageView
+        android:id="@+id/saturn"
+        android:src="@drawable/saturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/welcomeTo"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/uranus"
+        android:src="@drawable/uranus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/welcomeTo"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/neptune"
+        android:src="@drawable/neptune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/welcomeTo"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Welcome to"
-        android:id="@+id/textView12"
+        android:id="@+id/welcomeTo"
         android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/mars"
-        android:layout_toStartOf="@+id/mars"
-        android:layout_marginRight="150dp" />
+        android:layout_alignParentStart="false"
+        android:layout_toLeftOf="@+id/planetName" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/loadGame_ResourceMenu"
-        android:id="@+id/textView13"
-        android:layout_toStartOf="@+id/textView12"
-        android:layout_below="@+id/textView12"
+        android:id="@+id/resourceTitle"
+        android:layout_toStartOf="@+id/welcomeTo"
+        android:layout_below="@+id/welcomeTo"
         android:layout_alignLeft="@+id/gridLayout"
         android:layout_alignStart="@+id/gridLayout"
         android:layout_marginBottom="15dp"
@@ -151,11 +237,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/money"
         android:textStyle="bold"
-        android:id="@+id/textView24"
+        android:id="@+id/youHavePlanet"
         android:layout_toEndOf="@+id/fuelTextField"
-        android:layout_below="@+id/textView12"
-        android:layout_alignLeft="@+id/textView13"
-        android:layout_alignStart="@+id/textView13"
+        android:layout_below="@+id/welcomeTo"
+        android:layout_alignLeft="@+id/resourceTitle"
+        android:layout_alignStart="@+id/resourceTitle"
         android:layout_marginTop="20dp" />
 
     <TextView
@@ -164,12 +250,12 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/textView25"
-        android:layout_toEndOf="@+id/textView24"
+        android:layout_toEndOf="@+id/youHavePlanet"
         android:text="$$$$$"
         android:gravity="center_vertical|center_horizontal|left"
-        android:layout_alignBottom="@+id/textView24"
-        android:layout_toRightOf="@+id/textView24"
-        android:layout_alignTop="@+id/textView24"
+        android:layout_alignBottom="@+id/youHavePlanet"
+        android:layout_toRightOf="@+id/youHavePlanet"
+        android:layout_alignTop="@+id/youHavePlanet"
         android:layout_marginLeft="10dp" />
 
     <EditText
@@ -177,7 +263,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/spinnerTextField"
         android:layout_marginTop="36dp"
         android:layout_alignTop="@+id/gridLayout"
         android:layout_alignLeft="@+id/ResourceSpinner"
@@ -188,49 +274,45 @@
         android:layout_height="wrap_content"
         android:id="@+id/ResourceSpinner"
         android:layout_toStartOf="@+id/mars"
-        android:layout_alignTop="@+id/textView13"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_alignStart="@+id/textView12"
+        android:layout_alignTop="@+id/resourceTitle"
+        android:layout_alignLeft="@+id/welcomeTo"
+        android:layout_alignStart="@+id/welcomeTo"
         android:spinnerMode="dropdown"
         android:layout_above="@+id/gridLayout"
-        android:layout_alignRight="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12" />
+        android:layout_alignRight="@+id/welcomeTo"
+        android:layout_alignEnd="@+id/welcomeTo" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/buy"
-        android:id="@+id/button"
-        android:layout_alignTop="@+id/editText"
-        android:layout_toRightOf="@+id/editText"
-        android:layout_toEndOf="@+id/editText"
+        android:id="@+id/buyButtonPlanet"
+        android:layout_alignTop="@+id/spinnerTextField"
+        android:layout_toRightOf="@+id/spinnerTextField"
         android:layout_marginLeft="10dp"
-        android:layout_alignRight="@+id/ResourceSpinner"
-        android:layout_alignEnd="@+id/ResourceSpinner" />
+        android:onClick="buyResources" />
 
     <Button
         android:layout_width="150dp"
         android:layout_height="70dp"
-        android:text="Head to Next Planet!"
-        android:id="@+id/button3"
-        android:layout_alignTop="@+id/button"
-        android:layout_toRightOf="@+id/ResourceSpinner"
-        android:layout_toEndOf="@+id/ResourceSpinner"
-        android:layout_marginLeft="50dp"
-        android:layout_alignParentBottom="false" />
+        android:text="@string/nextPlanet"
+        android:id="@+id/headToPlanetButton"
+        android:layout_alignTop="@+id/buyButtonPlanet"
+        android:layout_alignParentBottom="false"
+        android:onClick="nextPlanet"
+        android:nestedScrollingEnabled="false"
+        android:layout_alignLeft="@+id/mars" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mercury"
-        android:id="@+id/textView26"
+        android:id="@+id/planetName"
         android:layout_alignParentTop="false"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
         android:textSize="30sp"
-        android:layout_marginLeft="15dp"
-        android:layout_alignBottom="@+id/textView12" />
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/mars"
+        android:layout_marginRight="25dp" />
 
 </RelativeLayout>
