@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/makeMove"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:scaleType="center"/>
 
     <ImageView
         android:id="@+id/mercury"
@@ -91,11 +92,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:layout_above="@+id/spaceship"
-        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/saturn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="109dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"

@@ -2,6 +2,7 @@ package team19.spacetrail;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
@@ -67,13 +69,19 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     finish();
                 }
             });
-            issue_alert.create().show();
+            Dialog d = issue_alert.create();
+            d.setCanceledOnTouchOutside(false);
+            d.show();
         }
 
         TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX()- 30.0f);
+        /*    ViewGroup.LayoutParams params = (ViewGroup.LayoutParams)spaceship.getLayoutParams();
+            params.width = (int)(params.width * .50);
+            params.height = (int)(params.height * .50);
+            spaceship.setLayoutParams(params);  */
         }
         else {
             Intent intent = new Intent(this, PlanetActivity.class);
@@ -92,14 +100,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             public void onClick(DialogInterface dialog, int which) {
                 dest_planet = which;
                 dialog.dismiss();
-                for(int i = 0; i < planets.size(); ++i){
-                    if(i != which){
-                        planets.get(i).setVisibility(View.INVISIBLE);
-                    }
-                    else {
-                        planets.get(i).setVisibility(View.VISIBLE);
-                    }
-                }
+                planets.get(dest_planet).setVisibility(View.VISIBLE);
             }
         });
         AlertDialog dialog = planet_selector.create();

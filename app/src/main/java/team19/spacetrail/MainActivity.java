@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_load_game);
     }
 
+    public void loadInstructions(View view) { setContentView(R.layout.instruction_screen); }
+
     public void buyResources() {
         //This is where we will change the xml file to reflect the changes in resources.
         Button buy = (Button) findViewById(R.id.buyButton);

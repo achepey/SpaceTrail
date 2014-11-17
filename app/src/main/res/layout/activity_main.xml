@@ -42,6 +42,7 @@
         android:id="@+id/instructionButton"
         android:layout_below="@+id/loadGameButton"
         android:layout_alignLeft="@+id/loadGameButton"
-        android:layout_alignStart="@+id/loadGameButton" />
+        android:layout_alignStart="@+id/loadGameButton"
+        android:onClick="loadInstructions"/>
 
 </RelativeLayout>
