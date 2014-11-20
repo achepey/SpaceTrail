@@ -35,7 +35,11 @@
         <activity
             android:name="team19.spacetrail.ExitActivity"
             android:label="@string/title_activity_exit"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="team19.spacetrail.AsteroidActivity"
+            android:label="@string/title_activity_asteroid" >
         </activity>
     </application>
 
