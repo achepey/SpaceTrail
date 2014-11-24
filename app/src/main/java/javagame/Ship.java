@@ -25,6 +25,7 @@ public class Ship {
         this.addPart("Living Bay", 100);
         System.out.println(captain + "'s ship has been completed.");
         System.out.println("------------------------------------------");
+        // test
     };
 
     /* Modify Functions */
