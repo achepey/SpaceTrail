@@ -40,16 +40,12 @@ public class Part {
     public void incrementStatus(int val, boolean action) {
         if(action) {
             status += val;
-            System.out.println("Part [" + name + "] has been repaired to [" + status + "] status.");
-            if(status < 25) {
-                System.out.println("WARNING: part [" + name + "] at critical level [" + status + "].");
-            }
         } else {
             status -= val;
-            System.out.println("Part [" + name + "] has been reduced to [" + status + "] status.");
-            if(status < 25) {
-                System.out.println("WARNING: part [" + name + "] at critical level [" + status + "].");
-            }
+        }
+        System.out.println("Part [" + name + "] has been repaired to [" + status + "] status.");
+        if(status < 25) {
+            System.out.println("WARNING: part [" + name + "] at critical level [" + status + "].");
         }
     }
 }

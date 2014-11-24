@@ -13,12 +13,8 @@ import java.io.*;
  */
 public class JavaGame {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        Ship ship = new Ship();
-        ship.addPart("Cockpit", 100);
+        Game test = new Game();
     }
 
 }

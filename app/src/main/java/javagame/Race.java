@@ -5,10 +5,42 @@
  */
 package javagame;
 
+import java.util.*;
 /**
  *
  * @author EvanKirkland
  */
 public class Race {
+    String name;
+    String strength;
+    String weakness;
 
+    public Race() {
+        Random randomGenerator = new Random();
+        long range = (long)4 - (long)1 + 1;
+        long fraction = (long)(range * randomGenerator.nextDouble());
+        int number = (int)(fraction + 1);
+        /* Names courtesy of http://fantasynamegenerators.com/alien-names.php#.VHN6X4vF-So */
+        switch (number) {
+            case 1: name = "Stryoks";
+                strength = "Helium";
+                weakness = "Methane";
+                break;
+            case 2: name = "Eonims";
+                strength = "Helium";
+                weakness = "Oxygen";
+                break;
+            case 3: name = "Oev'ysk";
+                strength = "Nitrogen";
+                weakness = "Hydrogen";
+                break;
+            case 4: name = "Creix";
+                strength = "Nitrogen";
+                weakness = "Carbon Dioxide";
+                break;
+        }
+        System.out.println("Name : [" + name + "]");
+        System.out.println("Strength : [" + strength + "]");
+        System.out.println("Weakness : [" + weakness + "]");
+    }
 }
