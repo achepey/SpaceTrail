@@ -78,4 +78,27 @@ public class Game {
     public void makeMove() {
 
     }
+
+    /*Returns the resources object (Daniel)*/
+    public Resources getResources() {
+        return resources;
+    }
+
+    /*Returns the ship object (Daniel)*/
+    public Ship getShip() {
+        return ship;
+    }
+
+    /*Will add a crew member to the ship
+     @param String name the name of the crew member
+     @param Boolean captain true if this crew member is to be the ship captain
+     */
+    public void addCrew(String name, Boolean captain) {
+        if(captain) {
+            people.add(0, new Person(name));
+        }
+        else {
+            people.add(new Person(name));
+        }
+    }
 }

@@ -15,10 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import javagame.Planet;
+import javagame.*;
 
 
 public class MainActivity extends Activity {
+
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        game = new Game();
     }
 
     /* Helper Methods */
@@ -80,18 +83,27 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, GameScreenActivity.class);
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
         int fuelint = Integer.parseInt(fuel.getText().toString());
+        game.getResources().setFuel(fuelint);
 
         TextView food = (TextView) findViewById(R.id.foodQuantity);
         int foodint = Integer.parseInt(fuel.getText().toString());
+        game.getResources().setFood(foodint);
 
         TextView engine = (TextView) findViewById(R.id.engineQuantity);
         int engineint = Integer.parseInt(fuel.getText().toString());
+        for(int i = 0; i < engineint; ++i) {
+            game.getResources().addSpare(new Part("Engine", 100));
+        }
 
         TextView alum = (TextView) findViewById(R.id.alumQuantity);
         int alumint = Integer.parseInt(fuel.getText().toString());
+        game.getResources().setAluminum(alumint);
 
         TextView wings = (TextView) findViewById(R.id.wingQuantity);
         int wingsint = Integer.parseInt(fuel.getText().toString());
+        for(int i = 0; i < wingsint; ++i) {
+            game.getResources().addSpare(new Part("Wing", 100));
+        }
 
         //Ends MainActivity and starts the GameScreenActivity
         startActivity(intent);

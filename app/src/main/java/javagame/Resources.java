@@ -13,7 +13,7 @@ import java.io.*;
  * @author EvanKirkland
  */
 public class Resources {
-    int money, food, fuel, compound;
+    int money, food, fuel, compound, aluminum;
     ArrayList<Part> spares;
     String race_compound;
 
@@ -30,6 +30,12 @@ public class Resources {
     public void setCompound(int val) {
         compound = val;
     }
+    public void setAluminum(int val) {
+        aluminum = val;
+    }
+    public void addSpare(Part p) {
+        spares.add(p);
+    }
 
     /* Getter Functions */
     public int getMoney() {
@@ -43,6 +49,9 @@ public class Resources {
     }
     public int getCompound() {
         return compound;
+    }
+    public int getAluminum() {
+        return aluminum;
     }
 
     /* Increment Functions */
@@ -73,6 +82,13 @@ public class Resources {
             compound += val;
         } else {
             compound -= val;
+        }
+    }
+    public void incrementAluminum(int val, boolean action) {
+        if(action) {
+            aluminum += val;
+        } else {
+            aluminum -= val;
         }
     }
 }
