@@ -11,10 +11,11 @@ import java.io.*;
  *
  * @author EvanKirkland
  */
-public class Game {
+public class Game implements Serializable {
     Ship ship;
     Resources resources;
     ArrayList<Person> people = new ArrayList<Person>();
+    ArrayList<Planet> planets = new ArrayList<Planet>();
     Planet destination;
     public Game() {
         Scanner s = new Scanner(System.in);
@@ -28,6 +29,16 @@ public class Game {
         Planet Uranus = new Planet("Uranus", "Helium", "Methane", 100);
         Planet Neptune = new Planet("Neptune", "Helium", "Methane", 100);
         Planet Pluto = new Planet("Pluto", "Nitrogen", "Methane", 100);
+
+        planets.add(Mercury);
+        planets.add(Venus);
+        planets.add(Earth);
+        planets.add(Mars);
+        planets.add(Jupiter);
+        planets.add(Saturn);
+        planets.add(Uranus);
+        planets.add(Neptune);
+        planets.add(Pluto);
 
         /* Declare captain of ship */
         System.out.print("Welcome to Space Trail. What would you like your captain's name to be?\n: ");
@@ -100,5 +111,11 @@ public class Game {
         else {
             people.add(new Person(name));
         }
+    }
+    /*Will set the destination to the correct planet
+    @param int planetIndex is the number of the planet in the solar system
+     */
+    public void setDestination(int planetIndex) {
+        destination = planets.get(planetIndex);
     }
 }

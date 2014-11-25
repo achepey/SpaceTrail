@@ -22,7 +22,14 @@ import javagame.*;
 
 public class MainActivity extends Activity {
 
+    private final double FOOD_COST = .25;
+    private final double FUEL_COST = .2;
+    private final int ENGINE_COST = 25;
+    private final int ALUMINUM_COST = 10;
+    private final int WING_COST = 15;
+
     private Game game;
+    private int startingMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         game = new Game();
+        startingMoney = game.getResources().getMoney();
     }
 
     /* Helper Methods */
@@ -99,18 +107,31 @@ public class MainActivity extends Activity {
         TextView aluminumText = (TextView) findViewById(R.id.alumQuantity);
         TextView wingsText = (TextView) findViewById(R.id.wingQuantity);
 
-        fuelText.setText(Integer.parseInt(fuelText.getText().toString()) + Integer.parseInt(fuel.getText().toString()));
-        foodText.setText(Integer.parseInt(foodText.getText().toString()) + Integer.parseInt(food.getText().toString()));
-        engineText.setText(Integer.parseInt(engineText.getText().toString()) + Integer.parseInt(engine.getText().toString()));
-        aluminumText.setText(Integer.parseInt(aluminumText.getText().toString()) + Integer.parseInt(aluminum.getText().toString()));
-        wingsText.setText(Integer.parseInt(wingsText.getText().toString()) + Integer.parseInt(wings.getText().toString()));
+        if(Integer.parseInt(fuel.getText().toString()) * FUEL_COST + Integer.parseInt(food.getText().toString())*FOOD_COST + Integer.parseInt(engine.getText().toString())*ENGINE_COST+Integer.parseInt(aluminum.getText().toString())*ALUMINUM_COST+Integer.parseInt(wings.getText().toString())*WING_COST - startingMoney > 0) {
+            fuelText.setText(Integer.parseInt(fuelText.getText().toString()) + Integer.parseInt(fuel.getText().toString()));
+            foodText.setText(Integer.parseInt(foodText.getText().toString()) + Integer.parseInt(food.getText().toString()));
+            engineText.setText(Integer.parseInt(engineText.getText().toString()) + Integer.parseInt(engine.getText().toString()));
+            aluminumText.setText(Integer.parseInt(aluminumText.getText().toString()) + Integer.parseInt(aluminum.getText().toString()));
+            wingsText.setText(Integer.parseInt(wingsText.getText().toString()) + Integer.parseInt(wings.getText().toString()));
 
-        //Creates pop-up letting user know the resources were purchased correctly
-        Context context = getApplicationContext();
-        CharSequence popup = "Resources Acquired!";
-        Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, 200);
-        toast.show();
+            startingMoney -= Integer.parseInt(fuel.getText().toString()) * FUEL_COST + Integer.parseInt(food.getText().toString())*FOOD_COST + Integer.parseInt(engine.getText().toString())*ENGINE_COST+Integer.parseInt(aluminum.getText().toString())*ALUMINUM_COST+Integer.parseInt(wings.getText().toString())*WING_COST;
+
+            //Creates pop-up letting user know the resources were purchased correctly
+            Context context = getApplicationContext();
+            CharSequence popup = "Resources Acquired!";
+            Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.show();
+        }
+        else {
+            //Creates pop-up letting user know the resources were purchased correctly
+            Context context = getApplicationContext();
+            CharSequence popup = "Not Enough Funds!";
+            Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.show();
+        }
+
 
         //Resets the fields to be blank values
         fuel.setText("");
@@ -146,7 +167,9 @@ public class MainActivity extends Activity {
             game.getResources().addSpare(new Part("Engine", 100));
         }
 
+        game.getResources().setMoney(startingMoney);
         //Ends MainActivity and starts the GameScreenActivity
+        intent.putExtra("Game", game);
         startActivity(intent);
         finish();
     }
@@ -154,6 +177,7 @@ public class MainActivity extends Activity {
     //Used for a button to start the GameScreenActivity
     public void gameScreen(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
+        intent.putExtra("Game", game);
         startActivity(intent);
         finish();
     }

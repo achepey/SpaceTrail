@@ -29,6 +29,8 @@ import android.widget.TableRow;
 
 import java.util.ArrayList;
 
+import javagame.*;
+
 
 public class GameScreenActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
@@ -42,6 +44,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private int dest_planet = 0; // Integer representing the user's desired planet destination
     private GestureDetector detector;
     private int screen_width;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         Point size = new Point();
         display.getSize(size);
         screen_width = size.x;
+
+        game = (Game) getIntent().getSerializableExtra("Game");
 
         selectPlanet();
     }
@@ -151,6 +156,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 dest_planet = which;
                 dialog.dismiss();
                 planets.get(dest_planet).setVisibility(View.VISIBLE);
+                game.setDestination(dest_planet);
             }
         });
         planet_selector.setCancelable(false);
