@@ -89,11 +89,11 @@ public class Game {
         return ship;
     }
 
-    /*Will add a crew member to the ship
+    /*Will add a crew member to the ship (Daniel)
      @param String name the name of the crew member
-     @param Boolean captain true if this crew member is to be the ship captain
+     @param boolean captain true if this crew member is to be the ship captain
      */
-    public void addCrew(String name, Boolean captain) {
+    public void addCrew(String name, boolean captain) {
         if(captain) {
             people.add(0, new Person(name));
         }

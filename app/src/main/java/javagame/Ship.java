@@ -34,7 +34,6 @@ public class Ship {
     }
     public void addPart(String name, int status) {
         Part p = new Part(name, status);
-        p.setStatus(10);        //why is this 10 and not 100? And why is it here anyways if the user gives a status? (Daniel)
         parts.add(p);
         System.out.println("Adding part [" + p.name + "] to ship.");
     }
