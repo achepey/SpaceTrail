@@ -36,6 +36,7 @@ public class Person {
     public void setAge(int a) {
         age = a;
     }
+    public void setRace(Race r) { race = r; }
 
     /* Getter Functions */
     public int getCondition() {

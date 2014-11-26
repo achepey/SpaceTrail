@@ -17,6 +17,7 @@ public class Game implements Serializable {
     ArrayList<Person> people = new ArrayList<Person>();
     ArrayList<Planet> planets = new ArrayList<Planet>();
     Planet destination;
+    Race race;
     public Game() {
         Scanner s = new Scanner(System.in);
         /* Create all 9 planets (or are we not using Pluto) */
@@ -40,40 +41,6 @@ public class Game implements Serializable {
         planets.add(Neptune);
         planets.add(Pluto);
 
-        /* Declare captain of ship */
-        System.out.print("Welcome to Space Trail. What would you like your captain's name to be?\n: ");
-        String captain = s.nextLine();
-        Person capt = new Person(captain);
-        people.add(capt);
-
-        /* Add the crew (4) */
-        System.out.print("Please enter name for [Crew Member 1] : ");
-        String crew1 = s.nextLine();
-        Person c1 = new Person(crew1);
-        people.add(c1);
-        System.out.print("Please enter name for [Crew Member 2] : ");
-        String crew2 = s.nextLine();
-        Person c2 = new Person(crew2);
-        people.add(c2);
-        System.out.print("Please enter name for [Crew Member 3] : ");
-        String crew3 = s.nextLine();
-        Person c3 = new Person(crew3);
-        people.add(c3);
-        System.out.print("Please enter name for [Crew Member 4] : ");
-        String crew4 = s.nextLine();
-        Person c4 = new Person(crew4);
-        people.add(c4);
-
-        /* Create the ship, with captain (1) */
-        ship = new Ship(captain);
-
-        /* Declare race of crew */
-        System.out.println("Cpt. " + captain + " and the crew are members of the following race: ");
-        Race race = new Race();
-        c1.race = race;
-        c2.race = race;
-        c3.race = race;
-        c4.race = race;
     }
     /* Display between turns, will eventually be called by pressing and holding on screen of phone */
     public void printInfo() {
@@ -107,9 +74,11 @@ public class Game implements Serializable {
     public void addCrew(String name, boolean captain) {
         if(captain) {
             people.add(0, new Person(name));
+            System.out.println("Captain [" + name + "] has been added.");
         }
         else {
             people.add(new Person(name));
+            System.out.println("Crew member [" + name + "] has been added.");
         }
     }
     /*Will set the destination to the correct planet
@@ -117,5 +86,14 @@ public class Game implements Serializable {
      */
     public void setDestination(int planetIndex) {
         destination = planets.get(planetIndex);
+    }
+
+    /* Will set the races of all the crew members
+    @param Race r is the randomly generated race that will be applied to the crew
+     */
+    public void setCrewRace(Race r) {
+        for(int i = 0; i < 4; i++) {
+            people.get(i).setRace(r);
+        }
     }
 }

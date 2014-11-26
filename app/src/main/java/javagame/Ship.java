@@ -13,17 +13,15 @@ import java.io.*;
  */
 public class Ship {
     ArrayList<Part> parts = new ArrayList<Part>();
-    String captain;
 
     /* Constructor */
-    public Ship(String c) {
-        captain = c;
+    public Ship() {
         System.out.println("------------------------------------------");
         System.out.println("Constructing ship.");
         this.addPart("Wing", 100);
         this.addPart("Engine", 100);
         this.addPart("Living Bay", 100);
-        System.out.println(captain + "'s ship has been completed.");
+        System.out.println("Ship has been completed.");
         System.out.println("------------------------------------------");
         // test
     };
