@@ -132,6 +132,7 @@ public class PlanetActivity extends Activity {
                 // User cancelled the dialog
             }
         });
+        builder.setCancelable(false);
         builder.create().show();
     }
 

@@ -1,6 +1,8 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,27 @@ public class AsteroidActivity extends Activity implements Animation.AnimationLis
         setContentView(R.layout.activity_asteroid);
     }
 
+    public int getAmountOfFuel() {
+        //Figure out way to get random number of fuel to add. Multiply by number of asteroids destroyed
+        return 10; // arbitrary number right now
+    }
+
+    public void miningResults() {
+        AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
+        planet_decider.setMessage("You have mined " + getAmountOfFuel() + " units of fuel.\nIt has been added to your inventory.");
+        planet_decider.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        planet_decider.create().show();
+    }
+
+    //Temporarily used for checking the end result
+    @Override
+    public void onBackPressed() {
+        miningResults();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

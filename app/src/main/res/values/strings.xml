@@ -61,10 +61,18 @@
         <item>Aluminum Parts</item>
         <item>Spare Wings</item>
     </string-array>
+    <string-array name="pace_array">
+        <item>Leisurely</item>
+        <item>Normal</item>
+        <item>Strenuous</item>
+    </string-array>
 
     <string name="title_activity_exit">ExitActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="play_again">Play Again?</string>
     <string name="title_activity_asteroid">AsteroidActivity</string>
+    <string name="MenuBackInfo">Hold down the screen or press the back button to return to the game</string>
+    <string name="asteroid_mine">Mine Asteroids!</string>
+    <string name="changePace">Change Pace</string>
 
 </resources>

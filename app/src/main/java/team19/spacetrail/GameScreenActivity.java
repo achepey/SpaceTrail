@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -45,6 +46,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private GestureDetector detector;
     private int screen_width;
     private Game game;
+
+    /*Helper Fields while Game integration is in progress*/
+    private int food = 1000;
+    private int fuel = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +81,13 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         display.getSize(size);
         screen_width = size.x;
 
-        game = (Game) getIntent().getSerializableExtra("Game");
+        /* Setting fields for Food and Fuel, using temp variables */
+        TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
+        TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+        fuelView.setText(Integer.toString(fuel));
+        foodView.setText(Integer.toString(food));
+
+        //game = (Game) getIntent().getSerializableExtra("Game");
 
         selectPlanet();
     }
@@ -100,7 +111,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 }
             });
             Dialog d = issue_alert.create();
-            d.setCanceledOnTouchOutside(false);
+            d.setCancelable(false);
             d.show();
         }
 
@@ -131,6 +142,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     recreate();
                 }
             });
+            planet_decider.setCancelable(false);
             planet_decider.create().show();
         }
 
@@ -156,7 +168,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 dest_planet = which;
                 dialog.dismiss();
                 planets.get(dest_planet).setVisibility(View.VISIBLE);
-                game.setDestination(dest_planet);
+                //game.setDestination(dest_planet);
             }
         });
         planet_selector.setCancelable(false);
@@ -181,6 +193,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 // User cancelled the dialog
             }
         });
+        builder.setCancelable(false);
         builder.create().show();
     }
 
@@ -252,6 +265,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onSingleTapUp(MotionEvent event) {
         View v = new View(this);
+        TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
+        TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+        fuelView.setText(Integer.toString(--fuel));
+        foodView.setText(Integer.toString(--food));
         moveShip(v);
         return true;
     }
@@ -260,6 +277,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onDoubleTap(MotionEvent event) {
         View v = new View(this);
+        TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
+        TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+        fuelView.setText(Integer.toString(--fuel));
+        foodView.setText(Integer.toString(--food));
         moveShip(v);
         return true;
     }

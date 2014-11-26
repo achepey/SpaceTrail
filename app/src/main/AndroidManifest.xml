@@ -39,7 +39,8 @@
         </activity>
         <activity
             android:name="team19.spacetrail.AsteroidActivity"
-            android:label="@string/title_activity_asteroid" >
+            android:label="@string/title_activity_asteroid"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

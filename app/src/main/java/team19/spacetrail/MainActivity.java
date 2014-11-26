@@ -39,8 +39,8 @@ public class MainActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        game = new Game();
-        startingMoney = game.getResources().getMoney();
+        //game = new Game();
+        //startingMoney = game.getResources().getMoney();
     }
 
     /* Helper Methods */
@@ -64,11 +64,11 @@ public class MainActivity extends Activity {
         String crew4Name = crew4.getText().toString();
 
         if(capName.length()!=0 && crew1Name.length()!=0 && crew2Name.length()!=0 && crew3Name.length()!=0 && crew4Name.length()!=0) {
-            game.addCrew(capName, true);
+            /*game.addCrew(capName, true);
             game.addCrew(crew1Name, false);
             game.addCrew(crew2Name, false);
             game.addCrew(crew3Name, false);
-            game.addCrew(crew4Name, false);
+            game.addCrew(crew4Name, false);*/
             setContentView(R.layout.resource_menu);
         }
         else {
@@ -140,36 +140,36 @@ public class MainActivity extends Activity {
         aluminum.setText("");
         wings.setText("");
     }
-    // Called when the user hits the send to space button, stores the starting resources in data file
+    // Called when the user hits the send to space button, stores the starting resources
     public void headToSpace(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
         int fuelint = Integer.parseInt(fuel.getText().toString());
-        game.getResources().setFuel(fuelint);
+        //game.getResources().setFuel(fuelint);
 
         TextView food = (TextView) findViewById(R.id.foodQuantity);
         int foodint = Integer.parseInt(food.getText().toString());
-        game.getResources().setFood(foodint);
+        //game.getResources().setFood(foodint);
 
         TextView engine = (TextView) findViewById(R.id.engineQuantity);
         int engineint = Integer.parseInt(engine.getText().toString());
-        for(int i = 0; i < engineint; ++i) {
+        /*for(int i = 0; i < engineint; ++i) {
             game.getResources().addSpare(new Part("Engine", 100));
-        }
+        }*/
 
         TextView alum = (TextView) findViewById(R.id.alumQuantity);
         int alumint = Integer.parseInt(alum.getText().toString());
-        game.getResources().setAluminum(alumint);
+        //game.getResources().setAluminum(alumint);
 
         TextView wings = (TextView) findViewById(R.id.wingQuantity);
         int wingsint = Integer.parseInt(wings.getText().toString());
-        for(int i = 0; i < engineint; ++i) {
+        /*for(int i = 0; i < engineint; ++i) {
             game.getResources().addSpare(new Part("Engine", 100));
-        }
+        }*/
 
-        game.getResources().setMoney(startingMoney);
+        //game.getResources().setMoney(startingMoney);
         //Ends MainActivity and starts the GameScreenActivity
-        intent.putExtra("Game", game);
+        //intent.putExtra("Game", game);
         startActivity(intent);
         finish();
     }
