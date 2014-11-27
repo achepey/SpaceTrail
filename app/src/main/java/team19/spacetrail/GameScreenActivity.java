@@ -88,8 +88,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         foodView.setText(Integer.toString(food));
 
         //game = (Game) getIntent().getSerializableExtra("Game");
-
-        selectPlanet();
+        if(game.getDestination().getDistance() == -1){
+            selectPlanet();
+        }
+        //Will add an else here when we get loading set up
     }
 
     /* Helper Methods */

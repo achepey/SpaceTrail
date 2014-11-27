@@ -20,4 +20,23 @@ public class Planet {
         compound2 = c2;
         distance = d;
     };
+
+    /*Returns planet name*/
+    public String getName() {
+        return name;
+    }
+
+    /*Returns compound1 */
+    public String getCompound1() {
+        return compound1;
+    }
+
+    /*Returns compund2 */
+    public String getCompound2() {
+        return compound2;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
 }

@@ -12,14 +12,17 @@ import java.io.*;
  * @author EvanKirkland
  */
 public class Game implements Serializable {
-    Ship ship;
-    Resources resources;
-    ArrayList<Person> people = new ArrayList<Person>();
-    ArrayList<Planet> planets = new ArrayList<Planet>();
-    Planet destination;
-    Race race;
+    private Ship ship;
+    private Resources resources;
+    private ArrayList<Person> people;
+    private ArrayList<Planet> planets;
+    private Planet destination;
+    private Race race;
     public Game() {
-        Scanner s = new Scanner(System.in);
+
+        people = new ArrayList<Person>();
+        planets = new ArrayList<Planet>();
+
         /* Create all 9 planets (or are we not using Pluto) */
         Planet Mercury = new Planet("Mercury", "Helium", "Oxygen", 100);
         Planet Venus = new Planet("Venus", "Nitrogen", "Carbon Dioxide", 100);
@@ -40,6 +43,10 @@ public class Game implements Serializable {
         planets.add(Uranus);
         planets.add(Neptune);
         planets.add(Pluto);
+
+        ship = new Ship();
+        resources = new Resources();
+        destination = new Planet("Temp", "Temp", "Temp", -1);       //used as default destination until a planet is given
 
     }
     /* Display between turns, will eventually be called by pressing and holding on screen of phone */
@@ -86,6 +93,11 @@ public class Game implements Serializable {
      */
     public void setDestination(int planetIndex) {
         destination = planets.get(planetIndex);
+    }
+
+    /*Returns destination planet */
+    public Planet getDestination() {
+        return destination;
     }
 
     /* Will set the races of all the crew members
