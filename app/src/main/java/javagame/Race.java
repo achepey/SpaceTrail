@@ -43,4 +43,12 @@ public class Race {
         System.out.println("Strength : [" + strength + "]");
         System.out.println("Weakness : [" + weakness + "]");
     }
+
+    /* Getter Functions */
+    public String getStrength() {
+        return strength;
+    }
+    public String getWeakness() {
+        return weakness;
+    }
 }

@@ -39,12 +39,14 @@ public class Person {
     public void setRace(Race r) { race = r; }
 
     /* Getter Functions */
+    public String getName() { return name; }
     public int getCondition() {
         return condition;
     }
     public int getAge() {
         return age;
     }
+    public Race getRace() { return race; }
 
     /* Increment Functions */
     /* For bool value, T is ADD, F is SUB */

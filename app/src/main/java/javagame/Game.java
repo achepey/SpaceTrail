@@ -7,6 +7,7 @@ package javagame;
 
 import java.util.*;
 import java.io.*;
+import java.lang.Math;
 /**
  *
  * @author EvanKirkland
@@ -17,6 +18,7 @@ public class Game implements Serializable {
     private ArrayList<Person> people;
     private ArrayList<Planet> planets;
     private Planet destination;
+    private int distance;
     private Race race;
     public Game() {
 
@@ -49,20 +51,48 @@ public class Game implements Serializable {
         destination = new Planet("Temp", "Temp", "Temp", -1);       //used as default destination until a planet is given
 
     }
-    /* Display between turns, will eventually be called by pressing and holding on screen of phone */
-    public void printInfo() {
-
-    }
-
-    /* Changes variables for purchasing supplies */
-    public void changeInfo() {
-
-    }
 
     /* Makes moves towards planet destination */
-    public void makeMove() {
-
+    public boolean makeMove() {
+        /* Things that need to be done in this method:
+            - reduce distance remaining
+            - decide how much health each crew member loses
+            - decide how to measure the pace (how many taps on the phone does it take?)
+         */
+        distance -= 10;                     // reduce distance remaining
+        crewAttrition();                    // decide how much health each crew member loses
+        if(distance <= 0) {
+            return true;
+        }
+        return false;
     }
+
+    public void crewAttrition() {
+        /* Attrition will be measured based on destination planet
+            - will be based on the compounds of the destination planet and race of the crew
+            - will be different based on crew member (age, current condition)
+        */
+        for(int i = 0; i < 5; i++) {
+            int amount = 0;                 // How much the crew member will be hurt
+            /* Measure attrition due to race */
+            if(people.get(i).getRace().getStrength() == destination.getCompound1() || people.get(i).getRace().getStrength() == destination.getCompound2()) {
+                amount += 5;               // Add health for heading to planet with strength compound
+            }
+            if(people.get(i).getRace().getWeakness() == destination.getCompound1() || people.get(i).getRace().getWeakness() == destination.getCompound2()) {
+                amount -= 10;               // Subtract health for heading to planet with weakness compound
+            }
+
+            /* Measure attrition due to age */
+            if(people.get(i).getAge() > 75) {    // THEY GON' DIE...but not really, they will just suffer more
+                amount -= 5;
+            }
+
+            /* Apply the subtraction/addition to the crew status */
+            System.out.println("Crew member [" + people.get(i).getName() + "] has had their health changed by [" + amount + "].");
+            people.get(i).incrementCondition(amount, true);
+        }
+    }
+
 
     /*Returns the resources object (Daniel)*/
     public Resources getResources() {
@@ -88,11 +118,32 @@ public class Game implements Serializable {
             System.out.println("Crew member [" + name + "] has been added.");
         }
     }
-    /*Will set the destination to the correct planet
+
+    public void setFirstDestination(int planetIndex) {
+        destination = planets.get(planetIndex);
+    }
+
+    /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)
     @param int planetIndex is the number of the planet in the solar system
      */
     public void setDestination(int planetIndex) {
+        int currentIndex = 0;
+        for(int i = 0; i < 9; i++) {
+            if(planets.get(i).getName() == destination.getName()) {
+                currentIndex = i;
+                break;
+            }
+        }
+
+        /* Calculating the distance between planets
+            - each planet has 40 degrees between it and the next one
+            - use planet index to compute total degrees between one planet and another
+            - find sine value, and apply to destination planet's distance
+            */
+        double hypotenuse = Math.sin(Math.toRadians(40 * (planetIndex - currentIndex)));
         destination = planets.get(planetIndex);
+        distance = (int)((destination.getDistance()) * hypotenuse);
+
     }
 
     /*Returns destination planet */
@@ -104,7 +155,7 @@ public class Game implements Serializable {
     @param Race r is the randomly generated race that will be applied to the crew
      */
     public void setCrewRace(Race r) {
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 5; i++) {
             people.get(i).setRace(r);
         }
     }

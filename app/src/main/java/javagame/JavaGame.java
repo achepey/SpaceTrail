@@ -40,6 +40,12 @@ public class JavaGame {
         System.out.println("Cpt. " + captain + " and the crew are members of the following race: ");
         Race race = new Race();
         test.setCrewRace(race);
+
+        test.setFirstDestination(1);
+        test.setDestination(2);
+        while(!test.makeMove()) {
+            System.out.println("In loop");
+        }
     }
 
 }
