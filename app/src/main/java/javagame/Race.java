@@ -45,10 +45,24 @@ public class Race {
     }
 
     /* Getter Functions */
+    public String getName() {
+        return name;
+    }
     public String getStrength() {
         return strength;
     }
     public String getWeakness() {
         return weakness;
+    }
+
+    /*Setter Methods */
+    public void setName(String n) {
+        name = n;
+    }
+    public void setStrength(String s) {
+        strength = s;
+    }
+    public void setWeakness(String w) {
+        weakness = w;
     }
 }

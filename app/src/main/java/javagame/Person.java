@@ -37,9 +37,11 @@ public class Person {
         age = a;
     }
     public void setRace(Race r) { race = r; }
+    public void setGender(Boolean g) { gender = g; }
 
     /* Getter Functions */
     public String getName() { return name; }
+    public Boolean getGender() { return gender; }
     public int getCondition() {
         return condition;
     }

@@ -36,6 +36,9 @@ public class Resources {
     public void addSpare(Part p) {
         spares.add(p);
     }
+    public void addSpareList(ArrayList<Part> partsList) {
+        spares = partsList;
+    }
 
     /* Getter Functions */
     public int getMoney() {
@@ -53,7 +56,9 @@ public class Resources {
     public int getAluminum() {
         return aluminum;
     }
-
+    public ArrayList<Part> getSpares() {
+        return spares;
+    }
     /* Increment Functions */
     /* For bool value, T is ADD, F is SUB */
     public void incrementMoney(int val, boolean action) {

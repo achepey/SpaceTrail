@@ -62,4 +62,17 @@ public class Ship {
     public int getLivingBayStatus() {
         return livingBay;
     }
+
+    //Setter methods
+    public void setEngineStatus(int status) {
+        engine = status;
+    }
+
+    public void setWingStatus(int status) {
+        wing = status;
+    }
+
+    public void setLivingBayStatus(int status) {
+        livingBay = status;
+    }
 }

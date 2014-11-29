@@ -61,10 +61,7 @@ public class Game implements Serializable {
          */
         distance -= 10;                     // reduce distance remaining
         crewAttrition();                    // decide how much health each crew member loses
-        if(distance <= 0) {
-            return true;
-        }
-        return false;
+        return distance <= 0;
     }
 
     public void crewAttrition() {
@@ -75,10 +72,10 @@ public class Game implements Serializable {
         for(int i = 0; i < 5; i++) {
             int amount = 0;                 // How much the crew member will be hurt
             /* Measure attrition due to race */
-            if(people.get(i).getRace().getStrength() == destination.getCompound1() || people.get(i).getRace().getStrength() == destination.getCompound2()) {
+            if(people.get(i).getRace().getStrength().equals(destination.getCompound1()) || people.get(i).getRace().getStrength().equals(destination.getCompound2())) {
                 amount += 5;               // Add health for heading to planet with strength compound
             }
-            if(people.get(i).getRace().getWeakness() == destination.getCompound1() || people.get(i).getRace().getWeakness() == destination.getCompound2()) {
+            if(people.get(i).getRace().getWeakness().equals(destination.getCompound1()) || people.get(i).getRace().getWeakness().equals(destination.getCompound2())) {
                 amount -= 10;               // Subtract health for heading to planet with weakness compound
             }
 
@@ -119,8 +116,42 @@ public class Game implements Serializable {
         }
     }
 
+    public Person getCrew(int personIndex) {
+        return people.get(personIndex);
+    }
+
     public void setFirstDestination(int planetIndex) {
         destination = planets.get(planetIndex);
+    }
+
+    public void setDestination(String planet) {
+        if(planet.equals("Mercury")) {
+            setDestination(1);
+        }
+        else if(planet.equals("Venus")) {
+            setDestination(2);
+        }
+        else if(planet.equals("Earth")) {
+            setDestination(3);
+        }
+        else if(planet.equals("Mars")) {
+            setDestination(4);
+        }
+        else if(planet.equals("Jupiter")) {
+            setDestination(5);
+        }
+        else if(planet.equals("Saturn")) {
+            setDestination(6);
+        }
+        else if(planet.equals("Uranus")) {
+            setDestination(7);
+        }
+        else if(planet.equals("Neptune")) {
+            setDestination(8);
+        }
+        else if(planet.equals("Pluto")) {
+            setDestination(9);
+        }
     }
 
     /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)
@@ -158,5 +189,9 @@ public class Game implements Serializable {
         for(int i = 0; i < 5; i++) {
             people.get(i).setRace(r);
         }
+    }
+
+    public void setDistance(int d) {
+        distance = d;
     }
 }
