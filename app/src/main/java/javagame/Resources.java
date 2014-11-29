@@ -13,7 +13,7 @@ import java.io.*;
  * @author EvanKirkland
  */
 public class Resources {
-    int money, food, fuel, compound, aluminum;
+    private int money, food, fuel, compound, aluminum;
     ArrayList<Part> spares;
     String race_compound;
 
@@ -35,7 +35,7 @@ public class Resources {
     }
     public void addSpare(Part p) {
         spares.add(p);
-    }
+    }   //Part name needs to be either Engine, Wing, or LivingBay
     public void addSpareList(ArrayList<Part> partsList) {
         spares = partsList;
     }

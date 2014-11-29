@@ -4,7 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,40 +11,42 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by Daniel on 11/28/2014.
  XML Structure:
- <Game>
-    <Ship>
+ <game>
+    <ship>
         ...ship stuff
-    </Ship>
-    <Resources>
+    </ship>
+    <resources>
         ...resources stuff
-    </Resources>
-    <People>
-        <Person1>
+    </resources>
+    <people>
+        <person1>
             ...person stuff
-        </Person1>
-        <Person2>
+        </person1>
+        <person2>
 
-        </Person2>
-        ...to Person5
-    </People>
-    <DestinationPlanet></DestinationPlanet>
-    <Distance></Distance>
- </Game>
+        </person2>
+        ...to person5
+    </people>
+    <destinationPlanet></destinationPlanet>
+    <distance></distance>
+ </game>
 
  */
-public class GameFile
+public class GameFileLoader
 {
     Document doc;
-    NodeList game_node;
+    NodeList game_nodes;
     Game game;
 
-    public GameFile(String fileName) {
+    public GameFileLoader(String fileName) {
         try {
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             doc = docBuilder.parse(fileName);
-            game_node = doc.getChildNodes();
+            game_nodes = doc.getChildNodes();
+            Node gameNode = getNode("game", game_nodes);
+            game_nodes = gameNode.getChildNodes();
 
             game = new Game();
 
@@ -58,34 +59,34 @@ public class GameFile
         loadShip();
         loadResources();
         loadPeople();
-        String destinationPlanet = getNodeValue("DestinationPlanet", game_node);
+        String destinationPlanet = getNodeValue("destinationPlanet", game_nodes);
         game.setDestination(destinationPlanet);
-        game.setDistance(Integer.parseInt(getNodeValue("Distance", game_node)));
+        game.setDistance(Integer.parseInt(getNodeValue("distance", game_nodes)));
         return game;
     }
 
     public void loadShip() {
-        Node ship = getNode("Ship",game_node);
+        Node ship = getNode("ship", game_nodes);
         NodeList ship_child_nodes = ship.getChildNodes();
-        game.getShip().setEngineStatus(Integer.parseInt(getNodeValue("Engine",ship_child_nodes)));
-        game.getShip().setWingStatus(Integer.parseInt(getNodeValue("Wing",ship_child_nodes)));
-        game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("LivingBay",ship_child_nodes))));
+        game.getShip().setEngineStatus(Integer.parseInt(getNodeValue("engine",ship_child_nodes)));
+        game.getShip().setWingStatus(Integer.parseInt(getNodeValue("wing",ship_child_nodes)));
+        game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("livingBay",ship_child_nodes))));
     }
     public void loadResources() {
-        Node resources = getNode("Resources", game_node);
+        Node resources = getNode("resources", game_nodes);
         NodeList resources_child_nodes = resources.getChildNodes();
         //Resources
-        game.getResources().setMoney(Integer.parseInt(getNodeValue("Money", resources_child_nodes)));
-        game.getResources().setFood(Integer.parseInt(getNodeValue("Food", resources_child_nodes)));
-        game.getResources().setFuel(Integer.parseInt(getNodeValue("Fuel", resources_child_nodes)));
-        game.getResources().setCompound(Integer.parseInt(getNodeValue("Compound", resources_child_nodes)));
-        game.getResources().setAluminum(Integer.parseInt(getNodeValue("Aluminum", resources_child_nodes)));
+        game.getResources().setMoney(Integer.parseInt(getNodeValue("money", resources_child_nodes)));
+        game.getResources().setFood(Integer.parseInt(getNodeValue("food", resources_child_nodes)));
+        game.getResources().setFuel(Integer.parseInt(getNodeValue("fuel", resources_child_nodes)));
+        game.getResources().setCompound(Integer.parseInt(getNodeValue("compound", resources_child_nodes)));
+        game.getResources().setAluminum(Integer.parseInt(getNodeValue("aluminum", resources_child_nodes)));
 
         //Spare parts
         int spareEngines, spareWings, spareLivingBays;
-        spareEngines = Integer.parseInt(getNodeValue("Engines",resources_child_nodes));
-        spareWings = Integer.parseInt(getNodeValue("Wings", resources_child_nodes));
-        spareLivingBays = Integer.parseInt(getNodeValue("LivingBays", resources_child_nodes));
+        spareEngines = Integer.parseInt(getNodeValue("spareEngines",resources_child_nodes));
+        spareWings = Integer.parseInt(getNodeValue("spareWings", resources_child_nodes));
+        spareLivingBays = Integer.parseInt(getNodeValue("spareLivingBays", resources_child_nodes));
         for(int i = 0; i < spareEngines; ++i) {
             game.getResources().addSpare(new Part("Engine", 100));
         }
@@ -97,28 +98,29 @@ public class GameFile
         }
     }
     public void loadPeople() {
-        Node people = getNode("People", game_node);
+        Node people = getNode("people", game_nodes);
         NodeList people_child_nodes = people.getChildNodes();
         //People
         for(int i = 0; i < people_child_nodes.getLength(); ++i) {
-            Node person = getNode("Person"+i, people_child_nodes);
+            Node person = getNode("person"+i, people_child_nodes);
             NodeList person_nodes = person.getChildNodes();
             if(i == 0) {
-                game.addCrew(getNodeValue("Name",person_nodes), true);
+                game.addCrew(getNodeValue("name",person_nodes), true);
             }
             else {
-                game.addCrew(getNodeValue("Name",person_nodes), false);
+                game.addCrew(getNodeValue("name",person_nodes), false);
             }
-            game.getCrew(i).setGender("Male".equals(getNodeValue("Gender", person_nodes)));
-            game.getCrew(i).setAge(Integer.parseInt(getNodeValue("Age", person_nodes)));
-            game.getCrew(i).setCondition(Integer.parseInt(getNodeValue("Condition", person_nodes)));
+            game.getCrew(i).setAge(Integer.parseInt(getNodeValue("age", person_nodes)));
+            game.getCrew(i).setCondition(Integer.parseInt(getNodeValue("condition", person_nodes)));
             Race loadRace = new Race();
-            loadRace.setName(getNodeValue("RaceName", person_nodes));
-            loadRace.setStrength(getNodeValue("RaceStrength", person_nodes));
-            loadRace.setWeakness(getNodeValue("RaceWeakness", person_nodes));
+            loadRace.setName(getNodeValue("raceName", person_nodes));
+            loadRace.setStrength(getNodeValue("raceStrength", person_nodes));
+            loadRace.setWeakness(getNodeValue("raceWeakness", person_nodes));
             game.getCrew(i).setRace(loadRace);
         }
     }
+
+
 
     //copied from http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
     protected Node getNode(String tagName, NodeList nodes) {
@@ -185,33 +187,5 @@ public class GameFile
 
         return "";
     }
-    //copied from http://www.drdobbs.com/jvm/creating-and-modifying-xml-in-java/240150782
-    protected void setNodeValue(String tagName, String value, NodeList nodes) {
-        Node node = getNode(tagName, nodes);
-        if ( node == null )
-            return;
 
-        // Locate the child text node and change its value
-        NodeList childNodes = node.getChildNodes();
-        for (int y = 0; y < childNodes.getLength(); y++ ) {
-            Node data = childNodes.item(y);
-            if ( data.getNodeType() == Node.TEXT_NODE ) {
-                data.setNodeValue(value);
-                return;
-            }
-        }
-    }
-    protected void addNode(String tagName, String value, Node parent) {
-        Document dom = parent.getOwnerDocument();
-
-        // Create a new Node with the given tag name
-        Node node = dom.createElement(tagName);
-
-        // Add the node value as a child text node
-        Text nodeVal = dom.createTextNode(value);
-        Node c = node.appendChild(nodeVal);
-
-        // Add the new node structure to the parent node
-        parent.appendChild(node);
-    }
 }

@@ -194,4 +194,8 @@ public class Game implements Serializable {
     public void setDistance(int d) {
         distance = d;
     }
+
+    public int getDistance() {
+        return distance;
+    }
 }
