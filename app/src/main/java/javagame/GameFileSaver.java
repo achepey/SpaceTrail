@@ -7,10 +7,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 /**
  * Created by Daniel on 11/29/2014.
@@ -76,13 +81,30 @@ public class GameFileSaver
     }
 
     public void saveGame(String fileName) {
-        saveShip();
-        saveResources();
-        savePeople();
-        NodeList rootNodes = doc.getChildNodes();
-        Node gameNode = getNode("game", gameNodes);
-        addNode("destinationPlanet", game.getDestination().getName(), gameNode);
-        addNode("distance", Integer.toString(game.getDistance()), gameNode);
+        try {
+            saveShip();
+            saveResources();
+            savePeople();
+            NodeList rootNodes = doc.getChildNodes();
+            Node gameNode = getNode("game", gameNodes);
+            addNode("destinationPlanet", game.getDestination().getName(), gameNode);
+            addNode("distance", Integer.toString(game.getDistance()), gameNode);
+
+
+            //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(fileName));
+
+            // Output to console for testing
+            // StreamResult result = new StreamResult(System.out);
+
+            transformer.transform(source, result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveShip() {
