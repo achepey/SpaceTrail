@@ -4,23 +4,44 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
  * Created by Daniel on 11/28/2014.
+ XML Structure:
+ <Game>
+    <Ship>
+        ...ship stuff
+    </Ship>
+    <Resources>
+        ...resources stuff
+    </Resources>
+    <People>
+        <Person1>
+            ...person stuff
+        </Person1>
+        <Person2>
+
+        </Person2>
+        ...to Person5
+    </People>
+    <DestinationPlanet></DestinationPlanet>
+    <Distance></Distance>
+ </Game>
+
  */
 public class GameFile
 {
-    private String fileName;
     Document doc;
     NodeList game_node;
     Game game;
 
-    public GameFile(String fn) {
+    public GameFile(String fileName) {
         try {
 
-            fileName = fn;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             doc = docBuilder.parse(fileName);
@@ -164,6 +185,33 @@ public class GameFile
 
         return "";
     }
+    //copied from http://www.drdobbs.com/jvm/creating-and-modifying-xml-in-java/240150782
+    protected void setNodeValue(String tagName, String value, NodeList nodes) {
+        Node node = getNode(tagName, nodes);
+        if ( node == null )
+            return;
 
+        // Locate the child text node and change its value
+        NodeList childNodes = node.getChildNodes();
+        for (int y = 0; y < childNodes.getLength(); y++ ) {
+            Node data = childNodes.item(y);
+            if ( data.getNodeType() == Node.TEXT_NODE ) {
+                data.setNodeValue(value);
+                return;
+            }
+        }
+    }
+    protected void addNode(String tagName, String value, Node parent) {
+        Document dom = parent.getOwnerDocument();
 
+        // Create a new Node with the given tag name
+        Node node = dom.createElement(tagName);
+
+        // Add the node value as a child text node
+        Text nodeVal = dom.createTextNode(value);
+        Node c = node.appendChild(nodeVal);
+
+        // Add the new node structure to the parent node
+        parent.appendChild(node);
+    }
 }
