@@ -12,7 +12,18 @@
         android:id="@+id/spaceshipMiddle"
         android:src="@drawable/spaceship_crop"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:padding="5dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spaceshipHit"
+        android:src="@drawable/spaceship_crop_hit"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="75dp"
@@ -73,4 +84,5 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="475dp" />
+
 </RelativeLayout>
