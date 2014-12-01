@@ -14,8 +14,12 @@ import java.io.*;
  */
 public class Resources {
     private int money, food, fuel, compound, aluminum;
-    ArrayList<Part> spares;
-    String race_compound;
+    private ArrayList<Part> spares;
+    private String race_compound;
+
+    public Resources() {
+        spares = new ArrayList<Part>();
+    }
 
     /* Setter Functions */
     public void setMoney(int val) {

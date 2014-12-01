@@ -18,23 +18,24 @@ public class Game implements Serializable {
     private ArrayList<Person> people;
     private ArrayList<Planet> planets;
     private Planet destination;
-    private int distance;
+    private double distance;
     private Race race;
+    private int money;
     public Game() {
-
+// test
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
 
         /* Create all 9 planets (or are we not using Pluto) */
-        Planet Mercury = new Planet("Mercury", "Helium", "Oxygen", 100);
-        Planet Venus = new Planet("Venus", "Nitrogen", "Carbon Dioxide", 100);
-        Planet Earth = new Planet("Earth", "Nitrogen", "Oxygen", 100);
-        Planet Mars = new Planet("Mars", "Nitrogen", "Carbon Dioxide", 100);
-        Planet Jupiter = new Planet("Jupiter", "Helium", "Hydrogen", 100);
-        Planet Saturn = new Planet("Saturn", "Helium", "Hydrogen", 100);
-        Planet Uranus = new Planet("Uranus", "Helium", "Methane", 100);
-        Planet Neptune = new Planet("Neptune", "Helium", "Methane", 100);
-        Planet Pluto = new Planet("Pluto", "Nitrogen", "Methane", 100);
+        Planet Mercury = new Planet("Mercury", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Venus = new Planet("Venus", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Earth = new Planet("Earth", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Mars = new Planet("Mars", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Jupiter = new Planet("Jupiter", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Saturn = new Planet("Saturn", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Uranus = new Planet("Uranus", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Neptune = new Planet("Neptune", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+//        Planet Pluto = new Planet("Pluto");
 
         planets.add(Mercury);
         planets.add(Venus);
@@ -44,11 +45,32 @@ public class Game implements Serializable {
         planets.add(Saturn);
         planets.add(Uranus);
         planets.add(Neptune);
-        planets.add(Pluto);
+//        planets.add(Pluto);
 
         ship = new Ship();
         resources = new Resources();
-        destination = new Planet("Temp", "Temp", "Temp", -1);       //used as default destination until a planet is given
+        destination = new Planet("Temp", "");       //used as default destination until a planet is given
+        race = new Race();
+
+    }
+
+    /* Fuel cost based on distance from sun */
+    public void sellFuel() {
+
+    }
+
+    /* Food cost based on distance from sun (medium range is cheapest) */
+    public void sellFood() {
+
+    }
+
+    /* Cheap on Earth, Mars, Pluto, and Mercury */
+    public void sellAluminum() {
+
+    }
+
+    /* Will be cheap if they race's compound is either compound1 or compound2 for planet */
+    public void sellCompound() {
 
     }
 
@@ -72,10 +94,10 @@ public class Game implements Serializable {
         for(int i = 0; i < 5; i++) {
             int amount = 0;                 // How much the crew member will be hurt
             /* Measure attrition due to race */
-            if(people.get(i).getRace().getStrength().equals(destination.getCompound1()) || people.get(i).getRace().getStrength().equals(destination.getCompound2())) {
+            if(people.get(i).getRace().getStrength().equals(destination.compound1) || people.get(i).getRace().getStrength().equals(destination.compound2)) {
                 amount += 5;               // Add health for heading to planet with strength compound
             }
-            if(people.get(i).getRace().getWeakness().equals(destination.getCompound1()) || people.get(i).getRace().getWeakness().equals(destination.getCompound2())) {
+            if(people.get(i).getRace().getWeakness().equals(destination.compound1) || people.get(i).getRace().getWeakness().equals(destination.compound2)) {
                 amount -= 10;               // Subtract health for heading to planet with weakness compound
             }
 
@@ -109,11 +131,17 @@ public class Game implements Serializable {
         if(captain) {
             people.add(0, new Person(name));
             System.out.println("Captain [" + name + "] has been added.");
+            people.get(0).setRace(race);
         }
         else {
             people.add(new Person(name));
             System.out.println("Crew member [" + name + "] has been added.");
+            people.get(people.size()-1).setRace(race);
         }
+    }
+
+    public ArrayList<Person> getPeople() {
+        return people;
     }
 
     public Person getCrew(int personIndex) {
@@ -122,36 +150,37 @@ public class Game implements Serializable {
 
     public void setFirstDestination(int planetIndex) {
         destination = planets.get(planetIndex);
+        distance = destination.distanceFromSun;
     }
 
     public void setDestination(String planet) {
         if(planet.equals("Mercury")) {
-            setDestination(1);
+            setDestination(0);
         }
         else if(planet.equals("Venus")) {
-            setDestination(2);
+            setDestination(1);
         }
         else if(planet.equals("Earth")) {
-            setDestination(3);
+            setDestination(2);
         }
         else if(planet.equals("Mars")) {
-            setDestination(4);
+            setDestination(3);
         }
         else if(planet.equals("Jupiter")) {
-            setDestination(5);
+            setDestination(4);
         }
         else if(planet.equals("Saturn")) {
-            setDestination(6);
+            setDestination(5);
         }
         else if(planet.equals("Uranus")) {
-            setDestination(7);
+            setDestination(6);
         }
         else if(planet.equals("Neptune")) {
+            setDestination(7);
+        }
+    /*    else if(planet.equals("Pluto")) {
             setDestination(8);
-        }
-        else if(planet.equals("Pluto")) {
-            setDestination(9);
-        }
+        }*/
     }
 
     /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)
@@ -160,7 +189,7 @@ public class Game implements Serializable {
     public void setDestination(int planetIndex) {
         int currentIndex = 0;
         for(int i = 0; i < 9; i++) {
-            if(planets.get(i).getName() == destination.getName()) {
+            if(planets.get(i).name.equals(destination.name)) {
                 currentIndex = i;
                 break;
             }
@@ -173,7 +202,7 @@ public class Game implements Serializable {
             */
         double hypotenuse = Math.sin(Math.toRadians(40 * (planetIndex - currentIndex)));
         destination = planets.get(planetIndex);
-        distance = (int)((destination.getDistance()) * hypotenuse);
+        distance = (int)((destination.distanceFromSun) * hypotenuse);
 
     }
 
@@ -195,7 +224,29 @@ public class Game implements Serializable {
         distance = d;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
+    }
+
+    public boolean isWinner() {
+        int counter = 0;
+        for(int i = 0; i < 9; i++) {
+            if (planets.get(i).visited == true) {
+                counter += 1;
+            }
+        }
+        if(counter == 9) {
+            System.out.println("You have visited all the planets.");
+            return true;
+        }
+        return false;
+    }
+
+    public void setMoney(int m) {
+        money = m;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

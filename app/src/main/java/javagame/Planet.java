@@ -1,42 +1,136 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javagame;
 
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 /**
- *
- * @author EvanKirkland
+ * Created by Daniel on 11/30/2014.
  */
-public class Planet {
-    String name, compound1, compound2;
-    int distance;
+public class Planet
+{
+    public String name, compound1, compound2;
+    public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure;
+    public int numberOfMoons;
+    public Boolean ringSystem, globalMagneticField, visited;
 
-    /* Constructor */
-    public Planet(String n, String c1, String c2, int d) {
-        name = n;
-        compound1 = c1;
-        compound2 = c2;
-        distance = d;
-    };
-
-    /*Returns planet name*/
-    public String getName() {
-        return name;
+    public Planet(String n, String fileName) {
+        try {
+            name = n;
+            visited = false;
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(fileName);
+            NodeList planets = doc.getChildNodes();
+            Node planetNode = getNode("resources", planets);
+            planets = planetNode.getChildNodes();
+            //planets should now contain list of planets in solar system
+            Node planet = getNode(name, planets);
+            //planet will be planet from XML document
+            NodeList planetInfo = planet.getChildNodes();
+            //planetInfo contains list of all planet attributes
+            //Begin setting instance fields
+            compound1 = getNodeValue("compound1", planetInfo);
+            compound2 = getNodeValue("compound2", planetInfo);
+            mass = Double.parseDouble(getNodeValue("mass", planetInfo));
+            diameter = Double.parseDouble(getNodeValue("diameter", planetInfo));
+            density = Double.parseDouble(getNodeValue("density", planetInfo));
+            gravity = Double.parseDouble(getNodeValue("gravity", planetInfo));
+            escapeVelocity = Double.parseDouble(getNodeValue("escapeVelocity", planetInfo));
+            rotationPeriod = Double.parseDouble(getNodeValue("rotationPeriod", planetInfo));
+            lengthOfDay = Double.parseDouble(getNodeValue("lengthOfDay", planetInfo));
+            distanceFromSun = Double.parseDouble(getNodeValue("distanceFromSun", planetInfo));
+            orbitalPeriod = Double.parseDouble(getNodeValue("orbitalPeriod", planetInfo));
+            orbitalVelocity = Double.parseDouble(getNodeValue("orbitalVelocity", planetInfo));
+            orbitalInclination = Double.parseDouble(getNodeValue("orbitalInclination", planetInfo));
+            axialTilt = Double.parseDouble(getNodeValue("axialTilt", planetInfo));
+            meanTemperature = Double.parseDouble(getNodeValue("meanTemperature", planetInfo));
+            surfacePressure = Double.parseDouble(getNodeValue("surfacePressure", planetInfo));
+            numberOfMoons = Integer.parseInt(getNodeValue("numberOfMoons", planetInfo));
+            if(getNodeValue("ringSystem", planetInfo).equals("Yes")) {
+                ringSystem = true;
+            }
+            else {
+                ringSystem = false;
+            }
+            if(getNodeValue("globalMagneticField", planetInfo).equals("Yes")) {
+                globalMagneticField = true;
+            }
+            else {
+                globalMagneticField = false;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    /*Returns compound1 */
-    public String getCompound1() {
-        return compound1;
-    }
 
-    /*Returns compund2 */
-    public String getCompound2() {
-        return compound2;
-    }
+    //copied from http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
+    protected Node getNode(String tagName, NodeList nodes) {
+        for ( int x = 0; x < nodes.getLength(); x++ ) {
+            Node node = nodes.item(x);
+            if (node.getNodeName().equalsIgnoreCase(tagName)) {
+                return node;
+            }
+        }
 
-    public int getDistance() {
-        return distance;
+        return null;
+    }
+    protected String getNodeValue( Node node ) {
+        NodeList childNodes = node.getChildNodes();
+        for (int x = 0; x < childNodes.getLength(); x++ ) {
+            Node data = childNodes.item(x);
+            if ( data.getNodeType() == Node.TEXT_NODE )
+                return data.getNodeValue();
+        }
+        return "";
+    }
+    protected String getNodeValue(String tagName, NodeList nodes ) {
+        for ( int x = 0; x < nodes.getLength(); x++ ) {
+            Node node = nodes.item(x);
+            if (node.getNodeName().equalsIgnoreCase(tagName)) {
+                NodeList childNodes = node.getChildNodes();
+                for (int y = 0; y < childNodes.getLength(); y++ ) {
+                    Node data = childNodes.item(y);
+                    if ( data.getNodeType() == Node.TEXT_NODE )
+                        return data.getNodeValue();
+                }
+            }
+        }
+        return "";
+    }
+    protected String getNodeAttr(String attrName, Node node ) {
+        NamedNodeMap attrs = node.getAttributes();
+        for (int y = 0; y < attrs.getLength(); y++ ) {
+            Node attr = attrs.item(y);
+            if (attr.getNodeName().equalsIgnoreCase(attrName)) {
+                return attr.getNodeValue();
+            }
+        }
+        return "";
+    }
+    protected String getNodeAttr(String tagName, String attrName, NodeList nodes ) {
+        for ( int x = 0; x < nodes.getLength(); x++ ) {
+            Node node = nodes.item(x);
+            if (node.getNodeName().equalsIgnoreCase(tagName)) {
+                NodeList childNodes = node.getChildNodes();
+                for (int y = 0; y < childNodes.getLength(); y++ ) {
+                    Node data = childNodes.item(y);
+                    if ( data.getNodeType() == Node.ATTRIBUTE_NODE ) {
+                        if ( data.getNodeName().equalsIgnoreCase(attrName) )
+                            return data.getNodeValue();
+                    }
+                }
+            }
+        }
+
+        return "";
     }
 }
