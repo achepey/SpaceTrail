@@ -19,13 +19,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
         ...resources stuff
     </resources>
     <people>
-        <person1>
+        <person0>
             ...person stuff
-        </person1>
-        <person2>
+        </person0>
+        <person1>
 
-        </person2>
-        ...to person5
+        </person1>
+        ...to person4
     </people>
     <destinationPlanet></destinationPlanet>
     <distance></distance>
@@ -65,14 +65,14 @@ public class GameFileLoader
         return game;
     }
 
-    public void loadShip() {
+    private void loadShip() {
         Node ship = getNode("ship", game_nodes);
         NodeList ship_child_nodes = ship.getChildNodes();
         game.getShip().setEngineStatus(Integer.parseInt(getNodeValue("engine",ship_child_nodes)));
         game.getShip().setWingStatus(Integer.parseInt(getNodeValue("wing",ship_child_nodes)));
         game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("livingBay",ship_child_nodes))));
     }
-    public void loadResources() {
+    private void loadResources() {
         Node resources = getNode("resources", game_nodes);
         NodeList resources_child_nodes = resources.getChildNodes();
         //Resources
@@ -91,13 +91,13 @@ public class GameFileLoader
             game.getResources().addSpare(new Part("Engine", 100));
         }
         for(int i = 0; i < spareWings; ++i) {
-            game.getResources().addSpare(new Part("Wings", 100));
+            game.getResources().addSpare(new Part("Wing", 100));
         }
         for(int i = 0; i < spareLivingBays; ++i) {
-            game.getResources().addSpare(new Part("LivingBays", 100));
+            game.getResources().addSpare(new Part("LivingBay", 100));
         }
     }
-    public void loadPeople() {
+    private void loadPeople() {
         Node people = getNode("people", game_nodes);
         NodeList people_child_nodes = people.getChildNodes();
         //People

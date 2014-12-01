@@ -29,13 +29,13 @@ import javax.xml.transform.stream.StreamResult;
         ...resources stuff
     </resources>
     <people>
-        <person1>
+        <person0>
             ...person stuff
-        </person1>
-        <person2>
+        </person0>
+        <person1>
 
-        </person2>
-        ...to person5
+        </person1>
+        ...to person4
     </people>
     <destinationPlanet></destinationPlanet>
     <distance></distance>
@@ -63,7 +63,7 @@ public class GameFileSaver
             Element peopleElement = doc.createElement("people");
             rootElement.appendChild(peopleElement);
             Element currPerson;
-            for(int i = 1; i < 6; ++i) {
+            for(int i = 0; i < 5; ++i) {
                 currPerson = doc.createElement("person" + i);
                 peopleElement.appendChild(currPerson);
             }
@@ -85,10 +85,11 @@ public class GameFileSaver
             saveShip();
             saveResources();
             savePeople();
-            NodeList rootNodes = doc.getChildNodes();
-            Node gameNode = getNode("game", gameNodes);
-            addNode("destinationPlanet", game.getDestination().getName(), gameNode);
-            addNode("distance", Integer.toString(game.getDistance()), gameNode);
+
+            NodeList rootNodeList = doc.getChildNodes();
+            Node gameNode = getNode("game", rootNodeList);
+            addNode("destinationPlanet", game.getDestination().name, gameNode);
+            addNode("distance", Double.toString(game.getDistance()), gameNode);
 
 
             //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
@@ -107,14 +108,14 @@ public class GameFileSaver
         }
     }
 
-    public void saveShip() {
+    private void saveShip() {
         Node ship = getNode("ship", gameNodes);
         addNode("engine", Integer.toString(game.getShip().getEngineStatus()), ship);
         addNode("wing", Integer.toString(game.getShip().getWingStatus()), ship);
         addNode("livingBay", Integer.toString(game.getShip().getLivingBayStatus()), ship);
     }
 
-    public void saveResources() {
+    private void saveResources() {
         Node resources = getNode("resources", gameNodes);
         addNode("money", Integer.toString(game.getResources().getMoney()), resources);
         addNode("food", Integer.toString(game.getResources().getFood()),resources);
@@ -129,10 +130,10 @@ public class GameFileSaver
             if(partsList.get(i).getName().equals("Engine")) {
                 ++numEngines;
             }
-            else if(partsList.get(i).getName().equals("Wings")) {
+            else if(partsList.get(i).getName().equals("Wing")) {
                 ++numWings;
             }
-            else if(partsList.get(i).getName().equals("LivingBays")){
+            else if(partsList.get(i).getName().equals("LivingBay")){
                 ++numLivingBays;
             }
         }
@@ -141,10 +142,10 @@ public class GameFileSaver
         addNode("spareLivingBays", Integer.toString(numLivingBays), resources);
     }
 
-    public void savePeople() {
+    private void savePeople() {
         Node people = getNode("people", gameNodes);
         NodeList people_nodes = people.getChildNodes();
-        for(int i = 0; i < 5; ++i) {
+        for(int i = 0; i < game.getPeople().size(); ++i) {
             Node person = getNode("person"+i, people_nodes);
             addNode("name", game.getCrew(i).getName(), person);
             addNode("age", Integer.toString(game.getCrew(i).getAge()), person);
