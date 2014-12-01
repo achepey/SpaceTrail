@@ -72,6 +72,13 @@ public class GameFileLoader
         int pace = Integer.parseInt(getNodeValue("pace", game_nodes));
         game.setPace(pace);
         game.setTotalDistance(Double.parseDouble(getNodeValue("totalDistance", game_nodes)));
+
+        String visitedPlanetsString = getNodeValue("visitedPlanets", game_nodes);
+        String delims = "[ ]";
+        String[] visitedPlanetsArray = visitedPlanetsString.split(delims);
+        for(int i = 0; i < visitedPlanetsArray.length; ++i) {
+            game.setVisited(visitedPlanetsArray[i]);
+        }
         return game;
     }
 
@@ -98,13 +105,13 @@ public class GameFileLoader
         spareWings = Integer.parseInt(getNodeValue("spareWings", resources_child_nodes));
         spareLivingBays = Integer.parseInt(getNodeValue("spareLivingBays", resources_child_nodes));
         for(int i = 0; i < spareEngines; ++i) {
-            game.getResources().addSpare(new Part("Engine", 100));
+            game.getResources().addSpare(new Part("engine", 100));
         }
         for(int i = 0; i < spareWings; ++i) {
-            game.getResources().addSpare(new Part("Wing", 100));
+            game.getResources().addSpare(new Part("wing", 100));
         }
         for(int i = 0; i < spareLivingBays; ++i) {
-            game.getResources().addSpare(new Part("LivingBay", 100));
+            game.getResources().addSpare(new Part("livingBay", 100));
         }
     }
     private void loadPeople() {

@@ -103,14 +103,14 @@ public class Game implements Serializable {
             return false;
         }
         for (int i = 0; i < m; i++) {           // add 'm' of this spare part
-            if(s.equals("Engine")) {
-                Part p = new Part("Engine", 100);
+            if(s.equals("engine")) {
+                Part p = new Part("engine", 100);
                 resources.addSpare(p);
-            }else if(s.equals("Wing")) {
-                Part p = new Part("Wing", 100);
+            }else if(s.equals("wing")) {
+                Part p = new Part("wing", 100);
                 resources.addSpare(p);
-            }else if(s.equals("LivingBay")) {
-                Part p = new Part("LivingBay", 100);
+            }else if(s.equals("livingBay")) {
+                Part p = new Part("livingBay", 100);
                 resources.addSpare(p);
             }
         }
@@ -476,6 +476,51 @@ public class Game implements Serializable {
         //destination dependent issues
            //will encounter destination issues if within close distanceRemaining to destination planet
         if((distanceRemaining < pace*2 && slow) || (distanceRemaining < pace && (medium || fast))) {
+            if(distanceRemaining <= 0) {     //If you arrived at the planet this turn
+                double nightOrDayChance = Math.random();
+                if(nightOrDayChance > .5) {         //you have arrived at night time to the planet
+                    if(destination.lengthOfDay > 30) {      //It would take too long to wait for it to become day
+                        issue = "After landing on " + destination.name + " at night, you realize that the length of the planet's night is " + destination.lengthOfDay/2 + " hours. You fly around the planet to land where it is daytime.";
+                        crewAttrition();                        // decide how much health each crew member loses
+                        resourceAttrition();                    // decide how many resources the crew loses
+                        return issue;
+                    }
+                }
+                double diameterIssueChance = Math.random();
+                if(diameterIssueChance < destination.diameter/1000000) {        //diameter will be a decimal if divided by 1000000
+                    issue = "The analysis probe you sent to measure the planet's size appears to have gotten lost! You have to buy a new one.";
+                    money -= 20;
+                    return issue;
+                }
+                double gravityIssueChance = Math.random();
+                if(gravityIssueChance < .04 && (destination.gravity > 10 || destination.gravity < 8)) {
+                    int crewMember = (int)Math.floor(Math.random() * people.size());
+                    issue = people.get(crewMember).getName() + " was not expecting the gravity on " + destination.name + " to be so different than the spaceships's artificial gravity and " + people.get(crewMember).getName() + " has hurt their leg.";
+                    people.get(crewMember).incrementCondition(10, false);
+                    return issue;
+                }
+                double cryoSleepIssueChance = Math.random();
+                if(totalDistance > 500 && cryoSleepIssueChance < .02) {     //crew only enters cryosleep if distance traveled is over 500 units
+                    int crewMember = (int)Math.floor(Math.random() * people.size());
+                    issue = people.get(crewMember).getName() + " is experiencing mild stomach discomfort after awakening from cyrosleep. Totally normal, no need for concern. Their condition is a little lower now, though.";
+                    people.get(crewMember).incrementCondition(5, false);
+                    return issue;
+                }
+                double gettingLostIssueChance = Math.random();
+                if(destination.axialTilt > 90 && gettingLostIssueChance < .025) {       //if planet's axis is very tilted
+                    issue = "Because of " + destination.name + "'s severe axial tilt (" + destination.axialTilt + " degrees) your crew has trouble reading their maps and gets lost. Your crew eats extra food when they are lost because they are nervous-eaters.";
+                    resources.incrementFood(10, false);
+                    return issue;
+                }
+                double instrumentMagneticIssueChance = (destination.globalMagneticField) ? Math.random() : 1;
+                if(instrumentMagneticIssueChance < .025) {
+                    issue = "Because of the global magnetic field of " + destination.name + " your navigation instruments are not working properly on the planet. Exploring the planet takes more time than usual.";
+                    resources.incrementFood(10, false);
+                    return issue;
+                }
+            }
+
+
             double moonIssueChance = Math.random();
             double ringIssueChance = (destination.ringSystem) ? Math.random() : 1;
             if(moonIssueChance < destination.numberOfMoons/200) {       //higher chance for planets with more moons
@@ -504,49 +549,7 @@ public class Game implements Serializable {
                 return issue;
             }
         }
-        if(distanceRemaining <= 0) {     //If you arrived at the planet this turn
-            double nightOrDayChance = Math.random();
-            if(nightOrDayChance > .5) {         //you have arrived at night time to the planet
-                if(destination.lengthOfDay > 30) {      //It would take too long to wait for it to become day
-                    issue = "After landing on " + destination.name + " at night, you realize that the length of the planet's night is " + destination.lengthOfDay/2 + " hours. You fly around the planet to land where it is daytime.";
-                    crewAttrition();                        // decide how much health each crew member loses
-                    resourceAttrition();                    // decide how many resources the crew loses
-                    return issue;
-                }
-            }
-            double diameterIssueChance = Math.random();
-            if(diameterIssueChance < destination.diameter/1000000) {        //diameter will be a decimal if divided by 1000000
-                issue = "The analysis probe you sent to measure the planet's size appears to have gotten lost! You have to buy a new one.";
-                money -= 20;
-                return issue;
-            }
-            double gravityIssueChance = Math.random();
-            if(gravityIssueChance < .04 && (destination.gravity > 10 || destination.gravity < 8)) {
-                int crewMember = (int)Math.floor(Math.random() * people.size());
-                issue = people.get(crewMember).getName() + " was not expecting the gravity on " + destination.name + " to be so different than the spaceships's artificial gravity and " + people.get(crewMember).getName() + " has hurt their leg.";
-                people.get(crewMember).incrementCondition(10, false);
-                return issue;
-            }
-            double cryoSleepIssueChance = Math.random();
-            if(totalDistance > 500 && cryoSleepIssueChance < .02) {     //crew only enters cryosleep if distance traveled is over 500 units
-                int crewMember = (int)Math.floor(Math.random() * people.size());
-                issue = people.get(crewMember).getName() + " is experiencing mild stomach discomfort after awakening from cyrosleep. Totally normal, no need for concern. Their condition is a little lower now, though.";
-                people.get(crewMember).incrementCondition(5, false);
-                return issue;
-            }
-            double gettingLostIssueChance = Math.random();
-            if(destination.axialTilt > 90 && gettingLostIssueChance < .025) {       //if planet's axis is very tilted
-                issue = "Because of " + destination.name + "'s severe axial tilt (" + destination.axialTilt + " degrees) your crew has trouble reading their maps and gets lost. Your crew eats extra food when they are lost because they are nervous-eaters.";
-                resources.incrementFood(10, false);
-                return issue;
-            }
-            double instrumentMagneticIssueChance = (destination.globalMagneticField) ? Math.random() : 1;
-            if(instrumentMagneticIssueChance < .025) {
-                issue = "Because of the global magnetic field of " + destination.name + " your navigation instruments are not working properly on the planet. Exploring the planet takes more time than usual.";
-                resources.incrementFood(10, false);
-                return issue;
-            }
-        }
+
 
         //travel issues
            //traveling through asteroid belt
@@ -660,5 +663,69 @@ public class Game implements Serializable {
 
     public void setArrivedAtPlanet(boolean b) {
         arrivedAtPlanet = b;
+    }
+
+    public ArrayList<Planet> getPlanets() {
+        return planets;
+    }
+
+    public void setVisited(String planetName) {
+        if(planetName.equals("Mercury")) {
+            planets.get(0).visited = true;
+        }
+        else if(planetName.equals("Venus")) {
+            planets.get(1).visited = true;
+        }
+        else if(planetName.equals("Earth")) {
+            planets.get(2).visited = true;
+        }
+        else if(planetName.equals("Mars")) {
+            planets.get(3).visited = true;
+        }
+        else if(planetName.equals("Jupiter")) {
+            planets.get(4).visited = true;
+        }
+        else if(planetName.equals("Saturn")) {
+            planets.get(5).visited = true;
+        }
+        else if(planetName.equals("Uranus")) {
+            planets.get(6).visited = true;
+        }
+        else if(planetName.equals("Neptune")) {
+            planets.get(7).visited = true;
+        }
+    }
+
+    public boolean repairHull(int amountAluminum) {
+        if(resources.getAluminum() < amountAluminum) {
+            return false;
+        }
+        resources.incrementAluminum(amountAluminum, false);
+        ship.repairPart("hull", amountAluminum);
+        return true;
+    }
+
+    public boolean repairEngine() {
+        if(resources.removeSpare("engine")){
+            ship.setEngineStatus(100);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean repairWing() {
+        if(resources.removeSpare("wing")){
+            ship.setWingStatus(100);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean repairLivingBay() {
+        if(resources.removeSpare("livingBay")){
+            ship.setLivingBayStatus(100);
+            return true;
+        }
+        return false;
     }
 }

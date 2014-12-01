@@ -37,6 +37,7 @@ import javax.xml.transform.stream.StreamResult;
         </person1>
         ...to person4
     </people>
+    <visitedPlanets></visitedPlanets>
     <destinationPlanet></destinationPlanet>
     <distance></distance>
  </game>
@@ -95,6 +96,13 @@ public class GameFileSaver
             addNode("pace", Integer.toString(game.getPace()), gameNode);
             addNode("totalDistance", Double.toString(game.getTotalDistance()), gameNode);
 
+            String visitedPlanets = "";
+            for(int i = 0; i < game.getPlanets().size(); ++i) {
+                if(game.getPlanets().get(i).visited){
+                    visitedPlanets += game.getPlanets().get(i).name + " ";
+                }
+            }
+            addNode("visitedPlanets", visitedPlanets, gameNode);
             //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -130,13 +138,13 @@ public class GameFileSaver
         ArrayList<Part> partsList = game.getResources().getSpares();
         int numEngines = 0, numWings = 0, numLivingBays = 0;
         for(int i = 0; i < partsList.size(); ++i) {
-            if(partsList.get(i).getName().equals("Engine")) {
+            if(partsList.get(i).getName().equals("engine")) {
                 ++numEngines;
             }
-            else if(partsList.get(i).getName().equals("Wing")) {
+            else if(partsList.get(i).getName().equals("wing")) {
                 ++numWings;
             }
-            else if(partsList.get(i).getName().equals("LivingBay")){
+            else if(partsList.get(i).getName().equals("livingBay")){
                 ++numLivingBays;
             }
         }
@@ -158,7 +166,6 @@ public class GameFileSaver
             addNode("raceWeakness", game.getCrew(i).getRace().getWeakness(), person);
         }
     }
-
     //copied from http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
     protected Node getNode(String tagName, NodeList nodes) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
