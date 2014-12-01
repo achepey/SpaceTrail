@@ -20,8 +20,9 @@ public class Game implements Serializable {
     private Planet destination;
     private double distance;
     private Race race;
+    private int money;
     public Game() {
-
+// test
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
 
@@ -50,6 +51,26 @@ public class Game implements Serializable {
         resources = new Resources();
         destination = new Planet("Temp", "");       //used as default destination until a planet is given
         race = new Race();
+
+    }
+
+    /* Fuel cost based on distance from sun */
+    public void sellFuel() {
+
+    }
+
+    /* Food cost based on distance from sun (medium range is cheapest) */
+    public void sellFood() {
+
+    }
+
+    /* Cheap on Earth, Mars, Pluto, and Mercury */
+    public void sellAluminum() {
+
+    }
+
+    /* Will be cheap if they race's compound is either compound1 or compound2 for planet */
+    public void sellCompound() {
 
     }
 
@@ -205,5 +226,27 @@ public class Game implements Serializable {
 
     public double getDistance() {
         return distance;
+    }
+
+    public boolean isWinner() {
+        int counter = 0;
+        for(int i = 0; i < 9; i++) {
+            if (planets.get(i).visited == true) {
+                counter += 1;
+            }
+        }
+        if(counter == 9) {
+            System.out.println("You have visited all the planets.");
+            return true;
+        }
+        return false;
+    }
+
+    public void setMoney(int m) {
+        money = m;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }

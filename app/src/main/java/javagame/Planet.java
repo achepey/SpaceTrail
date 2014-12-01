@@ -18,12 +18,12 @@ public class Planet
     public String name, compound1, compound2;
     public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure;
     public int numberOfMoons;
-    public Boolean ringSystem, globalMagneticField;
+    public Boolean ringSystem, globalMagneticField, visited;
 
     public Planet(String n, String fileName) {
         try {
             name = n;
-
+            visited = false;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(fileName);
