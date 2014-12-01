@@ -117,6 +117,9 @@ public class Game implements Serializable {
 
     /* Makes moves towards planet destination */
     public boolean makeMove() {
+        if(gameOver || isWinner()) {
+            return false;
+        }
         /* Things that need to be done in this method:
             - reduce distanceRemaining remaining
             - decide how much health each crew member loses
@@ -125,6 +128,13 @@ public class Game implements Serializable {
         distanceRemaining -= pace;                       // reduce distanceRemaining remaining
         crewAttrition();                        // decide how much health each crew member loses
         resourceAttrition();                    // decide how many resources the crew loses
+        String issue = getIssue();
+        if(!issue.equals("Successful Movement")){
+            System.out.println(issue);
+        }
+        if(gameOver) {
+            System.out.println("Game Over! You lose!");
+        }
         return distanceRemaining <= 0;
     }
 
@@ -312,6 +322,10 @@ public class Game implements Serializable {
         return false;
     }
 
+    public boolean isLoser() {
+        return gameOver;
+    }
+
     public void setMoney(int m) {
         money = m;
     }
@@ -338,7 +352,22 @@ public class Game implements Serializable {
             gameOver = true;
             resourceIssue = true;
         } else if (ship.getHullStatus() <= 0) {
-            issue = "Your hull has sustained critical damage! Your crew has been sucked into space through a hole in your living bay.";
+            issue = "Your hull has sustained critical damage! The structural integrity of the hull is so week that the ship breaks apart when the captain tries to decelerate.";
+            gameOver = true;
+            resourceIssue = true;
+        }
+        else if (ship.getEngineStatus() <= 0) {
+            issue = "Your engine has sustained critical damage! Your engines explode and the ship goes spiraling into a nearby moon.";
+            gameOver = true;
+            resourceIssue = true;
+        }
+        else if (ship.getLivingBayStatus() <= 0) {
+            issue = "Your living bay has sustained critical damage! Your crew has been sucked into space through a hole in space ship.";
+            gameOver = true;
+            resourceIssue = true;
+        }
+        else if (ship.getWingStatus() <= 0) {
+            issue = "Your wing has sustained critical damage! The ship can no longer be controlled and your crew escapes in an escape pod, except the captain who goes down with the ship.";
             gameOver = true;
             resourceIssue = true;
         }
@@ -380,6 +409,18 @@ public class Game implements Serializable {
             if(escapeVelocityIssueChance < previous.escapeVelocity/300) {
                 issue = "While leaving " + previous.name + " you did not correctly accommodate for the planet's escape velocity, so you used more fuel than was initially planned for to leave the atmosphere!";
                 resources.incrementFuel(10, false);
+                return issue;
+            }
+            double temperatureIssueChance = Math.random();
+            if(Math.abs(previous.meanTemperature) > 150 && temperatureIssueChance < .05) {      //5% chance
+                issue = "While on " + previous.name + " your supplies were damaged by the extreme temperatures! You have to throw away some of your food as it is now not edible.";
+                resources.incrementFood(10, false);
+                return issue;
+            }
+            else if(Math.abs(previous.meanTemperature) > 150 && temperatureIssueChance < .07) {      //2% chance
+                int crewMember = (int)Math.floor(Math.random() * people.size());
+                issue = "While on " + previous.name + ", " + people.get(crewMember).getName() + " got sick from the extreme temperatures! " + people.get(crewMember).getName() +"'s health has lowered.";
+                people.get(crewMember).incrementCondition(10, false);
                 return issue;
             }
         }
@@ -424,6 +465,32 @@ public class Game implements Serializable {
                     return issue;
                 }
             }
+            double diameterIssueChance = Math.random();
+            if(diameterIssueChance < destination.diameter/1000000) {        //diameter will be a decimal if divided by 1000000
+                issue = "The analysis probe you sent to measure the planet's size appears to have gotten lost! You have to buy a new one.";
+                money -= 20;
+                return issue;
+            }
+            double gravityIssueChance = Math.random();
+            if(gravityIssueChance < .04 && (destination.gravity > 10 || destination.gravity < 8)) {
+                int crewMember = (int)Math.floor(Math.random() * people.size());
+                issue = people.get(crewMember).getName() + " was not expecting the gravity on " + destination.name + " to be so different than the spaceships's artificial gravity and " + people.get(crewMember).getName() + " has hurt their leg.";
+                people.get(crewMember).incrementCondition(10, false);
+                return issue;
+            }
+            double cryoSleepIssueChance = Math.random();
+            if(totalDistance > 500 && cryoSleepIssueChance < .02) {     //crew only enters cryosleep if distance traveled is over 500 units
+                int crewMember = (int)Math.floor(Math.random() * people.size());
+                issue = people.get(crewMember).getName() + " is experiencing mild stomach discomfort after awakening from cyrosleep. Totally normal, no need for concern. Their condition is a little lower now, though.";
+                people.get(crewMember).incrementCondition(5, false);
+                return issue;
+            }
+            double gettingLostIssueChance = Math.random();
+            if(destination.axialTilt > 90 && gettingLostIssueChance < .025) {       //if planet's axis is very tilted
+                issue = "Because of " + destination.name + "'s severe axial tilt (" + destination.axialTilt + " degrees) your crew has trouble reading their maps and gets lost. Your crew eats extra food when they are lost because they are nervous-eaters.";
+                resources.incrementFood(10, false);
+                return issue;
+            }
         }
 
         //travel issues
@@ -449,9 +516,20 @@ public class Game implements Serializable {
                 ship.damagePart(shipPart, 10);
                 return issue;
             }
+            //if traveling more than 500 units, the crew will enter cryosleep when traveling
+            if(totalDistance > 500) {
+                double cryosleepIssueChance = Math.random();
+                if(cryosleepIssueChance > .0001) {
+                    int crewMember = (int)Math.floor(Math.random() * people.size());
+                    issue = people.get(crewMember).getName() + " has been killed due to complications with cryosleep. It was a painless way to go, but I am sure the rest of the crew will be sad to hear it when they wake up.";
+                    people.remove(crewMember);
+                    return issue;
+                }
+            }
         }
 
         //miscellaneous issues
+            //random issues that can occur
 
         return issue;
     }
