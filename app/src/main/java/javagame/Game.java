@@ -55,23 +55,35 @@ public class Game implements Serializable {
     }
 
     /* Fuel cost based on distance from sun */
-    public void sellFuel() {
-
+    public boolean sellFuel() {
+        if(money < 0) {
+            return false;
+        }
+        return true;
     }
 
     /* Food cost based on distance from sun (medium range is cheapest) */
-    public void sellFood() {
-
+    public boolean sellFood() {
+        if(money < 0) {
+            return false;
+        }
+        return true;
     }
 
     /* Cheap on Earth, Mars, Pluto, and Mercury */
-    public void sellAluminum() {
-
+    public boolean sellAluminum() {
+        if(money < 0) {
+            return false;
+        }
+        return true;
     }
 
-    /* Will be cheap if they race's compound is either compound1 or compound2 for planet */
-    public void sellCompound() {
-
+    /* Cheap on Earth, Mars, Pluto, and Mercury */
+    public boolean sellParts() {
+        if(money < 0) {
+            return false;
+        }
+        return true;
     }
 
     /* Makes moves towards planet destination */
