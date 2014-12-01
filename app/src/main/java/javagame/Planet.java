@@ -16,7 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class Planet
 {
     public String name, compound1, compound2;
-    public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure;
+    public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure, fuelCost, foodCost, partCost, aluminumCost;
     public int numberOfMoons;
     public Boolean ringSystem, globalMagneticField, visited;
 
@@ -64,6 +64,24 @@ public class Planet
             }
             else {
                 globalMagneticField = false;
+            }
+
+            if(distanceFromSun > 2200) {
+                fuelCost = 10;
+                foodCost = 5;
+            }else if(distanceFromSun > 600) {
+                fuelCost = 10;
+                foodCost = 1;
+            }else {
+                fuelCost = 5;
+                foodCost = 5;
+            }
+            if(name.equals("Earth") || name.equals("Pluto") || name.equals("Mars") || name.equals("Neptune") ) {
+                aluminumCost = 10;
+                partCost = 15;
+            }else{
+                aluminumCost = 15;
+                partCost = 25;
             }
         }
         catch (Exception e) {
