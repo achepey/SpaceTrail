@@ -23,6 +23,7 @@ public class Game implements Serializable {
     private int money;
     private boolean gameOver;
     private boolean fast, medium, slow;
+    private boolean arrivedAtPlanet;
     public Game() {
 // test
         people = new ArrayList<Person>();
@@ -58,6 +59,7 @@ public class Game implements Serializable {
         previous = new Planet("Temp", "");
         race = new Race();
         gameOver = false;
+        arrivedAtPlanet = false;
     }
 
     /* Fuel cost based on distanceRemaining from sun */
@@ -116,10 +118,7 @@ public class Game implements Serializable {
     }
 
     /* Makes moves towards planet destination */
-    public boolean makeMove() {
-        if(gameOver || isWinner()) {
-            return false;
-        }
+    public String makeMove() {
         /* Things that need to be done in this method:
             - reduce distanceRemaining remaining
             - decide how much health each crew member loses
@@ -129,13 +128,10 @@ public class Game implements Serializable {
         crewAttrition();                        // decide how much health each crew member loses
         resourceAttrition();                    // decide how many resources the crew loses
         String issue = getIssue();
-        if(!issue.equals("Successful Movement")){
-            System.out.println(issue);
+        if(distanceRemaining <= 0) {
+            arrivedAtPlanet = true;
         }
-        if(gameOver) {
-            System.out.println("Game Over! You lose!");
-        }
-        return distanceRemaining <= 0;
+        return issue;
     }
 
     public void resourceAttrition() {
@@ -273,6 +269,7 @@ public class Game implements Serializable {
                 break;
             }
         }
+        arrivedAtPlanet = false;
 
         /* Calculating the distanceRemaining between planets
             - each planet has 40 degrees between it and the next one
@@ -516,22 +513,34 @@ public class Game implements Serializable {
                 ship.damagePart(shipPart, 5);
                 return issue;
             }
-            //if traveling more than 500 units, the crew will enter cryosleep when traveling
-            if(totalDistance > 500) {
-                double cryosleepIssueChance = Math.random();
-                if(cryosleepIssueChance > .0001) {
-                    int crewMember = (int)Math.floor(Math.random() * people.size());
-                    issue = people.get(crewMember).getName() + " has been killed due to complications with cryosleep. It was a painless way to go, but I am sure the rest of the crew will be sad to hear it when they wake up.";
-                    people.remove(crewMember);
-                    return issue;
-                }
+        }
+        //if traveling more than 500 units, the crew will enter cryosleep when traveling
+        if(totalDistance > 500) {
+            double cryosleepIssueChance = Math.random();
+            if(cryosleepIssueChance < .0001) {
+                int crewMember = (int)Math.floor(Math.random() * people.size());
+                issue = people.get(crewMember).getName() + " has been killed due to complications with cryosleep. It was a painless way to go, but I am sure the rest of the crew will be sad to hear it when they wake up.";
+                people.remove(crewMember);
+                return issue;
+            }
+        }
+        //if traveling at a fast pace
+        if(fast) {
+            double fastRisk = Math.random();
+            if(fastRisk < .03) {
+                issue = "Because of the fast speed your ship was traveling at, it was unable to avoid hitting a small meteor that the scanners did not pick up. All of your ship parts were damaged in the collision.";
+                ship.damagePart("hull", 5);
+                ship.damagePart("engine", 5);
+                ship.damagePart("wing", 5);
+                ship.damagePart("livingBay", 5);
+                return issue;
             }
         }
 
         //miscellaneous issues
             //random issues that can occur
         double randomIssueChance = Math.random();
-        if(randomIssueChance > .01) {
+        if(randomIssueChance > .001) {
             double shipPartChance = Math.random();
             String shipPart;
             if(shipPartChance > .5) {
