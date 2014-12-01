@@ -18,11 +18,10 @@ public class Game implements Serializable {
     private ArrayList<Person> people;
     private ArrayList<Planet> planets;
     private Planet destination, previous;
-    private double distance, pace;
+    private double distanceRemaining,totalDistance, pace;
     private Race race;
     private int money;
     private boolean gameOver;
-
     private boolean fast, medium, slow;
     public Game() {
 // test
@@ -61,7 +60,7 @@ public class Game implements Serializable {
         gameOver = false;
     }
 
-    /* Fuel cost based on distance from sun */
+    /* Fuel cost based on distanceRemaining from sun */
     public boolean sellFuel(int m) {
         double cost = destination.fuelCost;
         money = money - (int)(cost * m);
@@ -72,7 +71,7 @@ public class Game implements Serializable {
         return true;
     }
 
-    /* Food cost based on distance from sun (medium range is cheapest) */
+    /* Food cost based on distanceRemaining from sun (medium range is cheapest) */
     public boolean sellFood(int m) {
         double cost = destination.foodCost;
         money = money - (int)(cost * m);
@@ -119,14 +118,14 @@ public class Game implements Serializable {
     /* Makes moves towards planet destination */
     public boolean makeMove() {
         /* Things that need to be done in this method:
-            - reduce distance remaining
+            - reduce distanceRemaining remaining
             - decide how much health each crew member loses
             - decide how to measure the pace (how many taps on the phone does it take?)
          */
-        distance -= pace;                       // reduce distance remaining
+        distanceRemaining -= pace;                       // reduce distanceRemaining remaining
         crewAttrition();                        // decide how much health each crew member loses
         resourceAttrition();                    // decide how many resources the crew loses
-        return distance <= 0;
+        return distanceRemaining <= 0;
     }
 
     public void resourceAttrition() {
@@ -218,7 +217,8 @@ public class Game implements Serializable {
 
     public void setFirstDestination(int planetIndex) {
         destination = planets.get(planetIndex);
-        distance = destination.distanceFromSun;
+        distanceRemaining = destination.distanceFromSun;
+        totalDistance = destination.distanceFromSun;
     }
 
     public void setDestination(String planet) {
@@ -264,14 +264,15 @@ public class Game implements Serializable {
             }
         }
 
-        /* Calculating the distance between planets
+        /* Calculating the distanceRemaining between planets
             - each planet has 40 degrees between it and the next one
             - use planet index to compute total degrees between one planet and another
-            - find sine value, and apply to destination planet's distance
+            - find sine value, and apply to destination planet's distanceRemaining
             */
         double hypotenuse = Math.sin(Math.toRadians(40 * (planetIndex - currentIndex)));
         destination = planets.get(planetIndex);
-        distance = (int)((destination.distanceFromSun) * hypotenuse);
+        distanceRemaining = (int)((destination.distanceFromSun) * hypotenuse);
+        totalDistance = distanceRemaining;
 
     }
 
@@ -289,12 +290,12 @@ public class Game implements Serializable {
         }
     }
 
-    public void setDistance(int d) {
-        distance = d;
+    public void setDistanceRemaining(int d) {
+        distanceRemaining = d;
     }
 
-    public double getDistance() {
-        return distance;
+    public double getDistanceRemaining() {
+        return distanceRemaining;
     }
 
     public boolean isWinner() {
@@ -320,10 +321,10 @@ public class Game implements Serializable {
     }
 
     private String getIssue() {
-        String issue = "";
+        String issue = "Successful movement!";
 
-        //resource issues
-        Boolean resourceIssue = false;
+        //resource and ship issues
+        boolean resourceIssue = false;
         if (resources.getFood() <= 0) {
             issue = "You are out of food! Your crew has resorted to cannibalism and your last member is currently starving to death.";
             gameOver = true;
@@ -345,30 +346,84 @@ public class Game implements Serializable {
             return issue;
         }
         //health issues
-        Boolean healthIssue = false;
         for (int i = 0; i < people.size(); ++i) {
             if (people.get(i).getCondition() <= 0) {
                 if (i == 0) {
-                    issue = "Your captain has died! Unfortunately he did not name a second-in-command and the entire crew is killed in the resulting power struggle.";
+                    issue = "Your captain has died! Unfortunately, he did not name a second-in-command and the entire crew is killed in the resulting power struggle.";
+                    if(people.size() == 1) {
+                        issue = "Your captain has died! He was the last living crew member for you spaceship! Without anyone at the controls, the ship eventually crashes on Venus and is destroyed.";
+                    }
                     gameOver = true;
+                    return issue;
                 } else {
-                    issue = people.get(i).getName() + " has died! You hold a moving ceremony for your lost crew member, but slowly forget about them.";
+                    double messageChance = Math.random();
+                    if(messageChance > .75)
+                        issue = people.get(i).getName() + " has died! You hold a moving ceremony for your lost crew member, but slowly forget about them.";
+                    else if(messageChance > .5)
+                        issue = people.get(i).getName() + " has died! " + people.get(i).getName() + " was the captain's favorite crew member, so " + people.get(0).getName() + " is feeling pretty down.";
+                    else if(messageChance > .25) {
+                        issue = people.get(i).getName() + " has died! " + people.get(i).getName() + " was disliked by the rest of the crew, so morale is higher than ever right now.";
+                    }
+                    else if(messageChance > 0) {
+                        issue = people.get(i).getName() + " has died! " + people.get(i).getName() + " was the best cook on the spaceship, so the crew is really going to miss him around dinner time";
+                    }
                     people.remove(i);
                     --i;
+                    return issue;
                 }
-                healthIssue = true;
             }
         }
         //previous dependent issues
-            //will encounter previous planet issues if within close distance to previously visited planet
-
+            //will encounter previous planet issues if within close distanceRemaining to previously visited planet
+        if(totalDistance == distanceRemaining) {
+            double escapeVelocityIssueChance = Math.random();
+            if(escapeVelocityIssueChance < previous.escapeVelocity/300) {
+                issue = "While leaving " + previous.name + " you did not correctly accommodate for the planet's escape velocity, so you used more fuel than was initially planned for to leave the atmosphere!";
+                resources.incrementFuel(10, false);
+                return issue;
+            }
+        }
         //destination dependent issues
-           //will encounter destination issues if within close distance to destination planet
-        if((distance < pace*2 && slow) || (distance < pace && (medium || fast))) {
-            double moonIssue = Math.random() * destination.numberOfMoons;
-            double ringIssue = Math.random();
-
-
+           //will encounter destination issues if within close distanceRemaining to destination planet
+        if((distanceRemaining < pace*2 && slow) || (distanceRemaining < pace && (medium || fast))) {
+            double moonIssueChance = Math.random();
+            double ringIssueChance = (destination.ringSystem) ? Math.random() : 0;
+            if(moonIssueChance < destination.numberOfMoons/200) {       //higher chance for planets with more moons
+                issue = "While approaching " + destination.name + " you miscalculated one of its moon's orbits. The trip takes longer and you use more resources than expected.";
+                crewAttrition();                        // decide how much health each crew member loses
+                resourceAttrition();                    // decide how many resources the crew loses
+                return issue;
+            }
+            if(ringIssueChance > .95) {
+                double shipPartChance = Math.random();
+                String shipPart;
+                if(shipPartChance > .5) {
+                    shipPart = "hull";
+                }
+                else if(shipPartChance > .34) {
+                    shipPart = "engine";
+                }
+                else if(shipPartChance > .18) {
+                    shipPart = "wing";
+                }
+                else {
+                    shipPart = "livingBay";
+                }
+                ship.damagePart(shipPart, 10);
+                issue = "You have traveled too close to " + destination.name + "'s rings! Your " + shipPart + " has been damaged by a large chunk of ice!";
+                return issue;
+            }
+        }
+        if(distanceRemaining <= 0) {     //If you arrived at the planet
+            double nightOrDayChance = Math.random();
+            if(nightOrDayChance > .5) {         //you have arrived at night time to the planet
+                if(destination.lengthOfDay > 30) {      //It would take too long to wait for it to become day
+                    issue = "After landing on " + destination.name + " at night, you realize that the length of the planet's night is " + destination.lengthOfDay/2 + " hours. You fly around the planet to land where it is daytime.";
+                    crewAttrition();                        // decide how much health each crew member loses
+                    resourceAttrition();                    // decide how many resources the crew loses
+                    return issue;
+                }
+            }
         }
 
         //travel issues
@@ -376,16 +431,25 @@ public class Game implements Serializable {
         if ((planets.indexOf(destination) < 4 && planets.indexOf(previous) > 4) || planets.indexOf(destination) > 4 && planets.indexOf(previous) < 4) {
             double rand = Math.random();
             if((slow && rand < .01) || (medium && rand < .015) || (fast && rand < .03)) {
-                issue = "While traveling through the asteroid belt, you have collided with an asteroid and your hull was damaged!";
-                ship.damagePart("hull", 10);
-                if(ship.getHullStatus() <= 0) {
-                    gameOver = true;
+                double shipPartChance = Math.random();
+                String shipPart;
+                if(shipPartChance > .5) {
+                    shipPart = "hull";
                 }
+                else if(shipPartChance > .34) {
+                    shipPart = "engine";
+                }
+                else if(shipPartChance > .18) {
+                    shipPart = "wing";
+                }
+                else {
+                    shipPart = "livingBay";
+                }
+                issue = "While traveling through the asteroid belt, you have collided with an asteroid and your " + shipPart + " was damaged!";
+                ship.damagePart(shipPart, 10);
                 return issue;
             }
         }
-
-        //spaceship issues
 
         //miscellaneous issues
 
@@ -398,19 +462,19 @@ public class Game implements Serializable {
                 fast = true;
                 medium = false;
                 slow = false;
-                pace = destination.distanceFromSun/12;
+                pace = totalDistance/12;
                 break;
             case 2:             // 'medium' is 14 taps
                 fast = false;
                 medium = true;
                 slow = false;
-                pace = destination.distanceFromSun/14;
+                pace = totalDistance/14;
                 break;
             case 3:             // 'slow' is 16 taps
                 fast = false;
                 medium = false;
                 slow = true;
-                pace = destination.distanceFromSun/16;
+                pace = totalDistance/16;
                 break;
         }
     }

@@ -89,7 +89,7 @@ public class GameFileSaver
             NodeList rootNodeList = doc.getChildNodes();
             Node gameNode = getNode("game", rootNodeList);
             addNode("destinationPlanet", game.getDestination().name, gameNode);
-            addNode("distance", Double.toString(game.getDistance()), gameNode);
+            addNode("distance", Double.toString(game.getDistanceRemaining()), gameNode);
             addNode("money", Integer.toString(game.getMoney()), gameNode);
 
 

@@ -62,7 +62,7 @@ public class GameFileLoader
         loadPeople();
         String destinationPlanet = getNodeValue("destinationPlanet", game_nodes);
         game.setDestination(destinationPlanet);
-        game.setDistance(Integer.parseInt(getNodeValue("distance", game_nodes)));
+        game.setDistanceRemaining(Integer.parseInt(getNodeValue("distance", game_nodes)));
         game.setMoney(Integer.parseInt(getNodeValue("money", game_nodes)));
         return game;
     }
