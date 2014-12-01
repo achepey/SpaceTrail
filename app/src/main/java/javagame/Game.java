@@ -24,6 +24,7 @@ public class Game implements Serializable {
     private boolean gameOver;
     private boolean fast, medium, slow;
     private boolean arrivedAtPlanet;
+    private boolean firstMove;
     public Game() {
 // test
         people = new ArrayList<Person>();
@@ -31,6 +32,7 @@ public class Game implements Serializable {
         fast = false;
         medium = true;
         slow = false;
+        firstMove = true;
 
         /* Create all 9 planets (or are we not using Pluto) */
         Planet Mercury = new Planet("Mercury", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
@@ -65,6 +67,9 @@ public class Game implements Serializable {
     /* Fuel cost based on distanceRemaining from sun */
     public boolean sellFuel(int m) {
         double cost = destination.fuelCost;
+        if(firstMove) {
+            cost = 5;
+        }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             return false;
@@ -76,6 +81,9 @@ public class Game implements Serializable {
     /* Food cost based on distanceRemaining from sun (medium range is cheapest) */
     public boolean sellFood(int m) {
         double cost = destination.foodCost;
+        if(firstMove) {
+            cost = 1;
+        }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             return false;
@@ -87,6 +95,9 @@ public class Game implements Serializable {
     /* Cheap on Earth, Mars, Pluto, and Mercury */
     public boolean sellAluminum(int m) {
         double cost = destination.aluminumCost;
+        if(firstMove) {
+            cost = 10;
+        }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             return false;
@@ -98,6 +109,9 @@ public class Game implements Serializable {
     /* Cheap on Earth, Mars, Pluto, and Mercury */
     public boolean sellParts(int m, String s) {
         double cost = destination.partCost;
+        if(firstMove) {
+            cost = 15;
+        }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             return false;
@@ -130,6 +144,7 @@ public class Game implements Serializable {
         String issue = getIssue();
         if(distanceRemaining <= 0) {
             arrivedAtPlanet = true;
+            destination.visited = true;
         }
         return issue;
     }
@@ -228,6 +243,7 @@ public class Game implements Serializable {
     }
 
     public void setDestination(String planet) {
+        firstMove = false;
         if(planet.equals("Mercury")) {
             setDestination(0);
         }
