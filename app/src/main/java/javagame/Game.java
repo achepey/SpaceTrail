@@ -18,9 +18,10 @@ public class Game implements Serializable {
     private ArrayList<Person> people;
     private ArrayList<Planet> planets;
     private Planet destination, previous;
-    private double distance;
+    private double distance, pace;
     private Race race;
     private int money;
+    private boolean fast, medium, slow;
     public Game() {
 // test
         people = new ArrayList<Person>();
@@ -55,33 +56,56 @@ public class Game implements Serializable {
     }
 
     /* Fuel cost based on distance from sun */
-    public boolean sellFuel() {
-        if(money < 0) {
+    public boolean sellFuel(int m) {
+        double cost = destination.fuelCost;
+        money = money - (int)(cost * m);
+        if(money < 0) {                         // make sure that this would not bankrupt
             return false;
         }
+        resources.incrementFuel(m, true);
         return true;
     }
 
     /* Food cost based on distance from sun (medium range is cheapest) */
-    public boolean sellFood() {
-        if(money < 0) {
+    public boolean sellFood(int m) {
+        double cost = destination.foodCost;
+        money = money - (int)(cost * m);
+        if(money < 0) {                         // make sure that this would not bankrupt
             return false;
         }
+        resources.incrementFood(m, true);
         return true;
     }
 
     /* Cheap on Earth, Mars, Pluto, and Mercury */
-    public boolean sellAluminum() {
-        if(money < 0) {
+    public boolean sellAluminum(int m) {
+        double cost = destination.aluminumCost;
+        money = money - (int)(cost * m);
+        if(money < 0) {                         // make sure that this would not bankrupt
             return false;
         }
+        resources.incrementAluminum(m, true);
         return true;
     }
 
     /* Cheap on Earth, Mars, Pluto, and Mercury */
-    public boolean sellParts() {
-        if(money < 0) {
+    public boolean sellParts(int m, String s) {
+        double cost = destination.partCost;
+        money = money - (int)(cost * m);
+        if(money < 0) {                         // make sure that this would not bankrupt
             return false;
+        }
+        for (int i = 0; i < m; i++) {           // add 'm' of this spare part
+            if(s.equals("Engine")) {
+                Part p = new Part("Engine", 100);
+                resources.addSpare(p);
+            }else if(s.equals("Wing")) {
+                Part p = new Part("Wing", 100);
+                resources.addSpare(p);
+            }else if(s.equals("LivingBay")) {
+                Part p = new Part("LivingBay", 100);
+                resources.addSpare(p);
+            }
         }
         return true;
     }
@@ -107,7 +131,7 @@ public class Game implements Serializable {
             int amount = 0;                 // How much the crew member will be hurt
             /* Measure attrition due to race */
             if(people.get(i).getRace().getStrength().equals(destination.compound1) || people.get(i).getRace().getStrength().equals(destination.compound2)) {
-                amount += 5;               // Add health for heading to planet with strength compound
+                amount += 10;               // Add health for heading to planet with strength compound
             }
             if(people.get(i).getRace().getWeakness().equals(destination.compound1) || people.get(i).getRace().getWeakness().equals(destination.compound2)) {
                 amount -= 10;               // Subtract health for heading to planet with weakness compound
@@ -260,5 +284,28 @@ public class Game implements Serializable {
 
     public int getMoney() {
         return money;
+    }
+
+    public void setPace(int p) {
+        switch(p) {
+            case 1:             // 'fast' is 12 taps
+                fast = true;
+                medium = false;
+                slow = false;
+                pace = destination.distanceFromSun/12;
+                break;
+            case 2:             // 'medium' is 14 taps
+                fast = false;
+                medium = true;
+                slow = false;
+                pace = destination.distanceFromSun/14;
+                break;
+            case 3:             // 'slow' is 16 taps
+                fast = false;
+                medium = false;
+                slow = true;
+                pace = destination.distanceFromSun/16;
+                break;
+        }
     }
 }
