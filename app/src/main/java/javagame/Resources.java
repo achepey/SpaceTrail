@@ -39,9 +39,18 @@ public class Resources {
     }
     public void addSpare(Part p) {
         spares.add(p);
-    }   //Part name needs to be either Engine, Wing, or LivingBay
+    }   //Part name needs to be either engine, wing, or livingBay
     public void addSpareList(ArrayList<Part> partsList) {
         spares = partsList;
+    }
+    public boolean removeSpare(String partName) {
+        for(int i = 0; i < spares.size(); ++i) {
+            if(spares.get(i).getName().equals(partName)) {
+                spares.remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     /* Getter Functions */
