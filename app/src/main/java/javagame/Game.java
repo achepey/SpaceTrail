@@ -29,7 +29,7 @@ public class Game implements Serializable {
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
         fast = false;
-        medium = false;
+        medium = true;
         slow = false;
 
         /* Create all 9 planets (or are we not using Pluto) */
