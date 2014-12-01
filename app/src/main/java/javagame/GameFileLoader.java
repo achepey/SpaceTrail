@@ -30,6 +30,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
     <destinationPlanet></destinationPlanet>
     <distance></distance>
     <money></money>
+    <previousPlanet></previousPlanet>
+    <pace></pace>
+    <totalDistance></totalDistance>
  </game>
 
  */
@@ -62,8 +65,13 @@ public class GameFileLoader
         loadPeople();
         String destinationPlanet = getNodeValue("destinationPlanet", game_nodes);
         game.setDestination(destinationPlanet);
-        game.setDistanceRemaining(Integer.parseInt(getNodeValue("distance", game_nodes)));
+        game.setDistanceRemaining(Double.parseDouble(getNodeValue("distance", game_nodes)));
         game.setMoney(Integer.parseInt(getNodeValue("money", game_nodes)));
+        String previousPlanet = getNodeValue("previousPlanet", game_nodes);
+        game.setPrevious(previousPlanet);
+        int pace = Integer.parseInt(getNodeValue("pace", game_nodes));
+        game.setPace(pace);
+        game.setTotalDistance(Double.parseDouble(getNodeValue("totalDistance", game_nodes)));
         return game;
     }
 
@@ -103,23 +111,24 @@ public class GameFileLoader
         Node people = getNode("people", game_nodes);
         NodeList people_child_nodes = people.getChildNodes();
         //People
+        Race loadRace = new Race();
         for(int i = 0; i < people_child_nodes.getLength(); ++i) {
             Node person = getNode("person"+i, people_child_nodes);
             NodeList person_nodes = person.getChildNodes();
             if(i == 0) {
                 game.addCrew(getNodeValue("name",person_nodes), true);
+                //this only needs to happen once; it is not reliant on captain
+                loadRace.setName(getNodeValue("raceName", person_nodes));
+                loadRace.setStrength(getNodeValue("raceStrength", person_nodes));
+                loadRace.setWeakness(getNodeValue("raceWeakness", person_nodes));
             }
             else {
                 game.addCrew(getNodeValue("name",person_nodes), false);
             }
             game.getCrew(i).setAge(Integer.parseInt(getNodeValue("age", person_nodes)));
             game.getCrew(i).setCondition(Integer.parseInt(getNodeValue("condition", person_nodes)));
-            Race loadRace = new Race();
-            loadRace.setName(getNodeValue("raceName", person_nodes));
-            loadRace.setStrength(getNodeValue("raceStrength", person_nodes));
-            loadRace.setWeakness(getNodeValue("raceWeakness", person_nodes));
-            game.getCrew(i).setRace(loadRace);
         }
+        game.setCrewRace(loadRace);
     }
 
 

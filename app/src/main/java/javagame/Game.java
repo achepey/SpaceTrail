@@ -280,12 +280,49 @@ public class Game implements Serializable {
         destination = planets.get(planetIndex);
         distanceRemaining = (int)((destination.distanceFromSun) * hypotenuse);
         totalDistance = distanceRemaining;
+    }
 
+    public void setPrevious(String planet) {
+        if(planet.equals("Mercury")) {
+            setPrevious(0);
+        }
+        else if(planet.equals("Venus")) {
+            setPrevious(1);
+        }
+        else if(planet.equals("Earth")) {
+            setPrevious(2);
+        }
+        else if(planet.equals("Mars")) {
+            setPrevious(3);
+        }
+        else if(planet.equals("Jupiter")) {
+            setPrevious(4);
+        }
+        else if(planet.equals("Saturn")) {
+            setPrevious(5);
+        }
+        else if(planet.equals("Uranus")) {
+            setPrevious(6);
+        }
+        else if(planet.equals("Neptune")) {
+            setPrevious(7);
+        }
+    /*    else if(planet.equals("Pluto")) {
+            setPrevious(8);
+        }*/
+    }
+
+    public void setPrevious(int planetIndex) {
+        previous = planets.get(planetIndex);
     }
 
     /*Returns destination planet */
     public Planet getDestination() {
         return destination;
+    }
+
+    public Planet getPrevious() {
+        return previous;
     }
 
     /* Will set the races of all the crew members
@@ -295,14 +332,23 @@ public class Game implements Serializable {
         for(int i = 0; i < 5; i++) {
             people.get(i).setRace(r);
         }
+        race = r;
     }
 
-    public void setDistanceRemaining(int d) {
+    public void setDistanceRemaining(double d) {
         distanceRemaining = d;
     }
 
     public double getDistanceRemaining() {
         return distanceRemaining;
+    }
+
+    public void setTotalDistance(double d) {
+        totalDistance = d;
+    }
+
+    public double getTotalDistance() {
+        return totalDistance;
     }
 
     public boolean isWinner() {
@@ -596,5 +642,23 @@ public class Game implements Serializable {
                 pace = totalDistance/16;
                 break;
         }
+    }
+
+    public int getPace() {      //returns 1 for fast, 2 for medium and 3 for slow
+        if(fast) {
+            return 1;
+        }
+        if(medium) {
+            return 2;
+        }
+        return 3;
+    }
+
+    public boolean getArrivedAtPlanet() {
+        return arrivedAtPlanet;
+    }
+
+    public void setArrivedAtPlanet(boolean b) {
+        arrivedAtPlanet = b;
     }
 }

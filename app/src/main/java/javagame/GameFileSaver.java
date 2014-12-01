@@ -91,8 +91,9 @@ public class GameFileSaver
             addNode("destinationPlanet", game.getDestination().name, gameNode);
             addNode("distance", Double.toString(game.getDistanceRemaining()), gameNode);
             addNode("money", Integer.toString(game.getMoney()), gameNode);
-
-
+            addNode("previousPlanet", game.getPrevious().name, gameNode);
+            addNode("pace", Integer.toString(game.getPace()), gameNode);
+            addNode("totalDistance", Double.toString(game.getTotalDistance()), gameNode);
 
             //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
