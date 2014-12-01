@@ -21,13 +21,16 @@ public class Game implements Serializable {
     private double distance, pace;
     private Race race;
     private int money;
-    private Boolean gameOver;
+    private boolean gameOver;
 
     private boolean fast, medium, slow;
     public Game() {
 // test
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
+        fast = false;
+        medium = false;
+        slow = false;
 
         /* Create all 9 planets (or are we not using Pluto) */
         Planet Mercury = new Planet("Mercury", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
@@ -120,9 +123,9 @@ public class Game implements Serializable {
             - decide how much health each crew member loses
             - decide how to measure the pace (how many taps on the phone does it take?)
          */
-        distance -= pace;                     // reduce distance remaining
-        crewAttrition();                    // decide how much health each crew member loses
-        resourceAttrition();
+        distance -= pace;                       // reduce distance remaining
+        crewAttrition();                        // decide how much health each crew member loses
+        resourceAttrition();                    // decide how many resources the crew loses
         return distance <= 0;
     }
 
