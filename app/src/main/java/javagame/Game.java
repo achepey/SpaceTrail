@@ -401,7 +401,7 @@ public class Game implements Serializable {
         }
         //previous planet dependent issues
             //will encounter previous planet issues if within close distanceRemaining to previously visited planet
-        if(totalDistance == distanceRemaining) {
+        if(totalDistance == distanceRemaining + pace) {
             double escapeVelocityIssueChance = Math.random();
             if(escapeVelocityIssueChance < previous.escapeVelocity/300) {
                 issue = "While leaving " + previous.name + " you did not correctly accommodate for the planet's escape velocity, so you used more fuel than was initially planned for to leave the atmosphere!";
@@ -420,12 +420,18 @@ public class Game implements Serializable {
                 people.get(crewMember).incrementCondition(10, false);
                 return issue;
             }
+            double capturedChance = (previous.name.equals("Earth")) ? Math.random() : 1;
+            if(capturedChance < .0001 && people.size() > 1) {               //.01% chance of this happening and the person needs to be leaving earth
+                issue = "Your crew member " + people.get(people.size()-1).getName() + " has been captured by the indigenous species of planet Earth and is studied in Area 51. You do not see him again";
+                people.remove(people.size()-1);
+                return issue;
+            }
         }
         //destination dependent issues
            //will encounter destination issues if within close distanceRemaining to destination planet
         if((distanceRemaining < pace*2 && slow) || (distanceRemaining < pace && (medium || fast))) {
             double moonIssueChance = Math.random();
-            double ringIssueChance = (destination.ringSystem) ? Math.random() : 0;
+            double ringIssueChance = (destination.ringSystem) ? Math.random() : 1;
             if(moonIssueChance < destination.numberOfMoons/200) {       //higher chance for planets with more moons
                 issue = "While approaching " + destination.name + " you miscalculated one of its moon's orbits. The trip takes longer and you use more resources than expected.";
                 crewAttrition();                        // decide how much health each crew member loses
@@ -485,6 +491,12 @@ public class Game implements Serializable {
             double gettingLostIssueChance = Math.random();
             if(destination.axialTilt > 90 && gettingLostIssueChance < .025) {       //if planet's axis is very tilted
                 issue = "Because of " + destination.name + "'s severe axial tilt (" + destination.axialTilt + " degrees) your crew has trouble reading their maps and gets lost. Your crew eats extra food when they are lost because they are nervous-eaters.";
+                resources.incrementFood(10, false);
+                return issue;
+            }
+            double instrumentMagneticIssueChance = (destination.globalMagneticField) ? Math.random() : 1;
+            if(instrumentMagneticIssueChance < .025) {
+                issue = "Because of the global magnetic field of " + destination.name + " your navigation instruments are not working properly on the planet. Exploring the planet takes more time than usual.";
                 resources.incrementFood(10, false);
                 return issue;
             }
