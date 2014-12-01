@@ -117,9 +117,35 @@ public class Game implements Serializable {
             - decide how much health each crew member loses
             - decide how to measure the pace (how many taps on the phone does it take?)
          */
-        distance -= 10;                     // reduce distance remaining
+        distance -= pace;                     // reduce distance remaining
         crewAttrition();                    // decide how much health each crew member loses
+        resourceAttrition();
         return distance <= 0;
+    }
+
+    public void resourceAttrition() {
+        if(fast) {
+            resources.incrementFuel(10, false);
+            resources.incrementFood(10, false);
+            resources.incrementCompound(10, false);
+            ship.damagePart("engine", 10);
+            ship.damagePart("wing", 10);
+            ship.damagePart("livingBay", 10);
+        }else if(medium) {
+            resources.incrementFuel(8, false);
+            resources.incrementFood(8, false);
+            resources.incrementCompound(8, false);
+            ship.damagePart("engine", 8);
+            ship.damagePart("wing", 8);
+            ship.damagePart("livingBay", 8);
+        }else if(slow) {
+            resources.incrementFuel(6, false);
+            resources.incrementFood(6, false);
+            resources.incrementCompound(6, false);
+            ship.damagePart("engine", 6);
+            ship.damagePart("wing", 6);
+            ship.damagePart("livingBay", 6);
+        }
     }
 
     public void crewAttrition() {
@@ -267,7 +293,7 @@ public class Game implements Serializable {
     public boolean isWinner() {
         int counter = 0;
         for(int i = 0; i < 8; i++) {
-            if (planets.get(i).visited == true) {
+            if (planets.get(i).visited) {
                 counter += 1;
             }
         }

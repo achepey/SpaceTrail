@@ -58,6 +58,21 @@ public class Ship {
         }
     }
 
+    public void damagePart(String partName, int amount) {
+        if(partName.equals("hull")) {
+            hull -= amount;
+        }
+        if(partName.equals("engine")){
+            engine -= amount;
+        }
+        else if(partName.equals("wing")){
+            wing -= amount;
+        }
+        else if(partName.equals("livingBay")){
+            livingBay -= amount;
+        }
+    }
+
     //Getter methods
     public int getHullStatus() {
         return hull;
