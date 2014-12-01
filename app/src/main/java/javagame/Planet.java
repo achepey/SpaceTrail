@@ -89,6 +89,9 @@ public class Planet
         }
     }
 
+    public Boolean equals(Planet p){
+        return name.equals(p.name);
+    }
 
     //copied from http://www.drdobbs.com/jvm/easy-dom-parsing-in-java/231002580
     protected Node getNode(String tagName, NodeList nodes) {

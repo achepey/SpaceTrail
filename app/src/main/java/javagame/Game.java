@@ -21,6 +21,8 @@ public class Game implements Serializable {
     private double distance, pace;
     private Race race;
     private int money;
+    private Boolean gameOver;
+
     private boolean fast, medium, slow;
     public Game() {
 // test
@@ -51,8 +53,9 @@ public class Game implements Serializable {
         ship = new Ship();
         resources = new Resources();
         destination = new Planet("Temp", "");       //used as default destination until a planet is given
+        previous = new Planet("Temp", "");
         race = new Race();
-
+        gameOver = false;
     }
 
     /* Fuel cost based on distance from sun */
@@ -249,6 +252,7 @@ public class Game implements Serializable {
     @param int planetIndex is the number of the planet in the solar system
      */
     public void setDestination(int planetIndex) {
+        previous = destination;
         int currentIndex = 0;
         for(int i = 0; i < 9; i++) {
             if(planets.get(i).name.equals(destination.name)) {
@@ -310,6 +314,79 @@ public class Game implements Serializable {
 
     public int getMoney() {
         return money;
+    }
+
+    private String getIssue() {
+        String issue = "";
+
+        //resource issues
+        Boolean resourceIssue = false;
+        if (resources.getFood() <= 0) {
+            issue = "You are out of food! Your crew has resorted to cannibalism and your last member is currently starving to death.";
+            gameOver = true;
+            resourceIssue = true;
+        } else if (resources.getFuel() <= 0) {
+            issue = "You are out of fuel! Your ship is currently floating around space somewhere near Saturn's 34th moon.";
+            gameOver = true;
+            resourceIssue = true;
+        } else if (resources.getCompound() <= 0) {
+            issue = "You have run out of " + race.getStrength() + "! Your crew can no longer breath and is currently asphyxiating as you read this.";
+            gameOver = true;
+            resourceIssue = true;
+        } else if (ship.getHullStatus() <= 0) {
+            issue = "Your hull has sustained critical damage! Your crew has been sucked into space through a hole in your living bay.";
+            gameOver = true;
+            resourceIssue = true;
+        }
+        if (resourceIssue) {
+            return issue;
+        }
+        //health issues
+        Boolean healthIssue = false;
+        for (int i = 0; i < people.size(); ++i) {
+            if (people.get(i).getCondition() <= 0) {
+                if (i == 0) {
+                    issue = "Your captain has died! Unfortunately he did not name a second-in-command and the entire crew is killed in the resulting power struggle.";
+                    gameOver = true;
+                } else {
+                    issue = people.get(i).getName() + " has died! You hold a moving ceremony for your lost crew member, but slowly forget about them.";
+                    people.remove(i);
+                    --i;
+                }
+                healthIssue = true;
+            }
+        }
+        //previous dependent issues
+            //will encounter previous planet issues if within close distance to previously visited planet
+
+        //destination dependent issues
+           //will encounter destination issues if within close distance to destination planet
+        if((distance < pace*2 && slow) || (distance < pace && (medium || fast))) {
+            double moonIssue = Math.random() * destination.numberOfMoons;
+            double ringIssue = Math.random();
+
+
+        }
+
+        //travel issues
+           //traveling through asteroid belt
+        if ((planets.indexOf(destination) < 4 && planets.indexOf(previous) > 4) || planets.indexOf(destination) > 4 && planets.indexOf(previous) < 4) {
+            double rand = Math.random();
+            if((slow && rand < .01) || (medium && rand < .015) || (fast && rand < .03)) {
+                issue = "While traveling through the asteroid belt, you have collided with an asteroid and your hull was damaged!";
+                ship.damagePart("hull", 10);
+                if(ship.getHullStatus() <= 0) {
+                    gameOver = true;
+                }
+                return issue;
+            }
+        }
+
+        //spaceship issues
+
+        //miscellaneous issues
+
+        return issue;
     }
 
     public void setPace(int p) {
