@@ -402,7 +402,7 @@ public class Game implements Serializable {
                 }
             }
         }
-        //previous dependent issues
+        //previous planet dependent issues
             //will encounter previous planet issues if within close distanceRemaining to previously visited planet
         if(totalDistance == distanceRemaining) {
             double escapeVelocityIssueChance = Math.random();
@@ -435,7 +435,7 @@ public class Game implements Serializable {
                 resourceAttrition();                    // decide how many resources the crew loses
                 return issue;
             }
-            if(ringIssueChance > .95) {
+            if(ringIssueChance < .05) {
                 double shipPartChance = Math.random();
                 String shipPart;
                 if(shipPartChance > .5) {
@@ -450,12 +450,12 @@ public class Game implements Serializable {
                 else {
                     shipPart = "livingBay";
                 }
-                ship.damagePart(shipPart, 10);
+                ship.damagePart(shipPart, 5);
                 issue = "You have traveled too close to " + destination.name + "'s rings! Your " + shipPart + " has been damaged by a large chunk of ice!";
                 return issue;
             }
         }
-        if(distanceRemaining <= 0) {     //If you arrived at the planet
+        if(distanceRemaining <= 0) {     //If you arrived at the planet this turn
             double nightOrDayChance = Math.random();
             if(nightOrDayChance > .5) {         //you have arrived at night time to the planet
                 if(destination.lengthOfDay > 30) {      //It would take too long to wait for it to become day
@@ -496,8 +496,8 @@ public class Game implements Serializable {
         //travel issues
            //traveling through asteroid belt
         if ((planets.indexOf(destination) < 4 && planets.indexOf(previous) > 4) || planets.indexOf(destination) > 4 && planets.indexOf(previous) < 4) {
-            double rand = Math.random();
-            if((slow && rand < .01) || (medium && rand < .015) || (fast && rand < .03)) {
+            double asteroidChance = Math.random();
+            if((slow && asteroidChance < .01) || (medium && asteroidChance < .015) || (fast && asteroidChance < .03)) {
                 double shipPartChance = Math.random();
                 String shipPart;
                 if(shipPartChance > .5) {
@@ -513,7 +513,7 @@ public class Game implements Serializable {
                     shipPart = "livingBay";
                 }
                 issue = "While traveling through the asteroid belt, you have collided with an asteroid and your " + shipPart + " was damaged!";
-                ship.damagePart(shipPart, 10);
+                ship.damagePart(shipPart, 5);
                 return issue;
             }
             //if traveling more than 500 units, the crew will enter cryosleep when traveling
@@ -530,6 +530,26 @@ public class Game implements Serializable {
 
         //miscellaneous issues
             //random issues that can occur
+        double randomIssueChance = Math.random();
+        if(randomIssueChance > .01) {
+            double shipPartChance = Math.random();
+            String shipPart;
+            if(shipPartChance > .5) {
+                shipPart = "hull";
+            }
+            else if(shipPartChance > .34) {
+                shipPart = "engine";
+            }
+            else if(shipPartChance > .18) {
+                shipPart = "wing";
+            }
+            else {
+                shipPart = "livingBay";
+            }
+            issue = "You have encountered space pirates who want to steal your valuable aluminum! You escape them but your " + shipPart + " has taken damage!";
+            ship.damagePart(shipPart, 5);
+            return issue;
+        }
 
         return issue;
     }
