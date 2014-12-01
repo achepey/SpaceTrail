@@ -35,14 +35,14 @@ public class Game implements Serializable {
         firstMove = true;
 
         /* Create all 9 planets (or are we not using Pluto) */
-        Planet Mercury = new Planet("Mercury", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Venus = new Planet("Venus", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Earth = new Planet("Earth", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Mars = new Planet("Mars", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Jupiter = new Planet("Jupiter", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Saturn = new Planet("Saturn", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Uranus = new Planet("Uranus", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
-        Planet Neptune = new Planet("Neptune", ".\\app\\src\\main\\java\\javagame\\planetData.xml");
+        Planet Mercury = new Planet("Mercury");
+        Planet Venus = new Planet("Venus");
+        Planet Earth = new Planet("Earth");
+        Planet Mars = new Planet("Mars");
+        Planet Jupiter = new Planet("Jupiter");
+        Planet Saturn = new Planet("Saturn");
+        Planet Uranus = new Planet("Uranus");
+        Planet Neptune = new Planet("Neptune");
 //        Planet Pluto = new Planet("Pluto");
 
         planets.add(Mercury);
@@ -57,8 +57,8 @@ public class Game implements Serializable {
 
         ship = new Ship();
         resources = new Resources();
-        destination = new Planet("Temp", "");       //used as default destination until a planet is given
-        previous = new Planet("Temp", "");
+        destination = new Planet("Temp");       //used as default destination until a planet is given
+        previous = new Planet("Temp");
         race = new Race();
         gameOver = false;
         arrivedAtPlanet = false;

@@ -15,13 +15,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
  */
 public class Planet
 {
+    private String fileName;
+
     public String name, compound1, compound2;
     public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure, fuelCost, foodCost, partCost, aluminumCost;
     public int numberOfMoons;
     public Boolean ringSystem, globalMagneticField, visited;
 
-    public Planet(String n, String fileName) {
+    public Planet(String n) {
         try {
+            fileName = ".\\app\\src\\main\\java\\javagame\\planetData.xml";
             name = n;
             visited = false;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
