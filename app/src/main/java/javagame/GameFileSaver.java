@@ -90,6 +90,8 @@ public class GameFileSaver
             Node gameNode = getNode("game", rootNodeList);
             addNode("destinationPlanet", game.getDestination().name, gameNode);
             addNode("distance", Double.toString(game.getDistance()), gameNode);
+            addNode("money", Integer.toString(game.getMoney()), gameNode);
+
 
 
             //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
@@ -110,6 +112,7 @@ public class GameFileSaver
 
     private void saveShip() {
         Node ship = getNode("ship", gameNodes);
+        addNode("hull", Integer.toString(game.getShip().getHullStatus()), ship);
         addNode("engine", Integer.toString(game.getShip().getEngineStatus()), ship);
         addNode("wing", Integer.toString(game.getShip().getWingStatus()), ship);
         addNode("livingBay", Integer.toString(game.getShip().getLivingBayStatus()), ship);
@@ -117,7 +120,6 @@ public class GameFileSaver
 
     private void saveResources() {
         Node resources = getNode("resources", gameNodes);
-        addNode("money", Integer.toString(game.getResources().getMoney()), resources);
         addNode("food", Integer.toString(game.getResources().getFood()),resources);
         addNode("fuel", Integer.toString(game.getResources().getFuel()), resources);
         addNode("compound", Integer.toString(game.getResources().getCompound()),resources);

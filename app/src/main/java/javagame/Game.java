@@ -17,7 +17,7 @@ public class Game implements Serializable {
     private Resources resources;
     private ArrayList<Person> people;
     private ArrayList<Planet> planets;
-    private Planet destination;
+    private Planet destination, previous;
     private double distance;
     private Race race;
     private int money;
@@ -50,6 +50,7 @@ public class Game implements Serializable {
         ship = new Ship();
         resources = new Resources();
         destination = new Planet("Temp", "");       //used as default destination until a planet is given
+        previous = new Planet("Temp", "");
         race = new Race();
 
     }
@@ -187,6 +188,7 @@ public class Game implements Serializable {
     @param int planetIndex is the number of the planet in the solar system
      */
     public void setDestination(int planetIndex) {
+        previous = destination;
         int currentIndex = 0;
         for(int i = 0; i < 9; i++) {
             if(planets.get(i).name.equals(destination.name)) {
@@ -230,12 +232,12 @@ public class Game implements Serializable {
 
     public boolean isWinner() {
         int counter = 0;
-        for(int i = 0; i < 9; i++) {
-            if (planets.get(i).visited == true) {
+        for(int i = 0; i < 8; i++) {
+            if (planets.get(i).visited) {
                 counter += 1;
             }
         }
-        if(counter == 9) {
+        if(counter == 8) {
             System.out.println("You have visited all the planets.");
             return true;
         }
@@ -248,5 +250,13 @@ public class Game implements Serializable {
 
     public int getMoney() {
         return money;
+    }
+
+    private String getIssue() {
+        String issue = "";
+
+
+
+        return issue;
     }
 }

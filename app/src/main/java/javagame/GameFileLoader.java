@@ -29,6 +29,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
     </people>
     <destinationPlanet></destinationPlanet>
     <distance></distance>
+    <money></money>
  </game>
 
  */
@@ -62,12 +63,14 @@ public class GameFileLoader
         String destinationPlanet = getNodeValue("destinationPlanet", game_nodes);
         game.setDestination(destinationPlanet);
         game.setDistance(Integer.parseInt(getNodeValue("distance", game_nodes)));
+        game.setMoney(Integer.parseInt(getNodeValue("money", game_nodes)));
         return game;
     }
 
     private void loadShip() {
         Node ship = getNode("ship", game_nodes);
         NodeList ship_child_nodes = ship.getChildNodes();
+        game.getShip().setHullStatus(Integer.parseInt(getNodeValue("hull", ship_child_nodes)));
         game.getShip().setEngineStatus(Integer.parseInt(getNodeValue("engine",ship_child_nodes)));
         game.getShip().setWingStatus(Integer.parseInt(getNodeValue("wing",ship_child_nodes)));
         game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("livingBay",ship_child_nodes))));
@@ -76,7 +79,6 @@ public class GameFileLoader
         Node resources = getNode("resources", game_nodes);
         NodeList resources_child_nodes = resources.getChildNodes();
         //Resources
-        game.getResources().setMoney(Integer.parseInt(getNodeValue("money", resources_child_nodes)));
         game.getResources().setFood(Integer.parseInt(getNodeValue("food", resources_child_nodes)));
         game.getResources().setFuel(Integer.parseInt(getNodeValue("fuel", resources_child_nodes)));
         game.getResources().setCompound(Integer.parseInt(getNodeValue("compound", resources_child_nodes)));

@@ -12,6 +12,7 @@ import java.io.*;
  * @author EvanKirkland
  */
 public class Ship {
+    private int hull;
     private int engine;
     private int wing;
     private int livingBay;
@@ -20,6 +21,7 @@ public class Ship {
     public Ship() {
         System.out.println("------------------------------------------");
         System.out.println("Constructing ship.");
+        hull = 100;
         engine = 100;
         wing = 100;
         livingBay = 100;
@@ -30,6 +32,12 @@ public class Ship {
 
     /* Modify Functions */
     public void repairPart(String partName, int amount) {
+        if(partName.equals("hull")) {
+            hull += amount;
+            if(hull > 100) {
+                hull = 100;
+            }
+        }
         if(partName.equals("engine")){
             engine += amount;
             if(engine > 100) {
@@ -51,6 +59,10 @@ public class Ship {
     }
 
     //Getter methods
+    public int getHullStatus() {
+        return hull;
+    }
+
     public int getEngineStatus() {
         return engine;
     }
@@ -64,6 +76,10 @@ public class Ship {
     }
 
     //Setter methods
+    public void setHullStatus(int status) {
+        hull = status;
+    }
+
     public void setEngineStatus(int status) {
         engine = status;
     }
