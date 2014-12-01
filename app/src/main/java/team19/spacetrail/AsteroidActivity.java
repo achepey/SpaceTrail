@@ -4,14 +4,22 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 
 
-public class AsteroidActivity extends Activity implements Animation.AnimationListener{
+public class AsteroidActivity extends Activity {
+    private ImageView ship;
+    private ImageView ship_hit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +27,15 @@ public class AsteroidActivity extends Activity implements Animation.AnimationLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asteroid);
+        ship = (ImageView) findViewById(R.id.spaceshipMiddle);
+        ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
+    }
+
+    @Override
+    public void onWindowFocusChanged (boolean hasFocus) {
+        int[] ship_coordinates = new int[2];
+        ship.getLocationOnScreen(ship_coordinates);
+        moveAsteroid(ship_coordinates);
     }
 
     public int getAmountOfFuel() {
@@ -35,6 +52,81 @@ public class AsteroidActivity extends Activity implements Animation.AnimationLis
             }
         });
         planet_decider.create().show();
+    }
+
+    public void moveAsteroid(int[] coordinates) {
+        final ImageView ast1 = (ImageView) findViewById(R.id.asteroid1);
+        final ImageView ast2 = (ImageView) findViewById(R.id.asteroid2);
+
+        final AnimationSet moveAsteroid = new AnimationSet(true);
+        Animation mveAst = AnimationUtils.loadAnimation(this, R.anim.asteroid_anim);
+        TranslateAnimation translate = new TranslateAnimation(200, -coordinates[0]+100, -200, coordinates[1]-100);
+        translate.setDuration(1500);
+
+        moveAsteroid.addAnimation(mveAst);
+        moveAsteroid.addAnimation(translate);
+        ast1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ast1.clearAnimation();
+            }
+        });
+        ast2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ast2.clearAnimation();
+            }
+        });
+        moveAsteroid.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ast1.setVisibility(View.GONE);
+                ship.setVisibility(View.INVISIBLE);
+                ship_hit.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        ast1.startAnimation(moveAsteroid);
+
+        TranslateAnimation translate1 = new TranslateAnimation(200, -coordinates[0]+100, -200, -coordinates[1]+100);
+        translate1.setDuration(1500);
+        final AnimationSet move2Asteroid = new AnimationSet(true);
+        move2Asteroid.addAnimation(mveAst);
+        move2Asteroid.addAnimation(translate1);
+        move2Asteroid.setStartTime(4000);
+        move2Asteroid.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                ship.setVisibility(View.VISIBLE);
+                ship_hit.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ast1.setVisibility(View.GONE);
+                ship.setVisibility(View.INVISIBLE);
+                ship_hit.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        ast2.startAnimation(move2Asteroid);
+
+        //ship.setColorFilter(original);
     }
 
     //Temporarily used for checking the end result
@@ -63,20 +155,5 @@ public class AsteroidActivity extends Activity implements Animation.AnimationLis
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
     }
 }

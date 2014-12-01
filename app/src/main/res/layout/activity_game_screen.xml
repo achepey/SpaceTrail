@@ -105,8 +105,8 @@
         android:id="@+id/textView26"
         android:layout_alignParentStart="false"
         android:layout_marginRight="10dp"
-        android:textSize="25sp"
-        android:layout_alignLeft="@+id/saturn" />
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/saturn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
         android:id="@+id/gameScreenFuel"
         android:layout_toRightOf="@+id/textView26"
         android:layout_toEndOf="@+id/textView26"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:paddingRight="100dp" />
 
     <TextView
@@ -126,7 +126,7 @@
         android:id="@+id/textView24"
         android:layout_alignParentStart="false"
         android:layout_marginRight="10dp"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:layout_toRightOf="@+id/gameScreenFuel" />
 
     <TextView
@@ -136,7 +136,7 @@
         android:id="@+id/gameScreenFood"
         android:layout_toRightOf="@+id/textView24"
         android:layout_toEndOf="@+id/textView26"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:paddingRight="100dp" />
 
 </RelativeLayout>
