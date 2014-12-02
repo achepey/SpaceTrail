@@ -83,7 +83,9 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the load game menu
     public void loadGame(View view) {
-        setContentView(R.layout.activity_load_game);
+        Intent intent = new Intent(this, AsteroidActivity.class);
+        startActivity(intent);
+        //setContentView(R.layout.activity_load_game);
     }
 
     //Sets Layout to the Instructions menu
