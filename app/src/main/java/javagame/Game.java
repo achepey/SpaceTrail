@@ -161,6 +161,7 @@ public class Game implements Serializable {
         if(distanceRemaining <= 0) {
             arrivedAtPlanet = true;
             destination.visited = true;
+            refreshCompound();
         }
         return issue;
     }
