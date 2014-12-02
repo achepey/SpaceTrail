@@ -837,9 +837,9 @@ public class Game implements Serializable {
             else if(resources.getSpares().get(i).getName().equals("wing")) { wings = wings + 1; }
             else if(resources.getSpares().get(i).getName().equals("livingBay")) { livingBays = livingBays + 1; }
         }
-        System.out.println("[Wing] : " + wings);
-        System.out.println("[Engine] : " + engines);
-        System.out.println("[Living Bay] : " + livingBays);
+        System.out.println("[Spare wings] : " + wings);
+        System.out.println("[Spare engines] : " + engines);
+        System.out.println("[Spare living bays] : " + livingBays);
     }
 
     public void showShip() {
