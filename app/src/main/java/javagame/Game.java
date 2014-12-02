@@ -84,6 +84,7 @@ public class Game implements Serializable {
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
+            System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy fuel.");
             return false;
         }
         resources.incrementFuel(m, true);
@@ -98,6 +99,7 @@ public class Game implements Serializable {
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
+            System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy food.");
             return false;
         }
         resources.incrementFood(m, true);
@@ -112,6 +114,7 @@ public class Game implements Serializable {
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
+            System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy aluminum.");
             return false;
         }
         resources.incrementAluminum(m, true);
@@ -126,6 +129,7 @@ public class Game implements Serializable {
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
+            System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy spare parts.");
             return false;
         }
         for (int i = 0; i < m; i++) {           // add 'm' of this spare part
