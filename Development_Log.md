@@ -65,26 +65,53 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   -Created exit activity
 -Andrew and Robert worked together: 2 hours
   -Writing development log, adding comments, finishing test driven development, and updating design document illustration
+  
+##### 11/19/2014
+-Evan: 1.5 hours
+  -Building basic classes for game (Game, Ship, Person, etc)
+  
+##### 11/20/2014
+-Evan: 1 hour
+  -Developing Race class and Part class
+  
+##### 11/23/2014
+-Evan: 2 hours
+  -Building up Game class, along with constructor
+  
+##### 11/24/2014
+-Evan: 3 hours
+  -Moving I/O functionality from Game to JavaGame (help from Robert)
 
-#### 11/25/2014
+##### 11/25/2014
 -Robert: 4 hours
   -Added game functionality to MainActivity
+-Evan: 1.5 hours
+  -Assigning randomly generated values to Race age
+  -Working on I/O
 
-#### 11/26/2014
+##### 11/26/2014
 -Robert: 3 hours
   -Began to integrate GameScreenActivity
   -Added getter and setter methods to game classes
+-Evan: 2 hours
+  -Handling cases for incorrect input
+  -Calculating distance for traveling amongst planets
+  -Added attrition to crew and resources
+  -Modifying makeMove
   
-#### 11/28/2014
+##### 11/28/2014
 -Robert: 4 hours
   -Researched XML loading and saving
   -Wrote loading functionality for game (GameFileLoader class)
+-Evan: 2 hours
+  -Redoing distance by using trigonometry and distances from sun
+  -Using planet compounds to heal or harm crew, depending on Race
   
-#### 11/29/2014
+##### 11/29/2014
 -Robert: 2 hours
   -Wrote saving functionality for game to XML (GameFileSaver class)
   
-#### 11/30/2014
+##### 11/30/2014
 -Robert: 4 hours
   -Wrote XML planetData
   -Created functionality for Planet class to load data from XML
@@ -93,7 +120,7 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   -Evan finished up game functionality and wrote selling methods
   -Robert began writing getIssue() method in Game class
   
-#### 12/1/2014
+##### 12/1/2014
 -Robert: 6.75 hours
   -Writing getIssue() method
   -Updated GameFileSaver and GameFileSaver for changes made to Game class 
