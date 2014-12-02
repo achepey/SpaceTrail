@@ -28,7 +28,7 @@ public class AsteroidActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asteroid);
         ship = (ImageView) findViewById(R.id.spaceshipMiddle);
-    //    ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
+        //ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
     }
 
     @Override
