@@ -169,26 +169,26 @@ public class Game implements Serializable {
     //Handles the decrement of resources for each move; changes based off of player's speed
     public void resourceAttrition() {
         if(fast) {
-            resources.incrementFuel(8, false);
-            resources.incrementFood(10, false);
-            resources.incrementCompound(6, false);
-            ship.damagePart("engine", 10);
-            ship.damagePart("wing", 10);
-            ship.damagePart("livingBay", 10);
-        }else if(medium) {
             resources.incrementFuel(6, false);
-            resources.incrementFood(8, false);
-            resources.incrementCompound(4, false);
-            ship.damagePart("engine", 8);
-            ship.damagePart("wing", 8);
-            ship.damagePart("livingBay", 8);
+            resources.incrementFood(5, false);
+            resources.incrementCompound(3, false);
+            ship.damagePart("engine", 3);
+            ship.damagePart("wing", 3);
+            ship.damagePart("livingBay", 3);
+        }else if(medium) {
+            resources.incrementFuel(3, false);
+            resources.incrementFood(5, false);
+            resources.incrementCompound(3, false);
+            ship.damagePart("engine", 2);
+            ship.damagePart("wing", 2);
+            ship.damagePart("livingBay", 2);
         }else if(slow) {
-            resources.incrementFuel(4, false);
-            resources.incrementFood(6, false);
-            resources.incrementCompound(2, false);
-            ship.damagePart("engine", 6);
-            ship.damagePart("wing", 6);
-            ship.damagePart("livingBay", 6);
+            resources.incrementFuel(2, false);
+            resources.incrementFood(5, false);
+            resources.incrementCompound(3, false);
+            ship.damagePart("engine", 1);
+            ship.damagePart("wing", 1);
+            ship.damagePart("livingBay", 1);
         }
     }
 
@@ -252,6 +252,37 @@ public class Game implements Serializable {
     //Returns the person at a specific index
     public Person getCrew(int personIndex) {
         return people.get(personIndex);
+    }
+
+    //Sets the first destination to the correct planet from a given String - calls the index method
+    public void setFirstDestination(String planet) {
+        if(planet.equals("Mercury")) {
+            setFirstDestination(0);
+        }
+        else if(planet.equals("Venus")) {
+            setFirstDestination(1);
+        }
+        else if(planet.equals("Earth")) {
+            setFirstDestination(2);
+        }
+        else if(planet.equals("Mars")) {
+            setFirstDestination(3);
+        }
+        else if(planet.equals("Jupiter")) {
+            setFirstDestination(4);
+        }
+        else if(planet.equals("Saturn")) {
+            setFirstDestination(5);
+        }
+        else if(planet.equals("Uranus")) {
+            setFirstDestination(6);
+        }
+        else if(planet.equals("Neptune")) {
+            setFirstDestination(7);
+        }
+    /*    else if(planet.equals("Pluto")) {
+            setFirstDestination(8);
+        }*/
     }
 
     //Sets the destination planet the player is traveling to - only used on first turn
