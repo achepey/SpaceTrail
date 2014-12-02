@@ -18,7 +18,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 /**
- * Created by Daniel on 11/29/2014.
+ * Created by Robert on 11/29/2014.
+ *GameFileSaver.java is a class that will save a Game object to an XML file
  *
  * XML Structure:
  <game>
@@ -48,6 +49,7 @@ public class GameFileSaver
     NodeList gameNodes;
     Game game;
 
+    //Creates the XML file skeleton to save the data to
     public GameFileSaver(Game g) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -81,6 +83,7 @@ public class GameFileSaver
         }
     }
 
+    //Will save the game object to the XML with the given fileName
     public void saveGame(String fileName) {
         try {
             saveShip();
@@ -119,6 +122,7 @@ public class GameFileSaver
         }
     }
 
+    //saves ship object
     private void saveShip() {
         Node ship = getNode("ship", gameNodes);
         addNode("hull", Integer.toString(game.getShip().getHullStatus()), ship);
@@ -126,7 +130,7 @@ public class GameFileSaver
         addNode("wing", Integer.toString(game.getShip().getWingStatus()), ship);
         addNode("livingBay", Integer.toString(game.getShip().getLivingBayStatus()), ship);
     }
-
+    //saves resource object
     private void saveResources() {
         Node resources = getNode("resources", gameNodes);
         addNode("food", Integer.toString(game.getResources().getFood()),resources);
@@ -152,7 +156,7 @@ public class GameFileSaver
         addNode("spareWings", Integer.toString(numWings), resources);
         addNode("spareLivingBays", Integer.toString(numLivingBays), resources);
     }
-
+    //saves people object
     private void savePeople() {
         Node people = getNode("people", gameNodes);
         NodeList people_nodes = people.getChildNodes();

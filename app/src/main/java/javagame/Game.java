@@ -10,27 +10,28 @@ import java.io.*;
 import java.lang.Math;
 /**
  *
- * @author EvanKirkland
+ * @author Evan Kirkland and Robert Christian
  */
 public class Game implements Serializable {
-    private Ship ship;
-    private Resources resources;
-    private ArrayList<Person> people;
-    private ArrayList<Planet> planets;
-    private Planet destination, previous;
-    private double distanceRemaining,totalDistance, pace;
-    private Race race;
-    private int money;
-    private boolean gameOver;
-    private boolean fast, medium, slow;
-    private boolean arrivedAtPlanet;
-    private boolean firstMove;
+
+    private Ship ship;      //The player's spaceship
+    private Resources resources;        //The player's resources
+    private ArrayList<Person> people;       //The crew of the spaceship - the captain is always at index 0, and there is a max size of 5
+    private ArrayList<Planet> planets;      //The planets in the solar system
+    private Planet destination, previous;       //The current destination and the previous planet traveled to
+    private double distanceRemaining,totalDistance, pace;       //how much distance is left to the destination planet, the total distance between previous and destination and the pace the ship is moving at
+    private Race race;      //the player's race - randomly assigned
+    private int money;      //the money that the player has
+    private boolean gameOver;       //if the player has lost
+    private boolean fast, medium, slow;     //only one of these values can be true, they represent how fast the player is moving
+    private boolean arrivedAtPlanet;        //states if player has just arrived at a planet
+    private boolean firstMove;      //if it is the first move in the game
+
     public Game() {
-// test
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
         fast = false;
-        medium = true;
+        medium = true;      //default speed is medium
         slow = false;
         firstMove = true;
         money = 1000;
@@ -63,6 +64,16 @@ public class Game implements Serializable {
         //race = new Race();
         gameOver = false;
         arrivedAtPlanet = false;
+    }
+
+    //Will automatically refresh the compound level to 100 if landing on a planet with the needed compound
+    public boolean refreshCompound() {
+        String compound = race.getStrength();
+        if(destination.compound1.equals(compound) || destination.compound2.equals(compound)) {
+            resources.setCompound(100);
+            return true;
+        }
+        return false;
     }
 
     /* Fuel cost based on distanceRemaining from sun */
@@ -150,6 +161,7 @@ public class Game implements Serializable {
         return issue;
     }
 
+    //Handles the decrement of resources for each move; changes based off of player's speed
     public void resourceAttrition() {
         if(fast) {
             resources.incrementFuel(8, false);
@@ -175,6 +187,7 @@ public class Game implements Serializable {
         }
     }
 
+    //Handles the decrement of crew health for each move; changes based off of the player's race's strengths and weaknesses and the planet being traveled to
     public void crewAttrition() {
         /* Attrition will be measured based on destination planet
             - will be based on the compounds of the destination planet and race of the crew
@@ -212,10 +225,7 @@ public class Game implements Serializable {
         return ship;
     }
 
-    /*Will add a crew member to the ship (Daniel)
-     @param String name the name of the crew member
-     @param boolean captain true if this crew member is to be the ship captain
-     */
+    /*Will add a crew member to the ship*/
     public void addCrew(String name, boolean captain) {
         if(captain) {
             people.add(0, new Person(name));
@@ -229,20 +239,24 @@ public class Game implements Serializable {
         }
     }
 
+    //Returns ArrayList of people
     public ArrayList<Person> getPeople() {
         return people;
     }
 
+    //Returns the person at a specific index
     public Person getCrew(int personIndex) {
         return people.get(personIndex);
     }
 
+    //Sets the destination planet the player is traveling to - only used on first turn
     public void setFirstDestination(int planetIndex) {
         destination = planets.get(planetIndex);
         distanceRemaining = destination.distanceFromSun;
         totalDistance = destination.distanceFromSun;
     }
 
+    //Sets the destination to the correct planet from a given String - calls the index method
     public void setDestination(String planet) {
         firstMove = false;
         if(planet.equals("Mercury")) {
@@ -274,9 +288,7 @@ public class Game implements Serializable {
         }*/
     }
 
-    /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)
-    @param int planetIndex is the number of the planet in the solar system
-     */
+    /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)*/
     public void setDestination(int planetIndex) {
         previous = destination;
         int currentIndex = 0;
@@ -299,6 +311,7 @@ public class Game implements Serializable {
         totalDistance = distanceRemaining;
     }
 
+    //Sets the previous planet to the correct planet from a given String - calls the index method
     public void setPrevious(String planet) {
         if(planet.equals("Mercury")) {
             setPrevious(0);
@@ -329,6 +342,7 @@ public class Game implements Serializable {
         }*/
     }
 
+    //Sets the previous planet to the correct planet - used index from planets ArrayList
     public void setPrevious(int planetIndex) {
         previous = planets.get(planetIndex);
     }
@@ -338,13 +352,12 @@ public class Game implements Serializable {
         return destination;
     }
 
+    //Returns the previous planet
     public Planet getPrevious() {
         return previous;
     }
 
-    /* Will set the races of all the crew members
-    @param Race r is the randomly generated race that will be applied to the crew
-     */
+    /* Will set the races of all the crew members*/
     public void setCrewRace(Race r) {
         for(int i = 0; i < 5; i++) {
             people.get(i).setRace(r);
@@ -356,22 +369,27 @@ public class Game implements Serializable {
         return race;
     }
 
+    //Sets distance remaining instance field
     public void setDistanceRemaining(double d) {
         distanceRemaining = d;
     }
 
+    //Returns the distance remaining instance field
     public double getDistanceRemaining() {
         return distanceRemaining;
     }
 
+    //Sets the total distance instance field
     public void setTotalDistance(double d) {
         totalDistance = d;
     }
 
+    //Returns the total distance instance field
     public double getTotalDistance() {
         return totalDistance;
     }
 
+    //Returns true if the player has went to all the planets
     public boolean isWinner() {
         int counter = 0;
         for(int i = 0; i < 8; i++) {
@@ -386,22 +404,28 @@ public class Game implements Serializable {
         return false;
     }
 
+    //Returns true if the gameOver instance field is true - player has lost
     public boolean isLoser() {
         return gameOver;
     }
 
+    //Sets the money instance field
     public void setMoney(int m) {
         money = m;
     }
 
+    //Returns the money instance field
     public int getMoney() {
         return money;
     }
 
+    //Uses planetary and current game data to determine if an issue will occur on a given turn
+    //Returns a string saying the issue and will also set the gameOver field if the crew is killed
+    //Semi-random - incorporates random values and planet data to determine if issue will happen
     private String getIssue() {
         String issue = "Successful movement!";
 
-        //resource and ship issues
+        //resource and ship issues - these will all be game ending and have no random elements
         boolean resourceIssue = false;
         if (resources.getFood() <= 0) {
             issue = "You are out of food! Your crew has resorted to cannibalism and your last member is currently starving to death.";
@@ -438,7 +462,7 @@ public class Game implements Serializable {
         if (resourceIssue) {
             return issue;
         }
-        //health issues
+        //health issues - issue chance of occurring is not random, but message displayed is random - is game ending if captain dies
         for (int i = 0; i < people.size(); ++i) {
             if (people.get(i).getCondition() <= 0) {
                 if (i == 0) {
@@ -468,7 +492,7 @@ public class Game implements Serializable {
         }
         //previous planet dependent issues
             //will encounter previous planet issues if within close distanceRemaining to previously visited planet
-        if(totalDistance == distanceRemaining + pace) {
+        if(totalDistance == distanceRemaining + pace && !previous.name.equals("Temp")) {
             double escapeVelocityIssueChance = Math.random();
             if(escapeVelocityIssueChance < previous.escapeVelocity/300) {
                 issue = "While leaving " + previous.name + " you did not correctly accommodate for the planet's escape velocity, so you used more fuel than was initially planned for to leave the atmosphere!";
@@ -645,6 +669,7 @@ public class Game implements Serializable {
         return issue;
     }
 
+    //sets the pace to either fast(1), medium(2) or slow(3)
     public void setPace(int p) {
         switch(p) {
             case 1:             // 'fast' is 12 taps
@@ -668,6 +693,7 @@ public class Game implements Serializable {
         }
     }
 
+    //returns an int representing the pace for fast(1), medium(@) or slow(3)
     public int getPace() {      //returns 1 for fast, 2 for medium and 3 for slow
         if(fast) {
             return 1;
@@ -678,18 +704,22 @@ public class Game implements Serializable {
         return 3;
     }
 
+    //returns boolean for if player has arrived at a planet
     public boolean getArrivedAtPlanet() {
         return arrivedAtPlanet;
     }
 
+    //sets the boolean value for arrived at planet
     public void setArrivedAtPlanet(boolean b) {
         arrivedAtPlanet = b;
     }
 
+    //returns the planets array
     public ArrayList<Planet> getPlanets() {
         return planets;
     }
 
+    //set the visited value for a planet
     public void setVisited(String planetName) {
         if(planetName.equals("Mercury")) {
             planets.get(0).visited = true;
@@ -717,6 +747,8 @@ public class Game implements Serializable {
         }
     }
 
+    //repairs the hull using the given amount of aluminum
+    //returns if the hull was repaired
     public boolean repairHull(int amountAluminum) {
         if(resources.getAluminum() < amountAluminum) {
             return false;
@@ -726,6 +758,8 @@ public class Game implements Serializable {
         return true;
     }
 
+    //repairs the engine by using a spare wing
+    //returns if the engine was repaired
     public boolean repairEngine() {
         if(resources.removeSpare("engine")){
             ship.setEngineStatus(100);
@@ -734,6 +768,8 @@ public class Game implements Serializable {
         return false;
     }
 
+    //repairs the wing by using a spare wing
+    //returns if the wing was repaired
     public boolean repairWing() {
         if(resources.removeSpare("wing")){
             ship.setWingStatus(100);
@@ -742,6 +778,8 @@ public class Game implements Serializable {
         return false;
     }
 
+    //repairs the living bay using a spare living bay
+    //returns if living bay was repaired
     public boolean repairLivingBay() {
         if(resources.removeSpare("livingBay")){
             ship.setLivingBayStatus(100);

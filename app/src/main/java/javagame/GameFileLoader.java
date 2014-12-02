@@ -9,7 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 /**
- * Created by Daniel on 11/28/2014.
+ * Created by Robert on 11/28/2014.
  XML Structure:
  <game>
     <ship>
@@ -42,6 +42,7 @@ public class GameFileLoader
     NodeList game_nodes;
     Game game;
 
+    //opens given file to read
     public GameFileLoader(String fileName) {
         try {
 
@@ -59,6 +60,7 @@ public class GameFileLoader
         }
     }
 
+    //Loads data from XML into game object
     public Game loadGame() {
         loadShip();
         loadResources();
@@ -81,7 +83,7 @@ public class GameFileLoader
         }
         return game;
     }
-
+    //Loads ship data into game object
     private void loadShip() {
         Node ship = getNode("ship", game_nodes);
         NodeList ship_child_nodes = ship.getChildNodes();
@@ -90,6 +92,7 @@ public class GameFileLoader
         game.getShip().setWingStatus(Integer.parseInt(getNodeValue("wing",ship_child_nodes)));
         game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("livingBay",ship_child_nodes))));
     }
+    //Loads resource data into game object
     private void loadResources() {
         Node resources = getNode("resources", game_nodes);
         NodeList resources_child_nodes = resources.getChildNodes();
@@ -114,6 +117,7 @@ public class GameFileLoader
             game.getResources().addSpare(new Part("livingBay", 100));
         }
     }
+    //Loads people object into game object
     private void loadPeople() {
         Node people = getNode("people", game_nodes);
         NodeList people_child_nodes = people.getChildNodes();
@@ -151,7 +155,6 @@ public class GameFileLoader
 
         return null;
     }
-
     protected String getNodeValue( Node node ) {
         NodeList childNodes = node.getChildNodes();
         for (int x = 0; x < childNodes.getLength(); x++ ) {
@@ -161,7 +164,6 @@ public class GameFileLoader
         }
         return "";
     }
-
     protected String getNodeValue(String tagName, NodeList nodes ) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
             Node node = nodes.item(x);
@@ -176,7 +178,6 @@ public class GameFileLoader
         }
         return "";
     }
-
     protected String getNodeAttr(String attrName, Node node ) {
         NamedNodeMap attrs = node.getAttributes();
         for (int y = 0; y < attrs.getLength(); y++ ) {
@@ -187,7 +188,6 @@ public class GameFileLoader
         }
         return "";
     }
-
     protected String getNodeAttr(String tagName, String attrName, NodeList nodes ) {
         for ( int x = 0; x < nodes.getLength(); x++ ) {
             Node node = nodes.item(x);
