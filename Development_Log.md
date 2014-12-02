@@ -73,14 +73,21 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
 ##### 11/20/2014
 -Evan: 1 hour
   -Developing Race class and Part class
+-Andrew: 2 hours
+  -Started developing the Asteroid Mining Activity, including animation of asteroids
   
 ##### 11/23/2014
 -Evan: 2 hours
   -Building up Game class, along with constructor
+-Andrew: 1 hour
+  -Began updating the in game menu
   
 ##### 11/24/2014
 -Evan: 3 hours
   -Moving I/O functionality from Game to JavaGame (help from Robert)
+-Andrew: 2 hours
+  -Updated in game menu and on screen functionality
+  -Updating animation for asteroid mining activity
 
 ##### 11/25/2014
 -Robert: 4 hours
@@ -119,6 +126,8 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
 -Robert and Evan: 3 hours
   -Evan finished up game functionality and wrote selling methods
   -Robert began writing getIssue() method in Game class
+-Andrew: 4.5 hours
+  -Implemented animation to asteroid activity, correctly implemented view animation style
   
 ##### 12/1/2014
 -Robert: 6.75 hours
