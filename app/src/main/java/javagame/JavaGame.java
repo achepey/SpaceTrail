@@ -13,14 +13,20 @@ import java.io.*;
  */
 public class JavaGame {
 
+    private static String FILE_NAME = ".\\gameFile.xml";
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         Game test = new Game();
 
-        System.out.print("Do you want to load the previous game? (y/n)\n: ");
-        String choice = s.nextLine();
+        File f = new File(FILE_NAME);
+        String choice = "n";
+        if(f.exists()) {
+            System.out.print("Do you want to load the previous game? (y/n)\n: ");
+            choice = s.nextLine();
+        }
         if(choice.equals("y")) {
-            GameFileLoader loader = new GameFileLoader(".\\gameFile.xml");
+            GameFileLoader loader = new GameFileLoader(FILE_NAME);
             test = loader.loadGame();
         }
         else {
@@ -164,7 +170,7 @@ public class JavaGame {
                 choice = s.nextLine();
                 if(choice.equals("y")) {
                     GameFileSaver saver = new GameFileSaver(test);
-                    saver.saveGame(".\\gameFile.xml");
+                    saver.saveGame(FILE_NAME);
                     return;
                 }
             }
