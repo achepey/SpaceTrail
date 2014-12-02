@@ -65,3 +65,44 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   -Created exit activity
 -Andrew and Robert worked together: 2 hours
   -Writing development log, adding comments, finishing test driven development, and updating design document illustration
+
+#### 11/25/2014
+-Robert: 4 hours
+  -Added game functionality to MainActivity
+
+#### 11/26/2014
+-Robert: 3 hours
+  -Began to integrate GameScreenActivity
+  -Added getter and setter methods to game classes
+  
+#### 11/28/2014
+-Robert: 4 hours
+  -Researched XML loading and saving
+  -Wrote loading functionality for game (GameFileLoader class)
+  
+#### 11/29/2014
+-Robert: 2 hours
+  -Wrote saving functionality for game to XML (GameFileSaver class)
+  
+#### 11/30/2014
+-Robert: 4 hours
+  -Wrote XML planetData
+  -Created functionality for Planet class to load data from XML
+  -Tested loading and saving
+-Robert and Evan: 3 hours
+  -Evan finished up game functionality and wrote selling methods
+  -Robert began writing getIssue() method in Game class
+  
+#### 12/1/2014
+-Robert: 6.75 hours
+  -Writing getIssue() method
+  -Updated GameFileSaver and GameFileSaver for changes made to Game class 
+-Robert and Evan: 1.5 hours
+  -Testing Game class with main class JavaGame
+  -Had file path issue
+-Evan, Robert and Andrew: 3 hours
+  -Andrew worked on AsteroidActivity
+  -Robert and Evan completed game testing
+
+
+
