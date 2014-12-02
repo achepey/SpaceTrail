@@ -60,7 +60,7 @@ public class JavaGame {
         System.out.println("What planet would you like to travel to first?");
         System.out.print("1. [Mercury]\n2.[Venus]\n3.[Earth]\n4. [Mars]\n5.[Jupiter]\n6. [Saturn]\n7. [Uranus]\n8. [Neptune]\n9. [Pluto]\n: ");
         int destination = s.nextInt();
-        while(destination > 9 || destination < 1) {
+        while (destination > 9 || destination < 1) {
             System.out.print("Incorrect choice. Choose a number between 1 and 9.\n: ");
             destination = s.nextInt();
         }
@@ -70,40 +70,38 @@ public class JavaGame {
         test.setPace(2);
         System.out.print("Hit [Enter] to move towards [" + test.getDestination().name + "].\n: ");
         String moving = s.nextLine();
-        while(!test.getArrivedAtPlanet()) {
+        while (!test.getArrivedAtPlanet()) {
             String result = test.makeMove();
             System.out.println(result);
-            if(test.isLoser()) {
+            if (test.isLoser()) {
                 System.out.println("GAME OVER. YOU LOSE.");
                 break;
-            }else{
+            } else {
                 System.out.print("Would you like to repair your ship, or change pace? (y/n)\n: ");
                 String choice = s.nextLine();
-                if(choice.equals("y")) {
+                if (choice.equals("y")) {
                     System.out.print("Do you want to repair (1) or chance pace (2)?\n: ");
                     choice = s.nextLine();
-                    if(choice.equals("1")) {
+                    if (choice.equals("1")) {
                         System.out.print("Would you like to repair the hull (1), engine (2), living bay (3), or wing (3)");
                         int repair = s.nextInt();
                         //switch(repair) {
-                           // case 1:
-                           //     test.getShip().
-                        }
-                    }else if(choice.equals("2")) {
-                        System.out.println("What pace would you like to go at?");
-                        System.out.print("1. [Fast]\n2.[Medium]\n3. [Slow]\n: ");
-                        int pace = s.nextInt();
-                        while(pace != 1 && pace != 2 && pace != 3) {
-                            System.out.print("Incorrect choice. Choose a number between 1 and 3.\n: ");
-                            pace = s.nextInt();
-                        }
-                        test.setPace(pace);
+                        // case 1:
+                        //     test.getShip().
                     }
+                } else if (choice.equals("2")) {
+                    System.out.println("What pace would you like to go at?");
+                    System.out.print("1. [Fast]\n2.[Medium]\n3. [Slow]\n: ");
+                    int pace = s.nextInt();
+                    while (pace != 1 && pace != 2 && pace != 3) {
+                        System.out.print("Incorrect choice. Choose a number between 1 and 3.\n: ");
+                        pace = s.nextInt();
+                    }
+                    test.setPace(pace);
                 }
-                System.out.print("Hit [Enter] to move towards [" + test.getDestination().name + "].\n: ");
-                moving = s.nextLine();
             }
+            System.out.print("Hit [Enter] to move towards [" + test.getDestination().name + "].\n: ");
+            moving = s.nextLine();
         }
     }
-
 }

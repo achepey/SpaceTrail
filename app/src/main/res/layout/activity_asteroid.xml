@@ -14,7 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:padding="5dp" />
-
+<!--
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:visibility="invisible" />
-
+-->
     <ImageView
         android:layout_width="75dp"
         android:layout_height="75dp"

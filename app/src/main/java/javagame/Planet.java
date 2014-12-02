@@ -24,7 +24,7 @@ public class Planet
 
     public Planet(String n) {
         try {
-            fileName = ".\\app\\src\\main\\java\\javagame\\planetData.xml";
+            fileName = ".\\planetData.xml";
             name = n;
             visited = false;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();

@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_asteroid.xml" />
+      <file url="file://$PROJECT_DIR$/app/src/main/java/team19.spacetrail/AsteroidActivity" />
+    </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />
