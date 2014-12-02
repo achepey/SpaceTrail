@@ -33,6 +33,7 @@ public class Game implements Serializable {
         medium = true;
         slow = false;
         firstMove = true;
+        money = 1000;
 
         /* Create all 9 planets (or are we not using Pluto) */
         Planet Mercury = new Planet("Mercury");
@@ -59,7 +60,7 @@ public class Game implements Serializable {
         resources = new Resources();
         destination = new Planet("Temp");       //used as default destination until a planet is given
         previous = new Planet("Temp");
-        race = new Race();
+        //race = new Race();
         gameOver = false;
         arrivedAtPlanet = false;
     }
@@ -151,23 +152,23 @@ public class Game implements Serializable {
 
     public void resourceAttrition() {
         if(fast) {
-            resources.incrementFuel(10, false);
+            resources.incrementFuel(8, false);
             resources.incrementFood(10, false);
-            resources.incrementCompound(10, false);
+            resources.incrementCompound(6, false);
             ship.damagePart("engine", 10);
             ship.damagePart("wing", 10);
             ship.damagePart("livingBay", 10);
         }else if(medium) {
-            resources.incrementFuel(8, false);
+            resources.incrementFuel(6, false);
             resources.incrementFood(8, false);
-            resources.incrementCompound(8, false);
+            resources.incrementCompound(4, false);
             ship.damagePart("engine", 8);
             ship.damagePart("wing", 8);
             ship.damagePart("livingBay", 8);
         }else if(slow) {
-            resources.incrementFuel(6, false);
+            resources.incrementFuel(4, false);
             resources.incrementFood(6, false);
-            resources.incrementCompound(6, false);
+            resources.incrementCompound(2, false);
             ship.damagePart("engine", 6);
             ship.damagePart("wing", 6);
             ship.damagePart("livingBay", 6);
@@ -349,6 +350,10 @@ public class Game implements Serializable {
             people.get(i).setRace(r);
         }
         race = r;
+    }
+
+    public Race getRace() {
+        return race;
     }
 
     public void setDistanceRemaining(double d) {
@@ -617,7 +622,7 @@ public class Game implements Serializable {
         //miscellaneous issues
             //random issues that can occur
         double randomIssueChance = Math.random();
-        if(randomIssueChance > .001) {
+        if(randomIssueChance < .001) {
             double shipPartChance = Math.random();
             String shipPart;
             if(shipPartChance > .5) {
@@ -743,5 +748,31 @@ public class Game implements Serializable {
             return true;
         }
         return false;
+    }
+
+    public void showResources() {
+        System.out.println("[Food] : " + resources.getFood());
+        System.out.println("[Fuel] : " + resources.getFuel());
+        System.out.println("[Aluminum] : " + resources.getAluminum());
+        System.out.println("[" + race.getStrength() + "] : " + resources.getCompound());
+        int wings = 0;
+        int engines = 0;
+        int livingBays = 0;
+        for(int i = 0; i < resources.getSpares().size(); i++) {
+            if(resources.getSpares().get(i).getName().equals("engine")) { engines = engines + 1; }
+            else if(resources.getSpares().get(i).getName().equals("wing")) { wings = wings + 1; }
+            else if(resources.getSpares().get(i).getName().equals("livingBay")) { livingBays = livingBays + 1; }
+        }
+        System.out.println("[Wing] : " + wings);
+        System.out.println("[Engine] : " + engines);
+        System.out.println("[Living Bay] : " + livingBays);
+    }
+
+    public void showShip() {
+        System.out.println("[Hull] : " + ship.getHullStatus());
+        System.out.println("[Engine] : " + ship.getEngineStatus());
+        System.out.println("[Wing] : " + ship.getWingStatus());
+        System.out.println("[Living Bay] : " + ship.getLivingBayStatus());
+
     }
 }

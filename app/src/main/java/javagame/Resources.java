@@ -19,6 +19,7 @@ public class Resources {
 
     public Resources() {
         spares = new ArrayList<Part>();
+        compound = 100;
     }
 
     /* Setter Functions */
