@@ -85,9 +85,31 @@ public class JavaGame {
                     if (choice.equals("1")) {
                         System.out.print("Would you like to repair the hull (1), engine (2), living bay (3), or wing (3)");
                         int repair = s.nextInt();
-                        //switch(repair) {
-                        // case 1:
-                        //     test.getShip().
+                        switch(repair) {
+                            case 1:
+                                System.out.print("How many units of aluminum would you like to use to repair the hull?\n: ");
+                                int hullRepair = s.nextInt();
+                                while(!test.repairHull(hullRepair)) {
+                                    System.out.print("You do not have that much aluminum. Choose another value.\n: ");
+                                    hullRepair = s.nextInt();
+                                }
+                                break;
+                            case 2:
+                                if(!test.repairEngine()) {
+                                    System.out.println("You do not have a spare engine.");
+                                }
+                                break;
+                            case 3:
+                                if(!test.repairLivingBay()) {
+                                    System.out.println("You do not have a spare living bay.");
+                                }
+                                break;
+                            case 4:
+                                if(!test.repairWing()) {
+                                    System.out.println("You do not have a spare wing.");
+                                }
+                                break;
+                        }
                     }
                 } else if (choice.equals("2")) {
                     System.out.println("What pace would you like to go at?");
