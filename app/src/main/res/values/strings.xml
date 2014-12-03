@@ -74,5 +74,6 @@
     <string name="MenuBackInfo">Hold down the screen or press the back button to return to the game</string>
     <string name="asteroid_mine">Mine Asteroids!</string>
     <string name="changePace">Change Pace</string>
+    <string name="enginePercent">Engine Health:</string>
 
 </resources>

@@ -131,6 +131,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 Bitmap rbmp = Bitmap.createScaledBitmap(bmp, width, height, true);
                 spaceship.setImageBitmap(rbmp);
             }
+            TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
+            TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+            fuelView.setText(Integer.toString(--fuel)); //USE THIS TO SUBTRACT ACTUAL FUEL
+            foodView.setText(Integer.toString(--food)); //USE THIS TO SUBTRACT ACTUAL FOOD
         }
         //Tells user they arrived at planet, and gives choice of moving to next planet, or stopping on planet to purchase resources
         else{
@@ -269,10 +273,6 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onSingleTapUp(MotionEvent event) {
         View v = new View(this);
-        TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
-        TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
-        fuelView.setText(Integer.toString(--fuel));
-        foodView.setText(Integer.toString(--food));
         moveShip(v);
         return true;
     }
@@ -281,10 +281,6 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onDoubleTap(MotionEvent event) {
         View v = new View(this);
-        TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
-        TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
-        fuelView.setText(Integer.toString(--fuel));
-        foodView.setText(Integer.toString(--food));
         moveShip(v);
         return true;
     }

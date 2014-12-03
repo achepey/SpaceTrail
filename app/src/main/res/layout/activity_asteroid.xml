@@ -43,4 +43,53 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/asteroid3"
+        android:src="@drawable/asteroid"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/asteroid4"
+        android:src="@drawable/asteroid"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enginePercent"
+        android:id="@+id/enginePercentText"
+        android:layout_alignLeft="@+id/spaceshipMiddle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/enginePercent"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/enginePercentText"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="%"
+        android:id="@+id/percent"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/spaceshipMiddle"
+        android:layout_toRightOf="@+id/enginePercent"
+        android:layout_marginLeft="4dp" />
+
 </RelativeLayout>
