@@ -336,7 +336,7 @@ public class AsteroidActivity extends Activity {
                     shipHitAction();
                 }
                 destroyed = false;
-                miningResults();
+                //miningResults();
             }
 
             @Override

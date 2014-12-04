@@ -45,6 +45,7 @@ public class PlanetActivity extends Activity {
         planets.add((ImageView) findViewById(R.id.saturn));
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
+        planets.add((ImageView) findViewById(R.id.pluto));
 
         Spinner spinner = (Spinner) findViewById(R.id.ResourceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout

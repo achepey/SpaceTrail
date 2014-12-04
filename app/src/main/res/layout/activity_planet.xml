@@ -208,6 +208,18 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="true" />
 
+    <ImageView
+        android:id="@+id/pluto"
+        android:src="@drawable/pluto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignTop="@+id/welcomeTo"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
