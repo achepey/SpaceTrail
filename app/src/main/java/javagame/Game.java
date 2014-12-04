@@ -34,7 +34,7 @@ public class Game implements Serializable {
         medium = true;      //default speed is medium
         slow = false;
         firstMove = true;
-        money = 1000;
+        money = 100000;
 
         /* Create all 9 planets (or are we not using Pluto) */
         Planet Mercury = new Planet("Mercury");
@@ -85,6 +85,7 @@ public class Game implements Serializable {
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy fuel.");
+            money = money + (int)(cost * m);
             return false;
         }
         resources.incrementFuel(m, true);
@@ -100,6 +101,7 @@ public class Game implements Serializable {
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy food.");
+            money = money + (int)(cost * m);
             return false;
         }
         resources.incrementFood(m, true);
@@ -115,6 +117,7 @@ public class Game implements Serializable {
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy aluminum.");
+            money = money + (int)(cost * m);
             return false;
         }
         resources.incrementAluminum(m, true);
@@ -130,6 +133,7 @@ public class Game implements Serializable {
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
             System.out.println("You did not have enough money. The vendor has zero patience, and you have lost your chance to buy spare parts.");
+            money = money + (int)(cost * m);
             return false;
         }
         for (int i = 0; i < m; i++) {           // add 'm' of this spare part
@@ -279,9 +283,9 @@ public class Game implements Serializable {
         else if(planet.equals("Neptune")) {
             setFirstDestination(7);
         }
-    /*    else if(planet.equals("Pluto")) {
+        else if(planet.equals("Pluto")) {
             setFirstDestination(8);
-        }*/
+        }
     }
 
     //Sets the destination planet the player is traveling to - only used on first turn
@@ -318,9 +322,9 @@ public class Game implements Serializable {
         else if(planet.equals("Neptune")) {
             setDestination(7);
         }
-    /*    else if(planet.equals("Pluto")) {
+        else if(planet.equals("Pluto")) {
             setDestination(8);
-        }*/
+        }
     }
 
     /*Will set the destination to the correct planet (MUST HAVE A DESTINATION PREVIOUSLY)*/
@@ -372,9 +376,9 @@ public class Game implements Serializable {
         else if(planet.equals("Neptune")) {
             setPrevious(7);
         }
-    /*    else if(planet.equals("Pluto")) {
+        else if(planet.equals("Pluto")) {
             setPrevious(8);
-        }*/
+        }
     }
 
     //Sets the previous planet to the correct planet - used index from planets ArrayList
@@ -427,12 +431,12 @@ public class Game implements Serializable {
     //Returns true if the player has went to all the planets
     public boolean isWinner() {
         int counter = 0;
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 9; i++) {
             if (planets.get(i).visited) {
                 counter += 1;
             }
         }
-        if(counter == 8) {
+        if(counter == 9) {
             System.out.println("You have visited all the planets.");
             return true;
         }
