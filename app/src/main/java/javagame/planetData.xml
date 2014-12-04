@@ -168,6 +168,27 @@
         <compound1>Helium</compound1>
         <compund2>Methane</compund2>
     </Neptune>
+    <Pluto>
+        <mass>.0131</mass>
+        <diameter>2390</diameter>
+        <density>1830</density>
+        <gravity>.6</gravity>
+        <escapeVelocity>1.1</escapeVelocity>
+        <rotationPeriod>-153.3</rotationPeriod>
+        <lengthOfDay>153.3</lengthOfDay>
+        <distanceFromSun>5870</distanceFromSun>
+        <orbitalPeriod>90588</orbitalPeriod>
+        <orbitalVelocity>4.7</orbitalVelocity>
+        <orbitalInclination>17.2</orbitalInclination>
+        <axialTilt>122.5</axialTilt>
+        <meanTemperature>-225</meanTemperature>
+        <surfacePressure>0</surfacePressure>
+        <numberOfMoons>5</numberOfMoons>
+        <ringSystem>No</ringSystem>
+        <globalMagneticField>No</globalMagneticField>
+        <compound1>Helium</compound1>
+        <compund2>Methane</compund2>
+    </Pluto>
     <Temp>
         <mass>1</mass>
         <diameter>1</diameter>

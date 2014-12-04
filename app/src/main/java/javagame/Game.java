@@ -600,34 +600,34 @@ public class Game implements Serializable {
                     return issue;
                 }
             }
-
-
-            double moonIssueChance = Math.random();
-            double ringIssueChance = (destination.ringSystem) ? Math.random() : 1;
-            if(moonIssueChance < destination.numberOfMoons/200) {       //higher chance for planets with more moons
-                issue = "While approaching " + destination.name + " you miscalculated one of its moon's orbits. The trip takes longer and you use more resources than expected.";
-                crewAttrition();                        // decide how much health each crew member loses
-                resourceAttrition();                    // decide how many resources the crew loses
-                return issue;
-            }
-            if(ringIssueChance < .05) {
-                double shipPartChance = Math.random();
-                String shipPart;
-                if(shipPartChance > .5) {
-                    shipPart = "hull";
+            else {
+                double moonIssueChance = Math.random();
+                double ringIssueChance = (destination.ringSystem) ? Math.random() : 1;
+                if(moonIssueChance < destination.numberOfMoons/200) {       //higher chance for planets with more moons
+                    issue = "While approaching " + destination.name + " you miscalculated one of its moon's orbits. The trip takes longer and you use more resources than expected.";
+                    crewAttrition();                        // decide how much health each crew member loses
+                    resourceAttrition();                    // decide how many resources the crew loses
+                    return issue;
                 }
-                else if(shipPartChance > .34) {
-                    shipPart = "engine";
+                if(ringIssueChance < .05) {
+                    double shipPartChance = Math.random();
+                    String shipPart;
+                    if(shipPartChance > .5) {
+                        shipPart = "hull";
+                    }
+                    else if(shipPartChance > .34) {
+                        shipPart = "engine";
+                    }
+                    else if(shipPartChance > .18) {
+                        shipPart = "wing";
+                    }
+                    else {
+                        shipPart = "livingBay";
+                    }
+                    ship.damagePart(shipPart, 5);
+                    issue = "You have traveled too close to " + destination.name + "'s rings! Your " + shipPart + " has been damaged by a large chunk of ice!";
+                    return issue;
                 }
-                else if(shipPartChance > .18) {
-                    shipPart = "wing";
-                }
-                else {
-                    shipPart = "livingBay";
-                }
-                ship.damagePart(shipPart, 5);
-                issue = "You have traveled too close to " + destination.name + "'s rings! Your " + shipPart + " has been damaged by a large chunk of ice!";
-                return issue;
             }
         }
 
