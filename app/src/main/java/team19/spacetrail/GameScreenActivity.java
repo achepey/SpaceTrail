@@ -37,7 +37,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
     /* Constants used for access outside of this activity */
     public final static String PLANET_NAME = "team19.spacetrail.PLANET_NAME";
-    public final static String[] PLANETS_ARRAY = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune"};
+    public final static String[] PLANETS_ARRAY = {"Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto"};
 
     /* Instance Fields */
     private ImageView spaceship;
@@ -75,6 +75,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planets.add((ImageView) findViewById(R.id.saturn));
         planets.add((ImageView) findViewById(R.id.uranus));
         planets.add((ImageView) findViewById(R.id.neptune));
+        planets.add((ImageView) findViewById(R.id.pluto));
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
