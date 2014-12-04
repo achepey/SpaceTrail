@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingBottom="5dp"
-    android:paddingTop="10dp">
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/headToSpace"
-        android:id="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:onClick="headToSpace" />
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:useDefaultMargins="true"
+    android:id="@+id/resourceMenu">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,36 +10,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/money"
         android:textStyle="bold"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/moneyText"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:layout_alignLeft="@+id/textView3"
-        android:paddingLeft="15dp" />
+        android:id="@+id/moneyString"
+        android:paddingLeft="15dp"
+        android:layout_row="0"
+        android:layout_column="0" />
 
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/moneyText"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
-        android:layout_alignBottom="@+id/toSpend"
+        android:id="@+id/moneyVariable"
         android:text="$$$$$"
-        android:gravity="center_vertical|center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/toSpend"
-        android:textStyle="bold"
-        android:id="@+id/toSpend"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/moneyText"
-        android:layout_toEndOf="@+id/moneyText"
-        android:paddingRight="10dp" />
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_row="0"
+        android:layout_column="1" />
 
     <EditText
         android:layout_width="75dp"
@@ -58,9 +32,9 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/fuelTextField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/foodTextField" />
+        android:layout_row="1"
+        android:layout_column="0"
+        android:text="0" />
 
     <EditText
         android:layout_width="75dp"
@@ -68,129 +42,109 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/foodTextField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/enginePartTextField" />
+        android:layout_row="2"
+        android:layout_column="0"
+        android:text="0" />
 
     <EditText
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/enginePartTextField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/aluminumPartsTextField" />
+        android:id="@+id/aluminumTextField"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:text="0" />
 
     <EditText
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/aluminumPartsTextField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/wingTextField" />
+        android:id="@+id/engineTextField"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:text="0" />
 
     <EditText
         android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/wingTextField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/buyButton" />
+        android:id="@+id/wingsTextField"
+        android:layout_row="5"
+        android:layout_column="0"
+        android:text="0" />
+
+    <EditText
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/livingBayTextField"
+        android:layout_row="6"
+        android:layout_column="0"
+        android:text="0" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/fuel"
-        android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/fuelTextField"
-        android:layout_toRightOf="@+id/fuelTextField"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:paddingLeft="15dp" />
+        android:id="@+id/fuelPrice"
+        android:paddingLeft="15dp"
+        android:layout_row="1"
+        android:layout_column="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/food"
-        android:id="@+id/textView4"
-        android:layout_alignBottom="@+id/foodTextField"
-        android:layout_toRightOf="@+id/foodTextField"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:paddingLeft="15dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enginePart"
-        android:id="@+id/textView5"
-        android:layout_alignBottom="@+id/enginePartTextField"
-        android:layout_toRightOf="@+id/enginePartTextField"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:paddingLeft="15dp" />
+        android:id="@+id/foodPrice"
+        android:paddingLeft="15dp"
+        android:layout_row="2"
+        android:layout_column="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/aluminumPart"
-        android:id="@+id/textView6"
-        android:layout_alignBottom="@+id/aluminumPartsTextField"
-        android:layout_toRightOf="@+id/aluminumPartsTextField"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:paddingLeft="15dp" />
+        android:id="@+id/aluminumPrice"
+        android:paddingLeft="15dp"
+        android:layout_row="3"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enginePart"
+        android:id="@+id/enginePrice"
+        android:paddingLeft="15dp"
+        android:layout_row="4"
+        android:layout_column="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/wings"
-        android:id="@+id/textView7"
-        android:layout_alignBottom="@+id/wingTextField"
-        android:layout_toRightOf="@+id/wingTextField"
-        android:layout_toEndOf="@+id/fuelTextField"
-        android:paddingLeft="15dp" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:text="@string/buy"
-        android:id="@+id/buyButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/wingTextField"
-        android:layout_alignStart="@+id/wingTextField"
-        android:onClick="buyStartingResources"
-        android:nestedScrollingEnabled="true" />
+        android:id="@+id/wingPrice"
+        android:paddingLeft="15dp"
+        android:layout_row="5"
+        android:layout_column="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Quantity You Have"
-        android:id="@+id/QtyYouHave"
-        android:layout_toEndOf="@+id/toSpend"
-        android:paddingBottom="40dp"
-        android:layout_above="@+id/fuelQuantity"
-        android:layout_toRightOf="@+id/toSpend" />
-
-    <Space
-        android:layout_width="20dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_below="@+id/textView7"
-        android:layout_above="@+id/buyButton"
-        android:layout_alignLeft="@+id/wingTextField"
-        android:layout_alignRight="@+id/wingTextField"
-        android:paddingTop="10dp"
-        android:id="@+id/space" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/livingBay"
+        android:id="@+id/livingBayPrice"
+        android:paddingLeft="15dp"
+        android:layout_row="6"
+        android:layout_column="1" />
 
     <TextView
         android:layout_width="50dp"
@@ -198,11 +152,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="0"
         android:id="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/QtyYouHave"
-        android:layout_alignStart="@+id/QtyYouHave"
         android:clickable="false"
-        android:layout_toRightOf="@+id/toSpend" />
+        android:layout_row="1"
+        android:layout_column="2" />
 
     <TextView
         android:layout_width="50dp"
@@ -210,10 +162,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="0"
         android:id="@+id/foodQuantity"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/QtyYouHave"
-        android:layout_alignStart="@+id/QtyYouHave"
-        android:clickable="false" />
+        android:clickable="false"
+        android:layout_row="2"
+        android:layout_column="2" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/aluminumQuantity"
+        android:clickable="false"
+        android:layout_row="3"
+        android:layout_column="2" />
 
     <TextView
         android:layout_width="50dp"
@@ -221,21 +182,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="0"
         android:id="@+id/engineQuantity"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignLeft="@+id/QtyYouHave"
-        android:layout_alignStart="@+id/QtyYouHave"
-        android:clickable="false" />
-
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/alumQuantity"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_alignLeft="@+id/QtyYouHave"
-        android:layout_alignStart="@+id/QtyYouHave"
-        android:clickable="false" />
+        android:clickable="false"
+        android:layout_row="4"
+        android:layout_column="2" />
 
     <TextView
         android:layout_width="50dp"
@@ -243,59 +192,91 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="0"
         android:id="@+id/wingQuantity"
-        android:layout_alignBottom="@+id/textView7"
-        android:layout_alignLeft="@+id/QtyYouHave"
-        android:layout_alignStart="@+id/QtyYouHave"
-        android:clickable="false" />
+        android:clickable="false"
+        android:layout_row="5"
+        android:layout_column="2" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/livingBayQuantity"
+        android:clickable="false"
+        android:layout_row="6"
+        android:layout_column="2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/Resources_fuel"
-        android:id="@+id/textView2"
-        android:layout_toRightOf="@+id/fuelQuantity"
-        android:layout_toEndOf="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/fuelQuantity" />
+        android:id="@+id/fuelAmtLabel"
+        android:layout_row="1"
+        android:layout_column="3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/Resources_food"
-        android:id="@+id/textView8"
-        android:layout_toRightOf="@+id/fuelQuantity"
-        android:layout_toEndOf="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/foodQuantity" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_EngPrts"
-        android:id="@+id/textView9"
-        android:layout_toRightOf="@+id/fuelQuantity"
-        android:layout_toEndOf="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/engineQuantity" />
+        android:id="@+id/foodAmtLabel"
+        android:layout_row="2"
+        android:layout_column="3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/Resources_AlumPrts"
-        android:id="@+id/textView10"
-        android:layout_toRightOf="@+id/fuelQuantity"
-        android:layout_toEndOf="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/alumQuantity" />
+        android:id="@+id/aluminumAmtLabel"
+        android:layout_row="3"
+        android:layout_column="3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Resources_EngPrts"
+        android:id="@+id/engineAmtLabel"
+        android:layout_row="4"
+        android:layout_column="3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/Resources_SprWings"
-        android:id="@+id/textView11"
-        android:layout_toRightOf="@+id/fuelQuantity"
-        android:layout_toEndOf="@+id/fuelQuantity"
-        android:layout_alignBottom="@+id/wingQuantity" />
+        android:id="@+id/wingAmtLabel"
+        android:layout_row="5"
+        android:layout_column="3" />
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/Resources_SprLivingBays"
+        android:id="@+id/textView4"
+        android:layout_row="6"
+        android:layout_column="3" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buy"
+        android:id="@+id/buyButton"
+        android:onClick="buyStartingResources"
+        android:layout_row="0"
+        android:layout_column="2"/>
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/headToSpace"
+        android:id="@+id/headToSpace"
+        android:onClick="headToSpace"
+        android:layout_row="0"
+        android:layout_column="3" />
+
+</GridLayout>

@@ -219,7 +219,6 @@ public class Game implements Serializable {
         }
     }
 
-
     /*Returns the resources object (Daniel)*/
     public Resources getResources() {
         return resources;
