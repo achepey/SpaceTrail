@@ -886,27 +886,28 @@ public class Game implements Serializable {
     }
 
     public double distanceToPlanet(Planet p) {
-        int currentIndex = 0;
-        int pIndex = 0;
-        for(int i = 0; i < 9; i++) {
-            if(planets.get(i).name.equals(destination.name)) {
-                currentIndex = i;
-            }
-            if(planets.get(i).name.equals(p.name)) {
-                pIndex = i;
-            }
+        if(firstMove){
+            return(p.distanceFromSun);
         }
+        else {
+            int currentIndex = 0;
+            int pIndex = 0;
+            for (int i = 0; i < 9; i++) {
+                if (planets.get(i).name.equals(destination.name)) {
+                    currentIndex = i;
+                }
+                if (planets.get(i).name.equals(p.name)) {
+                    pIndex = i;
+                }
+            }
 
         /* Calculating the distanceRemaining between planets
             - each planet has 40 degrees between it and the next one
             - use planet index to compute total degrees between one planet and another
             - find sine value, and apply to destination planet's distanceRemaining
             */
-        double hypotenuse = Math.sin(Math.toRadians(40 * (pIndex - currentIndex)));
-        return((int)((destination.distanceFromSun) * hypotenuse));
-    }
-
-    public double distanceToFirstPlanet(Planet p) {
-        return(p.distanceFromSun);
+            double hypotenuse = Math.sin(Math.toRadians(40 * (pIndex - currentIndex)));
+            return ((int) ((destination.distanceFromSun) * hypotenuse));
+        }
     }
 }

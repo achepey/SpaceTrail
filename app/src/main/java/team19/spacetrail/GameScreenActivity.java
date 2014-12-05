@@ -8,11 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +25,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -182,26 +190,250 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
     //Displays picture of planet to planet menu for better aesthetic view
     public void selectPlanet(){
-        AlertDialog.Builder planet_selector= new AlertDialog.Builder(this);
+        final Dialog planet_selector = new Dialog(GameScreenActivity.this);
+        planet_selector.setContentView(R.layout.planet_selector_layout);
         planet_selector.setTitle(R.string.planet_select);
+        ArrayList<TextView> choices = new ArrayList<TextView>();
 
-        planet_selector.setItems(PLANETS_ARRAY, new DialogInterface.OnClickListener() {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(planet_selector.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        planet_selector.getWindow().setAttributes(lp);
+
+        TextView merc = (TextView) planet_selector.findViewById(R.id.select_mercury);
+        merc.setText("Mercury: Distance is " + game.distanceToPlanet(game.getPlanets().get(0)) + ". (Helium, Oxygen)");
+        merc.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dest_planet = which;
-                dialog.dismiss();
-                planets.get(dest_planet).setVisibility(View.VISIBLE);
-                if(game.getFirstMove()) {
-                    game.setFirstDestination(dest_planet);
+            public void onClick(View view) {
+                if(game.getPrevious().name.equals("Mercury"))
+                {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
                 }
                 else {
-                    game.setDestination(dest_planet);
+                    dest_planet = 0; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
                 }
             }
         });
+        choices.add(merc);
+
+        TextView venus = (TextView) planet_selector.findViewById(R.id.select_venus);
+        venus.setText("Venus: Distance is " + game.distanceToPlanet(game.getPlanets().get(1)) + " - (Nitrogen, Carbon Dioxide)");
+        venus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Venus")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 1; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(venus);
+
+        TextView earth = (TextView) planet_selector.findViewById(R.id.select_earth);
+        earth.setText("Earth: Distance is " + game.distanceToPlanet(game.getPlanets().get(2)) + " - (Nitrogen, Oxygen)");
+        earth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Earth")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 2; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(earth);
+
+        TextView mars = (TextView) planet_selector.findViewById(R.id.select_mars);
+        mars.setText("Mars: Distance is " + game.distanceToPlanet(game.getPlanets().get(3)) + " - (Nitrogen, Carbon Dioxide)");
+        mars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Mars")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 3; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(mars);
+
+        TextView jupiter = (TextView) planet_selector.findViewById(R.id.select_jupiter);
+        jupiter.setText("Jupiter: Distance is " + game.distanceToPlanet(game.getPlanets().get(4)) + " - (Helium, Hydrogen)");
+        jupiter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Jupiter")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 4; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(jupiter);
+
+        TextView saturn = (TextView) planet_selector.findViewById(R.id.select_saturn);
+        saturn.setText("Saturn: Distance is " + game.distanceToPlanet(game.getPlanets().get(5)) + " - (Helium, Hydrogen)");
+        saturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Saturn")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 5; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(saturn);
+
+        TextView uranus = (TextView) planet_selector.findViewById(R.id.select_uranus);
+        uranus.setText("Uranus: Distance is " + game.distanceToPlanet(game.getPlanets().get(6)) + " - (Helium, Methane)");
+        uranus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Uranus")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 6; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(uranus);
+
+        TextView neptune = (TextView) planet_selector.findViewById(R.id.select_neptune);
+        neptune.setText("Neptune: Distance is " + game.distanceToPlanet(game.getPlanets().get(7)) + " - (Helium, Methane)");
+        neptune.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Neptune")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 7; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(neptune);
+
+        TextView pluto = (TextView) planet_selector.findViewById(R.id.select_pluto);
+        pluto.setText("Pluto: Distance is " + game.distanceToPlanet(game.getPlanets().get(8)) + " - (Helium, Methane)");
+        pluto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (game.getPrevious().name.equals("Pluto")) {
+                    CharSequence popup = "You are already on this planet, explorer!";
+                    Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 400);
+                    toast.show();
+                }
+                else {
+                    dest_planet = 8; // This is the numerical representation of the planet
+                    planets.get(dest_planet).setVisibility(view.VISIBLE);
+                    if (game.getFirstMove()) {
+                        game.setFirstDestination(dest_planet);
+                    } else {
+                        game.setDestination(dest_planet);
+                    }
+                    planet_selector.dismiss();
+                }
+            }
+        });
+        choices.add(pluto);
+
+        for(int i = 0; i < choices.size(); i++) {
+            if(game.getPlanets().get(i).visited){
+                choices.get(i).setTextColor(Color.RED);
+            }
+        }
         planet_selector.setCancelable(false);
-        AlertDialog dialog = planet_selector.create();
-        dialog.show();
+        planet_selector.show();
     }
 
     /* Override Methods */

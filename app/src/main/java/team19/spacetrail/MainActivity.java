@@ -117,7 +117,7 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the load game menu
     public void loadGame(View view) {
-        Intent intent = new Intent(this, AsteroidActivity.class);
+        Intent intent = new Intent(this, GameScreenActivity.class);
         startActivity(intent);
         //setContentView(R.layout.activity_load_game);
     }
@@ -152,6 +152,16 @@ public class MainActivity extends Activity {
         String wingAmt = wings.getText().toString();
         String lbAmt = livingBays.getText().toString();
 
+        /* If no resources are input, does not allow user to buy them*/
+        if (fuelAmt.matches("") && foodAmt.matches("") && almAmt.matches("") && engAmt.matches("") && wingAmt.matches("") && lbAmt.matches("")) {
+            CharSequence popup = "You did not enter any valid numbers!";
+            Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.show();
+            return;
+        }
+
+        /* adds default values for resource acquisitions */
         if(fuelAmt.equals("")) {
             fuelAmt = "0";
         }
