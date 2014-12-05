@@ -12,7 +12,7 @@ import java.io.*;
  *
  * @author EvanKirkland
  */
-public class Resources {
+public class Resources implements Serializable{
     private int food, fuel, compound, aluminum;
     private ArrayList<Part> spares;
     private String race_compound;

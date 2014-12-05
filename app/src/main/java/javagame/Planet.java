@@ -5,7 +5,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,9 +20,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by Daniel on 11/30/2014.
  */
-public class Planet
+public class Planet implements Serializable
 {
     private String fileName;
+
+    private Document doc;
 
     public String name, compound1, compound2;
     public double mass, diameter, density, gravity, escapeVelocity, rotationPeriod, lengthOfDay, distanceFromSun, orbitalPeriod, orbitalVelocity, orbitalInclination, axialTilt, meanTemperature, surfacePressure, fuelCost, foodCost, partCost, aluminumCost;
@@ -23,13 +32,23 @@ public class Planet
     public Boolean ringSystem, globalMagneticField, visited;
 
     public Planet(String n) {
+       fileName = ".\\planetData.xml";
+       name = n;
+       visited = false;
+
+       try {
+           DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+           DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+           doc = docBuilder.parse(fileName);
+           loadPlanet();
+       }
+       catch(Exception e) {
+           e.printStackTrace();
+       }
+    }
+
+    public void loadPlanet() {
         try {
-            fileName = ".\\planetData.xml";
-            name = n;
-            visited = false;
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse(fileName);
             NodeList planets = doc.getChildNodes();
             Node planetNode = getNode("resources", planets);
             planets = planetNode.getChildNodes();
@@ -87,7 +106,7 @@ public class Planet
                 partCost = 25;
             }
         }
-        catch (Exception e) {
+            catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -156,5 +175,22 @@ public class Planet
         }
 
         return "";
+    }
+
+    //only for use when loading in Android
+    //gets document from InputStream
+    public void setInputStream(InputStream is){
+        try {
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            doc = docBuilder.parse(is);
+            loadPlanet();
+            is.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    //    System.out.println(distanceFromSun + "\n");
+        doc = null;
     }
 }

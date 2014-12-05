@@ -5,12 +5,13 @@
  */
 package javagame;
 
+import java.io.Serializable;
 import java.util.*;
 /**
  *
  * @author EvanKirkland
  */
-public class Person {
+public class Person implements Serializable {
     String name;
     Boolean gender;         // True is (M), False is (F)
     int condition, age;

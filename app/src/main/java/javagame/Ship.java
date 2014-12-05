@@ -11,7 +11,7 @@ import java.io.*;
  *
  * @author EvanKirkland
  */
-public class Ship {
+public class Ship implements Serializable{
     private int hull;
     private int engine;
     private int wing;

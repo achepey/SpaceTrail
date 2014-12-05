@@ -95,7 +95,7 @@ public class JavaGame {
             test.setFirstDestination(destination - 1);
 
             /* Begin moving, with pace defaulted to medium */
-            test.setPace(2);
+            test.setSpeed(2);
         }
         System.out.print("Type [Enter] to move towards [" + test.getDestination().name + "].\n: ");
         String moving = s.nextLine();
@@ -155,7 +155,7 @@ public class JavaGame {
                         } else if (pace.equals("3")) {
                             paceChoice = 3;
                         }
-                        test.setPace(paceChoice);
+                        test.setSpeed(paceChoice);
                     }
                 }
 
@@ -274,7 +274,7 @@ public class JavaGame {
                             } else if (pace.equals("3")) {
                                 paceChoice = 3;
                             }
-                            test.setPace(paceChoice);
+                            test.setSpeed(paceChoice);
                         }
                     }
 

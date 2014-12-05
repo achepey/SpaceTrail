@@ -5,12 +5,13 @@
  */
 package javagame;
 
+import java.io.Serializable;
 import java.util.*;
 /**
  *
  * @author EvanKirkland
  */
-public class Race {
+public class Race implements Serializable {
     String name;
     String strength;
     String weakness;

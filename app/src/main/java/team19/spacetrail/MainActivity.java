@@ -3,6 +3,9 @@ package team19.spacetrail;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -14,6 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javagame.*;
 
@@ -39,6 +46,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         game = new Game();
+        try {
+            AssetManager assetManager = getAssets();
+            InputStream planetInput = assetManager.open("planetData.xml");
+
+            game.setPlanetInputStream(planetInput);
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         startingMoney = game.getMoney();
     }
 
@@ -151,7 +168,6 @@ public class MainActivity extends Activity {
     }
     // Called when the user hits the send to space button, stores the starting resources
     public void headToSpace(View view) {
-        Intent intent = new Intent(this, GameScreenActivity.class);
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
         int fuelint = Integer.parseInt(fuel.getText().toString());
         game.sellFuel(fuelint);
@@ -173,7 +189,10 @@ public class MainActivity extends Activity {
         game.sellParts(wingsint, "wing");
 
         //Ends MainActivity and starts the GameScreenActivity
-        //intent.putExtra("Game", game);
+        Intent intent = new Intent(this, GameScreenActivity.class);
+        Bundle b = new Bundle();
+        b.putSerializable("Game", game);
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }

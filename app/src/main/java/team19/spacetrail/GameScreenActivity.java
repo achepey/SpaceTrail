@@ -47,15 +47,13 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private int screen_width;
     private Game game;
 
-    /*Helper Fields while Game integration is in progress*/
-    private int food = 1000;
-    private int fuel = 1000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        game = (Game) getIntent().getExtras().getSerializable("Game");
 
         //Sets listener to the screen for tap and long tap
         detector = new GestureDetector(this, this);
@@ -85,10 +83,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         /* Setting fields for Food and Fuel, using temp variables */
         TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
         TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
-        fuelView.setText(Integer.toString(fuel));
-        foodView.setText(Integer.toString(food));
+        fuelView.setText(Integer.toString(game.getResources().getFuel()));
+        foodView.setText(Integer.toString(game.getResources().getFood()));
 
-        //game = (Game) getIntent().getSerializableExtra("Game");
+
        /* if(game.getDestination().getDistanceRemaining() == -1){
             selectPlanet();
         }*/
@@ -102,29 +100,41 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     //Process of moving ship across screen
     public void moveShip(View v) {
         //Random chance to encounter issue
-        double rand = Math.random();
+        /*double rand = Math.random();
         if(rand < .001) {
-            final Intent intent = new Intent(this, ExitActivity.class);
-            AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
+
+        }*/
+
+        //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
+        String moveResult = game.makeMove();
+        if(!moveResult.equals("Successful Movement!")) {
+            final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
             issue_alert.setTitle(R.string.issue_title);
-            issue_alert.setMessage("Your spaceship has been destroyed!");
+            issue_alert.setMessage(moveResult);
+            final GameScreenActivity tempGSA = this;
             issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    finish();
-                    intent.putExtra("activity", "GameScreen");
-                    startActivity(intent);
+                    dialog.cancel();
+                    if(game.isLoser()) {
+                        Intent intent = new Intent(tempGSA, ExitActivity.class);
+                        intent.putExtra("activity", "GameScreen");
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             });
             Dialog d = issue_alert.create();
             d.setCancelable(false);
             d.show();
-        }
 
-        //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
-        TranslateAnimation anim = new TranslateAnimation(0.0f, -30.0f, 0.0f, 0.0f);
+        }
+        double moveScreenPercent = game.getPace()/game.getTotalDistance();
+        double amtToMoveOnScreen = moveScreenPercent * (screen_width - planets.get(dest_planet).getX() - planets.get(dest_planet).getWidth());
+
+        TranslateAnimation anim = new TranslateAnimation(0.0f, (float)(amtToMoveOnScreen * -1), 0.0f, 0.0f);
         if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
             spaceship.startAnimation(anim);
-            spaceship.setX(spaceship.getX()- 30.0f);
+            spaceship.setX(spaceship.getX()- (float)amtToMoveOnScreen);
             if(spaceship.getX() < screen_width/2) {
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship_crop);
                 int width = (int) (spaceship.getWidth() * .95);
@@ -134,8 +144,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             }
             TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
             TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
-            fuelView.setText(Integer.toString(--fuel)); //USE THIS TO SUBTRACT ACTUAL FUEL
-            foodView.setText(Integer.toString(--food)); //USE THIS TO SUBTRACT ACTUAL FOOD
+            fuelView.setText(Integer.toString(game.getResources().getFuel()));
+            foodView.setText(Integer.toString(game.getResources().getFood()));
         }
         //Tells user they arrived at planet, and gives choice of moving to next planet, or stopping on planet to purchase resources
         else{
@@ -148,7 +158,11 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             });
             planet_decider.setNegativeButton(R.string.nextPlanet, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    recreate();
+                //    recreate();
+                    Intent intent = getIntent();
+                    intent.putExtra("Game", game);
+                    startActivity(intent);
+                    finish();
                 }
             });
             planet_decider.setCancelable(false);
@@ -177,7 +191,12 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 dest_planet = which;
                 dialog.dismiss();
                 planets.get(dest_planet).setVisibility(View.VISIBLE);
-                //game.setDestination(dest_planet);
+                if(game.getFirstMove()) {
+                    game.setFirstDestination(dest_planet);
+                }
+                else {
+                    game.setDestination(dest_planet);
+                }
             }
         });
         planet_selector.setCancelable(false);

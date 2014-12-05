@@ -44,7 +44,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         spinner.setAdapter(adapter);
 
         //Get the pace from the game object, THIS IS NOT CORRECT, JUST TEMPORARY
-        //pace = Game.getPace();
+        //pace = Game.getSpeed();
         pace = "Normal";
         int paceInt = adapter.getPosition(pace);
         spinner.setSelection(paceInt);

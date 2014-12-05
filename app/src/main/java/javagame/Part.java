@@ -5,11 +5,13 @@
  */
 package javagame;
 
+import java.io.Serializable;
+
 /**
  *
  * @author EvanKirkland
  */
-public class Part {
+public class Part implements Serializable {
     String name;
     int status;
 

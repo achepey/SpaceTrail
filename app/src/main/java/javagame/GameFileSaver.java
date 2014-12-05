@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -43,7 +44,7 @@ import javax.xml.transform.stream.StreamResult;
     <distance></distance>
  </game>
  */
-public class GameFileSaver
+public class GameFileSaver implements Serializable
 {
     Document doc;
     NodeList gameNodes;
@@ -96,7 +97,7 @@ public class GameFileSaver
             addNode("distance", Double.toString(game.getDistanceRemaining()), gameNode);
             addNode("money", Integer.toString(game.getMoney()), gameNode);
             addNode("previousPlanet", game.getPrevious().name, gameNode);
-            addNode("pace", Integer.toString(game.getPace()), gameNode);
+            addNode("pace", Integer.toString(game.getSpeed()), gameNode);
             addNode("totalDistance", Double.toString(game.getTotalDistance()), gameNode);
 
             String visitedPlanets = "";

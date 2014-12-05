@@ -5,6 +5,7 @@
  */
 package javagame;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.lang.Math;
@@ -36,7 +37,7 @@ public class Game implements Serializable {
         firstMove = true;
         money = 100000;
 
-        /* Create all 9 planets (or are we not using Pluto) */
+        /* Create all 9 planets  */
         Planet Mercury = new Planet("Mercury");
         Planet Venus = new Planet("Venus");
         Planet Earth = new Planet("Earth");
@@ -45,7 +46,7 @@ public class Game implements Serializable {
         Planet Saturn = new Planet("Saturn");
         Planet Uranus = new Planet("Uranus");
         Planet Neptune = new Planet("Neptune");
-//        Planet Pluto = new Planet("Pluto");
+        Planet Pluto = new Planet("Pluto");
 
         planets.add(Mercury);
         planets.add(Venus);
@@ -55,13 +56,13 @@ public class Game implements Serializable {
         planets.add(Saturn);
         planets.add(Uranus);
         planets.add(Neptune);
-//        planets.add(Pluto);
+        planets.add(Pluto);
 
         ship = new Ship();
         resources = new Resources();
         destination = new Planet("Temp");       //used as default destination until a planet is given
         previous = new Planet("Temp");
-        //race = new Race();
+        race = new Race();
         gameOver = false;
         arrivedAtPlanet = false;
     }
@@ -161,6 +162,7 @@ public class Game implements Serializable {
         distanceRemaining -= pace;                       // reduce distanceRemaining remaining
         crewAttrition();                        // decide how much health each crew member loses
         resourceAttrition();                    // decide how many resources the crew loses
+//        System.out.println("Destination: " + destination.name + " Distance Remaining: " + distanceRemaining + " Total Distance: " + totalDistance +" Pace: " + pace);
         String issue = getIssue();
         if(distanceRemaining <= 0) {
             arrivedAtPlanet = true;
@@ -293,6 +295,8 @@ public class Game implements Serializable {
         destination = planets.get(planetIndex);
         distanceRemaining = destination.distanceFromSun;
         totalDistance = destination.distanceFromSun;
+        setSpeed(getSpeed());
+        System.out.println("Destination: " + destination.name + " Distance Remaining: " + distanceRemaining + " Total Distance: " + totalDistance +" Pace: " + pace + "\n");
     }
 
     //Sets the destination to the correct planet from a given String - calls the index method
@@ -348,6 +352,7 @@ public class Game implements Serializable {
         destination = planets.get(planetIndex);
         distanceRemaining = (int)((destination.distanceFromSun) * hypotenuse);
         totalDistance = distanceRemaining;
+        setSpeed(getSpeed());
     }
 
     //Sets the previous planet to the correct planet from a given String - calls the index method
@@ -462,7 +467,7 @@ public class Game implements Serializable {
     //Returns a string saying the issue and will also set the gameOver field if the crew is killed
     //Semi-random - incorporates random values and planet data to determine if issue will happen
     private String getIssue() {
-        String issue = "Successful movement!";
+        String issue = "Successful Movement!";
 
         //resource and ship issues - these will all be game ending and have no random elements
         boolean resourceIssue = false;
@@ -709,7 +714,7 @@ public class Game implements Serializable {
     }
 
     //sets the pace to either fast(1), medium(2) or slow(3)
-    public void setPace(int p) {
+    public void setSpeed(int p) {
         switch(p) {
             case 1:             // 'fast' is 12 taps
                 fast = true;
@@ -733,7 +738,7 @@ public class Game implements Serializable {
     }
 
     //returns an int representing the pace for fast(1), medium(@) or slow(3)
-    public int getPace() {      //returns 1 for fast, 2 for medium and 3 for slow
+    public int getSpeed() {      //returns 1 for fast, 2 for medium and 3 for slow
         if(fast) {
             return 1;
         }
@@ -741,6 +746,11 @@ public class Game implements Serializable {
             return 2;
         }
         return 3;
+    }
+
+    //returns the amount that the spaceship will move in one turn
+    public double getPace(){
+        return pace;
     }
 
     //returns boolean for if player has arrived at a planet
@@ -851,5 +861,28 @@ public class Game implements Serializable {
         System.out.println("[Wing] : " + ship.getWingStatus());
         System.out.println("[Living Bay] : " + ship.getLivingBayStatus());
 
+    }
+
+    //returns if it is first move of game
+    public boolean getFirstMove() {
+        return firstMove;
+    }
+
+    public void setPlanetInputStream(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder out = new StringBuilder();
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                out.append(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < planets.size(); ++i) {
+            planets.get(i).setInputStream(new ByteArrayInputStream(out.toString().getBytes(StandardCharsets.UTF_8)));
+        }
     }
 }

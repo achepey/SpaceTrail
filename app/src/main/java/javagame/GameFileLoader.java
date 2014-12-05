@@ -5,6 +5,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.Serializable;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -36,7 +38,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
  </game>
 
  */
-public class GameFileLoader
+public class GameFileLoader implements Serializable
 {
     Document doc;
     NodeList game_nodes;
@@ -72,7 +74,7 @@ public class GameFileLoader
         String previousPlanet = getNodeValue("previousPlanet", game_nodes);
         game.setPrevious(previousPlanet);
         int pace = Integer.parseInt(getNodeValue("pace", game_nodes));
-        game.setPace(pace);
+        game.setSpeed(pace);
         game.setTotalDistance(Double.parseDouble(getNodeValue("totalDistance", game_nodes)));
 
         String visitedPlanetsString = getNodeValue("visitedPlanets", game_nodes);
