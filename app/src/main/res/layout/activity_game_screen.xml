@@ -145,8 +145,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/gameScreenFood"
         android:layout_toRightOf="@+id/foodText"
-        android:layout_toEndOf="@+id/fuelText"
         android:textSize="20sp"
-        android:paddingRight="100dp" />
+        android:layout_alignTop="@+id/foodText"
+        android:layout_alignRight="@+id/spaceship"
+        android:layout_alignEnd="@+id/spaceship" />
 
 </RelativeLayout>

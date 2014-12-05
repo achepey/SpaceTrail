@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,11 +22,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+
+import javagame.Game;
 
 
 public class PlanetActivity extends Activity {
     /* Instance Fields */
+    private Game game;
     private String planet_name;
     private ArrayList<ImageView> planets = new ArrayList<ImageView>();
 
@@ -55,7 +61,56 @@ public class PlanetActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        //Allows for changing price with spinner
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            private TextView priceText = (TextView) findViewById(R.id.priceVariable);
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch((int)id){
+                    case 0:
+                        priceText.setText(Double.toString(game.getDestination().fuelCost));
+                        break;
+                    case 1:
+                        priceText.setText(Double.toString(game.getDestination().foodCost));
+                        break;
+                    case 2:
+                        priceText.setText(Double.toString(game.getDestination().aluminumCost));
+                        break;
+                    default:
+                        priceText.setText(Double.toString(game.getDestination().partCost));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                priceText.setText("");
+            }
+        });
+
+
+        Intent intent = getIntent();
+        game = (Game) getIntent().getExtras().getSerializable("Game");
+
+        //Setting fields for resources
+        TextView money = (TextView) findViewById(R.id.moneyVariable);
+        TextView fuel = (TextView) findViewById(R.id.fuelVariable);
+        TextView food = (TextView) findViewById(R.id.foodVariable);
+        TextView aluminum = (TextView) findViewById(R.id.aluminumVariable);
+        TextView sprEngines = (TextView) findViewById(R.id.engineVariable);
+        TextView sprWings = (TextView) findViewById(R.id.wingVariable);
+        TextView sprLivBay = (TextView) findViewById(R.id.livingBayVariable);
+
+        money.setText(Integer.toString(game.getMoney()));
+        fuel.setText(Integer.toString(game.getResources().getFuel()));
+        food.setText(Integer.toString(game.getResources().getFood()));
+        aluminum.setText(Integer.toString(game.getResources().getAluminum()));
+        sprEngines.setText(Integer.toString(game.getResources().getSpareEngines()));
+        sprWings.setText(Integer.toString(game.getResources().getSpareWings()));
+        sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
+
+        System.out.println("Fuel: " + Integer.toString(game.getResources().getFuel()) + " Spare Wings: " + game.getResources().getSpareWings());
         setPlanetInfo();
 
     }
@@ -64,9 +119,7 @@ public class PlanetActivity extends Activity {
 
     //Gets info from previous activity, and sets the planet info screen appropriately
     public void setPlanetInfo() {
-        Intent intent = getIntent();
-        planet_name = intent.getStringExtra(GameScreenActivity.PLANET_NAME);
-        int planet_name_as_int = Integer.parseInt(planet_name);
+        int planet_name_as_int = game.getDestinationIndex();
         planet_name = GameScreenActivity.PLANETS_ARRAY[planet_name_as_int];
         TextView p_name = (TextView) findViewById(R.id.planetName);
         p_name.setText(planet_name);
@@ -92,7 +145,131 @@ public class PlanetActivity extends Activity {
 
         String prompt = spin.getSelectedItem().toString();
         int num = Integer.parseInt(stringRscText);
-        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
+
+        if(prompt.equals("Fuel")) {
+            if(game.sellFuel(num)) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView fuel = (TextView) findViewById(R.id.fuelVariable);
+                fuel.setText(Integer.toString(game.getResources().getFuel()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+        else if(prompt.equals("Food")){
+            if(game.sellFood(num)) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView food = (TextView) findViewById(R.id.foodVariable);
+                food.setText(Integer.toString(game.getResources().getFood()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+        else if(prompt.equals("Aluminum")){
+            if(game.sellAluminum(num)) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView aluminum = (TextView) findViewById(R.id.aluminumVariable);
+                aluminum.setText(Integer.toString(game.getResources().getAluminum()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+        else if(prompt.equals("Spare Engines")){
+            if(game.sellParts(num, "engines")) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView engines = (TextView) findViewById(R.id.engineVariable);
+                engines.setText(Integer.toString(game.getResources().getSpareEngines()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+        else if(prompt.equals("Spare Wings")){
+            if(game.sellParts(num, "wing")) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView wing = (TextView) findViewById(R.id.wingVariable);
+                wing.setText(Integer.toString(game.getResources().getSpareWings()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+        else{
+            if(game.sellParts(num,"livingBay")) {
+                Context context = getApplicationContext();
+                CharSequence popup = "Resources Acquired!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+                TextView livingBay = (TextView) findViewById(R.id.livingBayVariable);
+                livingBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
+            }
+            else{
+                Context context = getApplicationContext();
+                CharSequence popup = "Not Enough Funds!";
+                Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.BOTTOM, 0, 350);
+                toast.show();
+                rscText.setText("");
+            }
+        }
+
+
+
+        /*if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
             Intent intent = new Intent(this, ExitActivity.class);
             finish();
             intent.putExtra("activity", "Planet");
@@ -105,7 +282,7 @@ public class PlanetActivity extends Activity {
             toast.setGravity(Gravity.BOTTOM, 0, 350);
             toast.show();
             rscText.setText("");
-        }
+        }*/
 
     }
 

@@ -124,7 +124,40 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the Instructions menu
     public void loadInstructions(View view) {
-        setContentView(R.layout.instruction_screen);
+        Game testGame = new Game();
+        testGame.setMoney(1000000);
+        testGame.getResources().setCompound(10000);
+        testGame.getResources().setAluminum(10000);
+        testGame.getResources().setFood(10000);
+        testGame.getResources().setFuel(10000);
+        testGame.getResources().addSpare(new Part("engine",100));
+        testGame.getResources().addSpare(new Part("wing",100));
+        testGame.getResources().addSpare(new Part("livingBay",100));
+        testGame.addCrew("cap",true);
+        testGame.addCrew("1",false);
+        testGame.addCrew("2",false);
+        testGame.addCrew("3",false);
+        testGame.addCrew("4",false);
+
+        try {
+            AssetManager assetManager = getAssets();
+            InputStream planetInput = assetManager.open("planetData.xml");
+
+            testGame.setPlanetInputStream(planetInput);
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+        Intent intent = new Intent(this, GameScreenActivity.class);
+        Bundle b = new Bundle();
+        b.putSerializable("Game", testGame);
+        intent.putExtras(b);
+        startActivity(intent);
+        finish();
+    //    setContentView(R.layout.instruction_screen);
     }
 
     //Does the function of buying the original resources.

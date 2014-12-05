@@ -885,6 +885,10 @@ public class Game implements Serializable {
         }
     }
 
+    public int getDestinationIndex() {
+        return planets.indexOf(destination);
+    }
+
     public double distanceToPlanet(Planet p) {
         if(firstMove){
             return(p.distanceFromSun);

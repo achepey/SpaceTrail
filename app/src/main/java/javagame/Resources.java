@@ -67,6 +67,33 @@ public class Resources implements Serializable{
     public ArrayList<Part> getSpares() {
         return spares;
     }
+    public int getSpareEngines() {
+        int numSpares = 0;
+        for(int i = 0; i < spares.size(); ++i) {
+            if(spares.get(i).getName().equals("engine")) {
+                ++numSpares;
+            }
+        }
+        return numSpares;
+    }
+    public int getSpareWings() {
+        int numSpares = 0;
+        for(int i = 0; i < spares.size(); ++i) {
+            if(spares.get(i).getName().equals("wing")) {
+                ++numSpares;
+            }
+        }
+        return numSpares;
+    }
+    public int getSpareLivingBays() {
+        int numSpares = 0;
+        for(int i = 0; i < spares.size(); ++i) {
+            if(spares.get(i).getName().equals("livingBay")) {
+                ++numSpares;
+            }
+        }
+        return numSpares;
+    }
     /* Increment Functions */
     /* For bool value, T is ADD, F is SUB */
 

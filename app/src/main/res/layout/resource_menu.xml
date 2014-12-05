@@ -1,276 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:useDefaultMargins="true"
-    android:id="@+id/resourceMenu">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="fill_parent"
+    android:layout_width="match_parent">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:useDefaultMargins="true"
+            android:id="@+id/resourceMenu">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/money"
-        android:textStyle="bold"
-        android:id="@+id/moneyString"
-        android:paddingLeft="15dp"
-        android:layout_row="0"
-        android:layout_column="0" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/money"
+                android:textStyle="bold"
+                android:id="@+id/moneyString"
+                android:paddingLeft="15dp"
+                android:layout_row="0"
+                android:layout_column="0" />
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/moneyVariable"
-        android:text="$$$$$"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_row="0"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/moneyVariable"
+                android:text="$$$$$"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_row="0"
+                android:layout_column="1" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/fuelTextField"
-        android:layout_row="1"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/fuelTextField"
+                android:layout_row="1"
+                android:layout_column="0" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/foodTextField"
-        android:layout_row="2"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/foodTextField"
+                android:layout_row="2"
+                android:layout_column="0" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/aluminumTextField"
-        android:layout_row="3"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/aluminumTextField"
+                android:layout_row="3"
+                android:layout_column="0" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/engineTextField"
-        android:layout_row="4"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/engineTextField"
+                android:layout_row="4"
+                android:layout_column="0" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/wingsTextField"
-        android:layout_row="5"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/wingsTextField"
+                android:layout_row="5"
+                android:layout_column="0" />
 
-    <EditText
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/livingBayTextField"
-        android:layout_row="6"
-        android:layout_column="0" />
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/livingBayTextField"
+                android:layout_row="6"
+                android:layout_column="0" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/fuel"
-        android:id="@+id/fuelPrice"
-        android:paddingLeft="15dp"
-        android:layout_row="1"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/fuel"
+                android:id="@+id/fuelPrice"
+                android:paddingLeft="15dp"
+                android:layout_row="1"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/food"
-        android:id="@+id/foodPrice"
-        android:paddingLeft="15dp"
-        android:layout_row="2"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/food"
+                android:id="@+id/foodPrice"
+                android:paddingLeft="15dp"
+                android:layout_row="2"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/aluminumPart"
-        android:id="@+id/aluminumPrice"
-        android:paddingLeft="15dp"
-        android:layout_row="3"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/aluminumPart"
+                android:id="@+id/aluminumPrice"
+                android:paddingLeft="15dp"
+                android:layout_row="3"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enginePart"
-        android:id="@+id/enginePrice"
-        android:paddingLeft="15dp"
-        android:layout_row="4"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/enginePart"
+                android:id="@+id/enginePrice"
+                android:paddingLeft="15dp"
+                android:layout_row="4"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/wings"
-        android:id="@+id/wingPrice"
-        android:paddingLeft="15dp"
-        android:layout_row="5"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/wings"
+                android:id="@+id/wingPrice"
+                android:paddingLeft="15dp"
+                android:layout_row="5"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/livingBay"
-        android:id="@+id/livingBayPrice"
-        android:paddingLeft="15dp"
-        android:layout_row="6"
-        android:layout_column="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/livingBay"
+                android:id="@+id/livingBayPrice"
+                android:paddingLeft="15dp"
+                android:layout_row="6"
+                android:layout_column="1" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/fuelQuantity"
-        android:clickable="false"
-        android:layout_row="1"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/fuelQuantity"
+                android:clickable="false"
+                android:layout_row="1"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/foodQuantity"
-        android:clickable="false"
-        android:layout_row="2"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/foodQuantity"
+                android:clickable="false"
+                android:layout_row="2"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/aluminumQuantity"
-        android:clickable="false"
-        android:layout_row="3"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/aluminumQuantity"
+                android:clickable="false"
+                android:layout_row="3"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/engineQuantity"
-        android:clickable="false"
-        android:layout_row="4"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/engineQuantity"
+                android:clickable="false"
+                android:layout_row="4"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/wingQuantity"
-        android:clickable="false"
-        android:layout_row="5"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/wingQuantity"
+                android:clickable="false"
+                android:layout_row="5"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="0"
-        android:id="@+id/livingBayQuantity"
-        android:clickable="false"
-        android:layout_row="6"
-        android:layout_column="2" />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0"
+                android:id="@+id/livingBayQuantity"
+                android:clickable="false"
+                android:layout_row="6"
+                android:layout_column="2" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_fuel"
-        android:id="@+id/fuelAmtLabel"
-        android:layout_row="1"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_fuel"
+                android:id="@+id/fuelAmtLabel"
+                android:layout_row="1"
+                android:layout_column="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_food"
-        android:id="@+id/foodAmtLabel"
-        android:layout_row="2"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_food"
+                android:id="@+id/foodAmtLabel"
+                android:layout_row="2"
+                android:layout_column="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_AlumPrts"
-        android:id="@+id/aluminumAmtLabel"
-        android:layout_row="3"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_AlumPrts"
+                android:id="@+id/aluminumAmtLabel"
+                android:layout_row="3"
+                android:layout_column="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_EngPrts"
-        android:id="@+id/engineAmtLabel"
-        android:layout_row="4"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_EngPrts"
+                android:id="@+id/engineAmtLabel"
+                android:layout_row="4"
+                android:layout_column="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_SprWings"
-        android:id="@+id/wingAmtLabel"
-        android:layout_row="5"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_SprWings"
+                android:id="@+id/wingAmtLabel"
+                android:layout_row="5"
+                android:layout_column="3" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Resources_SprLivingBays"
-        android:id="@+id/textView4"
-        android:layout_row="6"
-        android:layout_column="3" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Resources_SprLivingBays"
+                android:id="@+id/livingBayAmtLabel"
+                android:layout_row="6"
+                android:layout_column="3" />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:text="@string/buy"
-        android:id="@+id/buyButton"
-        android:onClick="buyStartingResources"
-        android:layout_row="0"
-        android:layout_column="2"/>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="@string/buy"
+                android:id="@+id/buyButton"
+                android:onClick="buyStartingResources"
+                android:layout_row="0"
+                android:layout_column="2"/>
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/headToSpace"
-        android:id="@+id/headToSpace"
-        android:onClick="headToSpace"
-        android:layout_row="0"
-        android:layout_column="3" />
-
-</GridLayout>
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/headToSpace"
+                android:id="@+id/headToSpace"
+                android:onClick="headToSpace"
+                android:layout_row="0"
+                android:layout_column="3" />
+        </GridLayout>
+    </ScrollView>
+</LinearLayout>

@@ -56,13 +56,14 @@
     <string name="title_activity_planet">PlanetActivity</string>
     <string name="PlanetMenuWelcome">Welcome to</string>
     <string name="nextPlanet">Head to\nNext Planet!</string>
-
+    <string name="cost">Price: $</string>
     <string-array name="resources_array">
         <item>Fuel</item>
         <item>Food</item>
-        <item>Engine Parts</item>
-        <item>Aluminum Parts</item>
+        <item>Aluminum</item>
+        <item>Spare Engines</item>
         <item>Spare Wings</item>
+        <item>Spare Living Bays</item>
     </string-array>
     <string-array name="pace_array">
         <item>Leisurely</item>
