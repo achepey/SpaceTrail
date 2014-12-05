@@ -86,7 +86,7 @@ public class JavaGame {
 
             /* Set first destination */
             System.out.println("What planet would you like to travel to first?");
-            System.out.print("1. [Mercury]\n2. [Venus]\n3. [Earth]\n4. [Mars]\n5. [Jupiter]\n6. [Saturn]\n7. [Uranus]\n8. [Neptune]\n9. [Pluto]\n: ");
+            System.out.print("1. [Mercury] (Helium, Oxygen)\n2. [Venus]   (Nitrogen, Carbon Dioxide)\n3. [Earth]   (Nitrogen, Oxygen)\n4. [Mars]    (Nitrogen, Carbon Dioxide)\n5. [Jupiter] (Helium, Hydrogen)\n6. [Saturn]  (Helium, Hydrogen)\n7. [Uranus]  (Helium, Methane)\n8. [Neptune] (Helium, Methane)\n9. [Pluto]   (Helium, Methane)\n: ");
             int destination = s.nextInt();
             while (destination > 9 || destination < 1) {
                 System.out.print("Incorrect choice. Choose a number between 1 and 9.\n: ");
@@ -208,7 +208,7 @@ public class JavaGame {
 
             /* Set next destination */
             System.out.println("What planet would you like to travel to now?");
-            System.out.print("1. [Mercury]\n2. [Venus]\n3. [Earth]\n4. [Mars]\n5. [Jupiter]\n6. [Saturn]\n7. [Uranus]\n8. [Neptune]\n9. [Pluto]\n: ");
+            System.out.print("1. [Mercury] (Helium, Oxygen)\n2. [Venus]   (Nitrogen, Carbon Dioxide)\n3. [Earth]   (Nitrogen, Oxygen)\n4. [Mars]    (Nitrogen, Carbon Dioxide)\n5. [Jupiter] (Helium, Hydrogen)\n6. [Saturn]  (Helium, Hydrogen)\n7. [Uranus]  (Helium, Methane)\n8. [Neptune] (Helium, Methane)\n9. [Pluto]   (Helium, Methane)\n: ");
             int destination = s.nextInt();
             while (destination > 9 || destination < 1) {
                 System.out.print("Incorrect choice. Choose a number between 1 and 9.\n: ");
