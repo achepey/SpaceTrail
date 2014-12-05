@@ -145,15 +145,41 @@ public class MainActivity extends Activity {
         TextView wingsText = (TextView) findViewById(R.id.wingQuantity);
         TextView livingBayText = (TextView) findViewById(R.id.livingBayQuantity);
 
-        if(Integer.parseInt(fuel.getText().toString()) * FUEL_COST + Integer.parseInt(food.getText().toString())*FOOD_COST + Integer.parseInt(engine.getText().toString())*ENGINE_COST+Integer.parseInt(aluminum.getText().toString())*ALUMINUM_COST+Integer.parseInt(wings.getText().toString())*WING_COST+Integer.parseInt(livingBays.getText().toString()) * LIVING_BAY_COST - startingMoney < 0) {
-            fuelText.setText(Integer.toString(Integer.parseInt(fuelText.getText().toString()) + Integer.parseInt(fuel.getText().toString())));
-            foodText.setText(Integer.toString(Integer.parseInt(foodText.getText().toString()) + Integer.parseInt(food.getText().toString())));
-            engineText.setText(Integer.toString(Integer.parseInt(engineText.getText().toString()) + Integer.parseInt(engine.getText().toString())));
-            aluminumText.setText(Integer.toString(Integer.parseInt(aluminumText.getText().toString()) + Integer.parseInt(aluminum.getText().toString())));
-            wingsText.setText(Integer.toString(Integer.parseInt(wingsText.getText().toString()) + Integer.parseInt(wings.getText().toString())));
-            livingBayText.setText(Integer.toString(Integer.parseInt(livingBayText.getText().toString()) + Integer.parseInt(livingBays.getText().toString())));
+        String fuelAmt = fuel.getText().toString();
+        String foodAmt = food.getText().toString();
+        String almAmt = aluminum.getText().toString();
+        String engAmt = engine.getText().toString();
+        String wingAmt = wings.getText().toString();
+        String lbAmt = livingBays.getText().toString();
 
-            startingMoney -= Integer.parseInt(fuel.getText().toString()) * FUEL_COST + Integer.parseInt(food.getText().toString())*FOOD_COST + Integer.parseInt(engine.getText().toString())*ENGINE_COST+Integer.parseInt(aluminum.getText().toString())*ALUMINUM_COST+Integer.parseInt(wings.getText().toString())*WING_COST + Integer.parseInt(livingBays.getText().toString()) * LIVING_BAY_COST;
+        if(fuelAmt.equals("")) {
+            fuelAmt = "0";
+        }
+        if(foodAmt.equals("")) {
+            foodAmt = "0";
+        }
+        if(almAmt.equals("")) {
+            almAmt = "0";
+        }
+        if(engAmt.equals("")) {
+            engAmt = "0";
+        }
+        if(wingAmt.equals("")) {
+            wingAmt = "0";
+        }
+        if(lbAmt.equals("")) {
+            lbAmt = "0";
+        }
+
+        if(Integer.parseInt(fuelAmt) * FUEL_COST + Integer.parseInt(foodAmt)*FOOD_COST + Integer.parseInt(engAmt)*ENGINE_COST+Integer.parseInt(almAmt)*ALUMINUM_COST+Integer.parseInt(wingAmt)*WING_COST+Integer.parseInt(lbAmt) * LIVING_BAY_COST - startingMoney < 0) {
+            fuelText.setText(Integer.toString(Integer.parseInt(fuelText.getText().toString()) + Integer.parseInt(fuelAmt)));
+            foodText.setText(Integer.toString(Integer.parseInt(foodText.getText().toString()) + Integer.parseInt(foodAmt)));
+            engineText.setText(Integer.toString(Integer.parseInt(engineText.getText().toString()) + Integer.parseInt(engAmt)));
+            aluminumText.setText(Integer.toString(Integer.parseInt(aluminumText.getText().toString()) + Integer.parseInt(almAmt)));
+            wingsText.setText(Integer.toString(Integer.parseInt(wingsText.getText().toString()) + Integer.parseInt(wingAmt)));
+            livingBayText.setText(Integer.toString(Integer.parseInt(livingBayText.getText().toString()) + Integer.parseInt(lbAmt)));
+
+            startingMoney -= Integer.parseInt(fuelAmt) * FUEL_COST + Integer.parseInt(foodAmt)*FOOD_COST + Integer.parseInt(engAmt)*ENGINE_COST+Integer.parseInt(almAmt)*ALUMINUM_COST+Integer.parseInt(wingAmt)*WING_COST + Integer.parseInt(lbAmt) * LIVING_BAY_COST;
 
             //Creates pop-up letting user know the resources were purchased correctly
             Context context = getApplicationContext();
@@ -173,12 +199,12 @@ public class MainActivity extends Activity {
 
 
         //Resets the fields to be blank values
-        fuel.setText("0");
-        food.setText("0");
-        engine.setText("0");
-        aluminum.setText("0");
-        wings.setText("0");
-        livingBays.setText("0");
+        fuel.setText("");
+        food.setText("");
+        engine.setText("");
+        aluminum.setText("");
+        wings.setText("");
+        livingBays.setText("");
         TextView moneyText = (TextView) findViewById(R.id.moneyVariable);
         moneyText.setText(Integer.toString(startingMoney));
     }

@@ -296,7 +296,6 @@ public class Game implements Serializable {
         distanceRemaining = destination.distanceFromSun;
         totalDistance = destination.distanceFromSun;
         setSpeed(getSpeed());
-        System.out.println("Destination: " + destination.name + " Distance Remaining: " + distanceRemaining + " Total Distance: " + totalDistance +" Pace: " + pace + "\n");
     }
 
     //Sets the destination to the correct planet from a given String - calls the index method

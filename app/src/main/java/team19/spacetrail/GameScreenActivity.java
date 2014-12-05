@@ -129,16 +129,16 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
         }
         double moveScreenPercent = game.getPace()/game.getTotalDistance();
-        double amtToMoveOnScreen = moveScreenPercent * (screen_width - planets.get(dest_planet).getX() - planets.get(dest_planet).getWidth());
+        double amtToMoveOnScreen = moveScreenPercent * (screen_width - planets.get(dest_planet).getX() - planets.get(dest_planet).getWidth()- spaceship.getWidth()) + 10;
 
         TranslateAnimation anim = new TranslateAnimation(0.0f, (float)(amtToMoveOnScreen * -1), 0.0f, 0.0f);
-        if(spaceship.getX() >= planets.get(dest_planet).getX() + planets.get(dest_planet).getWidth()) {
+        if(!game.getArrivedAtPlanet()) {
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX()- (float)amtToMoveOnScreen);
             if(spaceship.getX() < screen_width/2) {
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship_crop);
-                int width = (int) (spaceship.getWidth() * .95);
-                int height = (int) (spaceship.getHeight() * .95);
+                int width = (int) (spaceship.getWidth() * .90);
+                int height = (int) (spaceship.getHeight() * .90);
                 Bitmap rbmp = Bitmap.createScaledBitmap(bmp, width, height, true);
                 spaceship.setImageBitmap(rbmp);
             }
