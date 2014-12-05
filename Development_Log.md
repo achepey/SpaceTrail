@@ -140,5 +140,15 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   -Andrew worked on AsteroidActivity
   -Robert and Evan completed game testing
 
+##### 12/2/2014
+-Worked in lab to finish submission and assigned jobs for final submission (50 minutes)
+##### 12/3/2014
 
+##### 12/4/2014
+-Worked in lab on individual parts for submission (50 minutes)
+-Robert: 5 hours
+  -Integrated MainActivity and began to integrate GameScreenActivity
+##### 12/5/2014
+-Robert: 5 hours
+  -Finished integrating game into GameScreenActivity and completely integrated PlanetActivity
 
