@@ -177,6 +177,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 public void onClick(DialogInterface dialog, int id) {
                     //    recreate();
                     Intent intent = getIntent();
+                    game.setArrivedAtPlanet(false);
                     intent.putExtra("Game", game);
                     startActivity(intent);
                     finish();

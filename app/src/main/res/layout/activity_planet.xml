@@ -24,7 +24,7 @@
             android:id="@+id/gridLayout"
             android:columnCount="2"
             android:minWidth="@dimen/loadGame_ColSize"
-            android:rowCount="6" >
+            android:rowCount="6">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +81,8 @@
                 android:id="@+id/fuelVariable"
                 android:layout_row="0"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,7 +90,8 @@
                 android:id="@+id/foodVariable"
                 android:layout_row="1"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,7 +99,8 @@
                 android:id="@+id/aluminumVariable"
                 android:layout_row="2"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,7 +108,8 @@
                 android:id="@+id/engineVariable"
                 android:layout_row="3"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +117,8 @@
                 android:id="@+id/wingVariable"
                 android:layout_row="4"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +126,8 @@
                 android:id="@+id/livingBayVariable"
                 android:layout_row="5"
                 android:layout_column="1"
-                android:minWidth="@dimen/loadGame_SubMenu_ColSize"/>
+                android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                android:paddingLeft="10dp"/>
         </GridLayout>
     </HorizontalScrollView>
 

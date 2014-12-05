@@ -207,7 +207,7 @@ public class PlanetActivity extends Activity {
             }
         }
         else if(prompt.equals("Spare Engines")){
-            if(game.sellParts(num, "engines")) {
+            if(game.sellParts(num, "engine")) {
                 Context context = getApplicationContext();
                 CharSequence popup = "Resources Acquired!";
                 Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
@@ -266,7 +266,8 @@ public class PlanetActivity extends Activity {
                 rscText.setText("");
             }
         }
-
+        TextView money = (TextView) findViewById(R.id.moneyVariable);
+        money.setText(Integer.toString(game.getMoney()));
 
 
         /*if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
@@ -289,6 +290,10 @@ public class PlanetActivity extends Activity {
     //called when user wants to travel to next planet, ends this activity and starts another Game Screen Activity
     public void nextPlanet(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
+        Bundle b = new Bundle();
+        game.setArrivedAtPlanet(false);
+        b.putSerializable("Game", game);
+        intent.putExtras(b);
         finish();
         startActivity(intent);
     }
