@@ -1,7 +1,10 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -85,6 +88,19 @@ public class MainActivity extends Activity {
             game.addCrew(crew2Name, false);
             game.addCrew(crew3Name, false);
             game.addCrew(crew4Name, false);
+
+            final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
+            issue_alert.setTitle(R.string.race_info_title);
+            issue_alert.setMessage("Your crew race is the " + game.getRace().getName() + ". The compound you need to survive is " + game.getRace().getStrength() + " and the compound that is toxic to you is " + game.getRace().getWeakness() + ".");
+            issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+            Dialog d = issue_alert.create();
+            d.setCancelable(false);
+            d.show();
+
             setContentView(R.layout.resource_menu);
             TextView moneyText = (TextView) findViewById(R.id.moneyVariable);
             moneyText.setText(Integer.toString(startingMoney));

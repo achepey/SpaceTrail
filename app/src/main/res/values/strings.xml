@@ -52,6 +52,7 @@
     <string name="instruction_text">Hello explorer!\n\nYou have traveled thousands of lightyears to explore other galaxies and have just entered a new solar system. This solar system has eight different planets, each with their own qualities and distinctions. To gather information about each of these planets, you will need to travel to each one and conduct research.\n\nAs an experienced space explorer like yourself would know, there are many challenges and difficulties that can arise with exploring unknown galaxies. Be cautious in all of your actions so you can make it back to your home planet with all your new data! Make sure to conserve your resources and make sure to not stay too long on planets that have atmospheres that are toxic to your race!\n\nWhen you press the start button, you will be able to purchase the resources you will need for your journey through the new solar system. You will be able to buy food, fuel, and spare parts. You will be able to purchase additional supplies on your journey on different planets, however the costs will change depending on the planet you are currently visiting.\n\nSome helpful tips! Tap the screen to move the spaceship toward the planet when on the travel page. Press and hold on the screen when in the travel page to pull up a page with all of your supplies and resources\n\nGood luck and safe travels!</string>
     <string name="planet_select">Which planet do you want to travel to?</string>
     <string name="issue_title">Alert! Alert! Alert!</string>
+    <string name="race_info_title">Crew Information</string>
     <string name="title_activity_planet">PlanetActivity</string>
     <string name="PlanetMenuWelcome">Welcome to</string>
     <string name="nextPlanet">Head to\nNext Planet!</string>
@@ -70,7 +71,6 @@
     </string-array>
 
     <string name="title_activity_exit">ExitActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="play_again">Play Again?</string>
     <string name="title_activity_asteroid">AsteroidActivity</string>
     <string name="MenuBackInfo">Hold down the screen or press the back button to return to the game</string>
