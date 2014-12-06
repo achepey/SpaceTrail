@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/d"
+    android:tag="new_game_menu"
     android:paddingBottom="20dp"
     android:paddingLeft="20dp"
     android:paddingTop="10dp">
@@ -150,5 +151,14 @@
         android:layout_alignRight="@+id/OtherMembersString"
         android:layout_alignEnd="@+id/OtherMembersString"
         android:paddingTop="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_generate"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/fourOtherName"
+        android:layout_alignStart="@+id/fourOtherName" />
 
 </RelativeLayout>

@@ -39,6 +39,14 @@ public class MainActivity extends Activity {
 
     private Game game;
     private int startingMoney;
+    protected String currentView;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        View view = getLayoutInflater().inflate(layoutResID, null);
+        currentView = (String)view.getTag();
+        super.setContentView(view);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +125,7 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the load game menu
     public void loadGame(View view) {
-        Intent intent = new Intent(this, GameScreenActivity.class);
-        startActivity(intent);
-        //setContentView(R.layout.activity_load_game);
+        setContentView(R.layout.activity_load_game);
     }
 
     //Sets Layout to the Instructions menu
@@ -292,22 +298,29 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.promptBack);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                setContentView(R.layout.activity_main);
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
-            }
-        });
-        builder.setCancelable(false);
-        builder.create().show();
+        if (!currentView.equals("main")) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.promptBack);
+            builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    setContentView(R.layout.activity_main);
+                }
+            });
+            builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+            builder.setCancelable(false);
+            AlertDialog dialog = builder.show();
+            TextView messageText = (TextView)dialog.findViewById(android.R.id.message);
+            messageText.setGravity(Gravity.CENTER);
+            dialog.show();
+        }
+        else{
+            super.onBackPressed();
+        }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

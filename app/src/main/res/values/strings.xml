@@ -7,7 +7,7 @@
     <string name="new_game">New Game</string>
     <string name="load_game">Load Game</string>
     <string name="instructions">Instructions</string>
-    <string name="newGameMenu">WELCOME TO THE NEW GAME MENU</string>
+    <string name="newGameMenu">Please select your explorer\'s names!</string>
     <string name="capName">Spaceship Captain\'s Name:</string>
     <string name="name">Name</string>
     <string name="buyResources">Buy Resources!</string>
@@ -84,5 +84,6 @@
     <string name="People_Name2">Name2</string>
     <string name="People_Name3">Name3</string>
     <string name="People_Name4">Name4</string>
+    <string name="auto_generate">Auto Generate!</string>
 
 </resources>
