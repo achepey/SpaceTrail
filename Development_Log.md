@@ -142,13 +142,29 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
 
 ##### 12/2/2014
 -Worked in lab to finish submission and assigned jobs for final submission (50 minutes)
+
 ##### 12/3/2014
+-Andrew: 3 hours
+  -Implemented different asteroid animation style
+  -Minor glitch with implementing post animation dialog
 
 ##### 12/4/2014
 -Worked in lab on individual parts for submission (50 minutes)
 -Robert: 5 hours
   -Integrated MainActivity and began to integrate GameScreenActivity
+-Andrew: 2 hours
+  -Fixed issue with asteroid animation, and completed asteroid activity
+  
 ##### 12/5/2014
 -Robert: 5 hours
   -Finished integrating game into GameScreenActivity and completely integrated PlanetActivity
-
+-Andrew: 6 hours
+  -Began integrating AsteroidActivity and GameInfoActivity into final product
+  -Added functionality to fix minor bugs
+  
+#### 12/6/2014
+-Andrew: > 4 hours
+  -Completely integrated AsteroidActivity and updating values
+  -Finihsed integrating GameInfoActivity
+  -Added repairing of hull functionality
+  -Began searching for and fixing issues within integration
