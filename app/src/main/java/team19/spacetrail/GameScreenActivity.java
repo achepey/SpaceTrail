@@ -53,7 +53,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     private int dest_planet = 0; // Integer representing the user's desired planet destination
     private GestureDetector detector;
     private int screen_width;
-    private Game game;
+    protected static Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,11 +107,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
     //Process of moving ship across screen
     public void moveShip(View v) {
-        //Random chance to encounter issue
-        /*double rand = Math.random();
-        if(rand < .001) {
 
-        }*/
+        Log.d("GameScreen", "Pace is " + game.getSpeed());
 
         //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
         String moveResult = game.makeMove();
@@ -216,14 +213,12 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         merc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(game.getPrevious().name.equals("Mercury"))
-                {
+                if (game.getPrevious().name.equals("Mercury")) {
                     CharSequence popup = "You are already on this planet, explorer!";
                     Toast toast = Toast.makeText(getApplicationContext(), popup, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.BOTTOM, 0, 400);
                     toast.show();
-                }
-                else {
+                } else {
                     dest_planet = 0; // This is the numerical representation of the planet
                     planets.get(dest_planet).setVisibility(view.VISIBLE);
                     if (game.getFirstMove()) {
@@ -444,6 +439,12 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         }
         planet_selector.setCancelable(false);
         planet_selector.show();
+    }
+
+    public void repairHull(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Uh oh! Your Hull needs repairs!");
+        builder.setMessage("Use your spare aluminum to repair it!");
     }
 
     /* Override Methods */

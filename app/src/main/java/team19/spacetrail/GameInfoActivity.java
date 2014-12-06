@@ -1,9 +1,12 @@
 package team19.spacetrail;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -14,9 +17,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import javagame.Game;
 
@@ -25,8 +32,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
 
     private GestureDetector detector;
     private String pace;
-    private Game game;
-    private TextView hullHealth;
+    public Game game;
 
     //Displays user resources, ship health, and explorer's health in orderly fashion
     @Override
@@ -40,14 +46,20 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         detector = new GestureDetector(this, this);
         detector.setOnDoubleTapListener(this);
 
-        game = (Game) getIntent().getExtras().getSerializable("Game");
+        game = GameScreenActivity.game;
 
         /* Setting fields for ship status */
         TextView engineHealth = (TextView) findViewById(R.id.engineHealth);
         TextView livingBayHealth = (TextView) findViewById(R.id.livingBayHealth);
         TextView wingsHealth = (TextView) findViewById(R.id.wingHealth);
-        hullHealth = (TextView) findViewById(R.id.hullHealth);
+        TextView hullHealth = (TextView) findViewById(R.id.hullHealth);
 
+        engineHealth.setText(Integer.toString(game.getShip().getEngineStatus())+"%");
+        livingBayHealth.setText(Integer.toString(game.getShip().getLivingBayStatus())+"%");
+        wingsHealth.setText(Integer.toString(game.getShip().getWingStatus())+"%");
+        hullHealth.setText(Integer.toString(game.getShip().getHullStatus())+"%");
+
+        /* Setting up pace spinner */
         Spinner spinner = (Spinner) findViewById(R.id.changePaceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -56,6 +68,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        spinner.setMinimumWidth(400);
 
         /* Make sure pace is correct in the menu */
         int gameSpeed = game.getSpeed(); //fast = 1, medium = 2, slow = 3
@@ -71,7 +84,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         else{
             Log.d("GameInfo", "ERROR: BAD GAME SPEED FROM OBJECT");
         }
-        Log.d("GameInfo", pace);
+        Log.d("GameInfo", "pace on create is " + pace + " " + gameSpeed);
         int paceInt = adapter.getPosition(pace);
         spinner.setSelection(paceInt);
 
@@ -120,11 +133,14 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
     public void mineAsteroids(View v) {
         Intent intent = new Intent(this, AsteroidActivity.class);
         Bundle b = new Bundle();
+        TextView hullHealth = (TextView) findViewById(R.id.hullHealth);
         String hullHlth = hullHealth.getText().toString();
         Log.d("GameInfo", "Hull Health = " + hullHlth);
-        int hullHlthInt = Integer.parseInt(hullHlth.substring(0, hullHlth.length()-1));
+        int hullHlthInt = Integer.parseInt(hullHlth.substring(0, hullHlth.length() - 1));
         Log.d("GameInfo", "Hull Health = " + hullHlthInt);
         b.putInt("HullHealth", hullHlthInt);
+        intent.putExtras(b);
+        finish();
         startActivity(intent);
     }
 
@@ -134,13 +150,13 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         Spinner spin = (Spinner) findViewById(R.id.changePaceSpinner);
         pace = spin.getSelectedItem().toString();
         if(pace.equals("Strenuous")){
-            game.setSpeed(3);
+            game.setSpeed(1);
         }
         else if(pace.equals("Normal")){
             game.setSpeed(2);
         }
         else if(pace.equals("Leisurely")){
-            game.setSpeed(1);
+            game.setSpeed(3);
         }
         else{
             Log.d("GameInfo", "ERROR: BAD PACE FROM SPINNER!");
@@ -151,6 +167,49 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.BOTTOM, 0, 200);
         toast.show();
+
+        Log.d("GameInfo", "Pace is " + game.getSpeed());
+    }
+
+    public void repairHull(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Repair Hull");
+        builder.setMessage("How much aluminum would like to spend on repairs?\nCurrent aluminum levels: " + game.getResources().getAluminum());
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+        builder.setPositiveButton("Repair!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String value = input.getText().toString();
+                if(value == ""){
+                    Context context = getApplicationContext();
+                    CharSequence popup = "Input a value!";
+                    Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.BOTTOM, 0, 200);
+                    toast.show();
+                }
+                else{
+                    game.repairHull(Integer.parseInt(value));
+                    updateFields();
+                }
+            }
+        }).setNegativeButton("No, let us die!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ;
+            }
+        });
+        builder.setCancelable(false).create().show();
+
+    }
+
+    public void updateFields(){
+        TextView hull = (TextView) findViewById(R.id.hullHealth);
+        hull.setText(Integer.toString(game.getShip().getHullStatus())+"%");
+
+        TextView alum = (TextView) findViewById(R.id.aluminumVariable);
+        alum.setText(Integer.toString(game.getResources().getAluminum()));
     }
 
     @Override

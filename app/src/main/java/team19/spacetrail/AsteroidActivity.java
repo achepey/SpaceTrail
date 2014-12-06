@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,9 +41,11 @@ public class AsteroidActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asteroid);
 
-        if(getIntent().getIntExtra("HullHealth", 0) != 0) {
-            hullPercent = getIntent().getExtras().getInt("HullHealth");
-        }
+        Bundle b = getIntent().getExtras();
+
+        hullPercent = b.getInt("HullHealth");
+        Log.d("Asteroid", "Hull Health = " + hullPercent);
+
         ship = (ImageView) findViewById(R.id.spaceshipMiddle);
         ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
         ast1 = (ImageView) findViewById(R.id.asteroid1);
@@ -51,8 +54,8 @@ public class AsteroidActivity extends Activity {
         ast4 = (ImageView) findViewById(R.id.asteroid4);
         ast5 = (ImageView) findViewById(R.id.asteroid5);
         ast6 = (ImageView) findViewById(R.id.asteroid6);
-        TextView hull = (TextView) findViewById(R.id.hullHealth);
-        hull.setText(Integer.toString(hullPercent)); // CHANGE THIS TO REPRESENT ACTUAL ENGINE PERCENTAGE
+        TextView hull = (TextView) findViewById(R.id.hullPercent);
+        hull.setText(Integer.toString(hullPercent));
 
         Point size = new Point();
         Random rand = new Random(); // used to generate a random number for the start of the asteroid position
@@ -103,10 +106,11 @@ public class AsteroidActivity extends Activity {
         planet_decider.setMessage("You have mined " + fuelAmount + " units of fuel.\nIt has been added to your inventory.");
         planet_decider.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                finish();
+                backToInfo();
             }
         });
         planet_decider.create().show();
+        GameScreenActivity.game.sellFuel(fuelAmount);
     }
 
     public void moveAsteroidObjects(int[] coordinates) {
@@ -180,7 +184,7 @@ public class AsteroidActivity extends Activity {
             });
             ast2.animate().setDuration(2500);
             ast2.animate().setStartDelay(delay + 350);
-            ast2.animate().x(coordinates[0] + 200).y(coordinates[1]);
+            ast2.animate().x(coordinates[0]).y(coordinates[1]);
             ast2.animate().setInterpolator(new LinearInterpolator());
             ast2.animate().alphaBy(1);
             ast2.animate().setListener(new Animator.AnimatorListener() {
@@ -222,7 +226,7 @@ public class AsteroidActivity extends Activity {
             });
             ast3.animate().setDuration(2500);
             ast3.animate().setStartDelay(delay + 1000);
-            ast3.animate().x(coordinates[0] + 200).y(coordinates[1]);
+            ast3.animate().x(coordinates[0]).y(coordinates[1]);
             ast3.animate().setInterpolator(new LinearInterpolator());
             ast3.animate().alphaBy(1);
             ast3.animate().setListener(new Animator.AnimatorListener() {
@@ -384,8 +388,18 @@ public class AsteroidActivity extends Activity {
 
     public void shipHitAction(){
         TextView engineView = (TextView) findViewById(R.id.hullPercent);
-        hullPercent -= 5;
-        engineView.setText(Integer.toString(hullPercent)); //USE THIS TO SUBTRACT ACTUAL FUEL
+        //Do not allow it to get less than 0
+        if(hullPercent >= 5) {
+            hullPercent -= 5;
+            GameScreenActivity.game.getShip().damagePart("hull", 5);
+            engineView.setText(Integer.toString(hullPercent));
+        }
+        else if(hullPercent < 5){
+            int previousPercent = hullPercent;
+            hullPercent = 0;
+            GameScreenActivity.game.getShip().damagePart("hull", previousPercent);
+            engineView.setText(Integer.toString(hullPercent));
+        }
         ship.setVisibility(View.INVISIBLE);
         ship_hit.setVisibility(View.VISIBLE);
         Handler handler = new Handler();
@@ -397,10 +411,17 @@ public class AsteroidActivity extends Activity {
         }, 500);
     }
 
+
+    public void backToInfo(){
+        Intent intent = new Intent(this, GameInfoActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     //Temporarily used for checking the end result
     @Override
     public void onBackPressed() {
-        ; // Disallow Exiting of game
+        ; // Disallow Exiting of mini-game
     }
 
     @Override

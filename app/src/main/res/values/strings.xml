@@ -85,5 +85,6 @@
     <string name="People_Name3">Name3</string>
     <string name="People_Name4">Name4</string>
     <string name="auto_generate">Auto Generate!</string>
+    <string name="repair_hull">Repair Hull</string>
 
 </resources>
