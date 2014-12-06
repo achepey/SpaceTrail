@@ -89,8 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enginePercent"
-        android:id="@+id/enginePercentText"
+        android:text="@string/hullPercent"
+        android:id="@+id/hullHealthText"
         android:layout_alignLeft="@+id/spaceshipMiddle" />
 
     <TextView
@@ -98,9 +98,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="0"
-        android:id="@+id/enginePercent"
+        android:id="@+id/hullPercent"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/enginePercentText"
+        android:layout_toRightOf="@+id/hullHealthText"
         android:layout_marginLeft="10dp" />
 
     <TextView
@@ -111,7 +111,7 @@
         android:id="@+id/percent"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/spaceshipMiddle"
-        android:layout_toRightOf="@+id/enginePercent"
+        android:layout_toRightOf="@+id/hullPercent"
         android:layout_marginLeft="4dp" />
 
 </RelativeLayout>

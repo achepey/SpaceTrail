@@ -516,6 +516,9 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public void onLongPress(MotionEvent event) {
         Intent intent = new Intent(this, GameInfoActivity.class);
+        Bundle b = new Bundle();
+        b.putSerializable("Game", game);
+        intent.putExtras(b);
         startActivity(intent);
     }
 

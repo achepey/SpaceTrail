@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.Menu;
@@ -14,13 +15,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import javagame.Game;
 
 
 public class GameInfoActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener{
 
     private GestureDetector detector;
     private String pace;
+    private Game game;
+    private TextView hullHealth;
 
     //Displays user resources, ship health, and explorer's health in orderly fashion
     @Override
@@ -34,6 +40,14 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         detector = new GestureDetector(this, this);
         detector.setOnDoubleTapListener(this);
 
+        game = (Game) getIntent().getExtras().getSerializable("Game");
+
+        /* Setting fields for ship status */
+        TextView engineHealth = (TextView) findViewById(R.id.engineHealth);
+        TextView livingBayHealth = (TextView) findViewById(R.id.livingBayHealth);
+        TextView wingsHealth = (TextView) findViewById(R.id.wingHealth);
+        hullHealth = (TextView) findViewById(R.id.hullHealth);
+
         Spinner spinner = (Spinner) findViewById(R.id.changePaceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -43,22 +57,94 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        //Get the pace from the game object, THIS IS NOT CORRECT, JUST TEMPORARY
-        //pace = Game.getSpeed();
-        pace = "Normal";
+        /* Make sure pace is correct in the menu */
+        int gameSpeed = game.getSpeed(); //fast = 1, medium = 2, slow = 3
+        if(gameSpeed == 1){
+            pace = "Strenuous";
+        }
+        else if(gameSpeed == 2){
+            pace = "Normal";
+        }
+        else if(gameSpeed == 3){
+            pace = "Leisurely";
+        }
+        else{
+            Log.d("GameInfo", "ERROR: BAD GAME SPEED FROM OBJECT");
+        }
+        Log.d("GameInfo", pace);
         int paceInt = adapter.getPosition(pace);
         spinner.setSelection(paceInt);
+
+        /* Setting fields for resources */
+        TextView money = (TextView) findViewById(R.id.moneyVariable);
+        TextView fuel = (TextView) findViewById(R.id.fuelVariable);
+        TextView food = (TextView) findViewById(R.id.foodVariable);
+        TextView aluminum = (TextView) findViewById(R.id.aluminumVariable);
+        TextView sprEngines = (TextView) findViewById(R.id.engineVariable);
+        TextView sprWings = (TextView) findViewById(R.id.wingVariable);
+        TextView sprLivBay = (TextView) findViewById(R.id.livingBayVariable);
+
+        money.setText(Integer.toString(game.getMoney()));
+        fuel.setText(Integer.toString(game.getResources().getFuel()));
+        food.setText(Integer.toString(game.getResources().getFood()));
+        aluminum.setText(Integer.toString(game.getResources().getAluminum()));
+        sprEngines.setText(Integer.toString(game.getResources().getSpareEngines()));
+        sprWings.setText(Integer.toString(game.getResources().getSpareWings()));
+        sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
+
+        /* Setting fields for names and their info */
+        TextView capt = (TextView) findViewById(R.id.captainName);
+        TextView person1 = (TextView) findViewById(R.id.peopleName1);
+        TextView person2 = (TextView) findViewById(R.id.peopleName2);
+        TextView person3 = (TextView) findViewById(R.id.peopleName3);
+        TextView person4 = (TextView) findViewById(R.id.peopleName4);
+        TextView captInfo = (TextView) findViewById(R.id.captainInfo);
+        TextView person1Info = (TextView) findViewById(R.id.peopleNameInfo1);
+        TextView person2Info = (TextView) findViewById(R.id.peopleNameInfo2);
+        TextView person3Info = (TextView) findViewById(R.id.peopleNameInfo3);
+        TextView person4Info = (TextView) findViewById(R.id.peopleNameInfo4);
+
+        capt.setText(game.getPeople().get(0).getName());
+        person1.setText(game.getPeople().get(1).getName());
+        person2.setText(game.getPeople().get(2).getName());
+        person3.setText(game.getPeople().get(3).getName());
+        person4.setText(game.getPeople().get(4).getName());
+
+        captInfo.setText("" + game.getPeople().get(0).getCondition() +"%");
+        person1Info.setText("" + game.getPeople().get(1).getCondition()+"%");
+        person2Info.setText("" + game.getPeople().get(2).getCondition()+"%");
+        person3Info.setText("" + game.getPeople().get(3).getCondition()+"%");
+        person4Info.setText("" + game.getPeople().get(4).getCondition()+"%");
     }
 
     public void mineAsteroids(View v) {
         Intent intent = new Intent(this, AsteroidActivity.class);
+        Bundle b = new Bundle();
+        String hullHlth = hullHealth.getText().toString();
+        Log.d("GameInfo", "Hull Health = " + hullHlth);
+        int hullHlthInt = Integer.parseInt(hullHlth.substring(0, hullHlth.length()-1));
+        Log.d("GameInfo", "Hull Health = " + hullHlthInt);
+        b.putInt("HullHealth", hullHlthInt);
         startActivity(intent);
     }
 
+    //this is where the pace of the game is changed
     public void changePace(View v) {
-        //this is where you will change the pace of the game in the game object
+
         Spinner spin = (Spinner) findViewById(R.id.changePaceSpinner);
         pace = spin.getSelectedItem().toString();
+        if(pace.equals("Strenuous")){
+            game.setSpeed(3);
+        }
+        else if(pace.equals("Normal")){
+            game.setSpeed(2);
+        }
+        else if(pace.equals("Leisurely")){
+            game.setSpeed(1);
+        }
+        else{
+            Log.d("GameInfo", "ERROR: BAD PACE FROM SPINNER!");
+        }
         //Creates pop-up letting user know the resources were purchased correctly
         Context context = getApplicationContext();
         CharSequence popup = "Pace has Changed!";

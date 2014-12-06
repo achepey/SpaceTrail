@@ -65,20 +65,112 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/loadGame_People_Name1"
-                    android:id="@+id/person1"
+                    android:text="@string/Captain_Name"
+                    android:id="@+id/captainName"
                     android:layout_row="0"
                     android:layout_column="0"
-                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingRight="2dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/loadGame_People_Info1"
-                    android:id="@+id/person1_info"
+                    android:text="Capt Info"
+                    android:id="@+id/captainInfo"
                     android:layout_row="0"
                     android:layout_column="1"
-                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingLeft="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/People_Name1"
+                    android:id="@+id/peopleName1"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingRight="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name1 Info"
+                    android:id="@+id/peopleNameInfo1"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingLeft="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/People_Name2"
+                    android:id="@+id/peopleName2"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingRight="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name2 Info"
+                    android:id="@+id/peopleNameInfo2"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingLeft="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/People_Name3"
+                    android:id="@+id/peopleName3"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingRight="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name3 Info"
+                    android:id="@+id/peopleNameInfo3"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingLeft="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/People_Name4"
+                    android:id="@+id/peopleName4"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingRight="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name4 Info"
+                    android:id="@+id/peopleNameInfo4"
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:maxWidth="@dimen/loadGame_SubMenu_ColSize"
+                    android:paddingLeft="3dp" />
             </GridLayout>
 
             <GridLayout
@@ -103,7 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="100%"
-                    android:id="@+id/tempValue1"
+                    android:id="@+id/engineHealth"
                     android:layout_row="0"
                     android:layout_column="1"
                     android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
@@ -111,16 +203,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ShipParts_Environment"
-                    android:id="@+id/shipParts_Env"
+                    android:text="@string/ShipParts_Living_Bay"
+                    android:id="@+id/shipParts_Living_bay"
                     android:layout_row="1"
                     android:layout_column="0" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ShipParts_Navigation"
-                    android:id="@+id/shipParts_Nav"
+                    android:text="@string/ShipParts_Hull"
+                    android:id="@+id/shipParts_Hull"
                     android:layout_row="2"
                     android:layout_column="0" />
 
@@ -128,7 +220,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="100%"
-                    android:id="@+id/tempValue2"
+                    android:id="@+id/livingBayHealth"
                     android:layout_row="1"
                     android:layout_column="1"
                     android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
@@ -137,9 +229,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="100%"
-                    android:id="@+id/tempValue3"
+                    android:id="@+id/hullHealth"
                     android:layout_row="2"
                     android:layout_column="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ShipParts_Wing"
+                    android:id="@+id/shipParts_Wing"
+                    android:layout_row="3"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+                    android:id="@+id/wingHealth"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
             </GridLayout>
 
@@ -151,14 +260,23 @@
                 android:layout_column="2"
                 android:columnCount="3"
                 android:minWidth="@dimen/loadGame_ColSize"
-                android:rowCount="5">
+                android:rowCount="7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Money"
+                    android:id="@+id/resourcesMoney"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Resources_fuel"
                     android:id="@+id/resourcesFuel"
-                    android:layout_row="0"
+                    android:layout_row="1"
                     android:layout_column="0"
                     android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
@@ -167,14 +285,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Resources_food"
                     android:id="@+id/resourcesFood"
-                    android:layout_row="1"
-                    android:layout_column="0" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Resources_EngPrts"
-                    android:id="@+id/resourcesEngPrts"
                     android:layout_row="2"
                     android:layout_column="0" />
 
@@ -182,8 +292,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Resources_AlumPrts"
-                    android:id="@+id/resourcesAlumPrts"
+                    android:id="@+id/resourcesAluminum"
                     android:layout_row="3"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Resources_EngPrts"
+                    android:id="@+id/resourcesEngParts"
+                    android:layout_row="4"
                     android:layout_column="0" />
 
                 <TextView
@@ -191,14 +309,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Resources_SprWings"
                     android:id="@+id/resourcesSprWngs"
-                    android:layout_row="4"
+                    android:layout_row="5"
                     android:layout_column="0" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500"
-                    android:id="@+id/tempValue4"
+                    android:text="@string/Resources_SprLivingBays"
+                    android:id="@+id/resourcesLivingBay"
+                    android:layout_row="6"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/moneyVariable"
                     android:layout_row="0"
                     android:layout_column="1"
                     android:minWidth="@dimen/loadGame_SubMenu_ColSize"
@@ -207,8 +332,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500"
-                    android:id="@+id/tempValue5"
+                    android:id="@+id/fuelVariable"
                     android:layout_row="1"
                     android:layout_column="1"
                     android:minWidth="@dimen/loadGame_SubMenu_ColSize"
@@ -217,28 +341,46 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
-                    android:id="@+id/tempValue6"
+                    android:id="@+id/foodVariable"
                     android:layout_row="2"
                     android:layout_column="1"
-                    android:layout_marginLeft="10dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10"
-                    android:id="@+id/tempValue7"
-                    android:layout_row="3"
-                    android:layout_column="1"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize"
                     android:layout_marginLeft="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10"
-                    android:id="@+id/tempValue8"
+                    android:id="@+id/aluminumVariable"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:layout_marginLeft="10dp"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/engineVariable"
                     android:layout_row="4"
                     android:layout_column="1"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wingVariable"
+                    android:layout_row="5"
+                    android:layout_column="1"
+                    android:layout_marginLeft="10dp"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/livingBayVariable"
+                    android:layout_row="6"
+                    android:layout_column="1"
+                    android:layout_marginLeft="10dp"
+                    android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
             </GridLayout>
 
         </GridLayout>
@@ -248,7 +390,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/MenuBackInfo"
-            android:id="@+id/textView13"
+            android:id="@+id/gameInfoText"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
@@ -259,21 +401,20 @@
             android:text="@string/asteroid_mine"
             android:id="@+id/mineButton"
             android:layout_below="@+id/gameInformation"
-            android:layout_alignLeft="@+id/textView13"
-            android:layout_alignStart="@+id/textView13"
             android:layout_marginTop="20dp"
-            android:onClick="mineAsteroids" />
+            android:onClick="mineAsteroids"
+            android:layout_alignLeft="@+id/gameInformation" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/loadGame_ColSize"
             android:layout_height="wrap_content"
             android:id="@+id/changePaceSpinner"
-            android:layout_alignRight="@+id/textView13"
-            android:layout_alignEnd="@+id/textView13"
+            android:layout_alignRight="@+id/gameInfoText"
+            android:layout_alignEnd="@+id/gameInfoText"
             android:layout_toRightOf="@+id/mineButton"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="50dp"
             android:layout_alignBottom="@+id/mineButton"
-            android:layout_marginBottom="25dp" />
+            android:layout_marginBottom="15dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -283,7 +424,7 @@
             android:id="@+id/button"
             android:layout_alignLeft="@+id/changePaceSpinner"
             android:layout_alignStart="@+id/changePaceSpinner"
-            android:layout_above="@+id/textView13"
+            android:layout_above="@+id/gameInfoText"
             android:layout_marginBottom="20dp"
             android:onClick="changePace" />
 

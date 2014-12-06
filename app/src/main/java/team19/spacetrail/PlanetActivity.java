@@ -89,8 +89,6 @@ public class PlanetActivity extends Activity {
             }
         });
 
-
-        Intent intent = getIntent();
         game = (Game) getIntent().getExtras().getSerializable("Game");
 
         //Setting fields for resources

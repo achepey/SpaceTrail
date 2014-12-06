@@ -17,7 +17,7 @@
     <string name="toSpend">to spend</string>
     <string name="fuel">Fuel @ $5.00</string>
     <string name="food">Food @ $1.00</string>
-    <string name="enginePart">Spare Engines @ $15.00</string>
+    <string name="enginePart">Spare Engines @ $15.00</string>ship
     <string name="aluminumPart">Aluminum @ $10.00</string>
     <string name="wings">Spare Wings @ $15.00</string>
     <string name="livingBay">Spare Living Bay @ $15.00</string>
@@ -25,15 +25,17 @@
     <string name="quantityYouHave">Quantity You Have</string>
     <string name="title_activity_load_game">load_game</string>
     <string name="loadGameMenu">GAME INFORMATION</string>
-    <string name="loadGame_PeopleMenu">People</string>
-    <string name="loadGame_ShipMenu">Ship</string>
-    <string name="loadGame_ResourceMenu">Resources</string>
-    <string name="loadGame_People_Name1">Name1</string>
-    <string name="loadGame_People_Info1">Info1</string>
+    <string name="loadGame_PeopleMenu">People:</string>
+    <string name="loadGame_ShipMenu">Ship:</string>
+    <string name="loadGame_ResourceMenu">Resources:</string>
+    <string name="Captain_Name">Captain</string>
+    <string name="People_Name1">Name1</string>
+    <string name="People_Info1">Info1</string>
     <string name="loadGame_CurrentPlanet">Planet</string>
     <string name="ShipParts_Engine">Engine</string>
-    <string name="ShipParts_Environment">Environment</string>
-    <string name="ShipParts_Navigation">Navigation</string>
+    <string name="ShipParts_Living_Bay">Living Bay</string>
+    <string name="ShipParts_Hull">Hull</string>
+    <string name="ShipParts_Wing">Wings</string>
     <string name="Resources_fuel">Fuel</string>
     <string name="Resources_food">Food</string>
     <string name="Resources_EngPrts">Spare Engines</string>
@@ -77,6 +79,10 @@
     <string name="MenuBackInfo">Hold down the screen or press the back button to return to the game</string>
     <string name="asteroid_mine">Mine Asteroids!</string>
     <string name="changePace">Change Pace</string>
-    <string name="enginePercent">Engine Health:</string>
+    <string name="hullPercent">Hull Health:</string>
+    <string name="promptBack">Go back to main menu?</string>
+    <string name="People_Name2">Name2</string>
+    <string name="People_Name3">Name3</string>
+    <string name="People_Name4">Name4</string>
 
 </resources>

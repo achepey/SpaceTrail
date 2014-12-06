@@ -13,11 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,8 +31,7 @@ public class AsteroidActivity extends Activity {
     private ImageView ast6;
     private boolean destroyed = false;
     private int numAsteroidsDestroyed = 0;
-    private int enginePercent = 100; // THIS IS DEFAULT, USE THIS TO ACTUALLY UPDATE ENGINE PERCENT FROM GAME
-    private int asteroidsComplete = 0;
+    private int hullPercent = 50; // THIS IS DEFAULT, USE THIS TO ACTUALLY UPDATE ENGINE PERCENT FROM GAME
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +39,10 @@ public class AsteroidActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asteroid);
+
+        if(getIntent().getIntExtra("HullHealth", 0) != 0) {
+            hullPercent = getIntent().getExtras().getInt("HullHealth");
+        }
         ship = (ImageView) findViewById(R.id.spaceshipMiddle);
         ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
         ast1 = (ImageView) findViewById(R.id.asteroid1);
@@ -52,8 +51,8 @@ public class AsteroidActivity extends Activity {
         ast4 = (ImageView) findViewById(R.id.asteroid4);
         ast5 = (ImageView) findViewById(R.id.asteroid5);
         ast6 = (ImageView) findViewById(R.id.asteroid6);
-        TextView engine = (TextView) findViewById(R.id.enginePercent);
-        engine.setText(Integer.toString(enginePercent)); // CHANGE THIS TO REPRESENT ACTUAL ENGINE PERCENTAGE
+        TextView hull = (TextView) findViewById(R.id.hullHealth);
+        hull.setText(Integer.toString(hullPercent)); // CHANGE THIS TO REPRESENT ACTUAL ENGINE PERCENTAGE
 
         Point size = new Point();
         Random rand = new Random(); // used to generate a random number for the start of the asteroid position
@@ -155,7 +154,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -198,7 +196,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -241,7 +238,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -284,7 +280,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -327,7 +322,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -370,7 +364,6 @@ public class AsteroidActivity extends Activity {
                         shipHitAction();
                     }
                     destroyed = false;
-                    asteroidsComplete++;
                 }
 
                 @Override
@@ -390,9 +383,9 @@ public class AsteroidActivity extends Activity {
     }
 
     public void shipHitAction(){
-        TextView engineView = (TextView) findViewById(R.id.enginePercent);
-        enginePercent -= 10;
-        engineView.setText(Integer.toString(enginePercent)); //USE THIS TO SUBTRACT ACTUAL FUEL
+        TextView engineView = (TextView) findViewById(R.id.hullPercent);
+        hullPercent -= 5;
+        engineView.setText(Integer.toString(hullPercent)); //USE THIS TO SUBTRACT ACTUAL FUEL
         ship.setVisibility(View.INVISIBLE);
         ship_hit.setVisibility(View.VISIBLE);
         Handler handler = new Handler();

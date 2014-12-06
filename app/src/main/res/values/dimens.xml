@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="loadGame_ColSize">200dp</dimen>
-    <dimen name="loadGame_SubMenu_ColSize">100dp</dimen>
+    <dimen name="loadGame_SubMenu_ColSize">90dp</dimen>
+
 
 </resources>
