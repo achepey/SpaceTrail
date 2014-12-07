@@ -163,8 +163,9 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   - Added functionality to fix minor bugs
 
 #### 12/6/2014
-- Andrew: > 4 hours
+- Andrew: 7 hours
   - Completely integrated AsteroidActivity and updating values
   - Finihsed integrating GameInfoActivity
   - Added repairing of hull functionality
   - Began searching for and fixing issues within integration
+  - Added death of crew members handling
