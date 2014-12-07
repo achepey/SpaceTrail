@@ -179,25 +179,25 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
         fuelView.setText(Integer.toString(game.getResources().getFuel()));
         foodView.setText(Integer.toString(game.getResources().getFood()));
-        if (!moveResult.equals("Successful Movement!")) {
+        if (!moveResult.equals("Successful Movement!") && (game.getShip().getEngineStatus() > 0 && game.getShip().getWingStatus() > 0 && game.getShip().getLivingBayStatus() > 0)) {
             final GameScreenActivity tempGSA = this;
             final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
             issue_alert.setTitle(R.string.issue_title);
             issue_alert.setMessage(moveResult);
             issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                    if (game.isLoser()) {
-                        dialog.cancel();
-                        Intent intent = new Intent(tempGSA, ExitActivity.class);
-                        intent.putExtra("activity", "Loser");
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        dialog.cancel();
-                        moveOnScreen();
-                    }
+                if (game.isLoser()) {
+                    dialog.cancel();
+                    Intent intent = new Intent(tempGSA, ExitActivity.class);
+                    intent.putExtra("activity", "Loser");
+                    startActivity(intent);
+                    finish();
+                } else {
+                    dialog.cancel();
+                    moveOnScreen();
                 }
-                });
+            }
+                          });
             Dialog d = issue_alert.create();
             d.setCancelable(false);
             d.show();
