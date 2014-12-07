@@ -24,6 +24,7 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import javagame.*;
 
@@ -40,6 +41,7 @@ public class MainActivity extends Activity {
     private Game game;
     private int startingMoney;
     protected String currentView;
+    private ArrayList<String> crewNames;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -55,6 +57,8 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        crewNames = new ArrayList<String>();
 
         game = new Game();
         try {
@@ -85,10 +89,15 @@ public class MainActivity extends Activity {
         EditText crew4 = (EditText) findViewById(R.id.fourOtherNameField);
 
         String capName = captain.getText().toString();
+        crewNames.add(capName);
         String crew1Name = crew1.getText().toString();
+        crewNames.add(crew1Name);
         String crew2Name = crew2.getText().toString();
+        crewNames.add(crew2Name);
         String crew3Name = crew3.getText().toString();
+        crewNames.add(crew3Name);
         String crew4Name = crew4.getText().toString();
+        crewNames.add(crew4Name);
 
         if(capName.length()!=0 && crew1Name.length()!=0 && crew2Name.length()!=0 && crew3Name.length()!=0 && crew4Name.length()!=0) {
             game.addCrew(capName, true);
@@ -140,10 +149,15 @@ public class MainActivity extends Activity {
         testGame.getResources().addSpare(new Part("wing",100));
         testGame.getResources().addSpare(new Part("livingBay",100));
         testGame.addCrew("cap",true);
+        crewNames.add("cap");
         testGame.addCrew("1",false);
+        crewNames.add("1");
         testGame.addCrew("2",false);
+        crewNames.add("2");
         testGame.addCrew("3",false);
+        crewNames.add("3");
         testGame.addCrew("4",false);
+        crewNames.add("4");
 
         try {
             AssetManager assetManager = getAssets();
@@ -160,10 +174,11 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
         b.putSerializable("Game", testGame);
+        b.putStringArrayList("Crew", crewNames);
         intent.putExtras(b);
         startActivity(intent);
         finish();
-    //    setContentView(R.layout.instruction_screen);
+    //  setContentView(R.layout.instruction_screen);
     }
 
     //Does the function of buying the original resources.
@@ -283,12 +298,13 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
         b.putSerializable("Game", game);
+        b.putStringArrayList("Crew", crewNames);
         intent.putExtras(b);
         startActivity(intent);
         finish();
     }
 
-    //Used for a button to start the GameScreenActivity
+    //Used for a button to start the GameScreenActivity from the Load Game
     public void gameScreen(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         intent.putExtra("Game", game);

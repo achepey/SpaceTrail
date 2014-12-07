@@ -268,20 +268,12 @@ public class PlanetActivity extends Activity {
         money.setText(Integer.toString(game.getMoney()));
 
 
-        /*if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
+        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
             Intent intent = new Intent(this, ExitActivity.class);
             finish();
             intent.putExtra("activity", "Planet");
             startActivity(intent);
         }
-        else {
-            Context context = getApplicationContext();
-            CharSequence popup = "Resources Acquired!";
-            Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 350);
-            toast.show();
-            rscText.setText("");
-        }*/
 
     }
 
@@ -291,6 +283,7 @@ public class PlanetActivity extends Activity {
         Bundle b = new Bundle();
         game.setArrivedAtPlanet(false);
         b.putSerializable("Game", game);
+        b.putStringArrayList("Crew", GameScreenActivity.crewNames);
         intent.putExtras(b);
         finish();
         startActivity(intent);

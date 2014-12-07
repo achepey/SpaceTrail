@@ -204,7 +204,7 @@ public class Game implements Serializable {
             - will be based on the compounds of the destination planet and race of the crew
             - will be different based on crew member (age, current condition)
         */
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < people.size(); i++) {
             int amount = 0;                 // How much the crew member will be hurt
             /* Measure attrition due to race */
             if(people.get(i).getRace().getStrength().equals(destination.compound1) || people.get(i).getRace().getStrength().equals(destination.compound2)) {
@@ -511,7 +511,7 @@ public class Game implements Serializable {
                 if (i == 0) {
                     issue = "Your captain has died! Unfortunately, he did not name a second-in-command and the entire crew is killed in the resulting power struggle.";
                     if(people.size() == 1) {
-                        issue = "Your captain has died! He was the last living crew member for you spaceship! Without anyone at the controls, the ship eventually crashes on Venus and is destroyed.";
+                        issue = "Your captain has died! He was the last living crew member for you spaceship! Without anyone at the controls, the ship eventually crashes on a moon of Saturn and is destroyed.";
                     }
                     gameOver = true;
                     return issue;

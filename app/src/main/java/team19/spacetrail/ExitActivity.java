@@ -28,7 +28,7 @@ public class ExitActivity extends Activity {
         //Determines which activity called this activity, in order to respond appropriately
         String caller = this.getIntent().getExtras().getString("activity");
         TextView exitMessage = (TextView) findViewById(R.id.exitMessage);
-        if(caller.equals("GameScreen")){
+        if(caller.equals("Loser")){
             exitMessage.setText("Sorry, You Lose!");
         }
     }

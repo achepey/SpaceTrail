@@ -25,6 +25,9 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javagame.Game;
 
 
@@ -106,28 +109,57 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
 
         /* Setting fields for names and their info */
+        ArrayList<TextView> names = new ArrayList<TextView>();
+        ArrayList<TextView> nameInfo = new ArrayList<TextView>();
         TextView capt = (TextView) findViewById(R.id.captainName);
+        names.add(capt);
         TextView person1 = (TextView) findViewById(R.id.peopleName1);
+        names.add(person1);
         TextView person2 = (TextView) findViewById(R.id.peopleName2);
+        names.add(person2);
         TextView person3 = (TextView) findViewById(R.id.peopleName3);
+        names.add(person3);
         TextView person4 = (TextView) findViewById(R.id.peopleName4);
+        names.add(person4);
         TextView captInfo = (TextView) findViewById(R.id.captainInfo);
+        nameInfo.add(captInfo);
         TextView person1Info = (TextView) findViewById(R.id.peopleNameInfo1);
+        nameInfo.add(person1Info);
         TextView person2Info = (TextView) findViewById(R.id.peopleNameInfo2);
+        nameInfo.add(person2Info);
         TextView person3Info = (TextView) findViewById(R.id.peopleNameInfo3);
+        nameInfo.add(person3Info);
         TextView person4Info = (TextView) findViewById(R.id.peopleNameInfo4);
+        nameInfo.add(person4Info);
 
-        capt.setText(game.getPeople().get(0).getName());
-        person1.setText(game.getPeople().get(1).getName());
-        person2.setText(game.getPeople().get(2).getName());
-        person3.setText(game.getPeople().get(3).getName());
-        person4.setText(game.getPeople().get(4).getName());
+        Log.d("Gameinfo", "Size of games people = " + game.getPeople().size());
+        int i = 0;
+        for(; i < game.getPeople().size(); i++){
+            names.get(i).setText(game.getPeople().get(i).getName());
+            nameInfo.get(i).setText(game.getPeople().get(i).getCondition()+"%");
+            Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
+        }
 
-        captInfo.setText("" + game.getPeople().get(0).getCondition() +"%");
-        person1Info.setText("" + game.getPeople().get(1).getCondition()+"%");
-        person2Info.setText("" + game.getPeople().get(2).getCondition()+"%");
-        person3Info.setText("" + game.getPeople().get(3).getCondition()+"%");
-        person4Info.setText("" + game.getPeople().get(4).getCondition()+"%");
+        /* Will only work if names are unique, I think... maybe, depends on remove function */
+        /* deadNames will contain all the names of dead crew members */
+        ArrayList<String> deadNames = new ArrayList<String>(GameScreenActivity.crewNames);
+        Log.d("gi", "i is " + i);
+        for(int j = 0; j < game.getPeople().size(); j++){
+            Log.d("gi", "j = " + j);
+            for(String s : deadNames){
+                if(game.getPeople().get(j).getName().equals(s)){
+                    deadNames.remove(s);
+                    Log.d("Gameinfo", s + " is alive!");
+                    break;
+                }
+            }
+        }
+        Log.d("GameInfo", "Size of deadNames = " + deadNames.size());
+        // i holds the current position in names without a crew member name
+        for(int j = 0; j < deadNames.size(); j++){
+            names.get(i+j).setText(deadNames.get(j));
+            nameInfo.get(i+j).setText("Dead");
+        }
     }
 
     public void mineAsteroids(View v) {

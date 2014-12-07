@@ -50,6 +50,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     /* Instance Fields */
     private ImageView spaceship;
     private ArrayList<ImageView> planets; // Holds image views for all planets
+    protected static ArrayList<String> crewNames;
     private int dest_planet = 0; // Integer representing the user's desired planet destination
     private GestureDetector detector;
     private int screen_width;
@@ -62,6 +63,13 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         game = (Game) getIntent().getExtras().getSerializable("Game");
+        crewNames = getIntent().getStringArrayListExtra("Crew");
+
+        Log.d("GameScreen", "Size of crewNames = " + crewNames.size());
+
+        for(String s : crewNames){
+            Log.d("GameScreen", s);
+        }
 
         //Sets listener to the screen for tap and long tap
         detector = new GestureDetector(this, this);
@@ -126,7 +134,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     dialog.cancel();
                     if(game.isLoser()) {
                         Intent intent = new Intent(tempGSA, ExitActivity.class);
-                        intent.putExtra("activity", "GameScreen");
+                        intent.putExtra("activity", "Loser");
                         startActivity(intent);
                         finish();
                     }
@@ -163,25 +171,33 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         }
         //Tells user they arrived at planet, and gives choice of moving to next planet, or stopping on planet to purchase resources
         else {
-            AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
-            planet_decider.setMessage("You've reached " + PLANETS_ARRAY[dest_planet] + "!\nWould you like to stop by the convenience store?");
-            planet_decider.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    goToPlanetMenu();
-                }
-            });
-            planet_decider.setNegativeButton(R.string.nextPlanet, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    //    recreate();
-                    Intent intent = getIntent();
-                    game.setArrivedAtPlanet(false);
-                    intent.putExtra("Game", game);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-            planet_decider.setCancelable(false);
-            planet_decider.create().show();
+            if(game.isWinner()){
+                Intent intent = new Intent(this, ExitActivity.class);
+                intent.putExtra("activity", "Winner");
+                startActivity(intent);
+                finish();
+            }
+            else {
+                AlertDialog.Builder planet_decider = new AlertDialog.Builder(this);
+                planet_decider.setMessage("You've reached " + PLANETS_ARRAY[dest_planet] + "!\nWould you like to stop by the convenience store?");
+                planet_decider.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        goToPlanetMenu();
+                    }
+                });
+                planet_decider.setNegativeButton(R.string.nextPlanet, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //    recreate();
+                        Intent intent = getIntent();
+                        game.setArrivedAtPlanet(false);
+                        intent.putExtra("Game", game);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                planet_decider.setCancelable(false);
+                planet_decider.create().show();
+            }
         }
     }
 
