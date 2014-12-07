@@ -173,3 +173,11 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   - Completely integrated saving and loading functionality to game
   - Changed activity load screen layout to match activity game info
   - Added automatic ship repair when engine, wings or living bay hit zero status and player has spare parts
+  - 
+##### 12/7/2014
+- Robert: 2.5 hours
+  - Updated instructions
+  - Fixed load game screen bugs
+  - Added ages and weaknesses to info and load game page
+  - Fixed other small bugs
+  
