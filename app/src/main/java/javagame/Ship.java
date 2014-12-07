@@ -16,6 +16,7 @@ public class Ship implements Serializable{
     private int engine;
     private int wing;
     private int livingBay;
+    float xpos;
 
     /* Constructor */
     public Ship() {
@@ -25,6 +26,7 @@ public class Ship implements Serializable{
         engine = 100;
         wing = 100;
         livingBay = 100;
+        xpos = 0;
         System.out.println("Ship has been completed.");
         System.out.println("------------------------------------------");
         // test
@@ -90,6 +92,10 @@ public class Ship implements Serializable{
         return livingBay;
     }
 
+    public float getXpos() {
+        return xpos;
+    }
+
     //Setter methods
     public void setHullStatus(int status) {
         hull = status;
@@ -105,5 +111,9 @@ public class Ship implements Serializable{
 
     public void setLivingBayStatus(int status) {
         livingBay = status;
+    }
+
+    public void setXpos(Float position) {
+        xpos = position;
     }
 }

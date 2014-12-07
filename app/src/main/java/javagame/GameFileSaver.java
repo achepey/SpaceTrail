@@ -1,5 +1,7 @@
 package javagame;
 
+import android.os.Environment;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -40,6 +42,7 @@ import javax.xml.transform.stream.StreamResult;
         ...to person4
     </people>
     <visitedPlanets></visitedPlanets>
+    <peopleNames></peopleNames>
     <destinationPlanet></destinationPlanet>
     <distance></distance>
  </game>
@@ -71,6 +74,8 @@ public class GameFileSaver implements Serializable
                 currPerson = doc.createElement("person" + i);
                 peopleElement.appendChild(currPerson);
             }
+            Element peopleNames = doc.createElement("peopleNames");
+            rootElement.appendChild(peopleNames);
 
             //setting gameNodes which will be used in the rest of the saving
             gameNodes = doc.getChildNodes();
@@ -123,6 +128,56 @@ public class GameFileSaver implements Serializable
         }
     }
 
+    //should only be called when saving on android device
+    public void saveGameAndroid(File file) {
+        try {
+            saveShip();
+            saveResources();
+            savePeople();
+
+            NodeList rootNodeList = doc.getChildNodes();
+            Node gameNode = getNode("game", rootNodeList);
+            addNode("destinationPlanet", game.getDestination().name, gameNode);
+            addNode("distance", Double.toString(game.getDistanceRemaining()), gameNode);
+            addNode("money", Integer.toString(game.getMoney()), gameNode);
+            addNode("previousPlanet", game.getPrevious().name, gameNode);
+            addNode("pace", Integer.toString(game.getSpeed()), gameNode);
+            addNode("totalDistance", Double.toString(game.getTotalDistance()), gameNode);
+
+            String visitedPlanets = "";
+            for(int i = 0; i < game.getPlanets().size(); ++i) {
+                if(game.getPlanets().get(i).visited){
+                    visitedPlanets += game.getPlanets().get(i).name + " ";
+                }
+            }
+            addNode("visitedPlanets", visitedPlanets, gameNode);
+            Node crewNamesNode = getNode("peopleNames", gameNodes);
+
+            System.out.println("crew names before saving:");
+            for(String s: game.crewNames) {
+                System.out.println(s + "\n");
+            }
+            System.out.println("Test");
+            for(int i = 0; i < game.crewNames.size(); ++i) {
+                addNode("crew"+i, game.crewNames.get(i),crewNamesNode);
+            }
+
+            //copied from http://www.mkyong.com/java/how-to-create-xml-file-in-java-dom/
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(file);
+
+            // Output to console for testing
+            // StreamResult result = new StreamResult(System.out);
+
+            transformer.transform(source, result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //saves ship object
     private void saveShip() {
         Node ship = getNode("ship", gameNodes);
@@ -130,6 +185,7 @@ public class GameFileSaver implements Serializable
         addNode("engine", Integer.toString(game.getShip().getEngineStatus()), ship);
         addNode("wing", Integer.toString(game.getShip().getWingStatus()), ship);
         addNode("livingBay", Integer.toString(game.getShip().getLivingBayStatus()), ship);
+        addNode("xpos", Float.toString(game.getShip().getXpos()), ship);
     }
     //saves resource object
     private void saveResources() {

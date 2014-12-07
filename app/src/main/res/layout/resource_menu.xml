@@ -276,9 +276,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/headToSpace"
                 android:id="@+id/headToSpace"
-                android:onClick="headToSpace"
                 android:layout_row="0"
-                android:layout_column="3" />
+                android:layout_column="3"
+                android:onClick="headToSpace" />
         </GridLayout>
     </ScrollView>
 </LinearLayout>

@@ -107,8 +107,6 @@ public class PlanetActivity extends Activity {
         sprEngines.setText(Integer.toString(game.getResources().getSpareEngines()));
         sprWings.setText(Integer.toString(game.getResources().getSpareWings()));
         sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
-
-        System.out.println("Fuel: " + Integer.toString(game.getResources().getFuel()) + " Spare Wings: " + game.getResources().getSpareWings());
         setPlanetInfo();
 
     }
@@ -268,12 +266,12 @@ public class PlanetActivity extends Activity {
         money.setText(Integer.toString(game.getMoney()));
 
 
-        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
+/*        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
             Intent intent = new Intent(this, ExitActivity.class);
             finish();
             intent.putExtra("activity", "Planet");
             startActivity(intent);
-        }
+        }*/
 
     }
 
@@ -283,7 +281,7 @@ public class PlanetActivity extends Activity {
         Bundle b = new Bundle();
         game.setArrivedAtPlanet(false);
         b.putSerializable("Game", game);
-        b.putStringArrayList("Crew", GameScreenActivity.crewNames);
+        b.putStringArrayList("Crew", game.crewNames);
         intent.putExtras(b);
         finish();
         startActivity(intent);

@@ -27,8 +27,11 @@ public class Game implements Serializable {
     private boolean fast, medium, slow;     //only one of these values can be true, they represent how fast the player is moving
     private boolean arrivedAtPlanet;        //states if player has just arrived at a planet
     private boolean firstMove;      //if it is the first move in the game
+    public boolean justLoaded;      //used to tell if the game had just been loaded or not
+    public ArrayList<String> crewNames;
 
     public Game() {
+        crewNames = new ArrayList<String>();
         people = new ArrayList<Person>();
         planets = new ArrayList<Planet>();
         fast = false;
@@ -36,6 +39,7 @@ public class Game implements Serializable {
         slow = false;
         firstMove = true;
         money = 100000;
+        justLoaded = false;
 
         /* Create all 9 planets  */
         Planet Mercury = new Planet("Mercury");
@@ -163,12 +167,12 @@ public class Game implements Serializable {
         crewAttrition();                        // decide how much health each crew member loses
         resourceAttrition();                    // decide how many resources the crew loses
 //        System.out.println("Destination: " + destination.name + " Distance Remaining: " + distanceRemaining + " Total Distance: " + totalDistance +" Pace: " + pace);
-        String issue = getIssue();
         if(distanceRemaining <= 0) {
             arrivedAtPlanet = true;
             destination.visited = true;
             refreshCompound();
         }
+        String issue = getIssue();
         return issue;
     }
 
@@ -913,5 +917,9 @@ public class Game implements Serializable {
             double hypotenuse = Math.sin(Math.toRadians(40 * (pIndex - currentIndex)));
             return ((int) ((destination.distanceFromSun) * hypotenuse));
         }
+    }
+
+    public void setFirstMove(boolean b) {
+        firstMove = b;
     }
 }

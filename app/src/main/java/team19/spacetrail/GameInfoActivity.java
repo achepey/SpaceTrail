@@ -140,9 +140,14 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
             Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
         }
 
+        System.out.println("crew names info page:");
+        for(String s: game.crewNames) {
+            System.out.println("1:"+s + "\n");
+        }
+
         /* Will only work if names are unique, I think... maybe, depends on remove function */
         /* deadNames will contain all the names of dead crew members */
-        ArrayList<String> deadNames = new ArrayList<String>(GameScreenActivity.crewNames);
+        ArrayList<String> deadNames = new ArrayList<String>(game.crewNames);
         Log.d("gi", "i is " + i);
         for(int j = 0; j < game.getPeople().size(); j++){
             Log.d("gi", "j = " + j);
@@ -214,7 +219,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String value = input.getText().toString();
-                if(value == ""){
+                if(value.equals("")){
                     Context context = getApplicationContext();
                     CharSequence popup = "Input a value!";
                     Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);

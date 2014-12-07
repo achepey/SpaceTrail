@@ -10,18 +10,22 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -98,7 +102,7 @@ public class MainActivity extends Activity {
         crewNames.add(crew3Name);
         String crew4Name = crew4.getText().toString();
         crewNames.add(crew4Name);
-
+        game.crewNames = new ArrayList<String>(crewNames);
         if(capName.length()!=0 && crew1Name.length()!=0 && crew2Name.length()!=0 && crew3Name.length()!=0 && crew4Name.length()!=0) {
             game.addCrew(capName, true);
             game.addCrew(crew1Name, false);
@@ -134,7 +138,120 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the load game menu
     public void loadGame(View view) {
+        File file = new File(getExternalFilesDir(null),"SpaceTrailData.xml");
+        GameFileLoader loader = new GameFileLoader(file);
+        game = loader.loadGame();
+        game.justLoaded = true;
+        try {
+            AssetManager assetManager = getAssets();
+            InputStream planetInput = assetManager.open("planetData.xml");
+
+            game.setPlanetInputStream(planetInput);
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         setContentView(R.layout.activity_load_game);
+
+        TextView engineHealth = (TextView) findViewById(R.id.engineHealth);
+        TextView livingBayHealth = (TextView) findViewById(R.id.livingBayHealth);
+        TextView wingsHealth = (TextView) findViewById(R.id.wingHealth);
+        TextView hullHealth = (TextView) findViewById(R.id.hullHealth);
+        TextView pace = (TextView) findViewById(R.id.paceValue);
+
+        engineHealth.setText(Integer.toString(game.getShip().getEngineStatus())+"%");
+        livingBayHealth.setText(Integer.toString(game.getShip().getLivingBayStatus())+"%");
+        wingsHealth.setText(Integer.toString(game.getShip().getWingStatus())+"%");
+        hullHealth.setText(Integer.toString(game.getShip().getHullStatus())+"%");
+        if(game.getSpeed() == 1) {
+            pace.setText("Fast");
+        }
+        else if(game.getSpeed() == 2) {
+            pace.setText("Medium");
+        }
+        else {
+            pace.setText("Slow");
+        }
+
+        /* Setting fields for resources */
+        TextView money = (TextView) findViewById(R.id.moneyVariable);
+        TextView fuel = (TextView) findViewById(R.id.fuelVariable);
+        TextView food = (TextView) findViewById(R.id.foodVariable);
+        TextView aluminum = (TextView) findViewById(R.id.aluminumVariable);
+        TextView sprEngines = (TextView) findViewById(R.id.engineVariable);
+        TextView sprWings = (TextView) findViewById(R.id.wingVariable);
+        TextView sprLivBay = (TextView) findViewById(R.id.livingBayVariable);
+
+        money.setText(Integer.toString(game.getMoney()));
+        fuel.setText(Integer.toString(game.getResources().getFuel()));
+        food.setText(Integer.toString(game.getResources().getFood()));
+        aluminum.setText(Integer.toString(game.getResources().getAluminum()));
+        sprEngines.setText(Integer.toString(game.getResources().getSpareEngines()));
+        sprWings.setText(Integer.toString(game.getResources().getSpareWings()));
+        sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
+
+        /* Setting fields for names and their info */
+        ArrayList<TextView> names = new ArrayList<TextView>();
+        ArrayList<TextView> nameInfo = new ArrayList<TextView>();
+        TextView capt = (TextView) findViewById(R.id.captainName);
+        names.add(capt);
+        TextView person1 = (TextView) findViewById(R.id.peopleName1);
+        names.add(person1);
+        TextView person2 = (TextView) findViewById(R.id.peopleName2);
+        names.add(person2);
+        TextView person3 = (TextView) findViewById(R.id.peopleName3);
+        names.add(person3);
+        TextView person4 = (TextView) findViewById(R.id.peopleName4);
+        names.add(person4);
+        TextView captInfo = (TextView) findViewById(R.id.captainInfo);
+        nameInfo.add(captInfo);
+        TextView person1Info = (TextView) findViewById(R.id.peopleNameInfo1);
+        nameInfo.add(person1Info);
+        TextView person2Info = (TextView) findViewById(R.id.peopleNameInfo2);
+        nameInfo.add(person2Info);
+        TextView person3Info = (TextView) findViewById(R.id.peopleNameInfo3);
+        nameInfo.add(person3Info);
+        TextView person4Info = (TextView) findViewById(R.id.peopleNameInfo4);
+        nameInfo.add(person4Info);
+
+        Log.d("Gameinfo", "Size of games people = " + game.getPeople().size());
+        int i = 0;
+        for(; i < game.getPeople().size(); i++){
+            names.get(i).setText(game.getPeople().get(i).getName());
+            nameInfo.get(i).setText(game.getPeople().get(i).getCondition()+"%");
+            Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
+        }
+
+        System.out.println("crew names: "+game.crewNames.size());
+        for(String s: game.crewNames) {
+            System.out.println(s + "\n");
+        }
+
+        /* Will only work if names are unique, I think... maybe, depends on remove function */
+        /* deadNames will contain all the names of dead crew members */
+        ArrayList<String> deadNames = new ArrayList<String>(game.crewNames);
+        Log.d("gi", "i is " + i);
+        for(int j = 0; j < game.getPeople().size(); j++){
+            Log.d("gi", "j = " + j);
+            for(String s : deadNames){
+                if(game.getPeople().get(j).getName().equals(s)){
+                    deadNames.remove(s);
+                    Log.d("Gameinfo", s + " is alive!");
+                    break;
+                }
+            }
+        }
+        Log.d("GameInfo", "Size of deadNames = " + deadNames.size());
+        // i holds the current position in names without a crew member name
+        System.out.println("Dead Names");
+        for(String s: deadNames) {
+            System.out.println(s + "\n");
+        }
+        for(int j = 0; j < deadNames.size(); j++){
+            names.get(i+j).setText(deadNames.get(j));
+            nameInfo.get(i+j).setText("Dead");
+        }
     }
 
     //Sets Layout to the Instructions menu
@@ -147,7 +264,7 @@ public class MainActivity extends Activity {
         testGame.getResources().setFuel(10000);
         testGame.getResources().addSpare(new Part("engine",100));
         testGame.getResources().addSpare(new Part("wing",100));
-        testGame.getResources().addSpare(new Part("livingBay",100));
+        testGame.getResources().addSpare(new Part("livingBay", 100));
         testGame.addCrew("cap",true);
         crewNames.add("cap");
         testGame.addCrew("1",false);
@@ -158,6 +275,8 @@ public class MainActivity extends Activity {
         crewNames.add("3");
         testGame.addCrew("4",false);
         crewNames.add("4");
+        game.crewNames = new ArrayList<String>(crewNames);
+
 
         try {
             AssetManager assetManager = getAssets();
@@ -307,7 +426,10 @@ public class MainActivity extends Activity {
     //Used for a button to start the GameScreenActivity from the Load Game
     public void gameScreen(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
-        intent.putExtra("Game", game);
+        Bundle b = new Bundle();
+        b.putSerializable("Game", game);
+        b.putStringArrayList("Crew", game.crewNames);
+        intent.putExtras(b);
         startActivity(intent);
         finish();
     }

@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javagame.*;
@@ -50,7 +51,6 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     /* Instance Fields */
     private ImageView spaceship;
     private ArrayList<ImageView> planets; // Holds image views for all planets
-    protected static ArrayList<String> crewNames;
     private int dest_planet = 0; // Integer representing the user's desired planet destination
     private GestureDetector detector;
     private int screen_width;
@@ -63,14 +63,14 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         game = (Game) getIntent().getExtras().getSerializable("Game");
-        crewNames = getIntent().getStringArrayListExtra("Crew");
+        ArrayList<String> crewNames = getIntent().getStringArrayListExtra("Crew");
 
         Log.d("GameScreen", "Size of crewNames = " + crewNames.size());
 
         for(String s : crewNames){
             Log.d("GameScreen", s);
         }
-
+        game.crewNames = crewNames;
         //Sets listener to the screen for tap and long tap
         detector = new GestureDetector(this, this);
         detector.setOnDoubleTapListener(this);
@@ -103,19 +103,22 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         foodView.setText(Integer.toString(game.getResources().getFood()));
 
 
-       /* if(game.getDestination().getDistanceRemaining() == -1){
+        if(game.getDistanceRemaining() <= 0 || game.getDestination().name.equals("Temp")) {
             selectPlanet();
-        }*/
+        }
+        else {
+            displayPlanet();
+        }
+
         //Will add an else here when we get loading set up
 
-        selectPlanet(); //will be removed when fully integrated
+    //    selectPlanet(); //will be removed when fully integrated
     }
 
     /* Helper Methods */
 
     //Process of moving ship across screen
     public void moveShip(View v) {
-
         Log.d("GameScreen", "Pace is " + game.getSpeed());
 
         //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
@@ -154,6 +157,11 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
 
 
     public void moveOnScreen() {
+        if(game.justLoaded){
+            spaceship.setX(game.getShip().getXpos());
+            game.justLoaded = false;
+        }
+
         double moveScreenPercent = game.getPace() / game.getTotalDistance();
         double amtToMoveOnScreen = moveScreenPercent * (screen_width - planets.get(dest_planet).getX() - planets.get(dest_planet).getWidth() - spaceship.getWidth()) + 10;
 
@@ -457,6 +465,46 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planet_selector.show();
     }
 
+    //Displays picture of planet to planet menu for better aesthetic view
+    public void displayPlanet(){
+        if(game.getDestination().name.equals("Mercury")) {
+            planets.get(0).setVisibility(View.VISIBLE);
+            dest_planet = 0;
+        }
+        else if(game.getDestination().name.equals("Venus")) {
+            planets.get(1).setVisibility(View.VISIBLE);
+            dest_planet = 1;
+        }
+        else if(game.getDestination().name.equals("Earth")) {
+            planets.get(2).setVisibility(View.VISIBLE);
+            dest_planet = 2;
+        }
+        else if(game.getDestination().name.equals("Mars")) {
+            planets.get(3).setVisibility(View.VISIBLE);
+            dest_planet = 3;
+        }
+        else if(game.getDestination().name.equals("Jupiter")) {
+            planets.get(4).setVisibility(View.VISIBLE);
+            dest_planet = 4;
+        }
+        else if(game.getDestination().name.equals("Saturn")) {
+            planets.get(5).setVisibility(View.VISIBLE);
+            dest_planet = 5;
+        }
+        else if(game.getDestination().name.equals("Uranus")) {
+            planets.get(6).setVisibility(View.VISIBLE);
+            dest_planet = 6;
+        }
+        else if(game.getDestination().name.equals("Neptune")) {
+            planets.get(7).setVisibility(View.VISIBLE);
+            dest_planet = 7;
+        }
+        else {
+            planets.get(8).setVisibility(View.VISIBLE);
+            dest_planet = 8;
+        }
+    }
+
     public void repairHull(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Uh oh! Your Hull needs repairs!");
@@ -472,7 +520,22 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         builder.setMessage(R.string.promptExit);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                game.getShip().setXpos(spaceship.getX());
+                System.out.println("save x: "+game.getShip().getXpos());
+                GameFileSaver saver = new GameFileSaver(game);
+                File file = new File(getExternalFilesDir(null),"SpaceTrailData.xml");
+                saver.saveGameAndroid(file);
                 finish();
+        /*        File folder = getExternalFilesDir(null);
+                File[] listOfFiles = folder.listFiles();
+
+                for (int i = 0; i < listOfFiles.length; i++) {
+                    if (listOfFiles[i].isFile()) {
+                        System.out.println("File " + listOfFiles[i].getName());
+                    } else if (listOfFiles[i].isDirectory()) {
+                        System.out.println("Directory " + listOfFiles[i].getName());
+                    }
+                }       */
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

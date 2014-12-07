@@ -5,6 +5,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.File;
 import java.io.Serializable;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -62,6 +63,23 @@ public class GameFileLoader implements Serializable
         }
     }
 
+    public GameFileLoader(File file) {
+        try {
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            doc = docBuilder.parse(file);
+            game_nodes = doc.getChildNodes();
+            Node gameNode = getNode("game", game_nodes);
+            game_nodes = gameNode.getChildNodes();
+
+            game = new Game();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //Loads data from XML into game object
     public Game loadGame() {
         loadShip();
@@ -73,16 +91,28 @@ public class GameFileLoader implements Serializable
         game.setMoney(Integer.parseInt(getNodeValue("money", game_nodes)));
         String previousPlanet = getNodeValue("previousPlanet", game_nodes);
         game.setPrevious(previousPlanet);
+        if(!previousPlanet.equals("Temp")) {
+            game.setFirstMove(false);
+        }
         int pace = Integer.parseInt(getNodeValue("pace", game_nodes));
-        game.setSpeed(pace);
         game.setTotalDistance(Double.parseDouble(getNodeValue("totalDistance", game_nodes)));
-
+        game.setSpeed(pace);
         String visitedPlanetsString = getNodeValue("visitedPlanets", game_nodes);
         String delims = "[ ]";
         String[] visitedPlanetsArray = visitedPlanetsString.split(delims);
         for(int i = 0; i < visitedPlanetsArray.length; ++i) {
             game.setVisited(visitedPlanetsArray[i]);
         }
+        Node crewNames = getNode("peopleNames", game_nodes);
+        NodeList crewNamesNodes = crewNames.getChildNodes();
+        for(int i = 0; i < 5; ++i) {
+            game.crewNames.add(getNodeValue("crew"+i,crewNamesNodes));
+        }
+        System.out.println("crew names:");
+        for(String s: game.crewNames) {
+            System.out.println(s + "\n");
+        }
+
         return game;
     }
     //Loads ship data into game object
@@ -93,6 +123,7 @@ public class GameFileLoader implements Serializable
         game.getShip().setEngineStatus(Integer.parseInt(getNodeValue("engine",ship_child_nodes)));
         game.getShip().setWingStatus(Integer.parseInt(getNodeValue("wing",ship_child_nodes)));
         game.getShip().setLivingBayStatus(Integer.parseInt((getNodeValue("livingBay",ship_child_nodes))));
+        game.getShip().setXpos(Float.parseFloat(getNodeValue("xpos",ship_child_nodes)));
     }
     //Loads resource data into game object
     private void loadResources() {

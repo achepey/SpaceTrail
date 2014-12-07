@@ -31,6 +31,9 @@ public class ExitActivity extends Activity {
         if(caller.equals("Loser")){
             exitMessage.setText("Sorry, You Lose!");
         }
+        if(caller.equals("winner")) {
+            exitMessage.setText("Congratulations! You have visited all the planets!");
+        }
     }
 
     /* Helper Methods */
