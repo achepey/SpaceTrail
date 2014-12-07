@@ -182,6 +182,8 @@ public class MainActivity extends Activity {
         TextView sprEngines = (TextView) findViewById(R.id.engineVariable);
         TextView sprWings = (TextView) findViewById(R.id.wingVariable);
         TextView sprLivBay = (TextView) findViewById(R.id.livingBayVariable);
+        TextView compoundName = (TextView) findViewById(R.id.resourceCompound);
+        TextView compound = (TextView) findViewById(R.id.compoundVariable);
 
         money.setText(Integer.toString(game.getMoney()));
         fuel.setText(Integer.toString(game.getResources().getFuel()));
@@ -190,6 +192,8 @@ public class MainActivity extends Activity {
         sprEngines.setText(Integer.toString(game.getResources().getSpareEngines()));
         sprWings.setText(Integer.toString(game.getResources().getSpareWings()));
         sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
+        compoundName.setText(game.getRace().getStrength());
+        compound.setText((Integer.toString(game.getResources().getCompound())));
 
         /* Setting fields for names and their info */
         ArrayList<TextView> names = new ArrayList<TextView>();

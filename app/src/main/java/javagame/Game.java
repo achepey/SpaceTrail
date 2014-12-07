@@ -815,6 +815,7 @@ public class Game implements Serializable {
     public boolean repairEngine() {
         if(resources.removeSpare("engine")){
             ship.setEngineStatus(100);
+            gameOver=false;
             return true;
         }
         return false;
@@ -825,6 +826,7 @@ public class Game implements Serializable {
     public boolean repairWing() {
         if(resources.removeSpare("wing")){
             ship.setWingStatus(100);
+            gameOver=false;
             return true;
         }
         return false;
@@ -835,6 +837,7 @@ public class Game implements Serializable {
     public boolean repairLivingBay() {
         if(resources.removeSpare("livingBay")){
             ship.setLivingBayStatus(100);
+            gameOver=false;
             return true;
         }
         return false;
