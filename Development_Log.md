@@ -169,7 +169,7 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   - Added repairing of hull functionality
   - Began searching for and fixing issues within integration
   - Added death of crew members handling
-- Robert: 6 hours
+- Robert: 7 hours
   - Completely integrated saving and loading functionality to game
   - Changed activity load screen layout to match activity game info
   - Added automatic ship repair when engine, wings or living bay hit zero status and player has spare parts
