@@ -140,7 +140,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         int i = 0;
         for(; i < game.getPeople().size(); i++){
             names.get(i).setText(game.getPeople().get(i).getName());
-            nameInfo.get(i).setText(game.getPeople().get(i).getCondition()+"%");
+            nameInfo.get(i).setText(game.getPeople().get(i).getAge() + ", " + game.getPeople().get(i).getCondition()+"%");
             Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
         }
 

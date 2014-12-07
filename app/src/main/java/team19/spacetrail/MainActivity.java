@@ -223,7 +223,7 @@ public class MainActivity extends Activity {
         int i = 0;
         for(; i < game.getPeople().size(); i++){
             names.get(i).setText(game.getPeople().get(i).getName());
-            nameInfo.get(i).setText(game.getPeople().get(i).getCondition()+"%");
+            nameInfo.get(i).setText(game.getPeople().get(i).getAge() + ", " + game.getPeople().get(i).getCondition()+"%");
             Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
         }
 
@@ -416,6 +416,10 @@ public class MainActivity extends Activity {
         TextView wings = (TextView) findViewById(R.id.wingQuantity);
         int wingsint = Integer.parseInt(wings.getText().toString());
         game.sellParts(wingsint, "wing");
+
+        TextView bay = (TextView) findViewById(R.id.livingBayQuantity);
+        int bayint = Integer.parseInt(bay.getText().toString());
+        game.sellParts(bayint, "livingBay");
 
         //Ends MainActivity and starts the GameScreenActivity
         Intent intent = new Intent(this, GameScreenActivity.class);
