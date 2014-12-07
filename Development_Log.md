@@ -162,10 +162,14 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   - Began integrating AsteroidActivity and GameInfoActivity into final product
   - Added functionality to fix minor bugs
 
-#### 12/6/2014
+##### 12/6/2014
 - Andrew: 7 hours
   - Completely integrated AsteroidActivity and updating values
   - Finihsed integrating GameInfoActivity
   - Added repairing of hull functionality
   - Began searching for and fixing issues within integration
   - Added death of crew members handling
+- Robert: 6 hours
+  - Completely integrated saving and loading functionality to game
+  - Changed activity load screen layout to match activity game info
+  - Added automatic ship repair when engine, wings or living bay hit zero status and player has spare parts
