@@ -87,4 +87,5 @@
     <string name="auto_generate">Auto Generate!</string>
     <string name="repair_hull">Repair Hull</string>
     <string name="pace">Pace</string>
+    <string name="weakness">Weakness</string>
 </resources>

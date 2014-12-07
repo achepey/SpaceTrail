@@ -101,6 +101,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         TextView sprLivBay = (TextView) findViewById(R.id.livingBayVariable);
         TextView compoundName = (TextView) findViewById(R.id.resourceCompound);
         TextView compound = (TextView) findViewById(R.id.compoundVariable);
+        TextView weakness = (TextView) findViewById(R.id.weaknessVariable);
 
         money.setText(Integer.toString(game.getMoney()));
         fuel.setText(Integer.toString(game.getResources().getFuel()));
@@ -111,6 +112,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         sprLivBay.setText(Integer.toString(game.getResources().getSpareLivingBays()));
         compoundName.setText(game.getRace().getStrength());
         compound.setText((Integer.toString(game.getResources().getCompound())));
+        weakness.setText(game.getRace().getWeakness());
 
         /* Setting fields for names and their info */
         ArrayList<TextView> names = new ArrayList<TextView>();

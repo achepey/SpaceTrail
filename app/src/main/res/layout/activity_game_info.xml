@@ -261,151 +261,169 @@
                 android:fillViewport="false"
                 android:id="@+id/resourceScroll">
 
-                <GridLayout
-                    android:layout_width="181dp"
-                    android:layout_height="132dp"
-                    android:id="@+id/resourceInformation"
+                    <GridLayout
+                        android:layout_width="181dp"
+                        android:layout_height="132dp"
+                        android:id="@+id/resourceInformation"
 
-                    android:columnCount="3"
-                    android:minWidth="@dimen/loadGame_ColSize"
-                    android:rowCount="8">
+                        android:columnCount="3"
+                        android:minWidth="@dimen/loadGame_ColSize"
+                        android:rowCount="9">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Money"
-                        android:id="@+id/resourcesMoney"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Money"
+                            android:id="@+id/resourcesMoney"
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_fuel"
-                        android:id="@+id/resourcesFuel"
-                        android:layout_row="1"
-                        android:layout_column="0"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_fuel"
+                            android:id="@+id/resourcesFuel"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_food"
-                        android:id="@+id/resourcesFood"
-                        android:layout_row="2"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_food"
+                            android:id="@+id/resourcesFood"
+                            android:layout_row="2"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_AlumPrts"
-                        android:id="@+id/resourcesAluminum"
-                        android:layout_row="3"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_AlumPrts"
+                            android:id="@+id/resourcesAluminum"
+                            android:layout_row="3"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_EngPrts"
-                        android:id="@+id/resourcesEngParts"
-                        android:layout_row="4"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_EngPrts"
+                            android:id="@+id/resourcesEngParts"
+                            android:layout_row="4"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_SprWings"
-                        android:id="@+id/resourcesSprWngs"
-                        android:layout_row="5"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_SprWings"
+                            android:id="@+id/resourcesSprWngs"
+                            android:layout_row="5"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/Resources_SprLivingBays"
-                        android:id="@+id/resourcesLivingBay"
-                        android:layout_row="6"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Resources_SprLivingBays"
+                            android:id="@+id/resourcesLivingBay"
+                            android:layout_row="6"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/resourceCompound"
-                        android:layout_row="7"
-                        android:layout_column="0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/resourceCompound"
+                            android:layout_row="7"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/moneyVariable"
-                        android:layout_row="0"
-                        android:layout_column="1"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize"
-                        android:layout_marginLeft="10dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/weakness"
+                            android:text="@string/weakness"
+                            android:layout_row="8"
+                            android:layout_column="0" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/fuelVariable"
-                        android:layout_row="1"
-                        android:layout_column="1"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize"
-                        android:layout_marginLeft="10dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/moneyVariable"
+                            android:layout_row="0"
+                            android:layout_column="1"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                            android:layout_marginLeft="10dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/foodVariable"
-                        android:layout_row="2"
-                        android:layout_column="1"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize"
-                        android:layout_marginLeft="10dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/fuelVariable"
+                            android:layout_row="1"
+                            android:layout_column="1"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                            android:layout_marginLeft="10dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/aluminumVariable"
-                        android:layout_row="3"
-                        android:layout_column="1"
-                        android:layout_marginLeft="10dp"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/engineVariable"
-                        android:layout_row="4"
-                        android:layout_column="1"
-                        android:layout_marginLeft="10dp"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/foodVariable"
+                            android:layout_row="2"
+                            android:layout_column="1"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+                            android:layout_marginLeft="10dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/wingVariable"
-                        android:layout_row="5"
-                        android:layout_column="1"
-                        android:layout_marginLeft="10dp"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/aluminumVariable"
+                            android:layout_row="3"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/engineVariable"
+                            android:layout_row="4"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/livingBayVariable"
-                        android:layout_row="6"
-                        android:layout_column="1"
-                        android:layout_marginLeft="10dp"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/wingVariable"
+                            android:layout_row="5"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/compoundVariable"
-                        android:layout_row="7"
-                        android:layout_column="1"
-                        android:layout_marginLeft="10dp"
-                        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
-                </GridLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/livingBayVariable"
+                            android:layout_row="6"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/compoundVariable"
+                            android:layout_row="7"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/weaknessVariable"
+                            android:layout_row="8"
+                            android:layout_column="1"
+                            android:layout_marginLeft="10dp"
+                            android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+                    </GridLayout>
             </ScrollView>
         </GridLayout>
 
