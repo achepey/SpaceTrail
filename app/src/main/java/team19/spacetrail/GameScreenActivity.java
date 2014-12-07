@@ -118,17 +118,18 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     /* Helper Methods */
 
     //Process of moving ship across screen
-    public void moveShip(View v) {
+    public void automaticRepair(View v) {
         Log.d("GameScreen", "Pace is " + game.getSpeed());
 
-        if(game.getShip().getEngineStatus() <= 0 ) {
-            if(game.repairEngine()) {
+        if (game.getShip().getEngineStatus() <= 0) {
+            if (game.repairEngine()) {
                 final AlertDialog.Builder repair_alert = new AlertDialog.Builder(this);
                 repair_alert.setTitle(R.string.issue_title);
                 repair_alert.setMessage("Your engines were critically damaged and have been replaced with one of your spares.");
                 repair_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        makeMove();
                     }
                 });
                 Dialog repair_dialog = repair_alert.create();
@@ -136,14 +137,15 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 repair_dialog.show();
             }
         }
-        if(game.getShip().getWingStatus() <= 0 ) {
-            if(game.repairWing()) {
+        if (game.getShip().getWingStatus() <= 0) {
+            if (game.repairWing()) {
                 final AlertDialog.Builder repair_alert = new AlertDialog.Builder(this);
                 repair_alert.setTitle(R.string.issue_title);
                 repair_alert.setMessage("Your wings were critically damaged and have been replaced with one of your spares.");
                 repair_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        makeMove();
                     }
                 });
                 Dialog repair_dialog = repair_alert.create();
@@ -151,14 +153,15 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 repair_dialog.show();
             }
         }
-        if(game.getShip().getLivingBayStatus() <= 0 ) {
-            if(game.repairLivingBay()) {
+        if (game.getShip().getLivingBayStatus() <= 0) {
+            if (game.repairLivingBay()) {
                 final AlertDialog.Builder repair_alert = new AlertDialog.Builder(this);
                 repair_alert.setTitle(R.string.issue_title);
                 repair_alert.setMessage("Your living bay was critically damaged and has been replaced with one of your spares.");
                 repair_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        makeMove();
                     }
                 });
                 Dialog repair_dialog = repair_alert.create();
@@ -166,29 +169,30 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 repair_dialog.show();
             }
         }
+    }
 
+    public void makeMove() {
         //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
         String moveResult = game.makeMove();
         TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
         TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
         fuelView.setText(Integer.toString(game.getResources().getFuel()));
         foodView.setText(Integer.toString(game.getResources().getFood()));
-        if(!moveResult.equals("Successful Movement!")) {
-            if(!game.isLoser()) {
+        if (!moveResult.equals("Successful Movement!")) {
+            if (!game.isLoser()) {
                 final GameScreenActivity tempGSA = this;
                 final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
                 issue_alert.setTitle(R.string.issue_title);
                 issue_alert.setMessage(moveResult);
                 issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if(game.isLoser()){
+                        if (game.isLoser()) {
                             dialog.cancel();
                             Intent intent = new Intent(tempGSA, ExitActivity.class);
                             intent.putExtra("activity", "Loser");
                             startActivity(intent);
                             finish();
-                        }
-                        else {
+                        } else {
                             dialog.cancel();
                             moveOnScreen();
                         }
@@ -198,11 +202,11 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 d.setCancelable(false);
                 d.show();
             }
-        }
-        else {
+        } else {
             moveOnScreen();
         }
     }
+
 
 
     public void moveOnScreen() {
@@ -667,7 +671,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onSingleTapUp(MotionEvent event) {
         View v = new View(this);
-        moveShip(v);
+        automaticRepair(v);
         return true;
     }
 
@@ -675,7 +679,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     @Override
     public boolean onDoubleTap(MotionEvent event) {
         View v = new View(this);
-        moveShip(v);
+        automaticRepair(v);
         return true;
     }
 
