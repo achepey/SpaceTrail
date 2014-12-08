@@ -386,6 +386,13 @@ public class MainActivity extends Activity {
             Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM, 0, 200);
             toast.show();
+
+            fuel.setText("");
+            food.setText("");
+            engine.setText("");
+            aluminum.setText("");
+            wings.setText("");
+            livingBays.setText("");
         }
         else {
             //Creates pop-up letting user know the resources were purchased correctly
