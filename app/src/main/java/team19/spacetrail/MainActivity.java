@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javagame.*;
 
@@ -432,6 +433,86 @@ public class MainActivity extends Activity {
         intent.putExtras(b);
         startActivity(intent);
         finish();
+    }
+
+    public void autoGenerate(View v){
+        ArrayList<String> alienNames = new ArrayList<String>();
+        alienNames.add("Glemb");
+        alienNames.add("Welldoss");
+        alienNames.add("Entayta");
+        alienNames.add("Brownfox");
+        alienNames.add("Tarkal");
+        alienNames.add("Mustafav");
+        alienNames.add("Sarah Palin");
+        alienNames.add("Obama");
+        alienNames.add("Nekav");
+        alienNames.add("J'Satun");
+        alienNames.add("Nihan");
+        alienNames.add("Koocrah");
+        alienNames.add("Javaris");
+        alienNames.add("Xwing@Aliciousness");
+        alienNames.add("Beezer");
+        alienNames.add("Eeeeeeeee");
+        alienNames.add("J'Pluto");
+        alienNames.add("Torque");
+        alienNames.add("Probincrux");
+        alienNames.add("Jackmerius");
+        alienNames.add("Tyroil");
+        alienNames.add("Jimmy");
+        alienNames.add("Jimmy Jr.");
+        alienNames.add("Jimmy Sr.");
+        alienNames.add("Jimmy III");
+        alienNames.add("Jimmy IV");
+        alienNames.add("Hinglecringle");
+        alienNames.add("Waxon");
+        alienNames.add("SmoochieWallis");
+        alienNames.add("Peele");
+        alienNames.add("Quatro");
+        alienNames.add("Ozamataz");
+        alienNames.add("Washingbeard");
+        alienNames.add("T.G.I.F");
+        alienNames.add("Lewith");
+        alienNames.add("Mousecop");
+        alienNames.add("Dan Smith");
+        alienNames.add("Mergatroid");
+        alienNames.add("Quackadilly");
+        alienNames.add("Trisket");
+        alienNames.add("Fartrell");
+        alienNames.add("Jammie");
+        alienNames.add("Fresca");
+        alienNames.add("Yeast");
+        alienNames.add("Toyata");
+        alienNames.add("Dahistorius");
+        alienNames.add("Lamystorius");
+        alienNames.add("AyeAyeRon");
+        alienNames.add("JayQuelIn");
+
+        ArrayList<EditText> fields = new ArrayList<EditText>();
+
+        EditText capt = (EditText) findViewById(R.id.editCapField);
+        fields.add(capt);
+        EditText person1 = (EditText) findViewById(R.id.firstOtherNameField);
+        fields.add(person1);
+        EditText person2 = (EditText) findViewById(R.id.secOtherNameField);
+        fields.add(person2);
+        EditText person3 = (EditText) findViewById(R.id.thirdOtherNameField);
+        fields.add(person3);
+        EditText person4 = (EditText) findViewById(R.id.fourOtherNameField);
+        fields.add(person4);
+
+        Random rand = new Random();
+        int number = 0;
+        String name = "";
+        number = rand.nextInt(alienNames.size());
+
+        Log.d("Main", "Number = " + number);
+
+        for(int i = 0; i < 5; i++){
+            name = alienNames.get(number);
+            alienNames.remove(number);
+            fields.get(i).setText(name, TextView.BufferType.EDITABLE);
+            number = rand.nextInt(alienNames.size());
+        }
     }
 
     //Used for a button to start the GameScreenActivity from the Load Game

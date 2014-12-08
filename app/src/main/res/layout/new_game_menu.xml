@@ -166,8 +166,11 @@
         android:layout_height="wrap_content"
         android:text="@string/auto_generate"
         android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/fourOtherName"
-        android:layout_alignStart="@+id/fourOtherName" />
+        android:layout_above="@+id/sumbitGame"
+        android:layout_alignLeft="@+id/sumbitGame"
+        android:layout_alignStart="@+id/sumbitGame"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="autoGenerate" />
 
 </RelativeLayout>
