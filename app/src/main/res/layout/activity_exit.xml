@@ -46,5 +46,7 @@
         android:layout_below="@+id/playAgainButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:onClick="exitGame" />
+        android:onClick="exitGame"
+        android:layout_alignLeft="@+id/playAgainButton"
+        android:layout_alignRight="@+id/playAgainButton" />
 </RelativeLayout>

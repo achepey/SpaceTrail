@@ -36,12 +36,13 @@ import javagame.*;
 
 public class MainActivity extends Activity {
 
-    private final double FOOD_COST = 1;
-    private final double FUEL_COST = 5;
-    private final int ENGINE_COST = 15;
+    //Starting costs for resources
+    private final int FOOD_COST = 4;
+    private final int FUEL_COST = 5;
+    private final int ENGINE_COST = 100;
     private final int ALUMINUM_COST = 10;
-    private final int WING_COST = 15;
-    private final int LIVING_BAY_COST = 15;
+    private final int WING_COST = 100;
+    private final int LIVING_BAY_COST = 100;
 
     private Game game;
     private int startingMoney;
@@ -51,6 +52,7 @@ public class MainActivity extends Activity {
     @Override
     public void setContentView(int layoutResID) {
         View view = getLayoutInflater().inflate(layoutResID, null);
+        //tag was needed for pressing back button to go back to splash screen
         currentView = (String)view.getTag();
         super.setContentView(view);
     }
@@ -64,13 +66,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         crewNames = new ArrayList<String>();
-
         game = new Game();
         try {
             AssetManager assetManager = getAssets();
             InputStream planetInput = assetManager.open("planetData.xml");
             InputStream schema = assetManager.open("mySchema.xsd");
+            //input stream needed to load planet info
             game.setPlanetInputStream(planetInput);
+            //needed for validation
             game.setSchema(schema);
         }
         catch(Exception e) {
@@ -94,22 +97,22 @@ public class MainActivity extends Activity {
         EditText crew4 = (EditText) findViewById(R.id.fourOtherNameField);
 
         String capName = captain.getText().toString();
-        crewNames.add(capName);
         String crew1Name = crew1.getText().toString();
-        crewNames.add(crew1Name);
         String crew2Name = crew2.getText().toString();
-        crewNames.add(crew2Name);
         String crew3Name = crew3.getText().toString();
-        crewNames.add(crew3Name);
         String crew4Name = crew4.getText().toString();
-        crewNames.add(crew4Name);
         game.crewNames = new ArrayList<String>(crewNames);
         if(capName.length()!=0 && crew1Name.length()!=0 && crew2Name.length()!=0 && crew3Name.length()!=0 && crew4Name.length()!=0) {
             game.addCrew(capName, true);
+            crewNames.add(capName);
             game.addCrew(crew1Name, false);
+            crewNames.add(crew1Name);
             game.addCrew(crew2Name, false);
+            crewNames.add(crew2Name);
             game.addCrew(crew3Name, false);
+            crewNames.add(crew3Name);
             game.addCrew(crew4Name, false);
+            crewNames.add(crew4Name);
 
             final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
             issue_alert.setTitle(R.string.race_info_title);

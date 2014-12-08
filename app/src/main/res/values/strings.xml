@@ -16,11 +16,11 @@
     <string name="money">Money:</string>
     <string name="toSpend">to spend</string>
     <string name="fuel">Fuel @ $5.00</string>
-    <string name="food">Food @ $1.00</string>
-    <string name="enginePart">Spare Engines @ $15.00</string>ship
+    <string name="food">Food @ $4.00</string>
+    <string name="enginePart">Spare Engines @ $100.00</string>ship
     <string name="aluminumPart">Aluminum @ $10.00</string>
-    <string name="wings">Spare Wings @ $15.00</string>
-    <string name="livingBay">Spare Living Bay @ $15.00</string>
+    <string name="wings">Spare Wings @ $100.00</string>
+    <string name="livingBay">Spare Living Bay @ $100.00</string>
     <string name="buy">Buy!</string>
     <string name="quantityYouHave">Quantity You Have</string>
     <string name="title_activity_load_game">load_game</string>
