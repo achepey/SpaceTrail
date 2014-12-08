@@ -17,7 +17,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/scrollView"
+                android:id="@+id/scrollViewOfTextViews"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator1" />
 
             <TextView
                 android:id="@+id/select_earth"
@@ -66,7 +66,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator2" />
 
             <TextView
                 android:id="@+id/select_mars"
@@ -82,7 +82,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator3" />
 
             <TextView
                 android:id="@+id/select_jupiter"
@@ -98,7 +98,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator4" />
 
             <TextView
                 android:id="@+id/select_saturn"
@@ -114,7 +114,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator5" />
 
             <TextView
                 android:id="@+id/select_uranus"
@@ -130,7 +130,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator6" />
 
             <TextView
                 android:id="@+id/select_neptune"
@@ -146,7 +146,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator7" />
 
             <TextView
                 android:id="@+id/select_pluto"
@@ -162,7 +162,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/line_separator"
-                android:id="@+id/line_separator" />
+                android:id="@+id/line_separator8" />
 
 
         </LinearLayout>

@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config1 {
+            keyAlias 'SpaceTrailKey'
+            keyPassword 'PLANES123'
+            storeFile file('C:/Users/Andrew/Documents/Coding/keystores/spacetrail.jks')
+            storePassword 'PLANES123'
+        }
+    }
     compileSdkVersion 21
     buildToolsVersion "19.1.0"
-
     defaultConfig {
         applicationId "team19.spacetrail"
         minSdkVersion 16
@@ -15,6 +22,7 @@ android {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config1
         }
     }
 }
