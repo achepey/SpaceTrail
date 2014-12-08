@@ -4,12 +4,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.Serializable;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.transform.Source;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.Validator;
 
 /**
  * Created by Robert on 11/28/2014.
@@ -69,6 +77,19 @@ public class GameFileLoader implements Serializable
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             doc = docBuilder.parse(file);
+
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
+
+            Source schemaFile = new StreamSource(new File("mySchema.xsd"));
+            Schema schema = factory.newSchema(schemaFile);
+
+            Validator validator = schema.newValidator();
+            try {
+                validator.validate(new DOMSource(doc));
+            } catch (SAXException e) {
+                    // instance document is invalid!
+            }
+
             game_nodes = doc.getChildNodes();
             Node gameNode = getNode("game", game_nodes);
             game_nodes = gameNode.getChildNodes();

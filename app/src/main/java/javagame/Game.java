@@ -913,6 +913,7 @@ public class Game implements Serializable {
             int pIndex = 0;
             for (int i = 0; i < 9; i++) {
                 if (planets.get(i).name.equals(destination.name)) {
+                    System.out.println("Current planet index: " + i);
                     currentIndex = i;
                     Log.d("Game", "current index = " + i);
                 }
