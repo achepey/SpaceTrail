@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
         String crew3Name = crew3.getText().toString();
         String crew4Name = crew4.getText().toString();
         game.crewNames = new ArrayList<String>(crewNames);
+        //checking if 5 names have been entered
         if(capName.length()!=0 && crew1Name.length()!=0 && crew2Name.length()!=0 && crew3Name.length()!=0 && crew4Name.length()!=0) {
             game.addCrew(capName, true);
             crewNames.add(capName);
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
             game.addCrew(crew4Name, false);
             crewNames.add(crew4Name);
 
+            //displaying race
             final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
             issue_alert.setTitle(R.string.race_info_title);
             issue_alert.setMessage("Your crew race is the " + game.getRace().getName() + ". The compound you need to survive is " + game.getRace().getStrength() + " and the compound that is toxic to you is " + game.getRace().getWeakness() + ".");
@@ -155,9 +157,11 @@ public class MainActivity extends Activity {
         catch(Exception e) {
             e.printStackTrace();
         }
+        //at this point the game is loaded and playable
 
         setContentView(R.layout.activity_load_game);
 
+        //displaying game information on loading page
         TextView engineHealth = (TextView) findViewById(R.id.engineHealth);
         TextView livingBayHealth = (TextView) findViewById(R.id.livingBayHealth);
         TextView wingsHealth = (TextView) findViewById(R.id.wingHealth);
@@ -365,6 +369,7 @@ public class MainActivity extends Activity {
             lbAmt = "0";
         }
 
+        //checking if player has money to buy all the resources
         if(Integer.parseInt(fuelAmt) * FUEL_COST + Integer.parseInt(foodAmt)*FOOD_COST + Integer.parseInt(engAmt)*ENGINE_COST+Integer.parseInt(almAmt)*ALUMINUM_COST+Integer.parseInt(wingAmt)*WING_COST+Integer.parseInt(lbAmt) * LIVING_BAY_COST - startingMoney < 0) {
             fuelText.setText(Integer.toString(Integer.parseInt(fuelText.getText().toString()) + Integer.parseInt(fuelAmt)));
             foodText.setText(Integer.toString(Integer.parseInt(foodText.getText().toString()) + Integer.parseInt(foodAmt)));
@@ -393,17 +398,18 @@ public class MainActivity extends Activity {
 
 
         //Resets the fields to be blank values
-        fuel.setText("");
+ /*       fuel.setText("");
         food.setText("");
         engine.setText("");
         aluminum.setText("");
         wings.setText("");
-        livingBays.setText("");
+        livingBays.setText("");*/
         TextView moneyText = (TextView) findViewById(R.id.moneyVariable);
         moneyText.setText(Integer.toString(startingMoney));
     }
     // Called when the user hits the send to space button, stores the starting resources
     public void headToSpace(View view) {
+        //the game object will be updated with resources bought
         TextView fuel = (TextView) findViewById(R.id.fuelQuantity);
         int fuelint = Integer.parseInt(fuel.getText().toString());
         game.sellFuel(fuelint);
@@ -429,6 +435,7 @@ public class MainActivity extends Activity {
         game.sellParts(bayint, "livingBay");
 
         //Ends MainActivity and starts the GameScreenActivity
+        //Passes game object to new activity
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
         game.setSchemaNull();
@@ -439,6 +446,7 @@ public class MainActivity extends Activity {
         finish();
     }
 
+    //Used in autogenerating the names for the player's crew
     public void autoGenerate(View v){
         ArrayList<String> alienNames = new ArrayList<String>();
         alienNames.add("Glemb");
@@ -521,6 +529,7 @@ public class MainActivity extends Activity {
 
     //Used for a button to start the GameScreenActivity from the Load Game
     public void gameScreen(View view) {
+        //Passing game object to new instance
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
         b.putSerializable("Game", game);
@@ -532,6 +541,7 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        //Checks if the current screen is not the activity_main.xml layout
         if (!currentView.equals("main")) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.promptBack);

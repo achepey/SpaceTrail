@@ -38,6 +38,7 @@ public class ExitActivity extends Activity {
         }
         else {
             exitMessage.setText("Congratulations! You have visited all the planets!");
+            //getting audio file from raw folder
             mp = MediaPlayer.create(getApplicationContext(), R.raw.you_won);
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
