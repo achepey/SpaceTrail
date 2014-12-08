@@ -7,6 +7,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
 
 import javax.xml.XMLConstants;
@@ -71,23 +72,25 @@ public class GameFileLoader implements Serializable
         }
     }
 
-    public GameFileLoader(File file) {
+    public GameFileLoader(File file, InputStream schemaStream) {
         try {
 
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             doc = docBuilder.parse(file);
 
-            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
-
-            Source schemaFile = new StreamSource(new File("mySchema.xsd"));
-            Schema schema = factory.newSchema(schemaFile);
-
-            Validator validator = schema.newValidator();
             try {
+                SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                Source schemaFile = new StreamSource(schemaStream);
+                Schema schema = factory.newSchema(schemaFile);
+
+                Validator validator = schema.newValidator();
                 validator.validate(new DOMSource(doc));
-            } catch (SAXException e) {
-                    // instance document is invalid!
+                System.out.println("XML Validated \n");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("SOMETHING WENT WRONG WITH THE SCHEMA!!!!");
+                // instance document is invalid!
             }
 
             game_nodes = doc.getChildNodes();

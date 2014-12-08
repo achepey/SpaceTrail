@@ -31,6 +31,7 @@ public class Game implements Serializable {
     private boolean firstMove;      //if it is the first move in the game
     public boolean justLoaded;      //used to tell if the game had just been loaded or not
     public ArrayList<String> crewNames;
+    private InputStream schemaStream;
 
     public Game() {
         crewNames = new ArrayList<String>();
@@ -40,7 +41,7 @@ public class Game implements Serializable {
         medium = true;      //default speed is medium
         slow = false;
         firstMove = true;
-        money = 100000;
+        money = 8000;
         justLoaded = false;
 
         /* Create all 9 planets  */
@@ -103,7 +104,7 @@ public class Game implements Serializable {
     public boolean sellFood(int m) {
         double cost = destination.foodCost;
         if(firstMove) {
-            cost = 1;
+            cost = 4;
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
@@ -135,7 +136,7 @@ public class Game implements Serializable {
     public boolean sellParts(int m, String s) {
         double cost = destination.partCost;
         if(firstMove) {
-            cost = 15;
+            cost = 100;
         }
         money = money - (int)(cost * m);
         if(money < 0) {                         // make sure that this would not bankrupt
@@ -550,13 +551,13 @@ public class Game implements Serializable {
             double escapeVelocityIssueChance = Math.random();
             if(escapeVelocityIssueChance < previous.escapeVelocity/300) {
                 issue = "While leaving " + previous.name + " you did not correctly accommodate for the planet's escape velocity, so you used more fuel than was initially planned for to leave the atmosphere!";
-                resources.incrementFuel(10, false);
+                resources.incrementFuel(20, false);
                 return issue;
             }
             double temperatureIssueChance = Math.random();
             if(Math.abs(previous.meanTemperature) > 150 && temperatureIssueChance < .05) {      //5% chance
                 issue = "While on " + previous.name + " your supplies were damaged by the extreme temperatures! You have to throw away some of your food as it is now not edible.";
-                resources.incrementFood(10, false);
+                resources.incrementFood(20, false);
                 return issue;
             }
             else if(Math.abs(previous.meanTemperature) > 150 && temperatureIssueChance < .07) {      //2% chance
@@ -588,7 +589,7 @@ public class Game implements Serializable {
                 double diameterIssueChance = Math.random();
                 if(diameterIssueChance < destination.diameter/1000000) {        //diameter will be a decimal if divided by 1000000
                     issue = "The analysis probe you sent to measure the planet's size appears to have gotten lost! You have to buy a new one.";
-                    money -= 20;
+                    money -= 100;
                     return issue;
                 }
                 double gravityIssueChance = Math.random();
@@ -627,7 +628,7 @@ public class Game implements Serializable {
                     resourceAttrition();                    // decide how many resources the crew loses
                     return issue;
                 }
-                if(ringIssueChance < .05) {
+                if(ringIssueChance < .03) {
                     double shipPartChance = Math.random();
                     String shipPart;
                     if(shipPartChance > .5) {
@@ -700,7 +701,7 @@ public class Game implements Serializable {
         //miscellaneous issues
             //random issues that can occur
         double randomIssueChance = Math.random();
-        if(randomIssueChance < .001) {
+        if(randomIssueChance < .003) {
             double shipPartChance = Math.random();
             String shipPart;
             if(shipPartChance > .5) {
@@ -897,6 +898,21 @@ public class Game implements Serializable {
         for(int i = 0; i < planets.size(); ++i) {
             planets.get(i).setInputStream(new ByteArrayInputStream(out.toString().getBytes(StandardCharsets.UTF_8)));
         }
+    }
+
+    //used to save schema for XML validation
+    public void setSchema(InputStream is) {
+        schemaStream = is;
+    }
+
+    public InputStream getSchema() {
+        InputStream schemaTemp = schemaStream;
+        schemaStream = null;
+        return schemaTemp;
+    }
+
+    public void setSchemaNull() {
+        schemaStream = null;
     }
 
     public int getDestinationIndex() {

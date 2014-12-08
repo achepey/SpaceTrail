@@ -90,20 +90,20 @@ public class Planet implements Serializable
 
             if(distanceFromSun > 2200) {
                 fuelCost = 10;
-                foodCost = 5;
+                foodCost = 8;
             }else if(distanceFromSun > 600) {
-                fuelCost = 10;
-                foodCost = 1;
+                fuelCost = 8;
+                foodCost = 4;
             }else {
-                fuelCost = 5;
-                foodCost = 5;
+                fuelCost = 6;
+                foodCost = 6;
             }
             if(name.equals("Earth") || name.equals("Pluto") || name.equals("Mars") || name.equals("Neptune") ) {
                 aluminumCost = 10;
-                partCost = 15;
+                partCost = 115;
             }else{
                 aluminumCost = 15;
-                partCost = 25;
+                partCost = 125;
             }
         }
             catch (Exception e) {
@@ -193,4 +193,6 @@ public class Planet implements Serializable
     //    System.out.println(distanceFromSun + "\n");
         doc = null;
     }
+
+
 }

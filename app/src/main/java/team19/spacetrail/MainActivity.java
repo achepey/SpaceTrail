@@ -69,9 +69,9 @@ public class MainActivity extends Activity {
         try {
             AssetManager assetManager = getAssets();
             InputStream planetInput = assetManager.open("planetData.xml");
-
+            InputStream schema = assetManager.open("mySchema.xsd");
             game.setPlanetInputStream(planetInput);
-
+            game.setSchema(schema);
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -140,19 +140,19 @@ public class MainActivity extends Activity {
     //Sets Layout to the load game menu
     public void loadGame(View view) {
         File file = new File(getExternalFilesDir(null),"SpaceTrailData.xml");
-        GameFileLoader loader = new GameFileLoader(file);
+        GameFileLoader loader = new GameFileLoader(file, game.getSchema());
         game = loader.loadGame();
         game.justLoaded = true;
+
         try {
             AssetManager assetManager = getAssets();
             InputStream planetInput = assetManager.open("planetData.xml");
-
             game.setPlanetInputStream(planetInput);
-
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+
         setContentView(R.layout.activity_load_game);
 
         TextView engineHealth = (TextView) findViewById(R.id.engineHealth);
@@ -428,6 +428,7 @@ public class MainActivity extends Activity {
         //Ends MainActivity and starts the GameScreenActivity
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
+        game.setSchemaNull();
         b.putSerializable("Game", game);
         b.putStringArrayList("Crew", crewNames);
         intent.putExtras(b);
