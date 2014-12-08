@@ -23,11 +23,10 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editCapField"
+        style="@android:style/Widget.EditText"
         android:layout_marginTop="41dp"
-        android:layout_toEndOf="@+id/capName"
         android:layout_below="@+id/newGameTitle"
-        android:layout_alignRight="@+id/sumbitGame"
-        android:layout_alignEnd="@+id/sumbitGame" />
+        android:layout_toRightOf="@+id/capName" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,9 +57,11 @@
         android:text="@string/otherMembers"
         android:id="@+id/OtherMembersString"
         android:layout_marginRight="77dp"
-        android:layout_alignTop="@+id/capName"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/newGameTitle"
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,9 +69,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="1."
         android:id="@+id/firstOtherName"
-        android:layout_below="@+id/editCapField"
+        android:layout_below="@+id/OtherMembersString"
         android:layout_alignLeft="@+id/OtherMembersString"
-        android:layout_alignStart="@+id/OtherMembersString" />
+        android:layout_alignStart="@+id/OtherMembersString"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -81,7 +84,8 @@
         android:layout_alignLeft="@+id/firstOtherName"
         android:layout_alignStart="@+id/firstOtherName"
         android:layout_alignRight="@+id/OtherMembersString"
-        android:layout_alignEnd="@+id/OtherMembersString" />
+        android:layout_alignEnd="@+id/OtherMembersString"
+        android:layout_below="@+id/OtherMembersString" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,7 +96,8 @@
         android:layout_below="@+id/firstOtherName"
         android:layout_alignLeft="@+id/OtherMembersString"
         android:layout_alignStart="@+id/OtherMembersString"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_marginBottom="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -104,7 +109,8 @@
         android:layout_alignStart="@+id/firstOtherName"
         android:layout_alignRight="@+id/OtherMembersString"
         android:layout_alignEnd="@+id/OtherMembersString"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_below="@+id/firstOtherNameField" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -115,7 +121,8 @@
         android:layout_below="@+id/secOtherName"
         android:layout_alignLeft="@+id/OtherMembersString"
         android:layout_alignStart="@+id/OtherMembersString"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_marginBottom="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -127,7 +134,8 @@
         android:layout_alignStart="@+id/firstOtherName"
         android:layout_alignRight="@+id/OtherMembersString"
         android:layout_alignEnd="@+id/OtherMembersString"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_below="@+id/secOtherNameField" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -150,7 +158,8 @@
         android:layout_alignStart="@+id/firstOtherName"
         android:layout_alignRight="@+id/OtherMembersString"
         android:layout_alignEnd="@+id/OtherMembersString"
-        android:paddingTop="5dp" />
+        android:paddingTop="5dp"
+        android:layout_below="@+id/thirdOtherNameField" />
 
     <Button
         android:layout_width="wrap_content"

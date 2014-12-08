@@ -70,7 +70,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         for(String s : crewNames){
             Log.d("GameScreen", s);
         }
-        game.crewNames = crewNames;
+        game.crewNames = new ArrayList<String>(crewNames);
         //Sets listener to the screen for tap and long tap
         detector = new GestureDetector(this, this);
         detector.setOnDoubleTapListener(this);

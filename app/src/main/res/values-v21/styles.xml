@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.Light">
+    <style name="AppTheme" parent="android:Theme.Black.NoTitleBar">
+        <item name="android:editTextStyle">@android:style/Widget.Holo.Light.EditText</item>
+        <item name="android:editTextBackground">@android:drawable/edit_text</item>
     </style>
 </resources>
