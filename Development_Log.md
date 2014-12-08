@@ -180,4 +180,11 @@ Team 19: Andrew Chepey, Robert Christian, Evan Kirkland, Matthan Myers
   - Fixed load game screen bugs
   - Added ages and weaknesses to info and load game page
   - Fixed other small bugs
+- Evan and Andrew: 6.5 hours
+  - Fixed game bugs
+  - XML schema design
+  - XML validation
   
+##### 12/8/2014
+- Robert, Andrew, Evan: 1.5 hours
+  - Preparing for final submission
