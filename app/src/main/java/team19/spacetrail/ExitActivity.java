@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 
 public class ExitActivity extends Activity {
@@ -33,7 +36,23 @@ public class ExitActivity extends Activity {
         }
         if(caller.equals("winner")) {
             exitMessage.setText("Congratulations! You have visited all the planets!");
+            final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.you_won);
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mp.seekTo(2600); //2.6 seconds in
+                    try {
+                        mp.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    mp.start();
+                }
+            });
+            mp.setLooping(true);
+            mp.start();
         }
+
     }
 
     /* Helper Methods */
@@ -47,6 +66,12 @@ public class ExitActivity extends Activity {
         Intent intent = new Intent(this, MainActivity.class);
         finish();
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
+        System.exit(0);
     }
 
     /* Override Methods */
