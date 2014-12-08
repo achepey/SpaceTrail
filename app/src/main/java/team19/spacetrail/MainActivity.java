@@ -554,6 +554,21 @@ public class MainActivity extends Activity {
             builder.setMessage(R.string.promptBack);
             builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
+                    crewNames = new ArrayList<String>();
+                    game = new Game();
+                    try {
+                        AssetManager assetManager = getAssets();
+                        InputStream planetInput = assetManager.open("planetData.xml");
+                        InputStream schema = assetManager.open("mySchema.xsd");
+                        //input stream needed to load planet info
+                        game.setPlanetInputStream(planetInput);
+                        //needed for validation
+                        game.setSchema(schema);
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    startingMoney = game.getMoney();
                     setContentView(R.layout.activity_main);
                 }
             });
