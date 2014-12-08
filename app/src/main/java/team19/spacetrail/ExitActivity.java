@@ -20,6 +20,8 @@ import java.io.IOException;
 
 public class ExitActivity extends Activity {
 
+    private MediaPlayer mp;
+    private boolean won = false;
     //Allows for clean exit of the game or has user decide to play again or not.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,9 @@ public class ExitActivity extends Activity {
         if(caller.equals("Loser")){
             exitMessage.setText("Sorry, You Lose!");
         }
-        if(caller.equals("winner")) {
+        else {
             exitMessage.setText("Congratulations! You have visited all the planets!");
-            final MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.you_won);
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.you_won);
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -51,7 +53,9 @@ public class ExitActivity extends Activity {
             });
             mp.setLooping(true);
             mp.start();
+            won = true;
         }
+
 
     }
 
@@ -59,12 +63,16 @@ public class ExitActivity extends Activity {
     //Cleanly exists game
     public void exitGame(View view) {
         finish();
+        System.exit(0);
     }
 
     //If user chooses to restart, takes them back to main activity
     public void startOver(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         finish();
+        if(won){
+            mp.stop();
+        }
         startActivity(intent);
     }
 

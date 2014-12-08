@@ -266,12 +266,12 @@ public class PlanetActivity extends Activity {
         money.setText(Integer.toString(game.getMoney()));
 
 
-/*        if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
+       if(planet_name.equals("Venus") && prompt.equals("Spare Wings") && num == 7) {
             Intent intent = new Intent(this, ExitActivity.class);
             finish();
             intent.putExtra("activity", "Planet");
             startActivity(intent);
-        }*/
+        }
 
     }
 
