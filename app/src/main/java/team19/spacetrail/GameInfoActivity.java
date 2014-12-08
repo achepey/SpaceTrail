@@ -33,8 +33,8 @@ import javagame.Game;
 
 public class GameInfoActivity extends Activity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener{
 
-    private GestureDetector detector;
-    private String pace;
+    private GestureDetector detector; // Allows user interactivity with the screen
+    private String pace; // holds the string representation for the pace of the game
     public Game game;
 
     //Displays user resources, ship health, and explorer's health in orderly fashion
@@ -139,7 +139,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         nameInfo.add(person4Info);
 
         Log.d("Gameinfo", "Size of games people = " + game.getPeople().size());
-        int i = 0;
+        int i = 0; // declared outside to figure out how many people have already died
         for(; i < game.getPeople().size(); i++){
             names.get(i).setText(game.getPeople().get(i).getName());
             nameInfo.get(i).setText(game.getPeople().get(i).getAge() + ", " + game.getPeople().get(i).getCondition()+"%");
@@ -151,7 +151,6 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
             System.out.println("1:"+s + "\n");
         }
 
-        /* Will only work if names are unique, I think... maybe, depends on remove function */
         /* deadNames will contain all the names of dead crew members */
         ArrayList<String> deadNames = new ArrayList<String>(game.crewNames);
         Log.d("gi", "i is " + i);
@@ -173,6 +172,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         }
     }
 
+    /* Starts the asteroid mining animation activity */
     public void mineAsteroids(View v) {
         Intent intent = new Intent(this, AsteroidActivity.class);
         Bundle b = new Bundle();
@@ -190,6 +190,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
     //this is where the pace of the game is changed
     public void changePace(View v) {
 
+        /* Spinner object */
         Spinner spin = (Spinner) findViewById(R.id.changePaceSpinner);
         pace = spin.getSelectedItem().toString();
         if(pace.equals("Strenuous")){
@@ -204,7 +205,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         else{
             Log.d("GameInfo", "ERROR: BAD PACE FROM SPINNER!");
         }
-        //Creates pop-up letting user know the resources were purchased correctly
+        //Creates pop-up letting user know that the pace has changed
         Context context = getApplicationContext();
         CharSequence popup = "Pace has Changed!";
         Toast toast = Toast.makeText(context, popup, Toast.LENGTH_SHORT);
@@ -214,6 +215,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
         Log.d("GameInfo", "Pace is " + game.getSpeed());
     }
 
+    /* Allows user to repair hull with spare aluminum */
     public void repairHull(View v){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Repair Hull");
@@ -237,7 +239,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
                     updateFields();
                 }
             }
-        }).setNegativeButton("No, let us die!", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("No, we'll take our chances!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ;
@@ -247,6 +249,7 @@ public class GameInfoActivity extends Activity implements GestureDetector.OnGest
 
     }
 
+    /* Updates the fields for the info screen after asteroid activity */
     public void updateFields(){
         TextView hull = (TextView) findViewById(R.id.hullHealth);
         hull.setText(Integer.toString(game.getShip().getHullStatus())+"%");

@@ -46,6 +46,7 @@ public class AsteroidActivity extends Activity {
         hullPercent = b.getInt("HullHealth");
         Log.d("Asteroid", "Hull Health = " + hullPercent);
 
+        /* Finds and stores all asteroid objects */
         ship = (ImageView) findViewById(R.id.spaceshipMiddle);
         ship_hit = (ImageView) findViewById(R.id.spaceshipHit);
         ast1 = (ImageView) findViewById(R.id.asteroid1);
@@ -57,7 +58,7 @@ public class AsteroidActivity extends Activity {
         TextView hull = (TextView) findViewById(R.id.hullPercent);
         hull.setText(Integer.toString(hullPercent));
 
-        Point size = new Point();
+        Point size = new Point(); // Point stores phone screen size
         Random rand = new Random(); // used to generate a random number for the start of the asteroid position
         int yPos = rand.nextInt(1400) - 200; // range is from -200 to 1200, randomly assigned this.
         int xPos = rand.nextInt(2500) - 200;
@@ -82,6 +83,7 @@ public class AsteroidActivity extends Activity {
         ast6.setY(-250);
     }
 
+    /* Detects whether or not the alert dialog has control of window*/
     @Override
     public void onWindowFocusChanged (boolean hasFocus) {
         if (hasFocus) {
@@ -99,6 +101,7 @@ public class AsteroidActivity extends Activity {
         return fuel; // arbitrary number right now
     }
 
+    /* Displays to user the amount of fuel successfully obtained from asteroids */
     public void miningResults() {
         int fuelAmount = getAmountOfFuel();
         Log.d("Asteroid", "Asteroids Clicked =" + numAsteroidsDestroyed + ", amount of fuel " + fuelAmount);
@@ -113,6 +116,7 @@ public class AsteroidActivity extends Activity {
         GameScreenActivity.game.sellFuel(fuelAmount);
     }
 
+    /* This method contains the animation code for all of the asteroid objects */
     public void moveAsteroidObjects(int[] coordinates) {
         Random rand = new Random();
         int delay = rand.nextInt(800) + 400; //random number for delay between 400 and 1200 milliseconds
@@ -143,7 +147,7 @@ public class AsteroidActivity extends Activity {
             ast1.animate().setDuration(2500);
             ast1.animate().setStartDelay(delay);
             ast1.animate().x(coordinates[0] + 200).y(coordinates[1]);
-            ast1.animate().setInterpolator(new LinearInterpolator());
+            ast1.animate().setInterpolator(new LinearInterpolator()); // Linear interpolator gives a constant animation speed
             ast1.animate().alphaBy(1);
             ast1.animate().setListener(new Animator.AnimatorListener() {
                 @Override
@@ -386,6 +390,7 @@ public class AsteroidActivity extends Activity {
         }
     }
 
+    /* Allows for the red version of ship to display for half a second to represent shit being "hit" */
     public void shipHitAction(){
         TextView engineView = (TextView) findViewById(R.id.hullPercent);
         //Do not allow it to get less than 0
@@ -402,7 +407,7 @@ public class AsteroidActivity extends Activity {
         }
         ship.setVisibility(View.INVISIBLE);
         ship_hit.setVisibility(View.VISIBLE);
-        Handler handler = new Handler();
+        Handler handler = new Handler(); // Handler allows this animation to be in the background
         handler.postDelayed(new Runnable() {
             public void run() {
                 ship.setVisibility(View.VISIBLE);
