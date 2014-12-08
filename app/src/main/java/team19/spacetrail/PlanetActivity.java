@@ -139,9 +139,9 @@ public class PlanetActivity extends Activity {
             return;
         }
 
+        //Checking which resource is selected and then buying it from game
         String prompt = spin.getSelectedItem().toString();
         int num = Integer.parseInt(stringRscText);
-
         if(prompt.equals("Fuel")) {
             if(game.sellFuel(num)) {
                 Context context = getApplicationContext();
@@ -279,6 +279,7 @@ public class PlanetActivity extends Activity {
     public void nextPlanet(View view) {
         Intent intent = new Intent(this, GameScreenActivity.class);
         Bundle b = new Bundle();
+        //Sending game object to GameScreenActivity
         game.setArrivedAtPlanet(false);
         b.putSerializable("Game", game);
         b.putStringArrayList("Crew", game.crewNames);

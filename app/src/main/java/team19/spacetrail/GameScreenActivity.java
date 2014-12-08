@@ -104,22 +104,20 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         foodView.setText(Integer.toString(game.getResources().getFood()));
         distanceView.setText(Integer.toString((int) game.getDistanceRemaining()));
 
-
+        //if it is the first turn of a new game
         if(game.getDistanceRemaining() <= 0 || game.getDestination().name.equals("Temp")) {
             selectPlanet();
         }
         else {
+            //will get here if loaded game from XML
             displayPlanet();
         }
 
-        //Will add an else here when we get loading set up
-
-    //    selectPlanet(); //will be removed when fully integrated
     }
 
     /* Helper Methods */
 
-    //Process of moving ship across screen
+    //Checks if any of the parts are broken and need to be replaced
     public void automaticRepair(View v) {
         Log.d("GameScreen", "Pace is " + game.getSpeed());
 
@@ -174,6 +172,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         makeMove();
     }
 
+    //Calls game move method and checks for issues
     public void makeMove() {
         //Stops ship when bitmap reaches planets outer edge, also shrinks ship when getting closer to planet
         String moveResult = game.makeMove();
@@ -216,20 +215,23 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     }
 
 
-
+    //Moves the ship on the screen
     public void moveOnScreen() {
         if(game.justLoaded){
             spaceship.setX(game.getShip().getXpos());
             game.justLoaded = false;
         }
 
+        //percent that the ship needs to move across the distance
         double moveScreenPercent = game.getPace() / game.getTotalDistance();
+        //finding the actual amount to move the ship in pixels
         double amtToMoveOnScreen = moveScreenPercent * (screen_width - planets.get(dest_planet).getX() - planets.get(dest_planet).getWidth() - spaceship.getWidth()) + 10;
 
         TranslateAnimation anim = new TranslateAnimation(0.0f, (float) (amtToMoveOnScreen * -1), 0.0f, 0.0f);
         if (!game.getArrivedAtPlanet()) {
             spaceship.startAnimation(anim);
             spaceship.setX(spaceship.getX() - (float) amtToMoveOnScreen);
+            //making ship get smaller as it approaches planet
             if (spaceship.getX() < screen_width / 2) {
                 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spaceship_crop);
                 int width = (int) (spaceship.getWidth() * .90);
@@ -285,15 +287,17 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         final Dialog planet_selector = new Dialog(GameScreenActivity.this);
         planet_selector.setContentView(R.layout.planet_selector_layout);
         planet_selector.setTitle(R.string.planet_select);
-        ArrayList<TextView> choices = new ArrayList<TextView>();
+        ArrayList<TextView> choices = new ArrayList<TextView>(); // Holds the planet name in order to determine if the planet has been visited
         final TextView distanceView = (TextView) findViewById(R.id.distanceField);
 
+        /* Grabs parameters of parent window and matches the dialog window to that */
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(planet_selector.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         planet_selector.getWindow().setAttributes(lp);
 
+        /* Adds all planet options to the dialog, and allows user to click the text to take them to certain planet */
         TextView merc = (TextView) planet_selector.findViewById(R.id.select_mercury);
         merc.setText("Mercury: Distance is " + game.distanceToPlanet(game.getPlanets().get(0)) + ". (Helium, Oxygen)");
         merc.setOnClickListener(new View.OnClickListener() {
@@ -312,7 +316,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
-                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining())); //Updates the distance remaining field
                     planet_selector.dismiss();
                 }
             }
@@ -527,6 +531,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         });
         choices.add(pluto);
 
+        /* Changes text color when user has visited the planet */
         for(int i = 0; i < choices.size(); i++) {
             if(game.getPlanets().get(i).visited){
                 choices.get(i).setTextColor(Color.RED);
@@ -537,6 +542,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
     }
 
     //Displays picture of planet to planet menu for better aesthetic view
+    //Used when loading, because the destination planet has already been set
     public void displayPlanet(){
         if(game.getDestination().name.equals("Mercury")) {
             planets.get(0).setVisibility(View.VISIBLE);
@@ -576,12 +582,6 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         }
     }
 
-    public void repairHull(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Uh oh! Your Hull needs repairs!");
-        builder.setMessage("Use your spare aluminum to repair it!");
-    }
-
     /* Override Methods */
 
     //Allows for user to save and exit the game
@@ -591,22 +591,12 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         builder.setMessage(R.string.promptExit);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                //Saves the x-position on the screen so it can be loaded back
                 game.getShip().setXpos(spaceship.getX());
-                System.out.println("save x: "+game.getShip().getXpos());
                 GameFileSaver saver = new GameFileSaver(game);
                 File file = new File(getExternalFilesDir(null),"SpaceTrailData.xml");
                 saver.saveGameAndroid(file);
                 finish();
-        /*        File folder = getExternalFilesDir(null);
-                File[] listOfFiles = folder.listFiles();
-
-                for (int i = 0; i < listOfFiles.length; i++) {
-                    if (listOfFiles[i].isFile()) {
-                        System.out.println("File " + listOfFiles[i].getName());
-                    } else if (listOfFiles[i].isDirectory()) {
-                        System.out.println("Directory " + listOfFiles[i].getName());
-                    }
-                }       */
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
