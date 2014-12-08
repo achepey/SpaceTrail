@@ -5,6 +5,8 @@
  */
 package javagame;
 
+import android.util.Log;
+
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
@@ -20,7 +22,7 @@ public class Game implements Serializable {
     private ArrayList<Person> people;       //The crew of the spaceship - the captain is always at index 0, and there is a max size of 5
     private ArrayList<Planet> planets;      //The planets in the solar system
     private Planet destination, previous;       //The current destination and the previous planet traveled to
-    private double distanceRemaining,totalDistance, pace;       //how much distance is left to the destination planet, the total distance between previous and destination and the pace the ship is moving at
+    private double distanceRemaining, totalDistance, pace;       //how much distance is left to the destination planet, the total distance between previous and destination and the pace the ship is moving at
     private Race race;      //the player's race - randomly assigned
     private int money;      //the money that the player has
     private boolean gameOver;       //if the player has lost
@@ -171,6 +173,7 @@ public class Game implements Serializable {
             arrivedAtPlanet = true;
             destination.visited = true;
             refreshCompound();
+            previous = destination;
         }
         String issue = getIssue();
         return issue;
@@ -265,6 +268,7 @@ public class Game implements Serializable {
 
     //Sets the first destination to the correct planet from a given String - calls the index method
     public void setFirstDestination(String planet) {
+        firstMove = false;
         if(planet.equals("Mercury")) {
             setFirstDestination(0);
         }
@@ -296,6 +300,8 @@ public class Game implements Serializable {
 
     //Sets the destination planet the player is traveling to - only used on first turn
     public void setFirstDestination(int planetIndex) {
+        firstMove = false;
+        resources.setCompound(100);
         destination = planets.get(planetIndex);
         distanceRemaining = destination.distanceFromSun;
         totalDistance = destination.distanceFromSun;
@@ -351,9 +357,10 @@ public class Game implements Serializable {
             - use planet index to compute total degrees between one planet and another
             - find sine value, and apply to destination planet's distanceRemaining
             */
-        double hypotenuse = Math.sin(Math.toRadians(40 * (planetIndex - currentIndex)));
+        double hypotenuse = Math.sqrt((planets.get(planetIndex).distanceFromSun)*(planets.get(planetIndex).distanceFromSun) + (destination.distanceFromSun)*(destination.distanceFromSun)-2*(planets.get(planetIndex).distanceFromSun)*(destination.distanceFromSun)*Math.cos(Math.toRadians(40 * (planetIndex - currentIndex))));
+        //double hypotenuse = Math.abs(Math.sin(Math.toRadians(40 * (planetIndex - currentIndex))));
         destination = planets.get(planetIndex);
-        distanceRemaining = (int)((destination.distanceFromSun) * hypotenuse);
+        distanceRemaining = (int)(hypotenuse);
         totalDistance = distanceRemaining;
         setSpeed(getSpeed());
     }
@@ -898,6 +905,7 @@ public class Game implements Serializable {
 
     public double distanceToPlanet(Planet p) {
         if(firstMove){
+            Log.d("Game", "first move is true");
             return(p.distanceFromSun);
         }
         else {
@@ -906,9 +914,11 @@ public class Game implements Serializable {
             for (int i = 0; i < 9; i++) {
                 if (planets.get(i).name.equals(destination.name)) {
                     currentIndex = i;
+                    Log.d("Game", "current index = " + i);
                 }
                 if (planets.get(i).name.equals(p.name)) {
                     pIndex = i;
+                    Log.d("Game", "next index = " + i);
                 }
             }
 
@@ -917,8 +927,9 @@ public class Game implements Serializable {
             - use planet index to compute total degrees between one planet and another
             - find sine value, and apply to destination planet's distanceRemaining
             */
-            double hypotenuse = Math.sin(Math.toRadians(40 * (pIndex - currentIndex)));
-            return ((int) ((destination.distanceFromSun) * hypotenuse));
+            double hypotenuse = Math.sqrt((planets.get(pIndex).distanceFromSun)*(planets.get(pIndex).distanceFromSun) + (destination.distanceFromSun)*(destination.distanceFromSun)-2*(planets.get(pIndex).distanceFromSun)*(destination.distanceFromSun)*Math.cos(Math.toRadians(40 * (pIndex - currentIndex))));
+            return (int)(hypotenuse);
+            //return ((int) ((destination.distanceFromSun) * hypotenuse));
         }
     }
 

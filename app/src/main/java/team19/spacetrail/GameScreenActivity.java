@@ -99,8 +99,10 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         /* Setting fields for Food and Fuel */
         TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
         TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+        TextView distanceView = (TextView) findViewById(R.id.distanceField);
         fuelView.setText(Integer.toString(game.getResources().getFuel()));
         foodView.setText(Integer.toString(game.getResources().getFood()));
+        distanceView.setText(Integer.toString((int) game.getDistanceRemaining()));
 
 
         if(game.getDistanceRemaining() <= 0 || game.getDestination().name.equals("Temp")) {
@@ -177,8 +179,15 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         String moveResult = game.makeMove();
         TextView fuelView = (TextView) findViewById(R.id.gameScreenFuel);
         TextView foodView = (TextView) findViewById(R.id.gameScreenFood);
+        TextView distanceView = (TextView) findViewById(R.id.distanceField);
         fuelView.setText(Integer.toString(game.getResources().getFuel()));
         foodView.setText(Integer.toString(game.getResources().getFood()));
+        if(((int)game.getDistanceRemaining()) < 0){
+            distanceView.setText("" + 0);
+        }
+        else {
+            distanceView.setText(Integer.toString((int) game.getDistanceRemaining()));
+        }
         if (!moveResult.equals("Successful Movement!") && (game.getShip().getEngineStatus() > 0 && game.getShip().getWingStatus() > 0 && game.getShip().getLivingBayStatus() > 0)) {
             final GameScreenActivity tempGSA = this;
             final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
@@ -277,6 +286,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
         planet_selector.setContentView(R.layout.planet_selector_layout);
         planet_selector.setTitle(R.string.planet_select);
         ArrayList<TextView> choices = new ArrayList<TextView>();
+        final TextView distanceView = (TextView) findViewById(R.id.distanceField);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(planet_selector.getWindow().getAttributes());
@@ -302,6 +312,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -327,6 +338,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -352,6 +364,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -377,6 +390,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -402,6 +416,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -427,6 +442,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -452,6 +468,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -477,6 +494,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }
@@ -502,6 +520,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                     } else {
                         game.setDestination(dest_planet);
                     }
+                    distanceView.setText(Integer.toString((int)game.getDistanceRemaining()));
                     planet_selector.dismiss();
                 }
             }

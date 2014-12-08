@@ -116,7 +116,7 @@
         android:layout_alignParentStart="false"
         android:layout_marginRight="10dp"
         android:textSize="20sp"
-        android:layout_toRightOf="@+id/saturn" />
+        android:layout_alignLeft="@+id/saturn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -126,7 +126,7 @@
         android:layout_toRightOf="@+id/fuelText"
         android:layout_toEndOf="@+id/fuelText"
         android:textSize="20sp"
-        android:paddingRight="100dp" />
+        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -147,7 +147,27 @@
         android:layout_toRightOf="@+id/foodText"
         android:textSize="20sp"
         android:layout_alignTop="@+id/foodText"
-        android:layout_alignRight="@+id/spaceship"
-        android:layout_alignEnd="@+id/spaceship" />
+        android:minWidth="@dimen/loadGame_SubMenu_ColSize" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/distance_left"
+        android:id="@+id/distanceText"
+        android:layout_alignParentStart="false"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/gameScreenFood" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/distanceField"
+        android:textSize="20sp"
+        android:layout_alignTop="@+id/foodText"
+        android:minWidth="@dimen/loadGame_SubMenu_ColSize"
+        android:layout_toRightOf="@+id/distanceText" />
 
 </RelativeLayout>

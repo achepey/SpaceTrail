@@ -263,7 +263,7 @@ public class MainActivity extends Activity {
     //Sets Layout to the Instructions menu
     public void loadInstructions(View view) {
         setContentView(R.layout.instruction_screen);
-    /*    Game testGame = new Game();
+        Game testGame = new Game();
         testGame.setMoney(1000000);
         testGame.getResources().setCompound(10000);
         testGame.getResources().setAluminum(10000);
@@ -303,8 +303,8 @@ public class MainActivity extends Activity {
         b.putStringArrayList("Crew", crewNames);
         intent.putExtras(b);
         startActivity(intent);
-        finish();*/
-      setContentView(R.layout.instruction_screen);
+        finish();
+     // setContentView(R.layout.instruction_screen);
     }
 
     //Does the function of buying the original resources.

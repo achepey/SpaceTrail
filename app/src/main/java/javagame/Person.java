@@ -24,7 +24,7 @@ public class Person implements Serializable {
 
         /* Time to randomly assign age */
         Random randomGenerator = new Random();
-        long range = (long)100 - (long)20 + 1;
+        long range = (long)90 - (long)20 + 1;
         long fraction = (long)(range * randomGenerator.nextDouble());
         age = (int)(fraction + 20);
         System.out.println("Crew member [" + name + "] has age of [" + age + "].");
