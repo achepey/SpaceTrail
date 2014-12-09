@@ -135,6 +135,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 Dialog repair_dialog = repair_alert.create();
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
+                return;
             }
             else {
                 final GameScreenActivity tempGSA = this;
@@ -174,6 +175,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 Dialog repair_dialog = repair_alert.create();
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
+                return;
             }
             else {
                 final GameScreenActivity tempGSA = this;
@@ -213,6 +215,7 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 Dialog repair_dialog = repair_alert.create();
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
+                return;
             }
             else {
                 final GameScreenActivity tempGSA = this;

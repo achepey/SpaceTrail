@@ -185,21 +185,21 @@ public class Game implements Serializable {
         if(fast) {
             resources.incrementFuel(6, false);
             resources.incrementFood(5, false);
-            resources.incrementCompound(3, false);
+            resources.incrementCompound(2, false);
             ship.damagePart("engine", 3);
             ship.damagePart("wing", 3);
             ship.damagePart("livingBay", 3);
         }else if(medium) {
             resources.incrementFuel(3, false);
             resources.incrementFood(5, false);
-            resources.incrementCompound(3, false);
+            resources.incrementCompound(2, false);
             ship.damagePart("engine", 2);
             ship.damagePart("wing", 2);
             ship.damagePart("livingBay", 2);
         }else if(slow) {
             resources.incrementFuel(2, false);
             resources.incrementFood(5, false);
-            resources.incrementCompound(3, false);
+            resources.incrementCompound(2, false);
             ship.damagePart("engine", 1);
             ship.damagePart("wing", 1);
             ship.damagePart("livingBay", 1);
