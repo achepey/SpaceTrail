@@ -136,6 +136,29 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
             }
+            else {
+                final GameScreenActivity tempGSA = this;
+                final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
+                issue_alert.setTitle(R.string.issue_title);
+                issue_alert.setMessage("Your engine has sustained critical damage! Your engines explode and the ship goes spiraling into a nearby moon.");
+                issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (game.isLoser()) {
+                            dialog.cancel();
+                            Intent intent = new Intent(tempGSA, ExitActivity.class);
+                            intent.putExtra("activity", "Loser");
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            dialog.cancel();
+                            moveOnScreen();
+                        }
+                    }
+                });
+                Dialog d = issue_alert.create();
+                d.setCancelable(false);
+                d.show();
+            }
         }
         if (game.getShip().getWingStatus() <= 0) {
             if (game.repairWing()) {
@@ -152,6 +175,29 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
             }
+            else {
+                final GameScreenActivity tempGSA = this;
+                final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
+                issue_alert.setTitle(R.string.issue_title);
+                issue_alert.setMessage("Your wing has sustained critical damage! The ship can no longer be controlled and your crew escapes in an escape pod, except the captain who goes down with the ship.");
+                issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (game.isLoser()) {
+                            dialog.cancel();
+                            Intent intent = new Intent(tempGSA, ExitActivity.class);
+                            intent.putExtra("activity", "Loser");
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            dialog.cancel();
+                            moveOnScreen();
+                        }
+                    }
+                });
+                Dialog d = issue_alert.create();
+                d.setCancelable(false);
+                d.show();
+            }
         }
         if (game.getShip().getLivingBayStatus() <= 0) {
             if (game.repairLivingBay()) {
@@ -167,6 +213,29 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 Dialog repair_dialog = repair_alert.create();
                 repair_dialog.setCancelable(false);
                 repair_dialog.show();
+            }
+            else {
+                final GameScreenActivity tempGSA = this;
+                final AlertDialog.Builder issue_alert = new AlertDialog.Builder(this);
+                issue_alert.setTitle(R.string.issue_title);
+                issue_alert.setMessage("Your living bay has sustained critical damage! Your crew has been sucked into space through a hole in space ship.");
+                issue_alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (game.isLoser()) {
+                            dialog.cancel();
+                            Intent intent = new Intent(tempGSA, ExitActivity.class);
+                            intent.putExtra("activity", "Loser");
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            dialog.cancel();
+                            moveOnScreen();
+                        }
+                    }
+                });
+                Dialog d = issue_alert.create();
+                d.setCancelable(false);
+                d.show();
             }
         }
         makeMove();
