@@ -146,7 +146,18 @@ public class MainActivity extends Activity {
     public void loadGame(View view) {
         File file = new File(getExternalFilesDir(null),"SpaceTrailData.xml");
         GameFileLoader loader = new GameFileLoader(file, game.getSchema());
-        game = loader.loadGame();
+        try {
+            game = loader.loadGame();
+        }
+        catch(Exception e) {
+            //Pop-up alert telling user that there is no saved game
+            Context context = getApplicationContext();
+            CharSequence popup = "No save file!";
+            Toast toast = Toast.makeText(context, popup, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM, 0, 200);
+            toast.show();
+            return;
+        }
         game.justLoaded = true;
 
         try {
