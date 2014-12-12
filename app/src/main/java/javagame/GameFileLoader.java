@@ -132,10 +132,10 @@ public class GameFileLoader implements Serializable
         for(int i = 0; i < 5; ++i) {
             game.crewNames.add(getNodeValue("crew"+i,crewNamesNodes));
         }
-        System.out.println("crew names:");
+    /*    System.out.println("crew names:");
         for(String s: game.crewNames) {
             System.out.println(s + "\n");
-        }
+        }*/
 
         return game;
     }

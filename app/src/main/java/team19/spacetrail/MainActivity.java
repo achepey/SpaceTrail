@@ -247,11 +247,11 @@ public class MainActivity extends Activity {
             nameInfo.get(i).setText(game.getPeople().get(i).getAge() + ", " + game.getPeople().get(i).getCondition()+"%");
             Log.d("Gameinfo", game.getPeople().get(i).getName() + " added to list");
         }
-
+/*
         System.out.println("crew names: "+game.crewNames.size());
         for(String s: game.crewNames) {
             System.out.println(s + "\n");
-        }
+        }*/
 
         /* Will only work if names are unique, I think... maybe, depends on remove function */
         /* deadNames will contain all the names of dead crew members */
@@ -269,10 +269,10 @@ public class MainActivity extends Activity {
         }
         Log.d("GameInfo", "Size of deadNames = " + deadNames.size());
         // i holds the current position in names without a crew member name
-        System.out.println("Dead Names");
+   /*     System.out.println("Dead Names");
         for(String s: deadNames) {
             System.out.println(s + "\n");
-        }
+        }*/
         for(int j = 0; j < deadNames.size(); j++){
             names.get(i+j).setText(deadNames.get(j));
             nameInfo.get(i+j).setText("Dead");
