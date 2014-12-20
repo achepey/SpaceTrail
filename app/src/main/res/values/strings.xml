@@ -17,8 +17,8 @@
     <string name="toSpend">to spend</string>
     <string name="fuel">Fuel @ $5.00</string>
     <string name="food">Food @ $4.00</string>
-    <string name="enginePart">Spare Engines @ $100.00</string>ship
-    <string name="aluminumPart">Aluminum @ $10.00</string>
+    <string name="enginePart">Spare Engines @ $100.00</string>
+ship    <string name="aluminumPart">Aluminum @ $10.00</string>
     <string name="wings">Spare Wings @ $100.00</string>
     <string name="livingBay">Spare Living Bay @ $100.00</string>
     <string name="buy">Buy!</string>
@@ -59,6 +59,7 @@
     <string name="PlanetMenuWelcome">Welcome to</string>
     <string name="nextPlanet">Head to\nNext Planet!</string>
     <string name="cost">Price: $</string>
+
     <string-array name="resources_array">
         <item>Fuel</item>
         <item>Food</item>
@@ -90,4 +91,9 @@
     <string name="weakness">Weakness</string>
     <string name="distance_left">Distance</string>
     <string name="score">Score:</string>
+    <string name="title_activity_barter">BarterActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="transaction">Complete Transaction</string>
+    <string name="buy_sell">Buy/Sell</string>
+
 </resources>

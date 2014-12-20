@@ -15,6 +15,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 
 import javagame.Game;
@@ -40,7 +42,6 @@ public class ExitActivity extends Activity {
 
         /* Grabs copy of game for scoring */
         game = (Game) getIntent().getExtras().getSerializable("Game");
-
         TextView exitMessage = (TextView) findViewById(R.id.exitMessage);
         if(caller.equals("Loser")){
             exitMessage.setText("Sorry, You Lose!");
@@ -65,6 +66,10 @@ public class ExitActivity extends Activity {
             mp.start();
             won = true;
         }
+
+        //sets the score on screen to the player's score
+        TextView score = (TextView) findViewById(R.id.score);
+        score.setText("" + generateScore());
     }
 
     /* Helper Methods */

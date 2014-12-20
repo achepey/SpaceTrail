@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -19,34 +19,29 @@
         android:textSize="40sp"
         android:gravity="center_vertical|center_horizontal" />
 
-    <RelativeLayout
-        android:layout_width="498dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="15dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="100000"
+        android:id="@+id/score"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_toRightOf="@+id/scoreText"
+        android:layout_alignBottom="@+id/scoreText" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/score"
-            android:id="@+id/Score"
-            android:textSize="30sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="15dp"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView"
-            android:textSize="30sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/Score" />
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/score"
+        android:id="@+id/scoreText"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/exitMessage"
+        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@+id/playAgainButton" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -56,7 +51,9 @@
         android:id="@+id/playAgainText"
         android:layout_marginTop="15dp"
         android:textSize="25sp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/scoreText"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -66,7 +63,8 @@
         android:layout_marginTop="10dp"
         android:onClick="startOver"
         android:layout_gravity="center_horizontal"
-        android:minWidth="150dp" />
+        android:layout_below="@+id/playAgainText"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -76,6 +74,8 @@
         android:layout_marginTop="15dp"
         android:onClick="exitGame"
         android:layout_gravity="center_horizontal"
-        android:minWidth="150dp" />
+        android:layout_alignLeft="@+id/playAgainButton"
+        android:layout_alignRight="@+id/playAgainButton"
+        android:layout_below="@+id/playAgainButton" />
 
-</LinearLayout>
+</RelativeLayout>

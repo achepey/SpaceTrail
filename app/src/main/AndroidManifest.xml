@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="team19.spacetrail"
     android:versionCode="2"
-    android:versionName="Version 1.1">
+    android:versionName="Version 1.1" >
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="team19.spacetrail.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -20,28 +20,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="team19.spacetrail.GameScreenActivity"
+            android:name=".GameScreenActivity"
             android:label="@string/title_activity_game_screen"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="team19.spacetrail.GameInfoActivity"
+            android:name=".GameInfoActivity"
             android:label="@string/title_activity_game_info"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="team19.spacetrail.PlanetActivity"
+            android:name=".PlanetActivity"
             android:label="@string/title_activity_planet"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="team19.spacetrail.ExitActivity"
+            android:name=".ExitActivity"
             android:label="@string/title_activity_exit"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="team19.spacetrail.AsteroidActivity"
+            android:name=".AsteroidActivity"
             android:label="@string/title_activity_asteroid"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".BarterActivity"
+            android:label="@string/title_activity_barter"
             android:screenOrientation="landscape">
         </activity>
     </application>
