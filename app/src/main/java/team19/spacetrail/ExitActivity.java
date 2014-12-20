@@ -17,11 +17,16 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import javagame.Game;
+import javagame.Person;
+
 
 public class ExitActivity extends Activity {
 
     private MediaPlayer mp;
     private boolean won = false;
+    private Game game;
+    private int gameScore = 0;
     //Allows for clean exit of the game or has user decide to play again or not.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,10 @@ public class ExitActivity extends Activity {
         setContentView(R.layout.activity_exit);
         //Determines which activity called this activity, in order to respond appropriately
         String caller = this.getIntent().getExtras().getString("activity");
+
+        /* Grabs copy of game for scoring */
+        game = (Game) getIntent().getExtras().getSerializable("Game");
+
         TextView exitMessage = (TextView) findViewById(R.id.exitMessage);
         if(caller.equals("Loser")){
             exitMessage.setText("Sorry, You Lose!");
@@ -56,8 +65,6 @@ public class ExitActivity extends Activity {
             mp.start();
             won = true;
         }
-
-
     }
 
     /* Helper Methods */
@@ -75,6 +82,19 @@ public class ExitActivity extends Activity {
             mp.stop();
         }
         startActivity(intent);
+    }
+
+    public int generateScore() {
+        //Generate score based upon current amounts of resources left.
+
+        //Adds percent of remaining living crew members
+        for(Person p : game.getPeople()){
+            gameScore+=p.getCondition();
+        }
+
+        //Rest of score TBD
+
+        return gameScore;
     }
 
     @Override

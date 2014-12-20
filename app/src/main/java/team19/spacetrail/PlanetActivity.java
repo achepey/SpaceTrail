@@ -53,6 +53,8 @@ public class PlanetActivity extends Activity {
         planets.add((ImageView) findViewById(R.id.neptune));
         planets.add((ImageView) findViewById(R.id.pluto));
 
+        game = (Game) getIntent().getExtras().getSerializable("Game");
+
         Spinner spinner = (Spinner) findViewById(R.id.ResourceSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -89,7 +91,6 @@ public class PlanetActivity extends Activity {
             }
         });
 
-        game = (Game) getIntent().getExtras().getSerializable("Game");
 
         //Setting fields for resources
         TextView money = (TextView) findViewById(R.id.moneyVariable);
@@ -270,6 +271,8 @@ public class PlanetActivity extends Activity {
             Intent intent = new Intent(this, ExitActivity.class);
             finish();
             intent.putExtra("activity", "Planet");
+            Bundle b = new Bundle();
+            b.putSerializable("Game", game);
             startActivity(intent);
         }
 

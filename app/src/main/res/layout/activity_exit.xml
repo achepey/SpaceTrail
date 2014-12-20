@@ -1,52 +1,81 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="team19.spacetrail.ExitActivity">
+    tools:context="team19.spacetrail.ExitActivity"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Congratulations, You Won!"
+        android:text="Congratulations, You&apos;ve visited all of the planets!"
         android:id="@+id/exitMessage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <RelativeLayout
+        android:layout_width="498dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/score"
+            android:id="@+id/Score"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/textView"
+            android:textSize="30sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/Score" />
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/play_again"
-        android:id="@+id/textView12"
-        android:layout_below="@+id/exitMessage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:textSize="30sp" />
+        android:id="@+id/playAgainText"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Of Course! Let&apos;s go!"
         android:id="@+id/playAgainButton"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textView12"
         android:layout_marginTop="10dp"
-        android:onClick="startOver" />
+        android:onClick="startOver"
+        android:layout_gravity="center_horizontal"
+        android:minWidth="150dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Exit"
         android:id="@+id/exitButton"
-        android:layout_below="@+id/playAgainButton"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:onClick="exitGame"
-        android:layout_alignLeft="@+id/playAgainButton"
-        android:layout_alignRight="@+id/playAgainButton" />
-</RelativeLayout>
+        android:layout_gravity="center_horizontal"
+        android:minWidth="150dp" />
+
+</LinearLayout>

@@ -89,4 +89,5 @@
     <string name="pace">Pace</string>
     <string name="weakness">Weakness</string>
     <string name="distance_left">Distance</string>
+    <string name="score">Score:</string>
 </resources>

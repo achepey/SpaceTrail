@@ -147,6 +147,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                         if (game.isLoser()) {
                             dialog.cancel();
                             Intent intent = new Intent(tempGSA, ExitActivity.class);
+                            Bundle b = new Bundle();
+                            b.putSerializable("Game", game);
                             intent.putExtra("activity", "Loser");
                             startActivity(intent);
                             finish();
@@ -188,6 +190,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                             dialog.cancel();
                             Intent intent = new Intent(tempGSA, ExitActivity.class);
                             intent.putExtra("activity", "Loser");
+                            Bundle b = new Bundle();
+                            b.putSerializable("Game", game);
                             startActivity(intent);
                             finish();
                         } else {
@@ -228,6 +232,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                             dialog.cancel();
                             Intent intent = new Intent(tempGSA, ExitActivity.class);
                             intent.putExtra("activity", "Loser");
+                            Bundle b = new Bundle();
+                            b.putSerializable("Game", game);
                             startActivity(intent);
                             finish();
                         } else {
@@ -269,6 +275,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
                 if (game.isLoser()) {
                     dialog.cancel();
                     Intent intent = new Intent(tempGSA, ExitActivity.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("Game", game);
                     intent.putExtra("activity", "Loser");
                     startActivity(intent);
                     finish();
@@ -317,6 +325,8 @@ public class GameScreenActivity extends Activity implements GestureDetector.OnGe
             if(game.isWinner()){
                 Intent intent = new Intent(this, ExitActivity.class);
                 intent.putExtra("activity", "Winner");
+                Bundle b = new Bundle();
+                b.putSerializable("Game", game);
                 startActivity(intent);
                 finish();
             }

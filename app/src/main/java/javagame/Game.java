@@ -16,7 +16,7 @@ import java.lang.Math;
  * @author Evan Kirkland and Robert Christian
  */
 public class Game implements Serializable {
-    //Test change for first commit on new repo
+
     private Ship ship;      //The player's spaceship
     private Resources resources;        //The player's resources
     private ArrayList<Person> people;       //The crew of the spaceship - the captain is always at index 0, and there is a max size of 5
