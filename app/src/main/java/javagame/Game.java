@@ -16,7 +16,7 @@ import java.lang.Math;
  * @author Evan Kirkland and Robert Christian
  */
 public class Game implements Serializable {
-
+    //Test change for first commit on new repo
     private Ship ship;      //The player's spaceship
     private Resources resources;        //The player's resources
     private ArrayList<Person> people;       //The crew of the spaceship - the captain is always at index 0, and there is a max size of 5
@@ -41,7 +41,7 @@ public class Game implements Serializable {
         medium = true;      //default speed is medium
         slow = false;
         firstMove = true;
-        money = 8000;
+        money = 7000;
         justLoaded = false;
 
         /* Create all 9 planets  */
@@ -70,6 +70,9 @@ public class Game implements Serializable {
         destination = new Planet("Temp");       //used as default destination until a planet is given
         previous = new Planet("Temp");
         race = new Race();
+        if(race.equals("Oev'ysk") || race.equals("Creix")){
+            money+=1000;
+        }
         gameOver = false;
         arrivedAtPlanet = false;
     }

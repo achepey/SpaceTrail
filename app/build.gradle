@@ -13,14 +13,14 @@ android {
     buildToolsVersion "19.1.0"
     defaultConfig {
         applicationId "team19.spacetrail"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config1
         }
