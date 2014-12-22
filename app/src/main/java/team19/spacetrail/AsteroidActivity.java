@@ -113,7 +113,7 @@ public class AsteroidActivity extends Activity {
             }
         });
         planet_decider.create().show();
-        GameScreenActivity.game.sellFuel(fuelAmount);
+        GameScreenActivity.game.getResources().incrementFuel(fuelAmount, true);
     }
 
     /* This method contains the animation code for all of the asteroid objects */

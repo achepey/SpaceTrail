@@ -472,7 +472,9 @@
             android:layout_alignStart="@+id/changePaceSpinner"
             android:layout_above="@+id/gameInfoText"
             android:layout_marginBottom="20dp"
-            android:onClick="changePace" />
+            android:onClick="changePace"
+            android:minHeight="45dp"
+            android:minWidth="110dp" />
 
         <Button
             android:layout_width="wrap_content"

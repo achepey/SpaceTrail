@@ -281,7 +281,7 @@ public class MainActivity extends Activity {
 
     //Sets Layout to the Instructions menu
     public void loadInstructions(View view) {
-        /*setContentView(R.layout.instruction_screen);
+        setContentView(R.layout.instruction_screen);
         Game testGame = new Game();
         testGame.setMoney(1000000);
         testGame.getResources().setCompound(10000);
@@ -316,20 +316,18 @@ public class MainActivity extends Activity {
         }
 
 
-        Intent intent = new Intent(this, GameScreenActivity.class);
+        Intent intent = new Intent(this, BarterActivity.class);
         Bundle b = new Bundle();
         b.putSerializable("Game", testGame);
         b.putStringArrayList("Crew", crewNames);
         intent.putExtras(b);
         startActivity(intent);
-        finish();*/
-      setContentView(R.layout.instruction_screen);
+        finish();
+      //setContentView(R.layout.instruction_screen);
     }
 
     //Does the function of buying the original resources.
     public void buyStartingResources(View view) {
-        //This is where we will change the xml file to reflect the changes in resources.
-        Button buy = (Button) findViewById(R.id.buyButton);
         EditText fuel = (EditText) findViewById(R.id.fuelTextField);
         EditText food = (EditText) findViewById(R.id.foodTextField);
         EditText engine = (EditText) findViewById(R.id.engineTextField);
