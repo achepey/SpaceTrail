@@ -93,10 +93,10 @@ public class Planet implements Serializable
                 foodCost = 8;
             }else if(distanceFromSun > 600) {
                 fuelCost = 8;
-                foodCost = 4;
+                foodCost = 6;
             }else {
                 fuelCost = 6;
-                foodCost = 6;
+                foodCost = 4;
             }
             if(name.equals("Earth") || name.equals("Pluto") || name.equals("Mars") || name.equals("Neptune") ) {
                 aluminumCost = 10;
